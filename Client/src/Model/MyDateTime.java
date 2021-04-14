@@ -107,9 +107,15 @@ public class MyDateTime
     {
       s += "0";
     }
-    s += month + "/" + year;
+    if (hour == 0 && minute == 0)
+    {
+      s += month + "/" + year;
+    }
+    else
+    {
 
-    s += " " + hour + ":" + minute;
+      s += month + "/" + year + " " + hour + ":" + minute;
+    }
     return s;
   }
 }

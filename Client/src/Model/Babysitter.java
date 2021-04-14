@@ -1,10 +1,10 @@
 package Model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Babysitter
 {
-  private int age;
   private double paymentPerHour;
   private ArrayList<String> languages;
   private double babysittingExperience;
@@ -12,39 +12,51 @@ public class Babysitter
   private String userName;
   private MyDateTime dateOfBirth;
 
-  //  public Babysitter(String userName, MyDateTime dateOfBirth,
-  //      double paymentPerHour, ArrayList<String> languages,
-  //      double babysittingExperience, boolean hasFirstAidCertificate)
-  //  {
-  //
-  //    setUserName(userName);
-  //    setDateOfBirth(dateOfBirth);
-  //    setPaymentPerHour(paymentPerHour);
-  //    setBabysittingExperience(babysittingExperience);
-  //    setFirstAidCertificate(hasFirstAidCertificate);
-  //  for (int i = 0; i < languages.size(); i++)
-  //  {
-  //    addLanguage(languages.get(i));
-  //  }
-  //
-  //  }
-
-  public Babysitter(String userName, MyDateTime dateOfBirth,
+  public Babysitter(String userName, int birthDay, int birthMonth, int birthYear,
       double paymentPerHour, String mainLanguage, double babysittingExperience,
       boolean hasFirstAidCertificate)
   {
-
     setUserName(userName);
-    setDateOfBirth(dateOfBirth);
     setPaymentPerHour(paymentPerHour);
     setBabysittingExperience(babysittingExperience);
     setFirstAidCertificate(hasFirstAidCertificate);
+
     this.languages = new ArrayList<>();
     addLanguage(mainLanguage);
 
+    setDateOfBirth(new MyDateTime(birthDay, birthMonth, birthYear));
+
   }
 
-  public MyDateTime getAge()
+  public int getAge(MyDateTime dateOfBirth)
+  {
+    int currentDay = LocalDate.now().getDayOfMonth();
+    int currentMonth = LocalDate.now().getMonthValue();
+    int currentYear = LocalDate.now().getYear();
+
+    int birthDay = dateOfBirth.getDay();
+    int birthMonth = dateOfBirth.getMonth();
+    int birthYear = dateOfBirth.getYear();
+
+    int age = currentYear - birthYear;
+
+    int differenceInDays = currentDay - birthDay;
+    int differenceInMonths = currentMonth - birthMonth;
+    if (differenceInDays < 0)
+    {
+      differenceInMonths = differenceInMonths - 1;
+    }
+    if (differenceInMonths < 0)
+    {
+      return age - 1;
+    }
+    else
+    {
+      return age;
+    }
+  }
+
+  public MyDateTime getDateOfBirth()
   {
     return dateOfBirth;
   }
@@ -116,8 +128,8 @@ public class Babysitter
       return false;
     }
     Babysitter other = (Babysitter) obj;
-    return age == other.age && paymentPerHour == other.paymentPerHour
-        && languages.equals(other.languages)
+    return paymentPerHour == other.paymentPerHour && getMainLanguage()
+        .equals(other.getMainLanguage())
         && babysittingExperience == other.babysittingExperience
         && hasFirstAidCertificate == other.hasFirstAidCertificate && userName
         .equals(other.userName) && dateOfBirth.equals(other.dateOfBirth);
@@ -125,12 +137,11 @@ public class Babysitter
 
   @Override public String toString()
   {
-    return "Username: " + userName + "\n" + "Age: " + age + "\n"
-        + "Payment per hour: " + paymentPerHour + "\n" + "Main language: "
-        + getMainLanguage() + "\n" + "Languages: " + languages + "\n"
-        + "Years of experience: " + babysittingExperience + "\n"
-        + "Has CPR certificate: " + hasFirstAidCertificate + "\n" + "Birthday: "
-        + dateOfBirth;
+    return "Username: " + userName + "\n" + "Payment per hour: "
+        + paymentPerHour + "\n" + "Main language: " + getMainLanguage() + "\n"
+        + "Languages: " + languages + "\n" + "Years of experience: "
+        + babysittingExperience + "\n" + "Has CPR certificate: "
+        + hasFirstAidCertificate + "\n" + "Birthday: " + dateOfBirth;
   }
 }
 
