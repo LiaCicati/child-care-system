@@ -25,6 +25,21 @@ public class MyDateTime
     setMinute(minute);
   }
 
+  public MyDateTime(int totalSeconds)
+  {
+    while (totalSeconds < 0)
+    {
+      totalSeconds += 86400;
+    }
+    while (totalSeconds >= 86400)
+    {
+      totalSeconds -= 86400;
+    }
+    this.hour = totalSeconds / 3600;
+    this.minute = (totalSeconds % 3600) / 60;
+
+  }
+
   public void set(int hour, int minute, int day, int month, int year)
   {
     this.hour = hour;
@@ -83,6 +98,25 @@ public class MyDateTime
   {
     this.minute = minute;
   }
+
+  public int getTime()
+  {
+    return day + month + year + (hour * 60 * 60) + (minute * 60);
+  }
+
+  public boolean isBefore(MyDateTime time)
+  {
+    if (getTime() < time.getTime())
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
+
+
 
   public boolean equals(Object obj)
   {
