@@ -1,5 +1,6 @@
 package Model;
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 
 public class Parent
@@ -9,7 +10,8 @@ public class Parent
     private ArrayList<Kid> kids;
 
     public Parent(boolean hasPets){
-        this.setHasPets(hasPets);
+        this.hasPets = hasPets;
+        this.kids = new ArrayList<Kid>();
     }
 
 
@@ -17,11 +19,8 @@ public class Parent
         return kids.size();
     }
 
-    public void setNrOfKids(int nrOfKids) {
-        this.nrOfKids = nrOfKids;
-    }
 
-    public boolean isHasPets() {
+    public boolean hasPets() {
         return hasPets;
     }
 
@@ -29,11 +28,28 @@ public class Parent
         this.hasPets = hasPets;
     }
 
+    public boolean equals(Object obj)
+    {
+        if (!(obj instanceof Parent))
+        {
+            return false;
+        }
+        Parent other = (Parent) obj;
+        return nrOfKids == other.nrOfKids
+                && hasPets()
+                == other.hasPets()
+                && kids == other.kids;
+    }
+
     public ArrayList<Kid> getKids() {
         return kids;
     }
 
-    public void addKid(Kid kid) {
-        this.kids = kids;
+    public void addKid(Kid kid){
+        kids.add(kid);
+    }
+
+    public String toString(){
+        return "Number ofKids: " + nrOfKids + " Has pets: " + hasPets + " Kids: " + getKids();
     }
 }
