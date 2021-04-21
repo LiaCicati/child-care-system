@@ -28,7 +28,7 @@ public class RemoteModelManager
     {
         this.property = new PropertyChangeProxy<>(this, true);
         this.model = model;
-        this.model.addListener(this, "add");
+//        this.model.addListener(this, "add");
         startRegistry();
         startServer();
     }
@@ -36,7 +36,7 @@ public class RemoteModelManager
     private void startServer() throws RemoteException, MalformedURLException
     {
         UnicastRemoteObject.exportObject(this, 0);
-        Naming.rebind("BookingList", this);
+        Naming.rebind("App", this);
         System.out.println("Server started...");
     }
 
