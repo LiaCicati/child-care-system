@@ -56,8 +56,8 @@ public class Kid
         Kid other = (Kid) obj;
         return age == other.age
                 && gender == other.gender
-                && healthConditions == other.healthConditions
-                && dateOfBirth = other.dateOfBirth;
+                && healthConditions.equals(other.healthConditions)
+                && dateOfBirth.equals(other.dateOfBirth);
     }
 
     public String toString(){
