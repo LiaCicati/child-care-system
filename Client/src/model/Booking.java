@@ -1,7 +1,7 @@
 package model;
 
 import java.time.LocalDateTime;
-
+import java.time.format.DateTimeFormatter;
 
 public class Booking
 {
@@ -17,7 +17,7 @@ public class Booking
     int minimum = 1;
     int maximum = 100;
     this.bookingID = (int) ((Math.random() * maximum) + minimum);
-    this.dateTimeOfBooking = null;
+    this.dateTimeOfBooking = LocalDateTime.now();
     this.parent = parent;
     this.babysitter = babysitter;
 
@@ -38,9 +38,9 @@ public class Booking
     return bookingID;
   }
 
-  public LocalDateTime getDateTimeOfBooking()
+  public String getDateTimeOfBooking()
   {
-    return dateTimeOfBooking;
+    return dateTimeOfBooking.format(DateTimeFormatter.ofPattern("dd/MM/yyyy, hh:mm"));
   }
 
   public Parent getParent()
@@ -60,6 +60,11 @@ public class Booking
 
   public void setDateTimeOfBooking(LocalDateTime dateTimeOfBooking)
   {
+    if (dateTimeOfBooking == null)
+    {
+      throw new IllegalArgumentException(
+          "Please select the date and time of your booking");
+    }
     this.dateTimeOfBooking = dateTimeOfBooking;
   }
 
@@ -71,6 +76,7 @@ public class Booking
   public String toString()
   {
     return "Booking id: " + bookingID + "\n" + "Parent: " + parent
-        + "Babysitter: " + babysitter + "\n" + "Time: " + time;
+        + "Babysitter: " + babysitter + "\n" + "Time: " + time + "\n"
+        + "Date and time of booking: " + getDateTimeOfBooking();
   }
 }
