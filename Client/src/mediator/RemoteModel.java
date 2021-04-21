@@ -1,6 +1,6 @@
-package Mediator;
+package mediator;
 
-import Model.Booking;
+import model.Booking;
 import utility.observer.subject.RemoteSubject;
 
 import java.net.MalformedURLException;

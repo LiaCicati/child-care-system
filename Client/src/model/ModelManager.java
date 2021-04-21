@@ -1,7 +1,7 @@
-package Model;
+package model;
 
-import Mediator.Client;
-import Mediator.RemoteModel;
+import mediator.Client;
+import mediator.RemoteModel;
 import utility.observer.event.ObserverEvent;
 import utility.observer.listener.GeneralListener;
 import utility.observer.listener.LocalListener;

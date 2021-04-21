@@ -1,6 +1,6 @@
 //import javafx.application.Application;
 
-import Model.Kid;
+import model.Kid;
 
 public class Main
 {

@@ -10,7 +10,7 @@ public class Kid
     private MyDateTime dateOfBirth;
 
     public Kid(int birthDay, int birthMonth, int birthYear, boolean gender, String healthConditions){
-        this.setDateOfBirth(new MyDateTime(birthDay,birthMonth, birthYear));
+        setDateOfBirth(new MyDateTime(birthDay,birthMonth, birthYear));
         this.gender = gender;
         this.healthConditions = healthConditions;
     }
@@ -46,6 +46,24 @@ public class Kid
     public void setDateOfBirth(MyDateTime dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
+
+    public boolean equals(Object obj)
+    {
+        if (!(obj instanceof Kid))
+        {
+            return false;
+        }
+        Kid other = (Kid) obj;
+        return age == other.age
+                && gender == other.gender
+                && healthConditions.equals(other.healthConditions)
+                && dateOfBirth.equals(other.dateOfBirth);
+    }
+
+    public String toString(){
+        return "Age: " + age + " Gender: " + gender + " Health conditions: " + healthConditions + " Date of birth: " + dateOfBirth;
+    }
+
 }
 
 

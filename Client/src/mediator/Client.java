@@ -1,7 +1,7 @@
-package Mediator;
+package mediator;
 
-import Model.Booking;
-import Model.Model;
+import model.Booking;
+import model.Model;
 import utility.observer.event.ObserverEvent;
 import utility.observer.listener.GeneralListener;
 import utility.observer.listener.RemoteListener;
