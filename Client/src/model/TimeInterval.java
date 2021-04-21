@@ -33,6 +33,6 @@ public class TimeInterval
 
   public String toString()
   {
-    return "Start time: " + startTime + "End time: " + endTime;
+    return "Start time: " + startTime + " End time: " + endTime;
   }
 }

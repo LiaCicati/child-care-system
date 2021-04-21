@@ -55,7 +55,7 @@ class BabysitterTest {
 
         babysitter.addLanguage("Danish");
         assertEquals("Danish", babysitter.getLanguages());
-        //same ting here, it is going to fail, because this is the 3rd in the arraylist, and it returns everything
+        //same ting here, it is going to fail, because this is the second in the arraylist, and it returns everything
         // within the arraylist
     }
 
