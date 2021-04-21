@@ -34,17 +34,21 @@ public class Parent
             return false;
         }
         Parent other = (Parent) obj;
-        return nrOfKids == other.nrOfKids
-                && hasPets()
-                == other.hasPets()
-                && kids == other.kids;
+        return hasPets
+            == other.hasPets
+            && kids.equals(other.kids);
     }
 
     public ArrayList<Kid> getKids() {
         return kids;
     }
 
-    public void addKid(Kid kid){
+    public void addKid(Kid kid)
+    {
+        if (kid == null)
+        {
+            throw new IllegalArgumentException("Add data");
+        }
         kids.add(kid);
     }
 
