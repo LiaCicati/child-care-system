@@ -34,13 +34,15 @@ class BabysitterTest {
         babysitter.setFirstAidCertificate(false);
         assertEquals(false, babysitter.hasFirstAidCertificate());
 
-       /* babysitter.addLanguage(null);
-        assertEquals(null, babysitter.getLanguages());*/
+        babysitter.addLanguage(null);
+        assertEquals(null, babysitter.getLanguages());
+        //the above fails because there is already added a language when creating the babysitter in setup, therefore
+        // the expected will be the arraylist of null,null, but that is not a legal input.
     }
 
     @Test void setOne(){
-        babysitter.setUserName(null);
-        assertEquals(null,babysitter.getUserName());
+        babysitter.setUserName("IngeLise");
+        assertEquals("IngeLise",babysitter.getUserName());
 
         babysitter.setPaymentPerHour(1);
         assertEquals(1,babysitter.getPaymentPerHour());
@@ -51,13 +53,18 @@ class BabysitterTest {
         babysitter.setFirstAidCertificate(true);
         assertEquals(true, babysitter.hasFirstAidCertificate());
 
-     /*   babysitter.addLanguage(null);
-        assertEquals(null, babysitter.getLanguages());*/
+        babysitter.addLanguage("Danish");
+        assertEquals("Danish", babysitter.getLanguages());
+        //same ting here, it is going to fail, because this is the 3rd in the arraylist, and it returns everything
+        // within the arraylist
     }
 
     @Test void setMany(){
-        babysitter.setUserName(null);
-        assertEquals(null,babysitter.getUserName());
+        babysitter.setUserName("Lone");
+        assertEquals("Lone",babysitter.getUserName());
+
+        babysitter.setUserName("Mathias");
+        assertEquals("Mathias",babysitter.getUserName());
 
         babysitter.setPaymentPerHour(6.3);
         assertEquals(6.3,babysitter.getPaymentPerHour());
@@ -71,8 +78,6 @@ class BabysitterTest {
         babysitter.setBabysittingExperience(4.7);
         assertEquals(4.7, babysitter.getBabysittingExperience());
 
- /*       babysitter.addLanguage(null);
-        assertEquals(null, babysitter.getLanguages());*/
     }
 
     @Test void setBoundary(){
