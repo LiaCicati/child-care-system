@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="750.0" prefWidth="414.0" style="-fx-background-color: E6E1FF;" userData="Edit kid data" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.EditKidDataViewController">
+    <children>
+        <ImageView fitHeight="111.0" fitWidth="174.0" layoutX="126.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@resources/logo.png" />
+        </ImageView>
+        <HBox alignment="CENTER" layoutX="42.0" layoutY="624.0" prefHeight="100.0" prefWidth="333.0" spacing="34.0">
+            <children>
+                <Button minHeight="56.0" minWidth="140.0" mnemonicParsing="false" onAction="#onSave" style="-fx-background-radius: 37; -fx-background-color: #7268A8;" text="Save" textFill="WHITE">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                    <effect>
+                        <DropShadow color="rgba(82, 67, 154, 0.25);" />
+                    </effect>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Button>
+                <Button minHeight="56.0" minWidth="140.0" mnemonicParsing="false" onAction="#onCancel" style="-fx-background-radius: 37; -fx-background-color: #B8B7C1;" text="Cancel" textFill="WHITE">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                    <effect>
+                        <DropShadow color="rgba(82, 67, 154, 0.25);" />
+                    </effect>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Button>
+            </children>
+        </HBox>
+      <VBox layoutX="33.0" layoutY="186.0" prefHeight="370.0" prefWidth="349.0" spacing="20.0">
+         <children>
+              <HBox prefHeight="62.0" prefWidth="350.0" spacing="10.0">
+                  <children>
+                      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="62.0" prefWidth="182.0" spacing="5.0">
+                          <children>
+                              <Label text="Age" />
+                              <DatePicker fx:id="age" />
+                          </children>
+                      </VBox>
+                      <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="62.0" prefWidth="138.0" spacing="5.0">
+                          <children>
+                              <Label text="Gender" />
+                              <ComboBox fx:id="gender" prefWidth="150.0" promptText="Select gender" />
+                          </children>
+                      </VBox>
+                  </children>
+              </HBox>
+            <Label text="Health condition" />
+            <TextArea fx:id="healthCondition" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="88.0" prefWidth="348.0" />
+         </children>
+      </VBox>
+      <Label fx:id="errorLabel" layoutX="33.0" layoutY="556.0" prefHeight="26.0" prefWidth="348.0" text="Error label" textFill="#f9494b">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+    </children>
+</AnchorPane>

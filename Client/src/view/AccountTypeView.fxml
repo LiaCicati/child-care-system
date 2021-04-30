@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane userData="Select account type" prefHeight="750.0" prefWidth="414.0" style="-fx-background-color: E6E1FF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.AccountTypeViewController">
+    <children>
+      <Label layoutX="137.0" layoutY="59.0" text="Choose your &#10;account type">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <VBox alignment="CENTER" layoutX="69.0" layoutY="621.0" prefHeight="91.0" prefWidth="276.0" spacing="5.0">
+         <children>
+            <Label text="Already have an account?">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Hyperlink onAction="#onLogIn" style="-fx-text-fill: #52439A; -fx-border-color: transparent; -fx-underline: hidden;" text="Log In">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Hyperlink>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" layoutX="43.0" layoutY="160.0" prefHeight="402.0" prefWidth="327.0" spacing="60.0">
+         <children>
+              <HBox prefHeight="134.0" prefWidth="276.0" style="-fx-background-color: #fff; -fx-background-radius: 12px;">
+                  <children>
+                      <VBox alignment="CENTER" prefHeight="134.0" prefWidth="120.0" style="-fx-background-color: #52439A; -fx-background-radius: 12;">
+                     <children>
+                        <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@resources/nanny.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </VBox>
+                      <VBox alignment="CENTER" prefHeight="134.0" prefWidth="206.0">
+                     <children>
+                        <Hyperlink alignment="CENTER" onAction="#onBabysitter" prefHeight="134.0" prefWidth="207.0" style="-fx-border-color: transparent; -fx-text-fill: #000; -fx-underline: hidden;" text="Babysitter">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Hyperlink>
+                     </children>
+                      </VBox>
+                  </children>
+              </HBox>
+              <HBox prefHeight="134.0" prefWidth="276.0" style="-fx-background-color: #fff; -fx-background-radius: 12;">
+                  <children>
+                      <VBox alignment="CENTER" prefHeight="134.0" prefWidth="120.0" style="-fx-background-color: #52439A; -fx-background-radius: 12;">
+                     <children>
+                        <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@resources/parents.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </VBox>
+                      <VBox alignment="CENTER" prefHeight="134.0" prefWidth="207.0">
+                     <children>
+                        <Hyperlink alignment="CENTER" onAction="#onParent" prefHeight="135.0" prefWidth="210.0" style="-fx-border-color: transparent; -fx-text-fill: #000; -fx-underline: hidden;" text="Parent">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Hyperlink>
+                     </children>
+                      </VBox>
+                  </children>
+              </HBox>
+         </children>
+      </VBox>
+    </children>
+</AnchorPane>

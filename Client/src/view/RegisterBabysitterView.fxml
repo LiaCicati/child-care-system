@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="750.0" prefWidth="414.0" style="-fx-background-color: #E6E1FF;" userData="Register" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.RegisterBabysitterViewController">
+    <children>
+        <ImageView fitHeight="117.0" fitWidth="143.0" layoutX="135.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@resources/kinder.png" />
+        </ImageView>
+        <Button layoutX="36.0" layoutY="620.0" minHeight="70.0" minWidth="342.0" mnemonicParsing="false" onAction="#onRegister" style="-fx-background-radius: 37; -fx-background-color: #A094E3;" text="Register" textFill="WHITE">
+            <font>
+                <Font size="16.0" />
+            </font>
+            <effect>
+                <DropShadow color="rgba(82, 67, 154, 0.25);" />
+            </effect>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
+      <VBox layoutX="43.0" layoutY="129.0" prefHeight="454.0" prefWidth="327.0" spacing="5.0">
+         <children>
+            <HBox prefHeight="61.0" prefWidth="327.0" spacing="5.0">
+               <children>
+                  <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="62.0" prefWidth="158.0" spacing="5.0">
+                     <children>
+                        <Label text="* First Name" />
+                        <TextField fx:id="firstName" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="158.0" style="-fx-background-radius: 37;" />
+                     </children>
+                  </VBox>
+                  <VBox minWidth="-Infinity" prefHeight="74.0" prefWidth="158.0" spacing="5.0">
+                     <children>
+                        <Label text="* Last Name" />
+                        <TextField fx:id="lastName" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="157.0" style="-fx-background-radius: 37;" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <Label text="* Username">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="username" prefHeight="30.0" prefWidth="231.0" style="-fx-background-radius: 37;">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </TextField>
+            <Label text="* Email">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="email" prefHeight="30.0" prefWidth="231.0" style="-fx-background-radius: 37;">
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+            </TextField>
+            <Label text="* Password" />
+            <PasswordField fx:id="password" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="326.0" style="-fx-background-radius: 37;">
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+            </PasswordField>
+            <VBox prefHeight="63.0" prefWidth="327.0" spacing="5.0">
+               <children>
+                  <Label text="Age" />
+                  <DatePicker fx:id="age" />
+               </children>
+            </VBox>
+            <HBox prefHeight="68.0" prefWidth="327.0" spacing="10.0">
+               <children>
+                  <VBox prefHeight="68.0" prefWidth="151.0" spacing="5.0">
+                     <children>
+                        <Label text="Experience" />
+                        <TextField fx:id="babysittingExperience" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" style="-fx-background-radius: 37;" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="68.0" prefWidth="152.0" spacing="5.0">
+                     <children>
+                        <Label text="Payment/hour" />
+                        <TextField fx:id="paymentPerHour" prefHeight="30.0" style="-fx-background-radius: 37;" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="64.0" prefWidth="327.0" spacing="10.0">
+               <children>
+                  <VBox prefHeight="95.0" prefWidth="150.0" spacing="5.0">
+                     <children>
+                        <Label text="Mother tongue" />
+                        <TextField fx:id="motherTongue" prefHeight="30.0" style="-fx-background-radius: 37;" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="95.0" prefWidth="154.0" spacing="5.0">
+                     <children>
+                        <Label text="First aid certificate" />
+                        <ComboBox fx:id="firstAidCertificate" prefHeight="30.0" prefWidth="150.0" promptText="Select">
+                           <items>
+                              <FXCollections fx:factory="observableArrayList">
+                                 <String fx:value="Possess" />
+                                 <String fx:value="Do not possess" />
+                              </FXCollections>
+                           </items>
+                        </ComboBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <HBox alignment="CENTER" layoutX="73.0" layoutY="695.0" prefHeight="39.0" prefWidth="267.0" spacing="5.0">
+         <children>
+            <Label text="Already have an account?">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Hyperlink onAction="#onLogIn" style="-fx-border-color: transparent; -fx-text-fill: #52439A;" text="Log In">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Hyperlink>
+         </children>
+      </HBox>
+      <Label fx:id="errorLabel" layoutX="45.0" layoutY="583.0" prefHeight="30.0" prefWidth="314.0" text="Error Label" textFill="#f9494b">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+    </children>
+</AnchorPane>
