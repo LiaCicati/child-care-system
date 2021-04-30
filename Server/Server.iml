@@ -10,5 +10,6 @@
     <orderEntry type="library" name="JavaFX11" level="application" />
     <orderEntry type="library" name="MyObserver-1.4" level="application" />
     <orderEntry type="library" name="MyObserver-1.3" level="application" />
+    <orderEntry type="library" name="MyObserver-1.32" level="application" />
   </component>
 </module>
