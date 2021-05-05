@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="750.0" prefWidth="414.0" style="-fx-background-color: E6E1FF;" userData="Edit kid data" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.EditKidDataViewController">
+<AnchorPane prefHeight="750.0" prefWidth="414.0" style="-fx-background-color: E6E1FF;" userData="Edit kid data" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.AddEditKidDataViewController">
     <children>
         <ImageView fitHeight="111.0" fitWidth="174.0" layoutX="126.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@resources/logo.png" />
@@ -51,7 +51,7 @@
                   <children>
                       <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="62.0" prefWidth="182.0" spacing="5.0">
                           <children>
-                              <Label text="Age" />
+                              <Label text="Date of birth" />
                               <DatePicker fx:id="age" />
                           </children>
                       </VBox>

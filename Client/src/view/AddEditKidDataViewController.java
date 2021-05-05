@@ -3,7 +3,7 @@ package view;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-public class EditKidDataViewController extends ViewController
+public class AddEditKidDataViewController extends ViewController
 {
   @FXML private DatePicker age;
   @FXML private TextArea healthCondition;

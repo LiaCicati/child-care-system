@@ -9,7 +9,7 @@ public enum View
   PARENT_PROFILE_VIEW("ParentProfileView.fxml"),
   ACCOUNT_TYPE_VIEW("AccountTypeView.fxml"),
   EDIT_BABYSITTER_PROFILE_VIEW("EditBabysitterProfileView.fxml"),
-  EDIT_KID_DATA_VIEW("EditKidDataView.fxml"),
+  ADD_EDIT_KID_DATA_VIEW("AddEditKidDataView.fxml"),
   EDIT_PARENT_DATA_VIEW("EditParentProfileView.fxml");
 
 

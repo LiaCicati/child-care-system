@@ -44,11 +44,11 @@ public class ParentProfileViewController extends ViewController
 
   public void onAddKidData()
   {
-    getViewHandler().openView(View.EDIT_KID_DATA_VIEW);
+    getViewHandler().openView(View.ADD_EDIT_KID_DATA_VIEW);
   }
 
   public void onEditKidData()
   {
-    getViewHandler().openView(View.EDIT_KID_DATA_VIEW);
+    getViewHandler().openView(View.ADD_EDIT_KID_DATA_VIEW);
   }
 }
