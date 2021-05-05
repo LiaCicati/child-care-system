@@ -2,6 +2,7 @@ package view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class EditParentProfileViewController extends ViewController
@@ -10,6 +11,7 @@ public class EditParentProfileViewController extends ViewController
   @FXML private TextField lastName;
   @FXML private TextField username;
   @FXML private ComboBox<String> familyPets;
+  @FXML private Label errorLabel;
 
   @Override protected void init()
   {
