@@ -10,19 +10,12 @@ public class MyDateTime
 
     public MyDateTime(int day, int month, int year)
     {
-        this.setDay(day);
-        this.setMonth(month);
-        this.setYear(year);
-
+        this.setDate(day, month, year);
     }
 
     public MyDateTime(int day, int month, int year, int hour, int minute)
     {
-        this.setDay(day);
-        this.setMonth(month);
-        this.setYear(year);
-        setHour(hour);
-        setMinute(minute);
+        this.set(day, month, year, hour, minute);
     }
 
     public MyDateTime(int totalSeconds)
@@ -37,7 +30,6 @@ public class MyDateTime
         }
         this.hour = totalSeconds / 3600;
         this.minute = (totalSeconds % 3600) / 60;
-
     }
 
     public void set(int day, int month, int year, int hour, int minute)
@@ -46,6 +38,8 @@ public class MyDateTime
         {
             year = -year;
         }
+        this.year = year;
+
         if (month < 1)
         {
             month = 1;
@@ -54,8 +48,8 @@ public class MyDateTime
         {
             month = 12;
         }
-        this.year = year;
         this.month = month;
+
         if (day < 1)
         {
             day = 1;
@@ -65,8 +59,55 @@ public class MyDateTime
             day = numberOfDaysInMonth();
         }
         this.day = day;
+
+        if (hour < 0)
+        {
+            hour = 0;
+        }
+        else if (hour > 23)
+        {
+            hour = 23;
+        }
         this.hour = hour;
+
+        if (minute < 0)
+        {
+            minute = 0;
+        }
+        else if (minute > 59)
+        {
+            minute = 59;
+        }
         this.minute = minute;
+    }
+
+    public void setDate(int day, int month, int year)
+    {
+        if (year < 0)
+        {
+            year = -year;
+        }
+        this.year = year;
+
+        if (month < 1)
+        {
+            month = 1;
+        }
+        else if (month > 12)
+        {
+            month = 12;
+        }
+        this.month = month;
+
+        if (day < 1)
+        {
+            day = 1;
+        }
+        else if (day > numberOfDaysInMonth())
+        {
+            day = numberOfDaysInMonth();
+        }
+        this.day = day;
     }
 
     /**
@@ -238,14 +279,7 @@ public class MyDateTime
 
     public boolean isBefore(MyDateTime time)
     {
-        if (getTime() < time.getTime())
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return getTime() < time.getTime();
     }
 
     public boolean equals(Object obj)
@@ -277,7 +311,6 @@ public class MyDateTime
         }
         else
         {
-
             s += month + "/" + year + " " + hour + ":" + minute;
         }
         return s;

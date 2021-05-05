@@ -12,7 +12,7 @@ class BabysitterTest {
     @org.junit.jupiter.api.BeforeEach
     void setUp() {
         System.out.println("--> setUp()");
-        babysitter = new Babysitter(null,9,10,1996,0,null,0,false);
+//        babysitter = new Babysitter(null,9,10,1996,0,null,0,false);
     }
 
     @org.junit.jupiter.api.AfterEach
