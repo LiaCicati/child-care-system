@@ -157,7 +157,7 @@ public class Babysitter extends Account
             return false;
         }
         Babysitter other = (Babysitter) obj;
-        return paymentPerHour == other.paymentPerHour && getMainLanguage()
+        return super.equals(obj) && paymentPerHour == other.paymentPerHour && getMainLanguage()
             .equals(other.getMainLanguage())
             && babysittingExperience == other.babysittingExperience
             && hasFirstAidCertificate == other.hasFirstAidCertificate

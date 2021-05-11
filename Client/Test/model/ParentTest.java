@@ -14,19 +14,19 @@ class ParentTest
 
   @BeforeEach void setUp()
   {
-//    parent = new Parent(false);
-
-        kids = new ArrayList<>();
+    parent = new Parent("Lana", "password", "lana@gmail.com", "Lana", "Peters",
+        false);
+    kids = new ArrayList<>();
   }
 
   @Test void sizeAfterAdding4Kids()
   {
-    parent.addKid(new Kid(13,2,2001,true,"health issues"));
-    parent.addKid(new Kid(12,1,2001,false,"health issues"));
-    parent.addKid(new Kid(10,4,2001,true,"health issues"));
-    parent.addKid(new Kid(5,2,2001,false,"health issues"));
+    parent.addKid(new Kid(13, 2, 2001, true, "health issues"));
+    parent.addKid(new Kid(12, 1, 2001, false, "health issues"));
+    parent.addKid(new Kid(10, 4, 2001, true, "health issues"));
+    parent.addKid(new Kid(5, 2, 2001, false, "health issues"));
 
-    assertEquals(4,parent.getNrOfKids());
+    assertEquals(4, parent.getNrOfKids());
   }
 
   @Test void setHasPets()
@@ -35,17 +35,22 @@ class ParentTest
     assertTrue(parent.hasPets());
   }
 
-
   @Test void testEquals()
   {
-//    Parent parent1 = new Parent(false);
-//    assertEquals(parent1, parent);
+    Parent parent1 = new Parent("La", "password", "lana123@gmail.com", "Lana",
+        "Peters", false);
+    Parent parent2 = new Parent("Lana", "password", "lana@gmail.com", "Lana",
+        "Peters", false);
+    System.out.println(parent1.equals(parent));
+    assertNotEquals(parent1, parent);
+    System.out.println(parent.equals(parent2));
+    assertEquals(parent, parent2);
   }
 
   @Test void getKids()
   {
 
-    assertEquals(kids,parent.getKids());
+    assertEquals(kids, parent.getKids());
   }
 
   @Test void addNullKidObject()
@@ -55,6 +60,5 @@ class ParentTest
       parent.addKid(null);
     });
   }
-
 
 }
