@@ -1,7 +1,7 @@
 package model;
 
 import mediator.Client;
-import mediator.RemoteModel;
+import mediator.RemoteModelClient;
 import utility.observer.event.ObserverEvent;
 import utility.observer.listener.GeneralListener;
 import utility.observer.listener.LocalListener;
@@ -12,14 +12,14 @@ import java.rmi.RemoteException;
 
 public class ModelManager implements Model, LocalListener<String, String>
 {
-  private RemoteModel remoteModel;
+  private RemoteModelClient remoteModelClient;
   private PropertyChangeAction<String, String> property;
 
   public ModelManager()
   {
     try
     {
-      this.remoteModel = new Client(this, "localhost");
+      this.remoteModelClient = new Client(this, "localhost");
     }
     catch (Exception e)
     {
@@ -30,7 +30,7 @@ public class ModelManager implements Model, LocalListener<String, String>
 
   @Override public void addBooking(Booking booking) throws RemoteException
   {
-    remoteModel.addBooking(booking);
+    remoteModelClient.addBooking(booking);
   }
 
   @Override public boolean addListener(GeneralListener<String, String> listener,

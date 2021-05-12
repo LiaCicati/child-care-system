@@ -16,13 +16,13 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
-public class RemoteModelManager
-    implements RemoteModel, LocalListener<Booking, Booking>
+public class Server
+    implements RemoteModelServer, LocalListener<Booking, Booking>
 {
     private Model model;
     private PropertyChangeAction<Booking, Booking> property;
 
-    public RemoteModelManager(Model model)
+    public Server(Model model)
         throws RemoteException, MalformedURLException
     {
         this.property = new PropertyChangeProxy<>(this, true);
