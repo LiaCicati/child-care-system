@@ -10,6 +10,7 @@ import utility.observer.subject.PropertyChangeProxy;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
+import java.rmi.NoSuchObjectException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -59,6 +60,16 @@ public class Client implements ClientModel, RemoteListener<String, String>
       e.printStackTrace();
       return false;
     }
+  }
+
+  @Override
+  public void close() {
+    try {
+      UnicastRemoteObject.unexportObject(this,true);
+    } catch (Exception e) {
+      throw new IllegalStateException("cannot unexport RMI object", e);
+    }
+
   }
 
   @Override public void propertyChange(ObserverEvent<String, String> event)

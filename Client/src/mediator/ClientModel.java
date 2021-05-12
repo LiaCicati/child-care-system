@@ -9,5 +9,5 @@ public interface ClientModel extends LocalSubject<String, String> {
     void addBooking(Booking booking);
 
     boolean isPasswordCorrect(String userName, String password);
-
+void close();
 }

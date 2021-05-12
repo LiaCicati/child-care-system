@@ -38,6 +38,11 @@ public class LocalModelManager implements LocalModel, LocalListener<String, Stri
     return serverModel.isPasswordCorrect(userName, password);
   }
 
+  @Override
+  public void close() {
+    property.close();
+    serverModel.close();
+  }
 
 
   @Override public boolean addListener(GeneralListener<String, String> listener,

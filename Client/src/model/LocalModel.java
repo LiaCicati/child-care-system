@@ -8,5 +8,5 @@ public interface LocalModel extends LocalSubject<String, String>
 {
   void addBooking(Booking booking) throws RemoteException;
   boolean isPasswordCorrect(String userName, String password) throws RemoteException;
-
+public void close();
 }
