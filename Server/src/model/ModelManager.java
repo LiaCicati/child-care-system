@@ -9,12 +9,14 @@ import java.rmi.RemoteException;
 public class ModelManager implements Model
 {
 //    private BookingList bookingList;    //TODO
+//    private AccountList accountList; //TODO
     private PropertyChangeAction<Booking, Booking> property;
-    private PropertyChangeAction<Account, Account> accountProperty;
+//    private PropertyChangeAction<Account, Account> accountProperty; //TODO incomment again when account class isimplemented
 
     public ModelManager()
     {
 //        this.bookingList = new BookingList();   //TODO
+//        this.accountList = new AccoubtList(); //TODO
         this.property = new PropertyChangeProxy<>(this);
     }
 
