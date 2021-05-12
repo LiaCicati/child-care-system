@@ -3,7 +3,7 @@ package model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Babysitter
+public class Babysitter extends Account
 {
   private double paymentPerHour;
   private ArrayList<String> languages;
@@ -12,11 +12,12 @@ public class Babysitter
   private String userName;
   private MyDateTime dateOfBirth;
 
-  public Babysitter(String userName, int birthDay, int birthMonth, int birthYear,
-      double paymentPerHour, String mainLanguage, double babysittingExperience,
-      boolean hasFirstAidCertificate)
+  public Babysitter(String userName, String password, String email,
+      String firstName, String lastName, int birthDay, int birthMonth,
+      int birthYear, double paymentPerHour, String mainLanguage,
+      double babysittingExperience, boolean hasFirstAidCertificate)
   {
-    setUserName(userName);
+    super(userName, password, email, firstName, lastName);
     setPaymentPerHour(paymentPerHour);
     setBabysittingExperience(babysittingExperience);
     setFirstAidCertificate(hasFirstAidCertificate);
@@ -73,7 +74,19 @@ public class Babysitter
 
   public void setPaymentPerHour(double paymentPerHour)
   {
-    this.paymentPerHour = paymentPerHour;
+    if (paymentPerHour < 0)
+    {
+      double positivePaymentPerHour = Math.abs(paymentPerHour);
+      this.paymentPerHour = positivePaymentPerHour;
+    }
+    else if (paymentPerHour > 500)
+    {
+      this.paymentPerHour = 500;
+    }
+    else
+    {
+      this.paymentPerHour = paymentPerHour;
+    }
   }
 
   public ArrayList<String> getLanguages()
@@ -103,7 +116,23 @@ public class Babysitter
 
   public void setBabysittingExperience(double babysittingExperience)
   {
-    this.babysittingExperience = babysittingExperience;
+    if (babysittingExperience < 0)
+    {
+      double positiveBabysittingExperience = Math
+          .abs(babysittingExperience);
+      this.babysittingExperience = positiveBabysittingExperience;
+    }
+/*    else if  (babysittingExperience>getAge(getDateOfBirth())){
+      this.babysittingExperience = getAge(getDateOfBirth());
+    }*/
+    else if (babysittingExperience > 70)
+    {
+      this.babysittingExperience = 70;
+    }
+    else
+    {
+      this.babysittingExperience = babysittingExperience;
+    }
   }
 
   public boolean hasFirstAidCertificate()
@@ -128,18 +157,19 @@ public class Babysitter
       return false;
     }
     Babysitter other = (Babysitter) obj;
-    return paymentPerHour == other.paymentPerHour && getMainLanguage()
+    return super.equals(obj) && paymentPerHour == other.paymentPerHour && getMainLanguage()
         .equals(other.getMainLanguage())
         && babysittingExperience == other.babysittingExperience
-        && hasFirstAidCertificate == other.hasFirstAidCertificate && userName
-        .equals(other.userName) && dateOfBirth.equals(other.dateOfBirth);
+        && hasFirstAidCertificate == other.hasFirstAidCertificate
+        && userName.equals(other.userName) && dateOfBirth
+        .equals(other.dateOfBirth);
   }
 
   @Override public String toString()
   {
-    return "Username: " + userName + "\n" + "Payment per hour: "
-        + paymentPerHour + "\n" + "Main language: " + getMainLanguage() + "\n"
-        + "Languages: " + languages + "\n" + "Years of experience: "
+    return super.toString() + "\n" + "Payment per hour: "
+        + paymentPerHour + "\n" + "Main language: " + getMainLanguage()
+        + "\n" + "Languages: " + languages + "\n" + "Years of experience: "
         + babysittingExperience + "\n" + "Has CPR certificate: "
         + hasFirstAidCertificate + "\n" + "Birthday: " + dateOfBirth;
   }
