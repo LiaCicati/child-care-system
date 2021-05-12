@@ -35,6 +35,26 @@ public abstract class Account
         this.lastName = lastName;
     }
 
+    public String getUserName()
+    {
+        return userName;
+    }
+
+    public String getEmail()
+    {
+        return email;
+    }
+
+    public String getFirstName()
+    {
+        return firstName;
+    }
+
+    public String getLastName()
+    {
+        return lastName;
+    }
+
     public boolean validateUserName(String userName)
     {
         return userName.length() <= 16 && !userName.isEmpty();
