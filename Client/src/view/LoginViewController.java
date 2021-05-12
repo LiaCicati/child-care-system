@@ -7,7 +7,7 @@ import javafx.scene.control.TextField;
 
 public class LoginViewController extends ViewController
 {
-  @FXML private TextField email;
+  @FXML private TextField userName;
   @FXML private PasswordField password;
   @FXML private Label errorLabel;
 

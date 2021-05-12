@@ -54,8 +54,8 @@
     <Label layoutX="197.0" layoutY="619.0" text="Or" textFill="#776f6f" />
    <VBox layoutX="57.0" layoutY="295.0" prefHeight="135.0" prefWidth="300.0" spacing="5.0">
       <children>
-         <Label text="Email" />
-          <TextField fx:id="email" prefHeight="42.0" prefWidth="300.0" style="-fx-background-radius: 37px;" />
+         <Label text="Username" />
+          <TextField fx:id="userName" prefHeight="42.0" prefWidth="300.0" style="-fx-background-radius: 37px;" />
          <Label text="Password" />
           <PasswordField fx:id="password" minHeight="42.0" minWidth="300.0" style="-fx-background-radius: 37;" />
       </children>

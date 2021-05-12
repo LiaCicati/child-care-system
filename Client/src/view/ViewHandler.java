@@ -44,6 +44,11 @@ public class ViewHandler extends ViewCreator
     primaryStage.show();
   }
 
+  public void closeView()
+  {
+    primaryStage.close();
+  }
+
   @Override protected void initViewController(ViewController controller,
       Region root)
   {
