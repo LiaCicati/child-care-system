@@ -1,7 +1,8 @@
 import mediator.Client;
-import model.Model;
+import model.LocalModel;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import model.LocalModelManager;
 import view.ViewHandler;
 import viewmodel.ViewModelFactory;
 
@@ -10,33 +11,19 @@ import java.rmi.NotBoundException;
 
 public class MyApplication extends Application
 {
-  private Model model;
+  private LocalModel localModel;
 
-  @Override public void start(Stage stage) throws IOException, NotBoundException
+  @Override public void start(Stage stage)
   {
 
-    Client client = new Client(model, "localhost");
-
-//    Scanner input = new Scanner(System.in);
-//
-//    boolean check = true;
-//    while (check)
-//    {
-//      System.out.print("To book a babysitter please type 1: ");
-//      String line = input.nextLine();
-//      if (line.equals("stop"))
-//      {
-//        check = false;
-//      }
-//      else if (line.equals("1"))
-//      {
-//        System.out.println("The booking was successfully made! ");
-//      }
-//
-//    }
-
-    ViewModelFactory viewModelFactory = new ViewModelFactory(model);
+//    Client client = new Client(localModel, "localhost");
+    localModel = new LocalModelManager();
+    ViewModelFactory viewModelFactory = new ViewModelFactory(localModel);
     ViewHandler view = new ViewHandler(viewModelFactory);
     view.start(stage);
+  }
+
+  @Override public void stop(){
+    localModel.close();
   }
 }

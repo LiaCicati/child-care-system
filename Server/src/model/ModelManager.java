@@ -4,14 +4,19 @@ import utility.observer.listener.GeneralListener;
 import utility.observer.subject.PropertyChangeAction;
 import utility.observer.subject.PropertyChangeProxy;
 
+import java.rmi.RemoteException;
+
 public class ModelManager implements Model
 {
 //    private BookingList bookingList;    //TODO
+//    private AccountList accountList; //TODO
     private PropertyChangeAction<Booking, Booking> property;
+//    private PropertyChangeAction<Account, Account> accountProperty; //TODO incomment again when account class isimplemented
 
     public ModelManager()
     {
 //        this.bookingList = new BookingList();   //TODO
+//        this.accountList = new AccoubtList(); //TODO
         this.property = new PropertyChangeProxy<>(this);
     }
 
@@ -20,6 +25,19 @@ public class ModelManager implements Model
     {
 //        bookingList.addBooking(booking);    //TODO
 //        property.firePropertyChange("add", null, booking);
+    }
+
+
+    @Override
+    public boolean isPasswordCorrect(String userName, String password) throws RemoteException {
+        return false;
+/*        Account account = accountList.getAccountByUserName(userName);
+        accountProperty.firePropertyChange("getByUserName", account, null);
+        if (account.getPassword == password){
+            return true;
+        } else {
+            return false;
+        }*/
     }
 
     @Override public void close()

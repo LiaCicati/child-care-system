@@ -1,5 +1,5 @@
 import mediator.RemoteModel;
-import mediator.RemoteModelManager;
+import mediator.Server;
 import model.Model;
 import model.ModelManager;
 
@@ -25,7 +25,7 @@ public class MyApplication extends Application
         //  starting server
         try
         {
-            server = new RemoteModelManager(model);
+            server = new Server(model);
         }
         catch (RemoteException | MalformedURLException e)
         {
@@ -36,6 +36,6 @@ public class MyApplication extends Application
     @Override public void stop()
     {
         model.close();  //closing observer threads
-        ((RemoteModelManager)server).close();   //closing server
+        ((Server)server).close();   //closing server
     }
 }

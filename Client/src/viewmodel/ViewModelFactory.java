@@ -1,10 +1,10 @@
 package viewmodel;
 
-import model.Model;
+import model.LocalModel;
 
 public class ViewModelFactory
 {
-  public ViewModelFactory(Model model)
+  public ViewModelFactory(LocalModel localModel)
   {
 
   }

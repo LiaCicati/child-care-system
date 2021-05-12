@@ -8,4 +8,6 @@ import java.rmi.RemoteException;
 public interface RemoteModel extends RemoteSubject<Booking, Booking>
 {
     void addBooking(Booking booking) throws RemoteException;
+    boolean isPasswordCorrect(String userName, String password) throws RemoteException;
+
 }

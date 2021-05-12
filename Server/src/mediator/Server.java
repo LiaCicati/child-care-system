@@ -16,13 +16,12 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
-public class RemoteModelManager
-    implements RemoteModel, LocalListener<Booking, Booking>
+public class Server implements RemoteModel, LocalListener<Booking, Booking>
 {
     private Model model;
     private PropertyChangeAction<Booking, Booking> property;
 
-    public RemoteModelManager(Model model)
+    public Server(Model model)
         throws RemoteException, MalformedURLException
     {
         this.property = new PropertyChangeProxy<>(this, true);
@@ -56,6 +55,11 @@ public class RemoteModelManager
     {
         model.addBooking(booking);
         property.firePropertyChange("add", null, booking);
+    }
+
+    @Override
+    public boolean isPasswordCorrect(String userName, String password) throws RemoteException {
+        return model.isPasswordCorrect(userName,password);
     }
 
     @Override public void propertyChange(ObserverEvent<Booking, Booking> event)
