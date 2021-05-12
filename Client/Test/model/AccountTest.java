@@ -32,8 +32,7 @@ class AccountTest
   {
     list.addAccount(parent);
     list.addAccount(babysitter);
-
-    //    assertEquals("2", list.size());
+    assertEquals(2, list.getNumberOfAccounts());
 
   }
 
