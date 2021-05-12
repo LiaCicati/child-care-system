@@ -1,4 +1,4 @@
-import mediator.RemoteModelServer;
+import mediator.RemoteModel;
 import mediator.Server;
 import model.Model;
 import model.ModelManager;
@@ -12,7 +12,7 @@ import java.rmi.RemoteException;
 public class MyApplication extends Application
 {
     private Model model;
-    private RemoteModelServer server;
+    private RemoteModel server;
 
     @Override public void start(Stage primaryStage) throws IOException
     {

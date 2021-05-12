@@ -7,7 +7,7 @@ import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
-public interface RemoteModelClient extends RemoteSubject<String, String>
+public interface RemoteModel extends RemoteSubject<String, String>
 {
 
  void addBooking(Booking booking) throws RemoteException;

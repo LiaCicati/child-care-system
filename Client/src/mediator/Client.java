@@ -10,7 +10,6 @@ import utility.observer.subject.PropertyChangeProxy;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
-import java.rmi.NoSuchObjectException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -20,7 +19,7 @@ public class Client implements ClientModel, RemoteListener<String, String>
   private static final String HOST = "localhost";
   private String host;
   private LocalModel localModel;
-  private RemoteModelClient remoteModelClient;
+  private RemoteModel remoteModel;
   private PropertyChangeAction<String, String> property;
 
   public Client(LocalModel localModel, String host)
@@ -29,7 +28,7 @@ public class Client implements ClientModel, RemoteListener<String, String>
     this.localModel = localModel;
     this.host = host;
 //    connect();
-    this.remoteModelClient = (RemoteModelClient) Naming
+    this.remoteModel = (RemoteModel) Naming
             .lookup("rmi://" + host + ":1099/App");
     UnicastRemoteObject.exportObject(this, 0);
     this.property = new PropertyChangeProxy<>(this);
@@ -47,7 +46,7 @@ public class Client implements ClientModel, RemoteListener<String, String>
 
   @Override public void addBooking(Booking booking) {
     try {
-      remoteModelClient.addBooking(booking);
+      remoteModel.addBooking(booking);
     } catch (RemoteException e) {
       e.printStackTrace();
     }
@@ -58,7 +57,7 @@ public class Client implements ClientModel, RemoteListener<String, String>
   @Override
   public boolean isPasswordCorrect(String userName, String password) {
     try {
-      return remoteModelClient.isPasswordCorrect(userName, password);
+      return remoteModel.isPasswordCorrect(userName, password);
     } catch (RemoteException e) {
       e.printStackTrace();
       return false;

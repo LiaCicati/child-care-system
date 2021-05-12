@@ -40,8 +40,12 @@ public class LocalModelManager implements LocalModel, LocalListener<String, Stri
 
   @Override
   public void close() {
-    property.close();
-    serverModel.close();
+    try {
+      property.close();
+      serverModel.close();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
 

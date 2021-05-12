@@ -16,7 +16,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
-public class Server implements RemoteModelServer, LocalListener<Booking, Booking>
+public class Server implements RemoteModel, LocalListener<Booking, Booking>
 {
     private Model model;
     private PropertyChangeAction<Booking, Booking> property;
