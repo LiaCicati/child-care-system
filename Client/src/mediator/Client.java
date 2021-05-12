@@ -28,7 +28,10 @@ public class Client implements ClientModel, RemoteListener<String, String>
   {
     this.localModel = localModel;
     this.host = host;
-    connect();
+//    connect();
+    this.remoteModelClient = (RemoteModelClient) Naming
+            .lookup("rmi://" + host + ":1099/App");
+    UnicastRemoteObject.exportObject(this, 0);
     this.property = new PropertyChangeProxy<>(this);
   }
 
@@ -36,11 +39,11 @@ public class Client implements ClientModel, RemoteListener<String, String>
     this(localModel,HOST);
   }
 
-   public void connect() throws RemoteException, MalformedURLException, NotBoundException {
+/*   public void connect() throws RemoteException, MalformedURLException, NotBoundException {
     this.remoteModelClient = (RemoteModelClient) Naming
         .lookup("rmi://" + host + ":1099/App");
     UnicastRemoteObject.exportObject(this, 0);
-  }
+  }*/
 
   @Override public void addBooking(Booking booking) {
     try {
