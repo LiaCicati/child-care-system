@@ -34,14 +34,11 @@ public class LocalModelManager implements LocalModel, LocalListener<String, Stri
   }
 
   @Override
-  public boolean doesUserNameExist(String userName) throws RemoteException {
-    return serverModel.doesUserNameExist(userName);
-  }
-
-  @Override
   public boolean isPasswordCorrect(String userName, String password) throws RemoteException {
     return serverModel.isPasswordCorrect(userName, password);
   }
+
+
 
   @Override public boolean addListener(GeneralListener<String, String> listener,
       String... propertyNames)

@@ -11,7 +11,6 @@ public interface RemoteModelClient extends RemoteSubject<String, String>
 {
 
  void addBooking(Booking booking) throws RemoteException;
- boolean doesUserNameExist(String userName) throws RemoteException;
  boolean isPasswordCorrect(String userName, String password) throws RemoteException;
 
 /*  void connect() throws RemoteException, MalformedURLException, NotBoundException;

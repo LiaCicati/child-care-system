@@ -8,7 +8,6 @@ public interface Model extends LocalSubject<Booking, Booking>
 {
   void addBooking(Booking booking) throws IllegalArgumentException;
 
-  boolean doesUserNameExist(String userName) throws RemoteException;
   boolean isPasswordCorrect(String userName, String password) throws RemoteException;
 
 

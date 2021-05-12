@@ -58,11 +58,6 @@ public class Server implements RemoteModelServer, LocalListener<Booking, Booking
     }
 
     @Override
-    public boolean doesUserNameExist(String userName) throws RemoteException {
-        return model.doesUserNameExist(userName);
-    }
-
-    @Override
     public boolean isPasswordCorrect(String userName, String password) throws RemoteException {
         return model.isPasswordCorrect(userName,password);
     }

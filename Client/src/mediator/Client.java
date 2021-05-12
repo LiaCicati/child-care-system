@@ -49,15 +49,7 @@ public class Client implements ClientModel, RemoteListener<String, String>
     }
   }
 
-  @Override
-  public boolean doesUserNameExist(String userName)  {
-    try {
-      return remoteModelClient.doesUserNameExist(userName);
-    } catch (RemoteException e) {
-      e.printStackTrace();
-    }
-    return false;
-  }
+
 
   @Override
   public boolean isPasswordCorrect(String userName, String password) {
@@ -65,8 +57,8 @@ public class Client implements ClientModel, RemoteListener<String, String>
       return remoteModelClient.isPasswordCorrect(userName, password);
     } catch (RemoteException e) {
       e.printStackTrace();
+      return false;
     }
-    return false;
   }
 
   @Override public void propertyChange(ObserverEvent<String, String> event)

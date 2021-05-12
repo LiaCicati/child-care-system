@@ -10,6 +10,7 @@ public class ModelManager implements Model
 {
 //    private BookingList bookingList;    //TODO
     private PropertyChangeAction<Booking, Booking> property;
+    private PropertyChangeAction<Account, Account> accountProperty;
 
     public ModelManager()
     {
@@ -24,17 +25,17 @@ public class ModelManager implements Model
 //        property.firePropertyChange("add", null, booking);
     }
 
-    @Override
-    public boolean doesUserNameExist(String userName) throws RemoteException {
-        return false;
-        //der skal være noget med at kigge i account list
-    }
 
     @Override
     public boolean isPasswordCorrect(String userName, String password) throws RemoteException {
         return false;
-        //der skal være noget med at kigge i account list
-
+/*        Account account = accountList.getAccountByUserName(userName);
+        accountProperty.firePropertyChange("getByUserName", account, null);
+        if (account.getPassword == password){
+            return true;
+        } else {
+            return false;
+        }*/
     }
 
     @Override public void close()
