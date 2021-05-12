@@ -36,7 +36,7 @@ class AccountTest
 
   }
 
-  @Test void isEmailValidWhenInvalidData()
+  @Test void validateEmailWhenInvalidData()
   {
     assertThrows(IllegalArgumentException.class, () -> {
       parent.setEmail(".username@yahoo.com");
@@ -53,6 +53,22 @@ class AccountTest
 
     assertThrows(IllegalArgumentException.class, () -> {
       babysitter.setEmail("username@yahoo.corporate");
+    });
+
+    assertThrows(IllegalArgumentException.class, () -> {
+      babysitter.setEmail("username@gmail");
+    });
+
+    assertThrows(IllegalArgumentException.class, () -> {
+      babysitter.setEmail("username.gmail.com");
+    });
+
+    assertThrows(IllegalArgumentException.class, () -> {
+      babysitter.setEmail("username@gmail");
+    });
+
+    assertThrows(IllegalArgumentException.class, () -> {
+      babysitter.setEmail("username");
     });
   }
 
