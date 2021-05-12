@@ -9,7 +9,7 @@ public class Babysitter extends Account
     private ArrayList<String> languages;
     private double babysittingExperience;
     private boolean hasFirstAidCertificate;
-    private String userName;
+//    private String userName;
     private MyDateTime dateOfBirth;
 
     public Babysitter(String userName, String password, String email,
@@ -99,15 +99,15 @@ public class Babysitter extends Account
         languages.add(language);
     }
 
-    public String getUserName()
-    {
-        return userName;
-    }
-
-    public void setUserName(String userName)
-    {
-        this.userName = userName;
-    }
+//    public String getUserName()
+//    {
+//        return userName;
+//    }
+//
+//    public void setUserName(String userName)
+//    {
+//        this.userName = userName;
+//    }
 
     public double getBabysittingExperience()
     {
@@ -161,7 +161,7 @@ public class Babysitter extends Account
             .equals(other.getMainLanguage())
             && babysittingExperience == other.babysittingExperience
             && hasFirstAidCertificate == other.hasFirstAidCertificate
-            && userName.equals(other.userName) && dateOfBirth
+             && dateOfBirth
             .equals(other.dateOfBirth);
     }
 

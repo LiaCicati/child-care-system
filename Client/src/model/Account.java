@@ -4,94 +4,131 @@ import java.util.regex.*;
 
 public abstract class Account
 {
-    private String userName;
-    private String password;
-    private String email;
-    private String firstName;
-    private String lastName;
+  private String userName;
+  private String password;
+  private String email;
+  private String firstName;
+  private String lastName;
 
-    public Account(String userName, String password, String email,
-        String firstName, String lastName)
+  public Account(String userName, String password, String email,
+      String firstName, String lastName)
+  {
+    setUserName(userName);
+    setPassword(password);
+    setEmail(email);
+    setFirstName(firstName);
+    setLastName(lastName);
+  }
+
+  public String getPassword()
+  {
+    return password;
+  }
+
+  public String getUserName()
+  {
+    return userName;
+  }
+
+  public String getEmail()
+  {
+    return email;
+  }
+
+  public String getFirstName()
+  {
+    return firstName;
+  }
+
+  public String getLastName()
+  {
+    return lastName;
+  }
+
+  public boolean validateUserName(String userName)
+  {
+    return userName.length() <= 16 && !userName.isEmpty();
+    //TODO check for matching usernames
+  }
+
+  public boolean validatePassword(String password)
+  {
+    return password.length() >= 8 && password.length() <= 16;
+  }
+
+  //https://www.javatpoint.com/java-email-validation
+  public boolean validateEmail(String email)
+  {
+    String regex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
+    Pattern pattern = Pattern.compile(regex);
+    Matcher matcher = pattern.matcher(email);
+    return matcher.matches();
+    //TODO check for matching emails
+  }
+
+  public void setFirstName(String firstName)
+  {
+    if (firstName == null || firstName.equals(""))
     {
-        if (!validateUserName(userName))
-        {
-            System.out.println("Username is not valid!");
-        }
-        this.userName = userName;
-
-        if (!validatePassword(password))
-        {
-            System.out.println("Password is not valid!");
-        }
-        this.password = password;
-
-        if (!validateEmail(email))
-        {
-            System.out.println("Email is not valid!");
-        }
-        this.email = email;
-
-        this.firstName = firstName;
-        this.lastName = lastName;
+      throw new IllegalArgumentException("Please enter your first name");
     }
+    this.firstName = firstName;
+  }
 
-    public String getUserName()
+  public void setLastName(String lastName)
+  {
+    if (lastName == null || lastName.equals(""))
     {
-        return userName;
+      throw new IllegalArgumentException("Please enter your last name");
     }
+    this.lastName = lastName;
+  }
 
-    public String getEmail()
+  public void setUserName(String userName)
+  {
+    if (!validateUserName(userName))
     {
-        return email;
+      throw new IllegalArgumentException(
+          "The username can not have more than 16 characters or be empty");
     }
+    this.userName = userName;
+  }
 
-    public String getFirstName()
+  public void setEmail(String email)
+  {
+    if (!validateEmail(email))
     {
-        return firstName;
+      throw new IllegalArgumentException("The email is not valid");
     }
+    this.email = email;
+  }
 
-    public String getLastName()
+  public void setPassword(String password)
+  {
+    if (!validatePassword(password))
     {
-        return lastName;
+      throw new IllegalArgumentException(
+          "The password must contain from 8 to 16 characters");
     }
+    this.password = password;
+  }
 
-    public boolean validateUserName(String userName)
+  @Override public boolean equals(Object obj)
+  {
+    if (!(obj instanceof Account))
     {
-        return userName.length() <= 16 && !userName.isEmpty();
-        //TODO check for matching usernames
+      return false;
     }
+    Account other = (Account) obj;
+    return userName.equals(other.userName) && password.equals(other.password)
+        && email.equals(other.email) && firstName.equals(other.firstName)
+        && lastName.equals(other.lastName);
+  }
 
-    public boolean validatePassword(String password)
-    {
-        return password.length() >= 8 && password.length() <= 16;
-    }
-
-    //https://www.javatpoint.com/java-email-validation
-    public boolean validateEmail(String email)
-    {
-        String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(email);
-        return matcher.matches();
-        //TODO check for matching emails
-    }
-
-    @Override public boolean equals(Object obj)
-    {
-        if (!(obj instanceof Account))
-        {
-            return false;
-        }
-        Account other = (Account) obj;
-        return userName.equals(other.userName) && password
-            .equals(other.password) && email.equals(other.email) && firstName
-            .equals(other.firstName) && lastName.equals(other.lastName);
-    }
-
-    @Override public String toString()
-    {
-        return "Username: " + userName + "\n" + "Password: " + password + "\n"
-            + "Email: " + email + "\n" + "First name: " + firstName + "\n"
-            + "Last name: " + lastName;
-    }
+  @Override public String toString()
+  {
+    return "Username: " + userName + "\n" + "Password: " + password + "\n"
+        + "Email: " + email + "\n" + "First name: " + firstName + "\n"
+        + "Last name: " + lastName;
+  }
 }

@@ -22,8 +22,8 @@ class BabysitterTest {
 
     @org.junit.jupiter.api.Test
     void setZero() {
-        babysitter.setUserName(null);
-        assertEquals(null,babysitter.getUserName());
+//        babysitter.setUserName(null);
+//        assertEquals(null,babysitter.getUserName());
 
         babysitter.setPaymentPerHour(0);
         assertEquals(0,babysitter.getPaymentPerHour());
