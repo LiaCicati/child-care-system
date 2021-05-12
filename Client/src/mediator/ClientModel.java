@@ -1,4 +1,14 @@
 package mediator;
 
-public interface ClientModel {
+import model.Booking;
+import utility.observer.subject.LocalSubject;
+
+import java.rmi.RemoteException;
+
+public interface ClientModel extends LocalSubject<String, String> {
+    void addBooking(Booking booking);
+
+    boolean doesUserNameExist(String userName);
+    boolean isPasswordCorrect(String userName, String password);
+
 }

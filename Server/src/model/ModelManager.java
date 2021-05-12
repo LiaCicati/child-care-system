@@ -4,6 +4,8 @@ import utility.observer.listener.GeneralListener;
 import utility.observer.subject.PropertyChangeAction;
 import utility.observer.subject.PropertyChangeProxy;
 
+import java.rmi.RemoteException;
+
 public class ModelManager implements Model
 {
 //    private BookingList bookingList;    //TODO
@@ -20,6 +22,19 @@ public class ModelManager implements Model
     {
 //        bookingList.addBooking(booking);    //TODO
 //        property.firePropertyChange("add", null, booking);
+    }
+
+    @Override
+    public boolean doesUserNameExist(String userName) throws RemoteException {
+        return false;
+        //der skal være noget med at kigge i account list
+    }
+
+    @Override
+    public boolean isPasswordCorrect(String userName, String password) throws RemoteException {
+        return false;
+        //der skal være noget med at kigge i account list
+
     }
 
     @Override public void close()

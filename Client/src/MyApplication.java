@@ -1,5 +1,5 @@
 import mediator.Client;
-import model.Model;
+import model.LocalModel;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import view.ViewHandler;
@@ -10,12 +10,12 @@ import java.rmi.NotBoundException;
 
 public class MyApplication extends Application
 {
-  private Model model;
+  private LocalModel localModel;
 
   @Override public void start(Stage stage) throws IOException, NotBoundException
   {
 
-    Client client = new Client(model, "localhost");
+    Client client = new Client(localModel, "localhost");
 
 //    Scanner input = new Scanner(System.in);
 //
@@ -35,7 +35,7 @@ public class MyApplication extends Application
 //
 //    }
 
-    ViewModelFactory viewModelFactory = new ViewModelFactory(model);
+    ViewModelFactory viewModelFactory = new ViewModelFactory(localModel);
     ViewHandler view = new ViewHandler(viewModelFactory);
     view.start(stage);
   }
