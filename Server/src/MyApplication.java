@@ -11,31 +11,25 @@ import java.rmi.RemoteException;
 
 public class MyApplication extends Application
 {
-    private Model model;
-    private RemoteModel server;
+//    private Model model;
+//    private RemoteModel server;
 
-    @Override public void start(Stage primaryStage) throws IOException
+     public void start(Stage primaryStage) throws IOException
     {
-        model = new ModelManager();
+        Model model = new ModelManager();
+        RemoteModel remoteModel = new RemoteModelManager(model);
 //        ViewModelFactory viewModelFactory = new ViewModelFactory(model);
 //        ViewHandler view = new ViewHandler(viewModelFactory);
 //
 //        view.start(primaryStage);
 
         //  starting server
-        try
-        {
-            server = new RemoteModelManager(model);
-        }
-        catch (RemoteException | MalformedURLException e)
-        {
-            e.printStackTrace();
-        }
+
     }
 
-    @Override public void stop()
-    {
-        model.close();  //closing observer threads
-        ((RemoteModelManager)server).close();   //closing server
-    }
+//    @Override public void stop()
+//    {
+//        model.close();  //closing observer threads
+//        ((RemoteModelManager)server).close();   //closing server
+//    }
 }

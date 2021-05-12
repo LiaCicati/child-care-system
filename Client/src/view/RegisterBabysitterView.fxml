@@ -140,7 +140,7 @@
             </Hyperlink>
          </children>
       </HBox>
-      <Label fx:id="errorLabel" layoutX="45.0" layoutY="583.0" prefHeight="30.0" prefWidth="314.0" text="Error Label" textFill="#f9494b">
+      <Label fx:id="errorLabel" layoutX="45.0" layoutY="578.0" prefHeight="35.0" prefWidth="327.0" text="Error Label" textFill="#f9494b">
          <font>
             <Font size="13.0" />
          </font>

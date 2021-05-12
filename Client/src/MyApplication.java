@@ -2,6 +2,7 @@ import mediator.Client;
 import model.Model;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import model.ModelManager;
 import view.ViewHandler;
 import viewmodel.ViewModelFactory;
 
@@ -15,7 +16,7 @@ public class MyApplication extends Application
   @Override public void start(Stage stage) throws IOException, NotBoundException
   {
 
-    Client client = new Client(model, "localhost");
+   Model model = new ModelManager();
 
 //    Scanner input = new Scanner(System.in);
 //

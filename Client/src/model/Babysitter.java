@@ -29,6 +29,11 @@ public class Babysitter extends Account
 
     }
 
+    public Babysitter(String userName, String password, String email,
+        String firstName, String lastName) {
+        super(userName, password, email, firstName, lastName);
+    }
+
     public int getAge(MyDateTime dateOfBirth)
     {
         int currentDay = LocalDate.now().getDayOfMonth();

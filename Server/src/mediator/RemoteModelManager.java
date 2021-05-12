@@ -1,5 +1,7 @@
 package mediator;
 
+import model.Account;
+import model.AccountList;
 import model.Booking;
 import model.Model;
 
@@ -17,79 +19,118 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
 public class RemoteModelManager
-    implements RemoteModel, LocalListener<Booking, Booking>
+    implements RemoteModel, LocalListener<Account, Booking>
 {
-    private Model model;
-    private PropertyChangeAction<Booking, Booking> property;
+  private Model model;
+  private PropertyChangeAction<Account, Booking> property;
 
-    public RemoteModelManager(Model model)
-        throws RemoteException, MalformedURLException
-    {
-        this.property = new PropertyChangeProxy<>(this, true);
-        this.model = model;
-//        this.model.addListener(this, "add");
-        startRegistry();
-        startServer();
-    }
+  public RemoteModelManager(Model model)
+      throws RemoteException, MalformedURLException
+  {
+    this.property = new PropertyChangeProxy<>(this, true);
+    this.model = model;
+//    model.addListener(this);
+    startRegistry();
+    startServer();
+  }
 
-    private void startServer() throws RemoteException, MalformedURLException
-    {
-        UnicastRemoteObject.exportObject(this, 0);
-        Naming.rebind("App", this);
-        System.out.println("Server started...");
-    }
+  private void startServer() throws RemoteException, MalformedURLException
+  {
+    UnicastRemoteObject.exportObject(this, 0);
+    Naming.rebind("App", this);
+    System.out.println("Server started...");
+  }
 
-    public void close()
+  public void close()
+  {
+    property.close();
+    try
     {
-        property.close();
-        try
-        {
-            UnicastRemoteObject.unexportObject(this, true);
-        }
-        catch (Exception e)
-        {
-            //  Nothing?
-        }
+      UnicastRemoteObject.unexportObject(this, true);
     }
+    catch (Exception e)
+    {
+      //  Nothing?
+    }
+  }
 
-    @Override public void addBooking(Booking booking) throws RemoteException
-    {
-        model.addBooking(booking);
-        property.firePropertyChange("add", null, booking);
-    }
+  @Override public void addBooking(Booking booking) throws RemoteException
+  {
+    model.addBooking(booking);
+    property.firePropertyChange("add", null, booking);
+  }
 
-    @Override public void propertyChange(ObserverEvent<Booking, Booking> event)
-    {
-        property.firePropertyChange(event.getPropertyName(), null,
-            event.getValue2());
-    }
+  @Override public Account login(String email, String password)
+      throws RemoteException
+  {
+    return model.login(email, password);
+  }
 
-    @Override public boolean addListener(
-        GeneralListener<Booking, Booking> listener, String... propertyNames)
-        throws RemoteException
-    {
-        boolean check = property.addListener(listener, propertyNames);
-        return check;
-    }
+  @Override public void registerBabysitter(String userName, String password,
+      String email, String firstName, String lastName)
+      throws RemoteException
+  {
+    model.registerBabysitter(userName, password, email, firstName, lastName);
+  }
 
-    @Override public boolean removeListener(
-        GeneralListener<Booking, Booking> listener, String... propertyNames)
-        throws RemoteException
-    {
-        return property.removeListener(listener, propertyNames);
-    }
+  @Override public void registerParent(String userName, String password,
+      String email, String firstName, String lastName, boolean hasPets)
+      throws RemoteException
+  {
+    model.registerParent(userName, password, email, firstName, lastName,
+        hasPets);
+  }
 
-    private void startRegistry() throws RemoteException
+  @Override public void logout(Account user) throws RemoteException
+  {
+    model.logout(user);
+  }
+
+  @Override public AccountList getAccountList() throws RemoteException
+  {
+    return model.getAccountList();
+  }
+
+  @Override public AccountList getBabysitterList() throws RemoteException
+  {
+    return model.getBabysitterList();
+  }
+
+  @Override public AccountList getParentList() throws RemoteException
+  {
+    return model.getParentList();
+  }
+
+  private void startRegistry() throws RemoteException
+  {
+    try
     {
-        try
-        {
-            Registry reg = LocateRegistry.createRegistry(1099);
-            System.out.println("Registry started...");
-        }
-        catch (java.rmi.server.ExportException ex)
-        {
-            System.out
-                .println("Registry already started?" + " " + ex.getMessage());
-        }
+      Registry reg = LocateRegistry.createRegistry(1099);
+      System.out.println("Registry started...");
     }
+    catch (java.rmi.server.ExportException ex)
+    {
+      System.out.println("Registry already started?" + " " + ex.getMessage());
+    }
+  }
+
+  @Override public void propertyChange(ObserverEvent<Account, Booking> event)
+  {
+    property.firePropertyChange(event.getPropertyName(), event.getValue1(),
+        event.getValue2());
+  }
+
+  @Override public boolean addListener(
+      GeneralListener<Account, Booking> listener, String... propertyNames)
+      throws RemoteException
+  {
+    return property.addListener(listener, propertyNames);
+  }
+
+  @Override public boolean removeListener(
+      GeneralListener<Account, Booking> listener, String... propertyNames)
+      throws RemoteException
+  {
+    return property.removeListener(listener, propertyNames);
+  }
 }

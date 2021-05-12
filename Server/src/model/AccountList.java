@@ -60,6 +60,6 @@ public class AccountList implements Serializable
 
   public String toString()
   {
-    return "Size: " + accounts.size();
+    return "Size: " + accounts;
   }
 }

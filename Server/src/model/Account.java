@@ -15,6 +15,7 @@ public abstract class Account implements Serializable
   public Account(String userName, String password, String email,
       String firstName, String lastName)
   {
+
     if (!validateUserName(userName))
     {
       throw new IllegalArgumentException("Username is not valid");
