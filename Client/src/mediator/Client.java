@@ -1,5 +1,7 @@
 package mediator;
 
+import model.Account;
+import model.AccountList;
 import model.Booking;
 import model.LocalModel;
 import utility.observer.event.ObserverEvent;
@@ -27,15 +29,17 @@ public class Client implements ClientModel, RemoteListener<String, String>
   {
     this.localModel = localModel;
     this.host = host;
-//    connect();
+    //    connect();
     this.remoteModel = (RemoteModel) Naming
-            .lookup("rmi://" + host + ":1099/App");
+        .lookup("rmi://" + host + ":1099/App");
     UnicastRemoteObject.exportObject(this, 0);
     this.property = new PropertyChangeProxy<>(this);
   }
 
-  public Client(LocalModel localModel) throws RemoteException, NotBoundException, MalformedURLException{
-    this(localModel,HOST);
+  public Client(LocalModel localModel)
+      throws RemoteException, NotBoundException, MalformedURLException
+  {
+    this(localModel, HOST);
   }
 
 /*   public void connect() throws RemoteException, MalformedURLException, NotBoundException {
@@ -44,34 +48,110 @@ public class Client implements ClientModel, RemoteListener<String, String>
     UnicastRemoteObject.exportObject(this, 0);
   }*/
 
-  @Override public void addBooking(Booking booking) {
-    try {
+  @Override public void addBooking(Booking booking)
+  {
+    try
+    {
       remoteModel.addBooking(booking);
-    } catch (RemoteException e) {
+    }
+    catch (RemoteException e)
+    {
       e.printStackTrace();
     }
   }
 
-
-
-  @Override
-  public boolean isPasswordCorrect(String userName, String password) {
-    try {
+  @Override public boolean isPasswordCorrect(String userName, String password)
+  {
+    try
+    {
       return remoteModel.isPasswordCorrect(userName, password);
-    } catch (RemoteException e) {
+    }
+    catch (RemoteException e)
+    {
       e.printStackTrace();
       return false;
     }
   }
 
-  @Override
-  public void close() {
-    try {
-      UnicastRemoteObject.unexportObject(this,true);
-    } catch (Exception e) {
+  @Override public void close()
+  {
+    try
+    {
+      UnicastRemoteObject.unexportObject(this, true);
+    }
+    catch (Exception e)
+    {
       throw new IllegalStateException("cannot unexport RMI object", e);
     }
 
+  }
+
+  @Override public Account login(String username, String password)
+  {
+    try
+    {
+      return remoteModel.login(username, password);
+    }
+    catch (RemoteException e)
+    {
+      throw new IllegalStateException(getExceptionMessage(e), e);
+    }
+  }
+
+  @Override public void registerBabysitter(String userName, String password,
+      String email, String firstName, String lastName, int birthDay,
+      int birthMonth, int birthYear, double paymentPerHour, String mainLanguage,
+      double babysittingExperience, boolean hasFirstAidCertificate)
+  {
+    try
+    {
+      remoteModel
+          .registerBabysitter(userName, password, email, firstName, lastName,
+              birthDay, birthMonth, birthYear, paymentPerHour, mainLanguage,
+              babysittingExperience, hasFirstAidCertificate);
+    }
+    catch (RemoteException e)
+    {
+      throw new IllegalStateException(getExceptionMessage(e), e);
+    }
+  }
+
+  @Override public void registerBabysitter(String userName, String password,
+      String email, String firstName, String lastName)
+  {
+    try
+    {
+      remoteModel
+          .registerBabysitter(userName, password, email, firstName, lastName);
+    }
+    catch (RemoteException e)
+    {
+      throw new IllegalStateException(getExceptionMessage(e), e);
+    }
+  }
+
+  @Override public AccountList getAccountList()
+  {
+    try
+    {
+      return remoteModel.getAccountList();
+    }
+    catch (RemoteException e)
+    {
+      throw new IllegalStateException(getExceptionMessage(e), e);
+    }
+  }
+
+  @Override public AccountList getBabysitterList()
+  {
+    try
+    {
+      return remoteModel.getBabysitterList();
+    }
+    catch (RemoteException e)
+    {
+      throw new IllegalStateException(getExceptionMessage(e), e);
+    }
   }
 
   @Override public void propertyChange(ObserverEvent<String, String> event)
@@ -81,11 +161,22 @@ public class Client implements ClientModel, RemoteListener<String, String>
   }
 
   @Override public boolean addListener(GeneralListener<String, String> listener,
-      String... propertyNames)  {
+      String... propertyNames)
+  {
     return property.addListener(listener, propertyNames);
   }
 
-  @Override public boolean removeListener(GeneralListener<String, String> listener, String... propertyNames)  {
+  @Override public boolean removeListener(
+      GeneralListener<String, String> listener, String... propertyNames)
+  {
     return property.removeListener(listener, propertyNames);
+  }
+
+  private String getExceptionMessage(Exception e)
+  {
+    String message = e.getMessage();
+    if (message != null)
+      message = message.split(";")[0];
+    return message;
   }
 }

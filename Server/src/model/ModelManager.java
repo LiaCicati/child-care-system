@@ -10,6 +10,8 @@ public class ModelManager implements Model
 {
 //    private BookingList bookingList;    //TODO
 //    private AccountList accountList; //TODO
+    private AccountList accountList;
+    private AccountList babysitterList;
     private PropertyChangeAction<Booking, Booking> property;
 //    private PropertyChangeAction<Account, Account> accountProperty; //TODO incomment again when account class isimplemented
 
@@ -17,6 +19,8 @@ public class ModelManager implements Model
     {
 //        this.bookingList = new BookingList();   //TODO
 //        this.accountList = new AccoubtList(); //TODO
+        this.accountList = new AccountList();
+        this.babysitterList = new AccountList();
         this.property = new PropertyChangeProxy<>(this);
     }
 
@@ -43,6 +47,52 @@ public class ModelManager implements Model
     @Override public void close()
     {
 //        property.close();
+    }
+
+    @Override public Account login(String username, String password)
+    {
+        return null;
+    }
+
+    @Override public void registerBabysitter(String userName, String password,
+        String email, String firstName, String lastName, int birthDay,
+        int birthMonth, int birthYear, double paymentPerHour,
+        String mainLanguage, double babysittingExperience,
+        boolean hasFirstAidCertificate)
+    {
+
+    }
+
+    @Override public void registerBabysitter(String userName, String password,
+        String email, String firstName, String lastName)
+    {
+        if (!accountList.contains(userName))
+        {
+            Account account = new Babysitter(userName, password, email, firstName,
+                lastName);
+            accountList.addAccount(account);
+            babysitterList.addAccount(account);
+        }
+        else if (userName.equals("") || password.equals("") || email.equals("")
+            || firstName.equals("") || lastName.equals(""))
+        {
+            throw new IllegalArgumentException("Fill out all the required fields");
+        }
+        else if (accountList.contains(email))
+        {
+            throw new IllegalStateException(
+                "An user with this email is already registered in the system");
+        }
+    }
+
+    @Override public AccountList getAccountList()
+    {
+        return accountList;
+    }
+
+    @Override public AccountList getBabysitterList()
+    {
+        return babysitterList;
     }
 
     @Override public boolean addListener(

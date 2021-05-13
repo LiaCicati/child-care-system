@@ -10,7 +10,8 @@ import utility.observer.subject.PropertyChangeProxy;
 
 import java.rmi.RemoteException;
 
-public class LocalModelManager implements LocalModel, LocalListener<String, String>
+public class LocalModelManager
+    implements LocalModel, LocalListener<String, String>
 {
   private ClientModel serverModel;
   private PropertyChangeAction<String, String> property;
@@ -19,7 +20,7 @@ public class LocalModelManager implements LocalModel, LocalListener<String, Stri
   {
     try
     {
-      this.serverModel = new Client(this, "localhost");
+      this.serverModel = new Client(this);
     }
     catch (Exception e)
     {
@@ -33,21 +34,57 @@ public class LocalModelManager implements LocalModel, LocalListener<String, Stri
     serverModel.addBooking(booking);
   }
 
-  @Override
-  public boolean isPasswordCorrect(String userName, String password) throws RemoteException {
+  @Override public boolean isPasswordCorrect(String userName, String password)
+      throws RemoteException
+  {
     return serverModel.isPasswordCorrect(userName, password);
   }
 
-  @Override
-  public void close() {
-    try {
+  @Override public void close()
+  {
+    try
+    {
       property.close();
       serverModel.close();
-    } catch (Exception e) {
+    }
+    catch (Exception e)
+    {
       e.printStackTrace();
     }
   }
 
+  @Override public Account login(String username, String password)
+  {
+    return serverModel.login(username, password);
+  }
+
+  @Override public void registerBabysitter(String userName, String password,
+      String email, String firstName, String lastName, int birthDay,
+      int birthMonth, int birthYear, double paymentPerHour, String mainLanguage,
+      double babysittingExperience, boolean hasFirstAidCertificate)
+  {
+    serverModel
+        .registerBabysitter(userName, password, email, firstName, lastName,
+            birthDay, birthMonth, birthYear, paymentPerHour, mainLanguage,
+            babysittingExperience, hasFirstAidCertificate);
+  }
+
+  @Override public void registerBabysitter(String userName, String password,
+      String email, String firstName, String lastName)
+  {
+    serverModel
+        .registerBabysitter(userName, password, email, firstName, lastName);
+  }
+
+  @Override public AccountList getAccountList()
+  {
+    return serverModel.getAccountList();
+  }
+
+  @Override public AccountList getBabysitterList()
+  {
+    return serverModel.getBabysitterList();
+  }
 
   @Override public boolean addListener(GeneralListener<String, String> listener,
       String... propertyNames)
