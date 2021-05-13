@@ -9,7 +9,7 @@ public class Babysitter extends Account
     private ArrayList<String> languages;
     private double babysittingExperience;
     private boolean hasFirstAidCertificate;
-//    private String userName;
+    private String userName;
     private MyDateTime dateOfBirth;
 
     public Babysitter(String userName, String password, String email,
@@ -28,7 +28,10 @@ public class Babysitter extends Account
         setDateOfBirth(new MyDateTime(birthDay, birthMonth, birthYear));
 
     }
-
+    public Babysitter(String userName, String password, String email,
+        String firstName, String lastName) {
+        super(userName, password, email, firstName, lastName);
+    }
     public int getAge(MyDateTime dateOfBirth)
     {
         int currentDay = LocalDate.now().getDayOfMonth();
@@ -99,15 +102,15 @@ public class Babysitter extends Account
         languages.add(language);
     }
 
-//    public String getUserName()
-//    {
-//        return userName;
-//    }
-//
-//    public void setUserName(String userName)
-//    {
-//        this.userName = userName;
-//    }
+    public String getUserName()
+    {
+        return userName;
+    }
+
+    public void setUserName(String userName)
+    {
+        this.userName = userName;
+    }
 
     public double getBabysittingExperience()
     {
@@ -161,7 +164,7 @@ public class Babysitter extends Account
             .equals(other.getMainLanguage())
             && babysittingExperience == other.babysittingExperience
             && hasFirstAidCertificate == other.hasFirstAidCertificate
-             && dateOfBirth
+            && userName.equals(other.userName) && dateOfBirth
             .equals(other.dateOfBirth);
     }
 
@@ -174,4 +177,6 @@ public class Babysitter extends Account
             + hasFirstAidCertificate + "\n" + "Birthday: " + dateOfBirth;
     }
 }
+
+
 

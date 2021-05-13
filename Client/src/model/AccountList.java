@@ -211,6 +211,30 @@ public class AccountList
         return null;
     }
 
+    public boolean contains(Account account)
+    {
+        for (int i = 0; i < accounts.size(); i++)
+        {
+            if (accounts.get(i).getUserName().equals(account.getUserName()))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean contains(String username)
+    {
+        for (int i = 0; i < accounts.size(); i++)
+        {
+            if (accounts.get(i).getUserName().equals(username))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override public String toString()
     {
         return "Accounts : " + "\n" + accounts;
