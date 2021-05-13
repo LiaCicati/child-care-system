@@ -73,15 +73,10 @@ public class ModelManager implements Model
             accountList.addAccount(account);
             babysitterList.addAccount(account);
         }
-        else if (userName.equals("") || password.equals("") || email.equals("")
-            || firstName.equals("") || lastName.equals(""))
-        {
-            throw new IllegalArgumentException("Fill out all the required fields");
-        }
-        else if (accountList.contains(email))
+        else if (accountList.contains(userName))
         {
             throw new IllegalStateException(
-                "An user with this email is already registered in the system");
+                "An user with this username is already registered in the system");
         }
     }
 
