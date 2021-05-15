@@ -21,4 +21,6 @@ public interface Model extends LocalSubject<Booking, Booking>
       String firstName, String lastName);
   AccountList getAccountList();
   AccountList getBabysitterList();
+  Babysitter getBabysitter(String username);
+  void logout(Account account);
 }

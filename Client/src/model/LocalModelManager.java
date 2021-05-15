@@ -86,6 +86,16 @@ public class LocalModelManager
     return serverModel.getBabysitterList();
   }
 
+  @Override public Babysitter getBabysitter(String username)
+  {
+    return serverModel.getBabysitter(username);
+  }
+
+  @Override public void logout(Account account)
+  {
+    serverModel.logout(account);
+  }
+
   @Override public boolean addListener(GeneralListener<String, String> listener,
       String... propertyNames)
   {

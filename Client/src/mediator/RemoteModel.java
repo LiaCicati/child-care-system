@@ -1,9 +1,6 @@
 package mediator;
 
-import model.Account;
-import model.AccountList;
-import model.Booking;
-import model.MyDateTime;
+import model.*;
 import utility.observer.subject.RemoteSubject;
 
 import java.net.MalformedURLException;
@@ -29,4 +26,6 @@ Account login(String username, String password) throws RemoteException;
      String firstName, String lastName) throws RemoteException;
  AccountList getAccountList() throws RemoteException;
  AccountList getBabysitterList() throws RemoteException;
+ Babysitter getBabysitter(String username) throws RemoteException;
+ void logout(Account account) throws RemoteException;
 }

@@ -1,10 +1,7 @@
 package mediator;
 
-import model.Account;
-import model.AccountList;
-import model.Booking;
+import model.*;
 
-import model.MyDateTime;
 import utility.observer.subject.RemoteSubject;
 import java.rmi.RemoteException;
 import java.time.LocalDate;
@@ -21,5 +18,7 @@ public interface RemoteModel extends RemoteSubject<Booking, Booking>
         String firstName, String lastName) throws RemoteException;
     AccountList getAccountList() throws RemoteException;
     AccountList getBabysitterList() throws RemoteException;
+    Babysitter getBabysitter(String username) throws RemoteException;
+    void logout(Account account) throws RemoteException;
 
 }

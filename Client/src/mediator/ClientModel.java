@@ -1,9 +1,6 @@
 package mediator;
 
-import model.Account;
-import model.AccountList;
-import model.Booking;
-import model.MyDateTime;
+import model.*;
 import utility.observer.subject.LocalSubject;
 
 import java.rmi.RemoteException;
@@ -22,4 +19,6 @@ void close();
         String firstName, String lastName);
     AccountList getAccountList();
     AccountList getBabysitterList();
+    Babysitter getBabysitter(String username);
+    void logout(Account account);
 }

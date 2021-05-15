@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane userData="Profile" prefHeight="750.0" prefWidth="414.0" style="-fx-background-color: E6E1FF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.BabysitterProfileViewController">
+<AnchorPane prefHeight="750.0" prefWidth="414.0" style="-fx-background-color: E6E1FF;" userData="Profile" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.BabysitterProfileViewController">
     <children>
         <ImageView fitHeight="111.0" fitWidth="174.0" layoutX="126.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@resources/logo.png" />
@@ -29,7 +29,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <Label layoutX="148.0" layoutY="176.0" text="Hello, Lara!">
+        <Label layoutX="148.0" layoutY="176.0" text="Hello, ">
             <font>
                 <Font size="24.0" />
             </font>
@@ -41,6 +41,7 @@
                         <Label text="First name" />
                         <Label text="Last name" />
                   <Label text="Username" />
+                  <Label text="Email" />
                   <Label text="Age" />
                   <Label text="Payment per hour" />
                   <Label text="Spoken languages" />
@@ -52,6 +53,7 @@
                         <Label fx:id="firstName" text="Lara" />
                         <Label fx:id="lastName" text="Peters" />
                   <Label fx:id="username" text="lara" />
+                  <Label fx:id="email" text="Label" />
                   <Label fx:id="age" />
                   <Label fx:id="paymentPerHour" />
                   <Label fx:id="spokenLanguages" />
@@ -73,5 +75,10 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
+      <Label fx:id="greetingName" layoutX="218.0" layoutY="176.0" prefHeight="35.0" prefWidth="139.0" text="Label">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>

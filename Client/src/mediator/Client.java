@@ -152,6 +152,30 @@ public class Client implements ClientModel, RemoteListener<String, String>
     }
   }
 
+  @Override public Babysitter getBabysitter(String username)
+  {
+    try
+    {
+      return remoteModel.getBabysitter(username);
+    }
+    catch (RemoteException e)
+    {
+      throw new IllegalStateException(getExceptionMessage(e), e);
+    }
+  }
+
+  @Override public void logout(Account account)
+  {
+    try
+    {
+      remoteModel.logout(account);
+    }
+    catch (RemoteException e)
+    {
+      throw new IllegalStateException(getExceptionMessage(e), e);
+    }
+  }
+
   @Override public void propertyChange(ObserverEvent<String, String> event)
       throws RemoteException
   {

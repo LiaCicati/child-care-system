@@ -12,10 +12,12 @@ public class LoginViewModel
   private StringProperty password;
   private StringProperty error;
   private LocalModel model;
+  private ViewState viewState;
 
-  public LoginViewModel(LocalModel model)
+  public LoginViewModel(LocalModel model, ViewState viewState)
   {
     this.model = model;
+    this.viewState = viewState;
     username = new SimpleStringProperty("");
     password = new SimpleStringProperty("");
     error = new SimpleStringProperty("");
@@ -33,6 +35,8 @@ public class LoginViewModel
     try
     {
       Account loggedIn = model.login(username.get(), password.get());
+      viewState.setAccount(loggedIn);
+      viewState.setBabysitter(model.getBabysitter(username.get()));
       if (loggedIn instanceof Babysitter)
       {
         return 2;

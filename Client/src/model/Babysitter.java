@@ -69,6 +69,10 @@ public class Babysitter extends Account
 
     public String getMainLanguage()
     {
+        if(languages == null)
+        {
+            return "No data";
+        }
         return languages.get(0);
     }
 
@@ -153,12 +157,9 @@ public class Babysitter extends Account
             return false;
         }
         Babysitter other = (Babysitter) obj;
-        return super.equals(obj) && paymentPerHour == other.paymentPerHour && getMainLanguage()
-            .equals(other.getMainLanguage())
+        return super.equals(obj) && paymentPerHour == other.paymentPerHour
             && babysittingExperience == other.babysittingExperience
-            && hasFirstAidCertificate == other.hasFirstAidCertificate
-            && dateOfBirth
-            .equals(other.dateOfBirth);
+            && hasFirstAidCertificate == other.hasFirstAidCertificate;
     }
 
     @Override public String toString()

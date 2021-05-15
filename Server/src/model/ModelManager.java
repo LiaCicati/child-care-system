@@ -136,6 +136,37 @@ public class ModelManager implements Model
     return babysitterList;
   }
 
+  @Override public Babysitter getBabysitter(String username)
+  {
+    if (babysitterList.containsUsername(username))
+    {
+      return (Babysitter) babysitterList.getByUserName(username);
+    }
+    else
+    {
+      return null;
+    }
+  }
+
+  @Override public void logout(Account account)
+  {
+    if (accountList.contains(account))
+    {
+      if (loggedInList.contains(account))
+      {
+        loggedInList.removeAccount(account);
+      }
+      else
+      {
+        throw new IllegalArgumentException("error");
+      }
+    }
+    else
+    {
+      throw new IllegalArgumentException("Nonexistent account");
+    }
+  }
+
   @Override public boolean addListener(
       GeneralListener<Booking, Booking> listener, String... propertyNames)
   {

@@ -94,6 +94,17 @@ public class Server implements RemoteModel, LocalListener<Booking, Booking>
     return model.getBabysitterList();
   }
 
+  @Override public Babysitter getBabysitter(String username)
+      throws RemoteException
+  {
+    return model.getBabysitter(username);
+  }
+
+  @Override public void logout(Account account) throws RemoteException
+  {
+    model.logout(account);
+  }
+
   @Override public void propertyChange(ObserverEvent<Booking, Booking> event)
   {
     property
