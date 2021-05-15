@@ -4,8 +4,10 @@ import model.Account;
 import model.AccountList;
 import model.Booking;
 
+import model.MyDateTime;
 import utility.observer.subject.RemoteSubject;
 import java.rmi.RemoteException;
+import java.time.LocalDate;
 
 public interface RemoteModel extends RemoteSubject<Booking, Booking>
 {
@@ -13,8 +15,7 @@ public interface RemoteModel extends RemoteSubject<Booking, Booking>
     boolean isPasswordCorrect(String userName, String password) throws RemoteException;
     Account login(String username, String password) throws RemoteException;
     void registerBabysitter(String userName, String password, String email,
-        String firstName, String lastName, int birthDay, int birthMonth,
-        int birthYear, double paymentPerHour, String mainLanguage,
+        String firstName, String lastName, LocalDate dateBirth, double paymentPerHour, String mainLanguage,
         double babysittingExperience, boolean hasFirstAidCertificate) throws RemoteException;
     void registerBabysitter(String userName, String password, String email,
         String firstName, String lastName) throws RemoteException;

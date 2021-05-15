@@ -9,6 +9,7 @@ import utility.observer.subject.PropertyChangeAction;
 import utility.observer.subject.PropertyChangeProxy;
 
 import java.rmi.RemoteException;
+import java.time.LocalDate;
 
 public class LocalModelManager
     implements LocalModel, LocalListener<String, String>
@@ -44,7 +45,7 @@ public class LocalModelManager
   {
     try
     {
-      property.close();
+//      property.close();
       serverModel.close();
     }
     catch (Exception e)
@@ -58,14 +59,13 @@ public class LocalModelManager
     return serverModel.login(username, password);
   }
 
-  @Override public void registerBabysitter(String userName, String password,
-      String email, String firstName, String lastName, int birthDay,
-      int birthMonth, int birthYear, double paymentPerHour, String mainLanguage,
+  @Override public void registerBabysitter(String userName, String password, String email,
+      String firstName, String lastName, LocalDate dateBirth, double paymentPerHour, String mainLanguage,
       double babysittingExperience, boolean hasFirstAidCertificate)
   {
     serverModel
         .registerBabysitter(userName, password, email, firstName, lastName,
-            birthDay, birthMonth, birthYear, paymentPerHour, mainLanguage,
+            dateBirth, paymentPerHour, mainLanguage,
             babysittingExperience, hasFirstAidCertificate);
   }
 

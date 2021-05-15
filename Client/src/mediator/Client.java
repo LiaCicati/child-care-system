@@ -1,9 +1,6 @@
 package mediator;
 
-import model.Account;
-import model.AccountList;
-import model.Booking;
-import model.LocalModel;
+import model.*;
 import utility.observer.event.ObserverEvent;
 import utility.observer.listener.GeneralListener;
 import utility.observer.listener.RemoteListener;
@@ -15,6 +12,7 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.time.LocalDate;
 
 public class Client implements ClientModel, RemoteListener<String, String>
 {
@@ -98,16 +96,16 @@ public class Client implements ClientModel, RemoteListener<String, String>
     }
   }
 
-  @Override public void registerBabysitter(String userName, String password,
-      String email, String firstName, String lastName, int birthDay,
-      int birthMonth, int birthYear, double paymentPerHour, String mainLanguage,
+  @Override public void registerBabysitter(String userName, String password, String email,
+      String firstName, String lastName, LocalDate dateBirth, double paymentPerHour, String mainLanguage,
       double babysittingExperience, boolean hasFirstAidCertificate)
   {
     try
     {
+
       remoteModel
           .registerBabysitter(userName, password, email, firstName, lastName,
-              birthDay, birthMonth, birthYear, paymentPerHour, mainLanguage,
+              dateBirth, paymentPerHour, mainLanguage,
               babysittingExperience, hasFirstAidCertificate);
     }
     catch (RemoteException e)

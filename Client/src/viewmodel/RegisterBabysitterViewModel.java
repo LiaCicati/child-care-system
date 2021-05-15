@@ -2,8 +2,10 @@ package viewmodel;
 
 import javafx.beans.property.*;
 import model.LocalModel;
+import model.MyDateTime;
 
 import java.rmi.RemoteException;
+import java.time.LocalDate;
 
 public class RegisterBabysitterViewModel
 {
@@ -13,11 +15,11 @@ public class RegisterBabysitterViewModel
   private StringProperty username;
   private StringProperty email;
   private StringProperty password;
-  //  private IntegerProperty age;
-  //  private DoubleProperty babysittingExperience;
-  //  private DoubleProperty paymentPerHour;
-  //  private StringProperty motherTongue;
-  //  private BooleanProperty firstAidCertificate;
+  private ObjectProperty<LocalDate> age;
+  private DoubleProperty babysittingExperience;
+  private DoubleProperty paymentPerHour;
+  private StringProperty motherTongue;
+  private StringProperty firstAidCertificate;
   private StringProperty errorLabel;
 
   public RegisterBabysitterViewModel(LocalModel model)
@@ -28,11 +30,11 @@ public class RegisterBabysitterViewModel
     username = new SimpleStringProperty("");
     email = new SimpleStringProperty("");
     password = new SimpleStringProperty("");
-    //    age = new SimpleIntegerProperty();
-    //    babysittingExperience = new SimpleDoubleProperty();
-    //    paymentPerHour = new SimpleDoubleProperty();
-    //    motherTongue = new SimpleStringProperty();
-    //    firstAidCertificate = new SimpleBooleanProperty();
+    age = new SimpleObjectProperty<>();
+    babysittingExperience = new SimpleDoubleProperty();
+    paymentPerHour = new SimpleDoubleProperty();
+    motherTongue = new SimpleStringProperty();
+    firstAidCertificate = new SimpleStringProperty("");
     errorLabel = new SimpleStringProperty("");
   }
 
@@ -43,11 +45,11 @@ public class RegisterBabysitterViewModel
     username.set("");
     email.set("");
     password.set("");
-    //    age.setValue(0);
-    //    babysittingExperience.set(0);
-    //    paymentPerHour.set(0);
-    //    motherTongue.set("");
-    //    firstAidCertificate.set(false);
+    age.set(null);
+    babysittingExperience.set(0);
+    paymentPerHour.set(0);
+    motherTongue.set("");
+    firstAidCertificate.set("");
     errorLabel.set("");
   }
 
@@ -76,44 +78,67 @@ public class RegisterBabysitterViewModel
     return password;
   }
 
-  //  public IntegerProperty getAge()
-  //  {
-  //    return age;
-  //  }
-  //
-  //  public DoubleProperty getBabysittingExperience()
-  //  {
-  //    return babysittingExperience;
-  //  }
-  //
-  //  public DoubleProperty getPaymentPerHour()
-  //  {
-  //    return paymentPerHour;
-  //  }
-  //
-  //  public StringProperty getMotherTongue()
-  //  {
-  //    return motherTongue;
-  //  }
-  //
-  //  public BooleanProperty getFirstAidCertificate()
-  //  {
-  //    return firstAidCertificate;
-  //  }
+  public ObjectProperty<LocalDate> getAge()
+  {
+    return age;
+  }
+
+  public DoubleProperty getBabysittingExperience()
+  {
+    return babysittingExperience;
+  }
+
+  public DoubleProperty getPaymentPerHour()
+  {
+    return paymentPerHour;
+  }
+
+  public StringProperty getMotherTongue()
+  {
+    return motherTongue;
+  }
+
+  public StringProperty getFirstAidCertificate()
+  {
+    return firstAidCertificate;
+  }
 
   public StringProperty getError()
   {
     return errorLabel;
   }
 
-  public boolean register() throws RemoteException
+  public boolean registerWithRequiredData() throws RemoteException
   {
-//    System.out.println("List: " + model.getAccountList());
+
     try
     {
       model.registerBabysitter(username.get(), password.get(), email.get(),
           firstName.get(), lastName.get());
       errorLabel.set("");
+
+      return true;
+    }
+    catch (Exception e)
+    {
+      errorLabel.set(e.getMessage());
+      return false;
+    }
+  }
+
+  public boolean register() throws RemoteException
+  {
+    try
+    {
+      model.registerBabysitter(username.get(), password.get(), email.get(),
+          firstName.get(), lastName.getValue(), age.get(), paymentPerHour.get(),
+          motherTongue.get(), babysittingExperience.get(),
+          Boolean.parseBoolean(firstAidCertificate.get()));
+      errorLabel.set("");
+      System.out.println(model.getAccountList().getAllBabysitterAccounts().get(1).getLanguages());
+      System.out.println(model.getAccountList().getAllBabysitterAccounts().get(1).hasFirstAidCertificate());
+
+
 
       return true;
     }

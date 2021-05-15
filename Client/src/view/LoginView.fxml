@@ -17,18 +17,7 @@
     <ImageView fitHeight="186.0" fitWidth="72.0" layoutX="170.0" layoutY="14.0">
         <Image url="@resources/login.png" />
     </ImageView>
-    <Button layoutX="33.0" layoutY="462.0" minHeight="70.0" minWidth="342.0" mnemonicParsing="false" onAction="#onBabysitterLogIn" style="-fx-background-radius: 37px; -fx-background-color: #A262B0;" text="Continue as babysitter" textFill="WHITE">
-        <font>
-            <Font name="System Bold" size="16.0" />
-        </font>
-        <effect>
-            <DropShadow color="rgba(82, 67, 154, 0.25)" />
-        </effect>
-        <cursor>
-            <Cursor fx:constant="HAND" />
-        </cursor>
-    </Button>
-    <Button layoutX="33.0" layoutY="649.0" minHeight="70.0" minWidth="342.0" mnemonicParsing="false" onAction="#onRegister" style="-fx-background-radius: 37px; -fx-background-color: #52439A;" text="Create an Account" textFill="WHITE">
+    <Button layoutX="33.0" layoutY="633.0" minHeight="70.0" minWidth="342.0" mnemonicParsing="false" onAction="#onRegister" style="-fx-background-radius: 37px; -fx-background-color: #52439A;" text="Create an Account" textFill="WHITE">
         <font>
             <Font name="System Bold" size="16.0" />
         </font>
@@ -49,10 +38,10 @@
             <Font name="System Bold" size="28.0" />
         </font>
     </Label>
-    <Line endX="59.0" layoutX="125.0" layoutY="628.0" startX="-100.0" stroke="#aca3a3" />
-    <Line endX="47.20001220703125" layoutX="344.0" layoutY="628.0" startX="-113.5999755859375" stroke="#aca3a3" />
-    <Label layoutX="197.0" layoutY="619.0" text="Or" textFill="#776f6f" />
-   <VBox layoutX="57.0" layoutY="295.0" prefHeight="135.0" prefWidth="300.0" spacing="5.0">
+    <Line endX="59.0" layoutX="125.0" layoutY="606.0" startX="-100.0" stroke="#aca3a3" />
+    <Line endX="47.20001220703125" layoutX="344.0" layoutY="606.0" startX="-113.5999755859375" stroke="#aca3a3" />
+    <Label layoutX="197.0" layoutY="597.0" text="Or" textFill="#776f6f" />
+   <VBox layoutX="57.0" layoutY="302.0" prefHeight="135.0" prefWidth="300.0" spacing="5.0">
       <children>
          <Label text="Username" />
           <TextField fx:id="userName" prefHeight="42.0" prefWidth="300.0" style="-fx-background-radius: 37px;" />
@@ -60,7 +49,7 @@
           <PasswordField fx:id="password" minHeight="42.0" minWidth="300.0" style="-fx-background-radius: 37;" />
       </children>
    </VBox>
-   <Button layoutX="39.0" layoutY="542.0" minHeight="70.0" minWidth="342.0" mnemonicParsing="false" onAction="#onParentLogIn" style="-fx-background-radius: 37px; -fx-background-color: #A262B0;" text="Continue as parent" textFill="WHITE">
+   <Button layoutX="39.0" layoutY="504.0" minHeight="70.0" minWidth="342.0" mnemonicParsing="false" onAction="#onLogIn" style="-fx-background-radius: 37px; -fx-background-color: #A262B0;" text="Continue &gt;" textFill="WHITE">
       <font>
          <Font name="System Bold" size="16.0" />
       </font>
@@ -71,7 +60,7 @@
          <Cursor fx:constant="HAND" />
       </cursor>
    </Button>
-   <Label fx:id="errorLabel" layoutX="63.0" layoutY="435.0" prefHeight="19.0" prefWidth="300.0" text="Error Label" textFill="#f9494b">
+   <Label fx:id="errorLabel" layoutX="54.0" layoutY="445.0" prefHeight="42.0" prefWidth="316.0" text="Error Label" textFill="#f9494b">
       <font>
          <Font size="13.0" />
       </font>

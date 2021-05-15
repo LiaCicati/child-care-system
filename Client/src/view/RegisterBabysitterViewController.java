@@ -1,7 +1,9 @@
 package view;
 
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import viewmodel.DoubleStringConverter;
 import viewmodel.RegisterBabysitterViewModel;
 
 import java.rmi.RemoteException;
@@ -29,23 +31,33 @@ public class RegisterBabysitterViewController extends ViewController
     username.textProperty().bindBidirectional(viewModel.getUsername());
     email.textProperty().bindBidirectional(viewModel.getEmail());
     password.textProperty().bindBidirectional(viewModel.getPassword());
-    //age.valueProperty().bindBidirectional(((SimpleIntegerProperty) viewModel.getAge()));
-    //babysittingExperience.textProperty().bindBidirectional(viewModel.getBabysittingExperience());
-    //paymentPerHour.textProperty().bindBidirectional(viewModel.getPaymentPerHour());
-    //    motherTongue.textProperty().bindBidirectional(viewModel.getMotherTongue());
-    //firstAidCertificate.valueProperty().bindBidirectional(viewModel.getFirstAidCertificate());
+    age.valueProperty().bindBidirectional(viewModel.getAge());
+    Bindings.bindBidirectional(babysittingExperience.textProperty(),
+        viewModel.getBabysittingExperience(), new DoubleStringConverter());
+    Bindings.bindBidirectional(paymentPerHour.textProperty(),
+        viewModel.getPaymentPerHour(), new DoubleStringConverter());
+    motherTongue.textProperty().bindBidirectional(viewModel.getMotherTongue());
+
+    firstAidCertificate.valueProperty().bindBidirectional(viewModel
+        .getFirstAidCertificate());  //have troubles with making it work
+
     errorLabel.textProperty().bind(viewModel.getError());
 
   }
 
   @Override public void reset()
   {
-viewModel.reset();
+    viewModel.reset();
   }
 
   public void onRegister() throws RemoteException
   {
     if (viewModel.register())
+    {
+      onLogIn();
+    }
+
+    if (viewModel.registerWithRequiredData())
     {
       onLogIn();
     }

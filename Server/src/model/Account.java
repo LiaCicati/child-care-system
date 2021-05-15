@@ -1,9 +1,10 @@
 package model;
 
+import java.io.Serializable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public abstract class Account
+public abstract class Account implements Serializable
 {
   private String userName;
   private String password;

@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class AccountList
+public class AccountList implements Serializable
 {
     private ArrayList<Account> accounts;
 
@@ -223,11 +224,23 @@ public class AccountList
         return false;
     }
 
-    public boolean contains(String username)
+    public boolean containsUsername(String username)
     {
         for (int i = 0; i < accounts.size(); i++)
         {
             if (accounts.get(i).getUserName().equals(username))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean containsEmail(String email)
+    {
+        for (int i = 0; i < accounts.size(); i++)
+        {
+            if (accounts.get(i).getEmail().equals(email))
             {
                 return true;
             }

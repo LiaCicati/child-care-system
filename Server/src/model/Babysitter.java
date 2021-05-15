@@ -9,12 +9,11 @@ public class Babysitter extends Account
   private ArrayList<String> languages;
   private double babysittingExperience;
   private boolean hasFirstAidCertificate;
-  private String userName;
   private MyDateTime dateOfBirth;
+  private int age;
 
   public Babysitter(String userName, String password, String email,
-      String firstName, String lastName, int birthDay, int birthMonth,
-      int birthYear, double paymentPerHour, String mainLanguage,
+      String firstName, String lastName, int age, double paymentPerHour, String mainLanguage,
       double babysittingExperience, boolean hasFirstAidCertificate)
   {
     super(userName, password, email, firstName, lastName);
@@ -25,21 +24,21 @@ public class Babysitter extends Account
     this.languages = new ArrayList<>();
     addLanguage(mainLanguage);
 
-    setDateOfBirth(new MyDateTime(birthDay, birthMonth, birthYear));
+   this.age = age;
 
   }
   public Babysitter(String userName, String password, String email,
       String firstName, String lastName) {
     super(userName, password, email, firstName, lastName);
   }
-  public int getAge(MyDateTime dateOfBirth)
+  public int getAge(LocalDate dateOfBirth)
   {
     int currentDay = LocalDate.now().getDayOfMonth();
     int currentMonth = LocalDate.now().getMonthValue();
     int currentYear = LocalDate.now().getYear();
 
-    int birthDay = dateOfBirth.getDay();
-    int birthMonth = dateOfBirth.getMonth();
+    int birthDay = dateOfBirth.getDayOfMonth();
+    int birthMonth = dateOfBirth.getMonthValue();
     int birthYear = dateOfBirth.getYear();
 
     int age = currentYear - birthYear;
@@ -59,7 +58,10 @@ public class Babysitter extends Account
       return age;
     }
   }
-
+public int getAge()
+{
+  return age;
+}
   public MyDateTime getDateOfBirth()
   {
     return dateOfBirth;
@@ -102,15 +104,6 @@ public class Babysitter extends Account
     languages.add(language);
   }
 
-  public String getUserName()
-  {
-    return userName;
-  }
-
-  public void setUserName(String userName)
-  {
-    this.userName = userName;
-  }
 
   public double getBabysittingExperience()
   {
@@ -164,7 +157,7 @@ public class Babysitter extends Account
         .equals(other.getMainLanguage())
         && babysittingExperience == other.babysittingExperience
         && hasFirstAidCertificate == other.hasFirstAidCertificate
-        && userName.equals(other.userName) && dateOfBirth
+        && dateOfBirth
         .equals(other.dateOfBirth);
   }
 

@@ -19,7 +19,7 @@ class AccountTest
     parent = new Parent("ana", "password", "ana@gmail.com", "Anna", "Mary",
         true);
     babysitter = new Babysitter("ciocarlia", "password", "ciocarlia@gmail.com",
-        "Lia", "Cicati", 13, 2, 2001, 30, "English", 1, true);
+        "Lia", "Cicati", 13, 30, "English", 1, true);
   }
 
   @AfterEach void tearDown()
