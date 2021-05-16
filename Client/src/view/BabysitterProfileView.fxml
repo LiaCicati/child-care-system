@@ -29,14 +29,9 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <Label layoutX="148.0" layoutY="176.0" text="Hello, ">
-            <font>
-                <Font size="24.0" />
-            </font>
-        </Label>
         <HBox layoutX="24.0" layoutY="255.0" prefHeight="312.0" prefWidth="366.0" spacing="5.0">
             <children>
-                <VBox prefHeight="166.0" prefWidth="180.0" spacing="25.0">
+                <VBox prefHeight="166.0" prefWidth="180.0" spacing="15.0">
                     <children>
                         <Label text="First name" />
                         <Label text="Last name" />
@@ -44,11 +39,12 @@
                   <Label text="Email" />
                   <Label text="Age" />
                   <Label text="Payment per hour" />
+                  <Label text="Babysitting experience" />
                   <Label text="Spoken languages" />
                   <Label text="First aid certificate" />
                     </children>
                 </VBox>
-                <VBox alignment="TOP_RIGHT" prefHeight="166.0" prefWidth="162.0" spacing="25.0">
+                <VBox alignment="TOP_RIGHT" prefHeight="166.0" prefWidth="162.0" spacing="15.0">
                     <children>
                         <Label fx:id="firstName" text="Lara" />
                         <Label fx:id="lastName" text="Peters" />
@@ -56,6 +52,7 @@
                   <Label fx:id="email" text="Label" />
                   <Label fx:id="age" />
                   <Label fx:id="paymentPerHour" />
+                  <Label fx:id="experience" text="Label" />
                   <Label fx:id="spokenLanguages" />
                   <Label fx:id="firstAidCertificate" />
                     </children>
@@ -75,10 +72,19 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-      <Label fx:id="greetingName" layoutX="218.0" layoutY="176.0" prefHeight="35.0" prefWidth="139.0" text="Label">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
+      <HBox alignment="CENTER" layoutX="102.0" layoutY="160.0" prefHeight="64.0" prefWidth="287.0" spacing="5.0">
+         <children>
+              <Label text="Hello, ">
+                  <font>
+                      <Font size="24.0" />
+                  </font>
+              </Label>
+            <Label fx:id="greetingName" prefHeight="35.0" prefWidth="166.0" text="Label">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
     </children>
 </AnchorPane>

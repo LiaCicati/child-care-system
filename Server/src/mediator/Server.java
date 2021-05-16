@@ -69,13 +69,13 @@ public class Server implements RemoteModel, LocalListener<Booking, Booking>
   }
 
   @Override public void registerBabysitter(String userName, String password,
-      String email, String firstName, String lastName, LocalDate dateBirth, double paymentPerHour, String mainLanguage,
-      double babysittingExperience, boolean hasFirstAidCertificate)
-      throws RemoteException
+      String email, String firstName, String lastName, LocalDate birthday,
+      double paymentPerHour, String mainLanguage, double babysittingExperience,
+      boolean hasFirstAidCertificate) throws RemoteException
   {
     model.registerBabysitter(userName, password, email, firstName, lastName,
-        dateBirth, paymentPerHour, mainLanguage,
-        babysittingExperience, hasFirstAidCertificate);
+        birthday, paymentPerHour, mainLanguage, babysittingExperience,
+        hasFirstAidCertificate);
   }
 
   @Override public void registerBabysitter(String userName, String password,

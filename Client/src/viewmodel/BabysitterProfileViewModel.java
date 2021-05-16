@@ -1,10 +1,7 @@
 package viewmodel;
 
 import javafx.beans.property.*;
-import model.Babysitter;
 import model.LocalModel;
-
-import java.time.LocalDate;
 
 public class BabysitterProfileViewModel
 {
@@ -15,7 +12,7 @@ public class BabysitterProfileViewModel
   private StringProperty username;
   private StringProperty email;
   private StringProperty password;
-  private ObjectProperty<LocalDate> age;
+  private IntegerProperty age;
   private DoubleProperty babysittingExperience;
   private DoubleProperty paymentPerHour;
   private StringProperty motherTongue;
@@ -31,7 +28,7 @@ public class BabysitterProfileViewModel
     username = new SimpleStringProperty();
     email = new SimpleStringProperty();
     password = new SimpleStringProperty();
-    age = new SimpleObjectProperty<>();
+    age = new SimpleIntegerProperty();
     babysittingExperience = new SimpleDoubleProperty();
     paymentPerHour = new SimpleDoubleProperty();
     motherTongue = new SimpleStringProperty();
@@ -54,19 +51,16 @@ public class BabysitterProfileViewModel
 
   private void loadData()
   {
-    LocalDate date = age.get();
     firstName.set(viewState.getAccount().getFirstName());
     lastName.set(viewState.getAccount().getLastName());
     username.set(viewState.getAccount().getUserName());
     email.set(viewState.getAccount().getEmail());
-//        age.setValue(viewState.getBabysitter().getAge(model.getBabysitter(username.get()).getDateOfBirth()));
-//    babysittingExperience
-//        .set(viewState.getBabysitter().getBabysittingExperience());
-
+    age.setValue(viewState.getBabysitter().getAge());
+    babysittingExperience
+        .set(viewState.getBabysitter().getBabysittingExperience());
     paymentPerHour.set(viewState.getBabysitter().getPaymentPerHour());
     motherTongue.set(viewState.getBabysitter().getMainLanguage());
-
-    //    firstAidCertificate.set(viewState.getBabysitter().hasFirstAidCertificate().);
+    firstAidCertificate.set(viewState.getBabysitter().hasFirstAidCertificate() + "");
   }
 
   public StringProperty getFirstName()
@@ -94,7 +88,7 @@ public class BabysitterProfileViewModel
     return password;
   }
 
-  public ObjectProperty<LocalDate> getAge()
+  public IntegerProperty getAge()
   {
     return age;
   }

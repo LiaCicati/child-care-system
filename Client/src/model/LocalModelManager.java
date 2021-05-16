@@ -45,7 +45,7 @@ public class LocalModelManager
   {
     try
     {
-//      property.close();
+      //      property.close();
       serverModel.close();
     }
     catch (Exception e)
@@ -59,14 +59,15 @@ public class LocalModelManager
     return serverModel.login(username, password);
   }
 
-  @Override public void registerBabysitter(String userName, String password, String email,
-      String firstName, String lastName, LocalDate dateBirth, double paymentPerHour, String mainLanguage,
-      double babysittingExperience, boolean hasFirstAidCertificate)
+  @Override public void registerBabysitter(String userName, String password,
+      String email, String firstName, String lastName, LocalDate birthday,
+      double paymentPerHour, String mainLanguage, double babysittingExperience,
+      boolean hasFirstAidCertificate)
   {
     serverModel
         .registerBabysitter(userName, password, email, firstName, lastName,
-            dateBirth, paymentPerHour, mainLanguage,
-            babysittingExperience, hasFirstAidCertificate);
+            birthday, paymentPerHour, mainLanguage, babysittingExperience,
+            hasFirstAidCertificate);
   }
 
   @Override public void registerBabysitter(String userName, String password,

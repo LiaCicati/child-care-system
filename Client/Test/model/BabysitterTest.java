@@ -12,7 +12,7 @@ class BabysitterTest {
     @org.junit.jupiter.api.BeforeEach
     void setUp() {
         System.out.println("--> setUp()");
-        babysitter = new Babysitter("Lana", "password", "lana@gmail.com", "Lana", "Peters",18,30,"English",2,false);
+        babysitter = new Babysitter("Lana", "password", "lana@gmail.com", "Lana", "Peters",new MyDateTime(13, 2, 2007),30,"English",2,false);
     }
 
     @org.junit.jupiter.api.AfterEach

@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
@@ -112,14 +110,8 @@
                   <VBox prefHeight="95.0" prefWidth="154.0" spacing="5.0">
                      <children>
                         <Label text="First aid certificate" />
-                        <ComboBox fx:id="firstAidCertificate" prefHeight="30.0" prefWidth="150.0" promptText="Select">
-                           <items>
-                              <FXCollections fx:factory="observableArrayList">
-                                 <String fx:value="Possess" />
-                                 <String fx:value="Do not possess" />
-                              </FXCollections>
-                           </items>
-                        </ComboBox>
+                        <RadioButton fx:id="hasCertificate" mnemonicParsing="false" text="yes" />
+                        <RadioButton fx:id="doNotHaveCertificate" mnemonicParsing="false" text="no" />
                      </children>
                   </VBox>
                </children>

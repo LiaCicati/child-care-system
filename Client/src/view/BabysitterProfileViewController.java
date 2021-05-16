@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import viewmodel.BabysitterProfileViewModel;
 import viewmodel.DoubleStringConverter;
+import viewmodel.StringIntegerConverter;
 
 public class BabysitterProfileViewController extends ViewController
 {
@@ -15,6 +16,7 @@ public class BabysitterProfileViewController extends ViewController
   @FXML private Label age;
   @FXML private Label paymentPerHour;
   @FXML private Label spokenLanguages;
+  @FXML private Label experience;
   @FXML private Label firstAidCertificate;
   @FXML private Label greetingName;
 
@@ -27,20 +29,22 @@ public class BabysitterProfileViewController extends ViewController
     firstName.textProperty().bind(viewModel.getFirstName());
     lastName.textProperty().bindBidirectional(viewModel.getLastName());
     username.textProperty().bindBidirectional(viewModel.getUsername());
-        email.textProperty().bindBidirectional(viewModel.getEmail());
+    email.textProperty().bindBidirectional(viewModel.getEmail());
     //    password.textProperty().bindBidirectional(viewModel.getPassword());
-    //    age.textProperty().bindBidirectional(viewModel.getAge().toString());
-    //    Bindings.bindBidirectional(babysittingExperience.textProperty(),
-    //        viewModel.getBabysittingExperience(), new DoubleStringConverter());
+    age.textProperty()
+        .bindBidirectional(viewModel.getAge(), new StringIntegerConverter(0));
+    Bindings.bindBidirectional(experience.textProperty(),
+        viewModel.getBabysittingExperience(), new DoubleStringConverter());
     Bindings.bindBidirectional(paymentPerHour.textProperty(),
         viewModel.getPaymentPerHour(), new DoubleStringConverter());
     spokenLanguages.textProperty()
         .bindBidirectional(viewModel.getMotherTongue());
 
-    firstAidCertificate.textProperty().bindBidirectional(viewModel
-        .getFirstAidCertificate());  //have troubles with making it work
+    firstAidCertificate.textProperty()
+        .bindBidirectional(viewModel.getFirstAidCertificate());
     //
     //    errorLabel.textProperty().bind(viewModel.getError());
+    reset();
   }
 
   @Override public void reset()

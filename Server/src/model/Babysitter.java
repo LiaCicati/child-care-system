@@ -10,11 +10,11 @@ public class Babysitter extends Account
   private double babysittingExperience;
   private boolean hasFirstAidCertificate;
   private MyDateTime dateOfBirth;
-  private int age;
 
   public Babysitter(String userName, String password, String email,
-      String firstName, String lastName, int age, double paymentPerHour, String mainLanguage,
-      double babysittingExperience, boolean hasFirstAidCertificate)
+      String firstName, String lastName, MyDateTime dateOfBirth,
+      double paymentPerHour, String mainLanguage, double babysittingExperience,
+      boolean hasFirstAidCertificate)
   {
     super(userName, password, email, firstName, lastName);
     setPaymentPerHour(paymentPerHour);
@@ -23,45 +23,72 @@ public class Babysitter extends Account
 
     this.languages = new ArrayList<>();
     addLanguage(mainLanguage);
-
-   this.age = age;
+    setDateOfBirth(dateOfBirth);
 
   }
+
   public Babysitter(String userName, String password, String email,
-      String firstName, String lastName) {
-    super(userName, password, email, firstName, lastName);
-  }
-  public int getAge(LocalDate dateOfBirth)
+      String firstName, String lastName)
   {
-    int currentDay = LocalDate.now().getDayOfMonth();
-    int currentMonth = LocalDate.now().getMonthValue();
-    int currentYear = LocalDate.now().getYear();
+    super(userName, password, email, firstName, lastName);
 
-    int birthDay = dateOfBirth.getDayOfMonth();
-    int birthMonth = dateOfBirth.getMonthValue();
-    int birthYear = dateOfBirth.getYear();
+  }
 
-    int age = currentYear - birthYear;
+  //  public int getAge(LocalDate dateOfBirth)
+  //  {
+  //    int currentDay = LocalDate.now().getDayOfMonth();
+  //    int currentMonth = LocalDate.now().getMonthValue();
+  //    int currentYear = LocalDate.now().getYear();
+  //
+  //    int birthDay = dateOfBirth.getDayOfMonth();
+  //    int birthMonth = dateOfBirth.getMonthValue();
+  //    int birthYear = dateOfBirth.getYear();
+  //
+  //    int age = currentYear - birthYear;
+  //
+  //    int differenceInDays = currentDay - birthDay;
+  //    int differenceInMonths = currentMonth - birthMonth;
+  //    if (differenceInDays < 0)
+  //    {
+  //      differenceInMonths = differenceInMonths - 1;
+  //    }
+  //    if (differenceInMonths < 0)
+  //    {
+  //      return age - 1;
+  //    }
+  //    else
+  //    {
+  //      return age;
+  //    }
+  //  }
 
-    int differenceInDays = currentDay - birthDay;
-    int differenceInMonths = currentMonth - birthMonth;
-    if (differenceInDays < 0)
+  public int getAge()
+  {
+    LocalDate localDate = LocalDate.now();
+    MyDateTime date = new MyDateTime(localDate.getDayOfMonth(),
+        localDate.getMonthValue(), localDate.getYear());
+    if (dateOfBirth == null)
     {
-      differenceInMonths = differenceInMonths - 1;
-    }
-    if (differenceInMonths < 0)
-    {
-      return age - 1;
+      return 0;
     }
     else
     {
-      return age;
+      return date.yearsBetween(this.dateOfBirth);
     }
   }
-public int getAge()
-{
-  return age;
-}
+
+//  public String getFirstAidCertificate()
+//  {
+//    if (hasFirstAidCertificate())
+//    {
+//      return "Possess";
+//    }
+//    else
+//    {
+//      return "Do not posses";
+//    }
+//  }
+
   public MyDateTime getDateOfBirth()
   {
     return dateOfBirth;
@@ -69,9 +96,9 @@ public int getAge()
 
   public String getMainLanguage()
   {
-    if(languages == null)
+    if (languages == null)
     {
-      return "No data";
+      return "";
     }
     return languages.get(0);
   }
@@ -108,7 +135,6 @@ public int getAge()
     languages.add(language);
   }
 
-
   public double getBabysittingExperience()
   {
     return babysittingExperience;
@@ -118,8 +144,7 @@ public int getAge()
   {
     if (babysittingExperience < 0)
     {
-      double positiveBabysittingExperience = Math
-          .abs(babysittingExperience);
+      double positiveBabysittingExperience = Math.abs(babysittingExperience);
       this.babysittingExperience = positiveBabysittingExperience;
     }
 /*    else if  (babysittingExperience>getAge(getDateOfBirth())){
@@ -164,11 +189,10 @@ public int getAge()
 
   @Override public String toString()
   {
-    return super.toString() + "\n" + "Payment per hour: "
-        + paymentPerHour + "\n" + "Main language: " + getMainLanguage()
-        + "\n" + "Languages: " + languages + "\n" + "Years of experience: "
-        + babysittingExperience + "\n" + "Has CPR certificate: "
-        + hasFirstAidCertificate + "\n" + "Birthday: " + dateOfBirth;
+    return super.toString() + "\n" + "Payment per hour: " + paymentPerHour
+        + "\n" + "Main language: " + getMainLanguage() + "\n" + "Languages: "
+        + languages + "\n" + "Years of experience: " + babysittingExperience
+        + "\n" + "Has CPR certificate: " + hasFirstAidCertificate + "\n"
+        + "Birthday: " + dateOfBirth;
   }
 }
-

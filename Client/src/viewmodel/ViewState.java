@@ -6,7 +6,6 @@ import model.Babysitter;
 public class ViewState
 {
   private Account account;
-  private Account selectedAccount;
   private Babysitter babysitter;
 
   public ViewState()
@@ -28,11 +27,6 @@ public class ViewState
   public void removeAccount()
   {
     account = null;
-  }
-
-  public Account getSelectedAccount()
-  {
-    return selectedAccount;
   }
 
   public Babysitter getBabysitter()

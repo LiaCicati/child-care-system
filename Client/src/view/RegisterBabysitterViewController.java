@@ -20,7 +20,8 @@ public class RegisterBabysitterViewController extends ViewController
   @FXML private TextField babysittingExperience;
   @FXML private TextField paymentPerHour;
   @FXML private TextField motherTongue;
-  @FXML private ComboBox<String> firstAidCertificate;
+  @FXML private RadioButton hasCertificate;
+  @FXML private RadioButton doNotHaveCertificate;
   @FXML private Label errorLabel;
 
   @Override protected void init()
@@ -31,16 +32,14 @@ public class RegisterBabysitterViewController extends ViewController
     username.textProperty().bindBidirectional(viewModel.getUsername());
     email.textProperty().bindBidirectional(viewModel.getEmail());
     password.textProperty().bindBidirectional(viewModel.getPassword());
-    age.valueProperty().bindBidirectional(viewModel.getAge());
+    Bindings.bindBidirectional(age.valueProperty(), viewModel.getAge());
     Bindings.bindBidirectional(babysittingExperience.textProperty(),
         viewModel.getBabysittingExperience(), new DoubleStringConverter());
     Bindings.bindBidirectional(paymentPerHour.textProperty(),
         viewModel.getPaymentPerHour(), new DoubleStringConverter());
     motherTongue.textProperty().bindBidirectional(viewModel.getMotherTongue());
-
-    firstAidCertificate.valueProperty().bindBidirectional(viewModel
-        .getFirstAidCertificate());  //have troubles with making it work
-
+    hasCertificate.selectedProperty()
+        .bindBidirectional(viewModel.getHasCertificate());
     errorLabel.textProperty().bind(viewModel.getError());
 
   }

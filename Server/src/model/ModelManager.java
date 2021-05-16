@@ -26,6 +26,20 @@ public class ModelManager implements Model
     this.babysitterList = new AccountList();
     this.loggedInList = new AccountList();
     this.property = new PropertyChangeProxy<>(this);
+    addDummyData();
+  }
+
+  private void addDummyData()
+  {
+    Account babysitter = new Babysitter("lia", "lialialia", "lia@mail.ru",
+        "Lia", "Cicati");
+    Account babysitter2 = new Babysitter("lori", "lialialia", "lori@mail.ru",
+        "Loredana", "Cicati", new MyDateTime(13, 2, 2001), 30, "English", 2,
+        false);
+    accountList.addAccount(babysitter);
+    accountList.addAccount(babysitter2);
+    babysitterList.addAccount(babysitter);
+    babysitterList.addAccount(babysitter2);
   }
 
   @Override public void addBooking(Booking booking)
@@ -74,19 +88,20 @@ public class ModelManager implements Model
   }
 
   @Override public void registerBabysitter(String userName, String password,
-      String email, String firstName, String lastName, LocalDate dateBirth,
+      String email, String firstName, String lastName, LocalDate birthday,
       double paymentPerHour, String mainLanguage, double babysittingExperience,
       boolean hasFirstAidCertificate)
   {
 
-    int age = babysitterList.getAllBabysitterAccounts().get(0)
-        .getAge(dateBirth);
+
     if (!accountList.containsUsername(userName) && !accountList
         .containsEmail(email))
     {
       Account account = new Babysitter(userName, password, email, firstName,
-          lastName, age, paymentPerHour, mainLanguage, babysittingExperience,
-          hasFirstAidCertificate);
+          lastName,
+          new MyDateTime(birthday.getDayOfMonth(), birthday.getMonthValue(),
+              birthday.getYear()), paymentPerHour, mainLanguage,
+          babysittingExperience, hasFirstAidCertificate);
       accountList.addAccount(account);
       babysitterList.addAccount(account);
     }

@@ -1,10 +1,7 @@
 package view;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 public class EditBabysitterProfileViewController extends ViewController
 {
@@ -18,7 +15,7 @@ public class EditBabysitterProfileViewController extends ViewController
   @FXML private TextField language4;
   @FXML private TextField language2;
   @FXML private TextField language3;
-  @FXML private ComboBox<String> firstAidCertificate;
+  @FXML private RadioButton firstAidCertificate;
   @FXML private Label errorLabel;
 
   @Override protected void init()
