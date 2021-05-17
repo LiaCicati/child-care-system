@@ -15,11 +15,15 @@ public class EditBabysitterProfileViewController extends ViewController
   @FXML private TextField language4;
   @FXML private TextField language2;
   @FXML private TextField language3;
-  @FXML private RadioButton firstAidCertificate;
+  @FXML private RadioButton hasCertificate;
+  @FXML private ToggleGroup groupToggle;
+  @FXML private RadioButton doesNotHaveCertificate;
   @FXML private Label errorLabel;
 
   @Override protected void init()
   {
+    hasCertificate.setToggleGroup(groupToggle);
+    doesNotHaveCertificate.setToggleGroup(groupToggle);
 
   }
 

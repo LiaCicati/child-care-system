@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -100,8 +101,14 @@
                </children>
             </HBox>
             <Label text="First aid certificate" />
-            <RadioButton fx:id="firstAidCertificate" mnemonicParsing="false" text="yes" />
-            <RadioButton mnemonicParsing="false" text="no" />
+            <RadioButton fx:id="hasCertificate" mnemonicParsing="false" text="yes">
+                <toggleGroup>
+                    <ToggleGroup fx:id="groupToggle">
+
+                    </ToggleGroup>
+                </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="doesNotHaveCertificate" mnemonicParsing="false" text="no" />
             </children>
         </VBox>
         <HBox alignment="CENTER" layoutX="42.0" layoutY="624.0" prefHeight="100.0" prefWidth="333.0" spacing="34.0">
