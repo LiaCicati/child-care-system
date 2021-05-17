@@ -28,6 +28,7 @@ public class ParentProfileViewController extends ViewController
 
   public void onHome()
   {
+    getViewHandler().openView(View.BOOKING_BABYSITTERS_VIEW);
   }
 
   public void onLogOut()

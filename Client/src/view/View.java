@@ -10,7 +10,8 @@ public enum View
   ACCOUNT_TYPE_VIEW("AccountTypeView.fxml"),
   EDIT_BABYSITTER_PROFILE_VIEW("EditBabysitterProfileView.fxml"),
   ADD_EDIT_KID_DATA_VIEW("AddEditKidDataView.fxml"),
-  EDIT_PARENT_DATA_VIEW("EditParentProfileView.fxml");
+  EDIT_PARENT_DATA_VIEW("EditParentProfileView.fxml"),
+  BOOKING_BABYSITTERS_VIEW("BookingBabysitterView.fxml");
 
 
   private String fxmlFile;
