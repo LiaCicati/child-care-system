@@ -1,9 +1,13 @@
 package viewmodel;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import model.Kid;
 import model.LocalModel;
 import view.View;
+
+import java.time.LocalDate;
 
 public class ParentProfileViewModel
 {
@@ -16,6 +20,8 @@ public class ParentProfileViewModel
   private StringProperty password;
   private StringProperty hasPets;
   private StringProperty errorLabel;
+  private ObservableList<KidListViewModel> kidTable;
+  private ObjectProperty<KidListViewModel> selectedKid;
 
   public ParentProfileViewModel(LocalModel model, ViewState viewState)
   {
@@ -28,6 +34,9 @@ public class ParentProfileViewModel
     password = new SimpleStringProperty();
     hasPets = new SimpleStringProperty();
     errorLabel = new SimpleStringProperty();
+//    kidTable = FXCollections.observableArrayList();
+//    selectedKid = new SimpleObjectProperty<>();
+
   }
 
   public void reset()
@@ -49,9 +58,11 @@ public class ParentProfileViewModel
     lastName.set(viewState.getAccount().getLastName());
     username.set(viewState.getAccount().getUserName());
     email.set(viewState.getAccount().getEmail());
-//    hasPets.set(viewState.getParent().hasPets() + "");
-  }
+    //    hasPets.set(viewState.getParent().hasPets() + "");
+//    kidTable.clear();
+//   model.get
 
+  }
 
   public StringProperty getFirstName()
   {
@@ -87,4 +98,5 @@ public class ParentProfileViewModel
   {
     return errorLabel;
   }
+
 }

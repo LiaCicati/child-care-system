@@ -136,6 +136,11 @@ public class LocalModelManager
     return serverModel.getAllKids(parent);
   }
 
+  @Override public void addKid( Kid kid)
+  {
+    serverModel.addKid( kid);
+  }
+
   @Override public boolean addListener(GeneralListener<String, String> listener,
       String... propertyNames)
   {

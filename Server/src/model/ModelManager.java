@@ -48,7 +48,7 @@ public class ModelManager implements Model
     Kid kid = new Kid(1, 13, 2, 2017, true, "nothing");
     accountList.addAccount(babysitter);
     accountList.addAccount(babysitter2);
-    kids.add(kid);
+    //    kids.add(kid);
     parent1.addKid(kid);
     System.out.println(parent1.getNrOfKids());
     accountList.addAccount(parent1);
@@ -277,6 +277,16 @@ public class ModelManager implements Model
   @Override public ArrayList<Kid> getAllKids(Parent parent)
   {
     return parent.getKids();
+  }
+
+  @Override public void addKid(Kid kid)
+  {
+    kids.add(kid);
+  }
+
+  @Override public Account getParentKids(Parent parent)
+  {
+    return parentList.getAccount(parent.getKids());
   }
 
   @Override public boolean addListener(

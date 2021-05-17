@@ -16,6 +16,16 @@ public class AccountList implements Serializable
     {
         accounts.add(account);
     }
+    public Account getAccount(Object obj)
+    {
+        if(obj instanceof Parent)
+        {
+            return (Account) obj;
+        }
+        else {
+            return null;
+        }
+    }
 
     public void removeAccount(Account account)
     {

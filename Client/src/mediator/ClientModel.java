@@ -31,4 +31,5 @@ void close();
     ArrayList<Kid> getKidList();
     void editKidData(String username, int id, Kid kid);
     ArrayList<Kid> getAllKids(Parent parent);
+    void addKid( Kid kid);
 }

@@ -266,6 +266,18 @@ public class Client implements ClientModel, RemoteListener<String, String>
     }
   }
 
+  @Override public void addKid( Kid kid)
+  {
+    try
+    {
+       remoteModel.addKid( kid);
+    }
+    catch (RemoteException e)
+    {
+      throw new IllegalStateException(getExceptionMessage(e), e);
+    }
+  }
+
   @Override public void propertyChange(ObserverEvent<String, String> event)
       throws RemoteException
   {

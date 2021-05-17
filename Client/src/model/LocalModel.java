@@ -32,4 +32,5 @@ public interface LocalModel extends LocalSubject<String, String>
   ArrayList<Kid> getKidList();
   void editKidData(String username, int id, Kid kid);
   ArrayList<Kid> getAllKids(Parent parent);
+  void addKid( Kid kid);
 }

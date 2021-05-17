@@ -66,14 +66,16 @@ public class Parent extends Account
     return null;
   }
 
-  public void addKid(Kid kid)
+  public Kid addKid(Kid kid)
   {
     if (kid == null)
     {
       throw new IllegalArgumentException("Add data");
     }
     kids.add(kid);
+    return kid;
   }
+
 
   public String toString()
   {
