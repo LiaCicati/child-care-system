@@ -1,5 +1,6 @@
 package view;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -32,5 +33,8 @@ public class BookingBabysitterViewController extends ViewController
   {
   }
 
-
+  public void onProfile()
+  {
+    getViewHandler().openView(View.PARENT_PROFILE_VIEW);
+  }
 }
