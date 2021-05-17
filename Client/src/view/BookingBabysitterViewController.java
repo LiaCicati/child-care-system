@@ -31,6 +31,9 @@ public class BookingBabysitterViewController extends ViewController
   public void onDateEntered()
   {
   }
-
+  public void onProfile()
+  {
+    getViewHandler().openView(View.PARENT_PROFILE_VIEW);
+  }
 
 }
