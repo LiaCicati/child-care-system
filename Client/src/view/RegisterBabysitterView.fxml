@@ -17,6 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.ToggleGroup?>
 <AnchorPane prefHeight="750.0" prefWidth="414.0" style="-fx-background-color: #E6E1FF;" userData="Register" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.RegisterBabysitterViewController">
     <children>
         <ImageView fitHeight="117.0" fitWidth="143.0" layoutX="135.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
@@ -110,7 +111,14 @@
                   <VBox prefHeight="95.0" prefWidth="154.0" spacing="5.0">
                      <children>
                         <Label text="First aid certificate" />
-                        <RadioButton fx:id="hasCertificate" mnemonicParsing="false" text="yes" />
+                        <RadioButton fx:id="hasCertificate" mnemonicParsing="false" text="yes">
+                           <toggleGroup>
+                           <ToggleGroup fx:id="groupToggle">
+
+                           </ToggleGroup>
+                        </toggleGroup>
+
+                        </RadioButton>
                         <RadioButton fx:id="doNotHaveCertificate" mnemonicParsing="false" text="no" />
                      </children>
                   </VBox>

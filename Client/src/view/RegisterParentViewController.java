@@ -1,5 +1,6 @@
 package view;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import viewmodel.RegisterParentViewModel;
@@ -17,23 +18,25 @@ public class RegisterParentViewController extends ViewController
   @FXML private RadioButton hasPets;
   @FXML private RadioButton doesNotHavePets;
   @FXML private Label errorLabel;
+  @FXML ToggleGroup groupToggle;
 
   @Override protected void init()
   {
+    hasPets.setToggleGroup(groupToggle);
+    doesNotHavePets.setToggleGroup(groupToggle);
     viewModel = getViewModelFactory().getRegisterParentViewModel();
     firstName.textProperty().bindBidirectional(viewModel.getFirstName());
     lastName.textProperty().bindBidirectional(viewModel.getLastName());
     username.textProperty().bindBidirectional(viewModel.getUsername());
     email.textProperty().bindBidirectional(viewModel.getEmail());
     password.textProperty().bindBidirectional(viewModel.getPassword());
-    hasPets.selectedProperty()
-        .bindBidirectional(viewModel.getHasPets());
+    hasPets.selectedProperty().bindBidirectional(viewModel.getHasPets());
     errorLabel.textProperty().bind(viewModel.getError());
   }
 
   @Override public void reset()
   {
-viewModel.reset();
+    viewModel.reset();
   }
 
   public void onRegister() throws RemoteException
@@ -52,5 +55,10 @@ viewModel.reset();
   public void onLogIn()
   {
     getViewHandler().openView(View.LOGIN_VIEW);
+  }
+
+  public void hasPetsSelected()
+  {
+
   }
 }

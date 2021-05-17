@@ -34,7 +34,7 @@ public class RegisterBabysitterViewModel
     email = new SimpleStringProperty("");
     password = new SimpleStringProperty("");
     age = new SimpleObjectProperty<>();
-    hasCertificate = new SimpleObjectProperty<>(true);
+    hasCertificate = new SimpleObjectProperty<>();
     babysittingExperience = new SimpleDoubleProperty();
     paymentPerHour = new SimpleDoubleProperty();
     motherTongue = new SimpleStringProperty();

@@ -23,9 +23,12 @@ public class RegisterBabysitterViewController extends ViewController
   @FXML private RadioButton hasCertificate;
   @FXML private RadioButton doNotHaveCertificate;
   @FXML private Label errorLabel;
+  @FXML ToggleGroup groupToggle;
 
   @Override protected void init()
   {
+    hasCertificate.setToggleGroup(groupToggle);
+    doNotHaveCertificate.setToggleGroup(groupToggle);
     viewModel = getViewModelFactory().getRegisterBabysitterViewModel();
     firstName.textProperty().bindBidirectional(viewModel.getFirstName());
     lastName.textProperty().bindBidirectional(viewModel.getLastName());

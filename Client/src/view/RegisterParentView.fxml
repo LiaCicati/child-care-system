@@ -8,6 +8,7 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -65,7 +66,13 @@
                     </VBox.margin>
                 </PasswordField>
             <Label text="Family pets" />
-            <RadioButton fx:id="hasPets" mnemonicParsing="false" text="yes" />
+            <RadioButton fx:id="hasPets" mnemonicParsing="false" onAction="#hasPetsSelected" text="yes">
+                <toggleGroup>
+                    <ToggleGroup fx:id="groupToggle">
+
+                    </ToggleGroup>
+                </toggleGroup>
+            </RadioButton>
             <RadioButton fx:id="doesNotHavePets" mnemonicParsing="false" text="no" />
             </children>
         </VBox>

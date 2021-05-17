@@ -27,7 +27,7 @@ public class RegisterParentViewModel
     username = new SimpleStringProperty("");
     email = new SimpleStringProperty("");
     password = new SimpleStringProperty("");
-    hasPets = new SimpleObjectProperty<>(true);
+    hasPets = new SimpleObjectProperty<>();
     errorLabel = new SimpleStringProperty("");
   }
 
@@ -39,7 +39,7 @@ public class RegisterParentViewModel
     email.set("");
     password.set("");
     errorLabel.set("");
-    hasPets.set(true);
+    hasPets.set(null);
   }
 
   public StringProperty getFirstName()
@@ -94,13 +94,16 @@ public class RegisterParentViewModel
       return false;
     }
   }
-
+public boolean hasPets()
+{
+  return hasPets.getValue();
+}
   public boolean register() throws RemoteException
   {
     try
     {
       model.registerParent(username.get(), password.get(), email.get(),
-          firstName.get(), lastName.getValue(), hasPets.get());
+          firstName.get(), lastName.getValue(), hasPets());
       errorLabel.set("");
       return true;
     }
