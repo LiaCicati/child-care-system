@@ -87,14 +87,15 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="418.0" prefWidth="386.0">
                      <children>
-                        <TableView layoutX="11.0" layoutY="27.0" prefHeight="312.0" prefWidth="357.0">
+                        <TableView fx:id="kidTable" layoutX="11.0" layoutY="27.0" prefHeight="312.0" prefWidth="357.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="Age" />
-                            <TableColumn prefWidth="81.5999755859375" text="Gender" />
-                              <TableColumn prefWidth="199.20001220703125" text="Health condition" />
+                              <TableColumn fx:id="idColumn" prefWidth="57.60003662109375" text="ID" />
+                            <TableColumn fx:id="ageColumn" prefWidth="75.20001220703125" text="Age" />
+                            <TableColumn fx:id="genderColumn" minWidth="0.0" prefWidth="94.4000244140625" text="Gender" />
+                              <TableColumn fx:id="healthConditionColumn" prefWidth="126.39996337890625" text="Health condition" />
                           </columns>
                         </TableView>
-                        <HBox alignment="CENTER" layoutX="14.0" layoutY="352.0" prefHeight="74.0" prefWidth="355.0" spacing="25.0">
+                        <HBox alignment="CENTER" layoutX="14.0" layoutY="349.0" prefHeight="74.0" prefWidth="355.0" spacing="25.0">
                            <children>
                               <Button minHeight="46.0" minWidth="110.0" mnemonicParsing="false" onAction="#onAddKidData" prefHeight="46.0" prefWidth="110.0" style="-fx-background-radius: 37; -fx-background-color: #7268A8;" text="Add" textFill="WHITE">
                                  <font>
@@ -120,6 +121,7 @@
                               </Button>
                            </children>
                         </HBox>
+                        <Label fx:id="errorLabel" layoutX="35.0" layoutY="422.0" prefHeight="18.0" prefWidth="319.0" text="Label" textFill="#ff6584" />
                      </children></AnchorPane>
             </content>
           </Tab>

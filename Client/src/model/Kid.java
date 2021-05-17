@@ -1,49 +1,61 @@
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Kid
+public class Kid implements Serializable
 {
   private int age;
+  private int id;
   private boolean gender; //false = boy, true = girl
   private String healthConditions;
   private MyDateTime dateOfBirth;
 
-  public Kid(int birthDay, int birthMonth, int birthYear, boolean gender,
-      String healthConditions)
+  public Kid(int id, int birthDay, int birthMonth, int birthYear,
+      boolean gender, String healthConditions)
   {
     setDateOfBirth(new MyDateTime(birthDay, birthMonth, birthYear));
     setGender(gender);
     setHealthConditions(healthConditions);
+    setId(id);
   }
 
-//  public int getAge(MyDateTime dateOfBirth)
-//  {
-//    int currentDay = LocalDate.now().getDayOfMonth();
-//    int currentMonth = LocalDate.now().getMonthValue();
-//    int currentYear = LocalDate.now().getYear();
-//
-//    int birthDay = dateOfBirth.getDay();
-//    int birthMonth = dateOfBirth.getMonth();
-//    int birthYear = dateOfBirth.getYear();
-//
-//    int age = currentYear - birthYear;
-//
-//    int differenceInDays = currentDay - birthDay;
-//    int differenceInMonths = currentMonth - birthMonth;
-//    if (differenceInDays < 0)
-//    {
-//      differenceInMonths = differenceInMonths - 1;
-//    }
-//    if (differenceInMonths < 0)
-//    {
-//      return age - 1;
-//    }
-//    else
-//    {
-//      return age;
-//    }
-//  }
+  public int getId()
+  {
+    return id;
+  }
+
+  public void setId(int id)
+  {
+    this.id = id;
+  }
+  //  public int getAge(MyDateTime dateOfBirth)
+  //  {
+  //    int currentDay = LocalDate.now().getDayOfMonth();
+  //    int currentMonth = LocalDate.now().getMonthValue();
+  //    int currentYear = LocalDate.now().getYear();
+  //
+  //    int birthDay = dateOfBirth.getDay();
+  //    int birthMonth = dateOfBirth.getMonth();
+  //    int birthYear = dateOfBirth.getYear();
+  //
+  //    int age = currentYear - birthYear;
+  //
+  //    int differenceInDays = currentDay - birthDay;
+  //    int differenceInMonths = currentMonth - birthMonth;
+  //    if (differenceInDays < 0)
+  //    {
+  //      differenceInMonths = differenceInMonths - 1;
+  //    }
+  //    if (differenceInMonths < 0)
+  //    {
+  //      return age - 1;
+  //    }
+  //    else
+  //    {
+  //      return age;
+  //    }
+  //  }
 
   public int getAge()
   {
@@ -94,6 +106,16 @@ public class Kid
   public void setGender(boolean gender)
   {
     this.gender = gender;
+  }
+
+  public void editData(int id, int birthDay, int birthMonth, int birthYear,
+      boolean gender, String healthConditions)
+  {
+    setId(id);
+    setDateOfBirth(new MyDateTime(birthDay, birthMonth, birthYear));
+    setGender(gender);
+    setHealthConditions(healthConditions);
+
   }
 
   public boolean equals(Object obj)

@@ -13,6 +13,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Client implements ClientModel, RemoteListener<String, String>
 {
@@ -222,6 +223,18 @@ public class Client implements ClientModel, RemoteListener<String, String>
     try
     {
       remoteModel.logout(account);
+    }
+    catch (RemoteException e)
+    {
+      throw new IllegalStateException(getExceptionMessage(e), e);
+    }
+  }
+
+  @Override public ArrayList<Kid> getKidList()
+  {
+    try
+    {
+     return remoteModel.getKidList();
     }
     catch (RemoteException e)
     {

@@ -20,7 +20,7 @@ public class Parent extends Account
       String firstName, String lastName)
   {
     super(userName, password, email, firstName, lastName);
-
+    this.kids = new ArrayList<>();
   }
 
   public int getNrOfKids()
@@ -52,6 +52,18 @@ public class Parent extends Account
   public ArrayList<Kid> getKids()
   {
     return kids;
+  }
+
+  public Kid getByID(int id)
+  {
+    for (int i = 0; i < kids.size(); i++)
+    {
+      if (kids.get(i).getId() == id)
+      {
+        return kids.get(i);
+      }
+    }
+    return null;
   }
 
   public void addKid(Kid kid)

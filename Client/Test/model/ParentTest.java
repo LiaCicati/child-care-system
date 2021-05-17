@@ -21,10 +21,10 @@ class ParentTest
 
   @Test void sizeAfterAdding4Kids()
   {
-    parent.addKid(new Kid(13, 2, 2001, true, "health issues"));
-    parent.addKid(new Kid(12, 1, 2001, false, "health issues"));
-    parent.addKid(new Kid(10, 4, 2001, true, "health issues"));
-    parent.addKid(new Kid(5, 2, 2001, false, "health issues"));
+    parent.addKid(new Kid(1, 13, 2, 2001, true, "health issues"));
+    parent.addKid(new Kid(2, 12, 1, 2001, false, "health issues"));
+    parent.addKid(new Kid(3, 10, 4, 2001, true, "health issues"));
+    parent.addKid(new Kid(4, 5, 2, 2001, false, "health issues"));
 
     assertEquals(4, parent.getNrOfKids());
   }

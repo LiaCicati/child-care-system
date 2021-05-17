@@ -10,6 +10,7 @@ import utility.observer.subject.PropertyChangeProxy;
 
 import java.rmi.RemoteException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class LocalModelManager
     implements LocalModel, LocalListener<String, String>
@@ -118,6 +119,11 @@ public class LocalModelManager
   @Override public void logout(Account account)
   {
     serverModel.logout(account);
+  }
+
+  @Override public ArrayList<Kid> getKidList()
+  {
+    return serverModel.getKidList();
   }
 
   @Override public boolean addListener(GeneralListener<String, String> listener,

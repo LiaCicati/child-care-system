@@ -15,6 +15,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Server implements RemoteModel, LocalListener<Booking, Booking>
 {
@@ -127,6 +128,11 @@ public class Server implements RemoteModel, LocalListener<Booking, Booking>
   @Override public void logout(Account account) throws RemoteException
   {
     model.logout(account);
+  }
+
+  @Override public ArrayList<Kid> getKidList() throws RemoteException
+  {
+    return model.getKidList();
   }
 
   @Override public void propertyChange(ObserverEvent<Booking, Booking> event)

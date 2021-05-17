@@ -4,7 +4,11 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import model.AccountList;
+import model.Kid;
 import model.LocalModel;
+
+import java.util.ArrayList;
 
 public class KidListViewModel
 {
@@ -25,7 +29,19 @@ public class KidListViewModel
   {
     error.set("");
     kids.clear();
+    update();
 
+  }
+
+  public void update()
+  {
+    kids.clear();
+    ArrayList<Kid> list;
+    list = model.getKidList();
+    for (int i = 0; i < list.size(); i++)
+    {
+      kids.add(new KidViewModel(list.get(i)));
+    }
   }
 
   public ObservableList<KidViewModel> getKids()

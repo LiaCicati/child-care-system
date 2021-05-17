@@ -7,6 +7,7 @@ import utility.observer.subject.PropertyChangeProxy;
 import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 
 public class ModelManager implements Model
 {
@@ -16,6 +17,7 @@ public class ModelManager implements Model
   private AccountList babysitterList;
   private AccountList parentList;
   private AccountList loggedInList;
+  ArrayList<Kid> kids;
   private PropertyChangeAction<Booking, Booking> property;
   //    private PropertyChangeAction<Account, Account> accountProperty; //TODO incomment again when account class isimplemented
 
@@ -27,6 +29,7 @@ public class ModelManager implements Model
     this.babysitterList = new AccountList();
     this.parentList = new AccountList();
     this.loggedInList = new AccountList();
+    this.kids = new ArrayList<>();
     this.property = new PropertyChangeProxy<>(this);
     addDummyData();
   }
@@ -38,10 +41,16 @@ public class ModelManager implements Model
     Account babysitter2 = new Babysitter("lori", "lialialia", "lori@mail.ru",
         "Loredana", "Cicati", new MyDateTime(13, 2, 2001), 30, "English", 2,
         false);
-    Account parent1 = new Parent("ana", "password", "ana@gmail.com", "Ana",  "Peters");
-    Account parent2 = new Parent("lina", "password", "lina@gmail.com", "Lina",  "Peters", true);
+    Parent parent1 = new Parent("ana", "password", "ana@gmail.com", "Ana",
+        "Peters");
+    Account parent2 = new Parent("lina", "password", "lina@gmail.com", "Lina",
+        "Peters", true);
+    Kid kid = new Kid(1, 13, 2, 2017, true, "nothing");
     accountList.addAccount(babysitter);
     accountList.addAccount(babysitter2);
+    kids.add(kid);
+    parent1.addKid(kid);
+    System.out.println(parent1.getNrOfKids());
     accountList.addAccount(parent1);
     accountList.addAccount(parent2);
     babysitterList.addAccount(babysitter);
@@ -100,7 +109,6 @@ public class ModelManager implements Model
       double paymentPerHour, String mainLanguage, double babysittingExperience,
       boolean hasFirstAidCertificate)
   {
-
 
     if (!accountList.containsUsername(userName) && !accountList
         .containsEmail(email))
@@ -251,6 +259,19 @@ public class ModelManager implements Model
     {
       throw new IllegalArgumentException("Nonexistent account");
     }
+  }
+
+  @Override public ArrayList<Kid> getKidList()
+  {
+
+    return kids;
+  }
+
+  @Override public void editKidData(String username, int id, Kid kid)
+  {
+    parentList.getAllParentAccounts().get(0).getByID(id)
+        .editData(kid.getId(), kid.getAge(), kid.getAge(), kid.getAge(),
+            kid.getGender(), kid.getHealthConditions());
   }
 
   @Override public boolean addListener(

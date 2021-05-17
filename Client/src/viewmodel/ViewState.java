@@ -2,6 +2,7 @@ package viewmodel;
 
 import model.Account;
 import model.Babysitter;
+import model.Kid;
 import model.Parent;
 
 public class ViewState
@@ -9,12 +10,14 @@ public class ViewState
   private Account account;
   private Babysitter babysitter;
   private Parent parent;
+  private Kid kid;
 
   public ViewState()
   {
     this.account = null;
     this.babysitter = null;
     this.parent = null;
+    this.kid = null;
   }
 
   public Account getAccount()
@@ -45,6 +48,11 @@ public class ViewState
   public void setBabysitter(Babysitter babysitter)
   {
     this.babysitter = babysitter;
+  }
+
+  public Kid getKid()
+  {
+    return kid;
   }
 
 }
