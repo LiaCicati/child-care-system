@@ -1,6 +1,8 @@
 package viewmodel;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.LocalModel;
 
@@ -15,6 +17,8 @@ public class KidListViewModel
   {
     this.model = model;
     this.viewState = viewState;
+    this.kids = FXCollections.observableArrayList();
+    this.error = new SimpleStringProperty();
   }
 
   public void reset()
