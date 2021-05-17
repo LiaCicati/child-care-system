@@ -84,6 +84,30 @@ public class Server implements RemoteModel, LocalListener<Booking, Booking>
     model.registerBabysitter(userName, password, email, firstName, lastName);
   }
 
+  @Override public void registerParent(String userName, String password,
+      String email, String firstName, String lastName) throws RemoteException
+  {
+    model.registerParent(userName, password, email, firstName, lastName);
+  }
+
+  @Override public void registerParent(String userName, String password,
+      String email, String firstName, String lastName, boolean hasPets)
+      throws RemoteException
+  {
+    model.registerParent(userName, password, email, firstName, lastName,
+        hasPets);
+  }
+
+  @Override public AccountList getParentList() throws RemoteException
+  {
+    return model.getParentList();
+  }
+
+  @Override public Parent getParent(String username)
+  {
+    return model.getParent(username);
+  }
+
   @Override public AccountList getAccountList() throws RemoteException
   {
     return model.getAccountList();
