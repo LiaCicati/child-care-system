@@ -3,6 +3,7 @@ package viewmodel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import model.LocalModel;
+import view.View;
 
 public class ParentProfileViewModel
 {
@@ -50,6 +51,7 @@ public class ParentProfileViewModel
     email.set(viewState.getAccount().getEmail());
 //    hasPets.set(viewState.getParent().hasPets() + "");
   }
+
 
   public StringProperty getFirstName()
   {

@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import model.AccountList;
 import model.Kid;
 import model.LocalModel;
+import view.View;
 
 import java.util.ArrayList;
 
@@ -31,6 +32,11 @@ public class KidListViewModel
     kids.clear();
     update();
 
+  }
+
+  public void edit()
+  {
+    error.set("Select a kid from the list");
   }
 
   public void update()

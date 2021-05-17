@@ -33,5 +33,7 @@ public interface Model extends LocalSubject<Booking, Booking>
   void logout(Account account);
   ArrayList<Kid> getKidList();
   void editKidData(String username, int id, Kid kid);
+  ArrayList<Kid> getAllKids(Parent parent);
+
 
 }

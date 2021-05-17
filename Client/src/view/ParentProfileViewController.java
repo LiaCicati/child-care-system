@@ -9,6 +9,7 @@ import model.Kid;
 import viewmodel.KidListViewModel;
 import viewmodel.KidViewModel;
 import viewmodel.ParentProfileViewModel;
+import viewmodel.ViewState;
 
 import java.io.IOException;
 
@@ -30,11 +31,13 @@ public class ParentProfileViewController extends ViewController
   @FXML private TableColumn<KidViewModel, String> healthConditionColumn;
 
   @FXML private Label errorLabel;
+  private ViewState viewState;
   @FXML private Label nrOfKids;
   @FXML private VBox container;
 
   @Override protected void init()
   {
+    this.viewState = new ViewState();
     viewModel = getViewModelFactory().getParentProfileViewModel();
     greetingName.textProperty().bind(viewModel.getFirstName());
     firstName.textProperty().bind(viewModel.getFirstName());
@@ -43,7 +46,6 @@ public class ParentProfileViewController extends ViewController
     email.textProperty().bindBidirectional(viewModel.getEmail());
     //    password.textProperty().bindBidirectional(viewModel.getPassword());
     hasPets.textProperty().bindBidirectional(viewModel.getHasPets());
-
 
     // Kid tab
     kidListViewModel = getViewModelFactory().getKidListViewModel();
@@ -87,6 +89,15 @@ public class ParentProfileViewController extends ViewController
 
   public void onEditKidData()
   {
-    getViewHandler().openView(View.ADD_EDIT_KID_DATA_VIEW);
+    KidViewModel selectedItem = kidTable.getSelectionModel().getSelectedItem();
+    if (selectedItem != null)
+    {
+      viewState.setSelectedChild(selectedItem.getId().getValue());
+      getViewHandler().openView(View.ADD_EDIT_KID_DATA_VIEW);
+    }
+    else
+    {
+      kidListViewModel.edit();
+    }
   }
 }

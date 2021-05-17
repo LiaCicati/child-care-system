@@ -274,6 +274,11 @@ public class ModelManager implements Model
             kid.getGender(), kid.getHealthConditions());
   }
 
+  @Override public ArrayList<Kid> getAllKids(Parent parent)
+  {
+    return parent.getKids();
+  }
+
   @Override public boolean addListener(
       GeneralListener<Booking, Booking> listener, String... propertyNames)
   {

@@ -30,4 +30,6 @@ public interface LocalModel extends LocalSubject<String, String>
   Babysitter getBabysitter(String username);
   void logout(Account account);
   ArrayList<Kid> getKidList();
+  void editKidData(String username, int id, Kid kid);
+  ArrayList<Kid> getAllKids(Parent parent);
 }

@@ -126,6 +126,16 @@ public class LocalModelManager
     return serverModel.getKidList();
   }
 
+  @Override public void editKidData(String username, int id, Kid kid)
+  {
+    serverModel.editKidData(username, id, kid);
+  }
+
+  @Override public ArrayList<Kid> getAllKids(Parent parent)
+  {
+    return serverModel.getAllKids(parent);
+  }
+
   @Override public boolean addListener(GeneralListener<String, String> listener,
       String... propertyNames)
   {

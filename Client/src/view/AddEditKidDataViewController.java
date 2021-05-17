@@ -5,14 +5,18 @@ import javafx.scene.control.*;
 
 public class AddEditKidDataViewController extends ViewController
 {
+  @FXML private TextField id;
   @FXML private DatePicker age;
   @FXML private TextArea healthCondition;
-  @FXML private ComboBox<String> gender;
+  @FXML private RadioButton girl;
+  @FXML private RadioButton boy;
+  @FXML private ToggleGroup groupToggle;
   @FXML private Label errorLabel;
 
   @Override protected void init()
   {
-
+    girl.setToggleGroup(groupToggle);
+    boy.setToggleGroup(groupToggle);
   }
 
   @Override public void reset()
