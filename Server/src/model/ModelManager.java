@@ -14,6 +14,7 @@ public class ModelManager implements Model
   //    private AccountList accountList; //TODO
   private AccountList accountList;
   private AccountList babysitterList;
+  private AccountList parentList;
   private AccountList loggedInList;
   private PropertyChangeAction<Booking, Booking> property;
   //    private PropertyChangeAction<Account, Account> accountProperty; //TODO incomment again when account class isimplemented
@@ -24,6 +25,7 @@ public class ModelManager implements Model
     //        this.accountList = new AccoubtList(); //TODO
     this.accountList = new AccountList();
     this.babysitterList = new AccountList();
+    this.parentList = new AccountList();
     this.loggedInList = new AccountList();
     this.property = new PropertyChangeProxy<>(this);
     addDummyData();
@@ -138,6 +140,69 @@ public class ModelManager implements Model
     {
       throw new IllegalStateException(
           "An user with this email is already registered in the system");
+    }
+  }
+
+  @Override public void registerParent(String userName, String password,
+      String email, String firstName, String lastName)
+  {
+    if (!accountList.containsUsername(userName) && !accountList
+        .containsEmail(email))
+    {
+      Account account = new Parent(userName, password, email, firstName,
+          lastName);
+      accountList.addAccount(account);
+      parentList.addAccount(account);
+    }
+    else if (accountList.containsUsername(userName))
+    {
+      throw new IllegalStateException(
+          "An user with this username is already registered in the system");
+    }
+    else if (accountList.containsEmail(email))
+    {
+      throw new IllegalStateException(
+          "An user with this email is already registered in the system");
+    }
+  }
+
+  @Override public void registerParent(String userName, String password,
+      String email, String firstName, String lastName, boolean hasPets)
+  {
+    if (!accountList.containsUsername(userName) && !accountList
+        .containsEmail(email))
+    {
+      Account account = new Parent(userName, password, email, firstName,
+          lastName, hasPets);
+      accountList.addAccount(account);
+      parentList.addAccount(account);
+    }
+    else if (accountList.containsUsername(userName))
+    {
+      throw new IllegalStateException(
+          "An user with this username is already registered in the system");
+    }
+    else if (accountList.containsEmail(email))
+    {
+      throw new IllegalStateException(
+          "An user with this email is already registered in the system");
+    }
+  }
+
+  @Override public AccountList getParentList()
+  {
+    return parentList;
+  }
+
+  @Override public Parent getParent(String username)
+  {
+    if (parentList.containsUsername(username))
+    {
+      return (Parent) parentList.getByUserName(username);
+    }
+    else
+    {
+      return null;
     }
   }
 

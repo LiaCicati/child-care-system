@@ -16,6 +16,12 @@ public class Parent extends Account
     this.kids = new ArrayList<Kid>();
   }
 
+  public Parent(String userName, String password, String email,
+      String firstName, String lastName)
+  {
+    super(userName, password, email, firstName, lastName);
+
+  }
   public int getNrOfKids()
   {
     return kids.size();

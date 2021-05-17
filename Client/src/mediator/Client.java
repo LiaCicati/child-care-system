@@ -129,6 +129,58 @@ public class Client implements ClientModel, RemoteListener<String, String>
     }
   }
 
+  @Override public void registerParent(String userName, String password,
+      String email, String firstName, String lastName)
+  {
+    try
+    {
+      remoteModel
+          .registerParent(userName, password, email, firstName, lastName);
+    }
+    catch (RemoteException e)
+    {
+      throw new IllegalStateException(getExceptionMessage(e), e);
+    }
+  }
+
+  @Override public void registerParent(String userName, String password,
+      String email, String firstName, String lastName, boolean hasPets)
+  {
+    try
+    {
+      remoteModel.registerParent(userName, password, email, firstName, lastName,
+          hasPets);
+    }
+    catch (RemoteException e)
+    {
+      throw new IllegalStateException(getExceptionMessage(e), e);
+    }
+  }
+
+  @Override public AccountList getParentList()
+  {
+    try
+    {
+     return remoteModel.getParentList();
+    }
+    catch (RemoteException e)
+    {
+      throw new IllegalStateException(getExceptionMessage(e), e);
+    }
+  }
+
+  @Override public Parent getParent(String username)
+  {
+    try
+    {
+      return remoteModel.getParent(username);
+    }
+    catch (RemoteException e)
+    {
+      throw new IllegalStateException(getExceptionMessage(e), e);
+    }
+  }
+
   @Override public AccountList getAccountList()
   {
     try

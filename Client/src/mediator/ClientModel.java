@@ -17,6 +17,12 @@ void close();
         double babysittingExperience, boolean hasFirstAidCertificate);
     void registerBabysitter(String userName, String password, String email,
         String firstName, String lastName);
+    void registerParent(String userName, String password, String email,
+        String firstName, String lastName);
+    void registerParent(String userName, String password, String email,
+        String firstName, String lastName, boolean hasPets);
+    AccountList getParentList();
+    Parent getParent(String username);
     AccountList getAccountList();
     AccountList getBabysitterList();
     Babysitter getBabysitter(String username);

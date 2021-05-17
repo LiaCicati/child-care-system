@@ -77,6 +77,29 @@ public class LocalModelManager
         .registerBabysitter(userName, password, email, firstName, lastName);
   }
 
+  @Override public void registerParent(String userName, String password,
+      String email, String firstName, String lastName)
+  {
+    serverModel.registerParent(userName, password, email, firstName, lastName);
+  }
+
+  @Override public void registerParent(String userName, String password,
+      String email, String firstName, String lastName, boolean hasPets)
+  {
+    serverModel.registerParent(userName, password, email, firstName, lastName,
+        hasPets);
+  }
+
+  @Override public AccountList getParentList()
+  {
+    return serverModel.getParentList();
+  }
+
+  @Override public Parent getParent(String username)
+  {
+    return serverModel.getParent(username);
+  }
+
   @Override public AccountList getAccountList()
   {
     return serverModel.getAccountList();
