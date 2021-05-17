@@ -17,31 +17,46 @@ public class Kid
     setHealthConditions(healthConditions);
   }
 
-  public int getAge(MyDateTime dateOfBirth)
+//  public int getAge(MyDateTime dateOfBirth)
+//  {
+//    int currentDay = LocalDate.now().getDayOfMonth();
+//    int currentMonth = LocalDate.now().getMonthValue();
+//    int currentYear = LocalDate.now().getYear();
+//
+//    int birthDay = dateOfBirth.getDay();
+//    int birthMonth = dateOfBirth.getMonth();
+//    int birthYear = dateOfBirth.getYear();
+//
+//    int age = currentYear - birthYear;
+//
+//    int differenceInDays = currentDay - birthDay;
+//    int differenceInMonths = currentMonth - birthMonth;
+//    if (differenceInDays < 0)
+//    {
+//      differenceInMonths = differenceInMonths - 1;
+//    }
+//    if (differenceInMonths < 0)
+//    {
+//      return age - 1;
+//    }
+//    else
+//    {
+//      return age;
+//    }
+//  }
+
+  public int getAge()
   {
-    int currentDay = LocalDate.now().getDayOfMonth();
-    int currentMonth = LocalDate.now().getMonthValue();
-    int currentYear = LocalDate.now().getYear();
-
-    int birthDay = dateOfBirth.getDay();
-    int birthMonth = dateOfBirth.getMonth();
-    int birthYear = dateOfBirth.getYear();
-
-    int age = currentYear - birthYear;
-
-    int differenceInDays = currentDay - birthDay;
-    int differenceInMonths = currentMonth - birthMonth;
-    if (differenceInDays < 0)
+    LocalDate localDate = LocalDate.now();
+    MyDateTime date = new MyDateTime(localDate.getDayOfMonth(),
+        localDate.getMonthValue(), localDate.getYear());
+    if (dateOfBirth == null)
     {
-      differenceInMonths = differenceInMonths - 1;
-    }
-    if (differenceInMonths < 0)
-    {
-      return age - 1;
+      return 0;
     }
     else
     {
-      return age;
+      return date.yearsBetween(this.dateOfBirth);
     }
   }
 

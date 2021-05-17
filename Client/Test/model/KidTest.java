@@ -51,10 +51,10 @@ class KidTest
     assertNotEquals(kid2, kid);
   }
 
-  @Test void getAge()
-  {
-    int age = kid.getAge(new MyDateTime(13, 2, 2001));
-    assertEquals(20, age);
-  }
+//  @Test void getAge()
+//  {
+//    int age = kid.getAge(new MyDateTime(13, 2, 2001));
+//    assertEquals(20, age);
+//  }
 
 }
