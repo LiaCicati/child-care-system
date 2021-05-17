@@ -12,7 +12,7 @@ public class Parent extends Account
       String firstName, String lastName, boolean hasPets)
   {
     super(userName, password, email, firstName, lastName);
-    this.hasPets = hasPets;
+    setHasPets(hasPets);
     this.kids = new ArrayList<Kid>();
   }
 
@@ -22,6 +22,7 @@ public class Parent extends Account
     super(userName, password, email, firstName, lastName);
 
   }
+
   public int getNrOfKids()
   {
     return kids.size();

@@ -100,7 +100,7 @@ public class RegisterParentViewModel
     try
     {
       model.registerParent(username.get(), password.get(), email.get(),
-          firstName.get(), lastName.getValue(), hasPets.getValue());
+          firstName.get(), lastName.getValue(), hasPets.get());
       errorLabel.set("");
       return true;
     }

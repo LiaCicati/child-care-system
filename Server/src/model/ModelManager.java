@@ -38,10 +38,16 @@ public class ModelManager implements Model
     Account babysitter2 = new Babysitter("lori", "lialialia", "lori@mail.ru",
         "Loredana", "Cicati", new MyDateTime(13, 2, 2001), 30, "English", 2,
         false);
+    Account parent1 = new Parent("ana", "password", "ana@gmail.com", "Ana",  "Peters");
+    Account parent2 = new Parent("lina", "password", "lina@gmail.com", "Lina",  "Peters", true);
     accountList.addAccount(babysitter);
     accountList.addAccount(babysitter2);
+    accountList.addAccount(parent1);
+    accountList.addAccount(parent2);
     babysitterList.addAccount(babysitter);
     babysitterList.addAccount(babysitter2);
+    parentList.addAccount(parent1);
+    parentList.addAccount(parent2);
   }
 
   @Override public void addBooking(Booking booking)

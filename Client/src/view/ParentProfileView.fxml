@@ -22,7 +22,7 @@
         <ImageView fitHeight="111.0" fitWidth="174.0" layoutX="126.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@resources/logo.png" />
         </ImageView>
-        <Label layoutX="150.0" layoutY="143.0" text="Hello, Eva!">
+        <Label layoutX="150.0" layoutY="143.0" text="Hello, ">
             <font>
                 <Font size="24.0" />
             </font>
@@ -53,6 +53,7 @@
                                     <Label text="First Name" />
                                     <Label text="Last Name" />
                                     <Label text="Username" />
+                                    <Label text="Email" />
                                     <Label text="Family pets" />
                                  </children>
                               </VBox>
@@ -61,6 +62,7 @@
                                     <Label fx:id="firstName" text="Eva" />
                                     <Label fx:id="lastName" text="Evans" />
                                     <Label fx:id="username" text="eva" />
+                                    <Label fx:id="email" text="Label" />
                                     <Label fx:id="hasPets" text="no" />
                                  </children>
                               </VBox>
@@ -123,5 +125,10 @@
           </Tab>
         </tabs>
       </TabPane>
+      <Label fx:id="greetingName" layoutX="218.0" layoutY="143.0" prefHeight="35.0" prefWidth="127.0" text="Label">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>
