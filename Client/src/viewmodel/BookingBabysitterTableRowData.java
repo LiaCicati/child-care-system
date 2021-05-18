@@ -13,28 +13,28 @@ public class BookingBabysitterTableRowData {
 
     public BookingBabysitterTableRowData(Babysitter babysitter)
     {
-        /*String babysitterName = null;
+        babysitter = new Babysitter("superNanny", "password",
+                "email@babysitter.com", "Lulu", "Lul", new MyDateTime(9,10,1996),
+         125.5,  "danish", 2.3, true);
+        String babysitterName = null;
         Integer babysitterAge = null;
         Double babysitterBabysittingExperience = null;
         Double babysitterPaymentPerHour = null;
         if (babysitter != null)
         {
             babysitterName = babysitter.getFirstName();
-            babysitterName += babysitter.getLastName();
             babysitterAge = babysitter.getAge();
             babysitterBabysittingExperience = babysitter.getBabysittingExperience();
             babysitterPaymentPerHour = babysitter.getPaymentPerHour();
 
-        }*/
+        }
 
-        /*setName(new SimpleStringProperty(babysitterName));
+        setName(new SimpleStringProperty(babysitterName));
         setAge(new SimpleIntegerProperty(babysitterAge));
         setBabysittingExperience(new SimpleDoubleProperty(babysitterBabysittingExperience));
-        setPaymentPerHour(new SimpleDoubleProperty(babysitterPaymentPerHour));*/
-        setName(new SimpleStringProperty("babysitterName"));
-        setAge(new SimpleIntegerProperty(42));
-        setBabysittingExperience(new SimpleDoubleProperty(3.5));
-        setPaymentPerHour(new SimpleDoubleProperty(100));
+        setPaymentPerHour(new SimpleDoubleProperty(babysitterPaymentPerHour));
+
+
     }
 
     public StringProperty getName() {
