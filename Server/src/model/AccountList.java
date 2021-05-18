@@ -16,16 +16,6 @@ public class AccountList implements Serializable
     {
         accounts.add(account);
     }
-    public Account getAccount(Object obj)
-    {
-        if(obj instanceof Parent)
-        {
-            return (Account) obj;
-        }
-        else {
-            return null;
-        }
-    }
 
     public void removeAccount(Account account)
     {
@@ -67,6 +57,7 @@ public class AccountList implements Serializable
         }
         return check;
     }
+
 
     public ArrayList<Parent> getAllParentAccounts()
     {
@@ -256,6 +247,10 @@ public class AccountList implements Serializable
             }
         }
         return false;
+    }
+
+    public Account getAccount(int index) {
+        return accounts.get(index);
     }
 
     @Override public String toString()

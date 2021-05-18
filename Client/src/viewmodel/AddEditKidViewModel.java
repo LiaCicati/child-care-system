@@ -38,6 +38,7 @@ public class AddEditKidViewModel
 
   public void addData()
   {
+    viewState.setSelectedParent("-1");
     if (viewState.getSelectedChild() > -1)
     {
       id.setValue(viewState.getSelectedKid().getId());
@@ -60,7 +61,7 @@ public class AddEditKidViewModel
     Kid kid = new Kid(id.get(), age.get().getDayOfYear(),
         age.get().getMonthValue(), age.get().getYear(), gender.get(),
         healthCondition.get());
-    model.addKid(kid);
+    model.addKid(viewState.getParent(), kid);
   }
 
   public void editData()

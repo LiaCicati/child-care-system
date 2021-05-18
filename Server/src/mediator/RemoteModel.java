@@ -34,5 +34,9 @@ public interface RemoteModel extends RemoteSubject<Booking, Booking>
   void editKidData(String username, int id, Kid kid) throws RemoteException;
   ArrayList<Kid> getAllKids(Parent parent) throws RemoteException;
   void addKid( Kid kid) throws RemoteException;
+  ArrayList<Kid> getKids(Parent parent) throws RemoteException;
+  ArrayList<Parent> getAllParents() throws RemoteException;
+  Account getParentByUsername(String username) throws RemoteException;
+  void addKid(Parent parent, Kid kid) throws RemoteException;
 
 }

@@ -100,6 +100,7 @@ public boolean hasPets()
 }
   public boolean register() throws RemoteException
   {
+
     try
     {
       model.registerParent(username.get(), password.get(), email.get(),

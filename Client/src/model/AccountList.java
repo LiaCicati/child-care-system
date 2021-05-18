@@ -58,6 +58,7 @@ public class AccountList implements Serializable
         return check;
     }
 
+
     public ArrayList<Parent> getAllParentAccounts()
     {
         ArrayList<Parent> temp = new ArrayList<>();
@@ -246,6 +247,10 @@ public class AccountList implements Serializable
             }
         }
         return false;
+    }
+
+    public Account getAccount(int index) {
+        return accounts.get(index);
     }
 
     @Override public String toString()

@@ -13,7 +13,7 @@ public class ViewState
   private Kid kid;
   private Kid selectedKid;
   private int selectedChild;
-  private int selectedParent;
+  private String selectedParent;
 
   public ViewState()
   {
@@ -22,7 +22,7 @@ public class ViewState
     this.parent = null;
     this.kid = null;
     this.selectedKid = null;
-    this.selectedParent = -1;
+    this.selectedParent = "-1";
     this.selectedChild = -1;
   }
 
@@ -70,13 +70,19 @@ public class ViewState
 public void setSelectedChild(int id) {
     this.selectedChild = id;
 }
-  public int getSelectedParent()
+  public String getSelectedParent()
   {
     return selectedParent;
   }
   public int getSelectedChild()
   {
     return selectedChild;
+  }
+  public void setParent(Parent parent) {
+    this.parent = parent;
+  }
+  public void setSelectedParent(String id) {
+    this.selectedParent = id;
   }
 
 }

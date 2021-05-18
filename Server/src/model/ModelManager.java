@@ -16,6 +16,7 @@ public class ModelManager implements Model
   private AccountList accountList;
   private AccountList babysitterList;
   private AccountList parentList;
+  private ArrayList<Parent> parents;
   private AccountList loggedInList;
   ArrayList<Kid> kids;
   private PropertyChangeAction<Booking, Booking> property;
@@ -30,6 +31,7 @@ public class ModelManager implements Model
     this.parentList = new AccountList();
     this.loggedInList = new AccountList();
     this.kids = new ArrayList<>();
+    this.parents = new ArrayList<>();
     this.property = new PropertyChangeProxy<>(this);
     addDummyData();
   }
@@ -50,6 +52,7 @@ public class ModelManager implements Model
     accountList.addAccount(babysitter2);
     //    kids.add(kid);
     parent1.addKid(kid);
+    System.out.println(getKids(parent1));
     System.out.println(parent1.getNrOfKids());
     accountList.addAccount(parent1);
     accountList.addAccount(parent2);
@@ -263,7 +266,6 @@ public class ModelManager implements Model
 
   @Override public ArrayList<Kid> getKidList()
   {
-
     return kids;
   }
 
@@ -279,15 +281,53 @@ public class ModelManager implements Model
     return parent.getKids();
   }
 
+  @Override public ArrayList<Kid> getKids(Parent parent)
+  {
+    return parent.getKids();
+  }
+
+  @Override public ArrayList<Parent> getAllParents()
+  {
+    return parents;
+  }
+
+  //  public Parent getParentByUsername(String username) {
+  //    for(int i = 0; i < parents.size(); i++)
+  //    {
+  //      if(parentList.getByUserName(username).getUserName().equals(username)) {
+  //        return parents.get(i);
+  //      }
+  //    }
+  //    return null;
+  //  }
+
+  @Override public Account getParentByUsername(String username)
+  {
+    for (int i = 0; i < parentList.getNumberOfAccounts(); i++)
+    {
+      if (parentList.getAccount(i).getUserName().equals(username))
+      {
+        return parentList.getAccount(i);
+      }
+    }
+    return null;
+  }
+
   @Override public void addKid(Kid kid)
   {
     kids.add(kid);
   }
 
-  @Override public Account getParentKids(Parent parent)
+  @Override public void addKid(Parent parent, Kid kid)
   {
-    return parentList.getAccount(parent.getKids());
+    parent = (Parent) parentList.getByUserName(parent.getUserName());
+    parent.addKid(kid);
   }
+
+  //  @Override public Account getParentKids(Parent parent)
+  //  {
+  //    return parentList.getAccount(parent.getKids());
+  //  }
 
   @Override public boolean addListener(
       GeneralListener<Booking, Booking> listener, String... propertyNames)

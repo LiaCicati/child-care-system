@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import model.AccountList;
 import model.Kid;
 import model.LocalModel;
+import model.Parent;
 import view.View;
 
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class KidListViewModel
   public void reset()
   {
     error.set("");
-    kids.clear();
+//    kids.clear();
     update();
 
   }
@@ -42,11 +43,13 @@ public class KidListViewModel
   public void update()
   {
     kids.clear();
-    ArrayList<Kid> list;
-    list = model.getKidList();
-    for (int i = 0; i < list.size(); i++)
+    for (int i = 0; i < model.getAllKids(
+        (Parent) model.getParentList().getByUserName(viewState.getParent().getUserName()))
+        .size(); i++)
     {
-      kids.add(new KidViewModel(list.get(i)));
+      kids.add(new KidViewModel(model.getAllKids(
+          (Parent) model.getParentList().getByUserName(viewState.getParent().getUserName()))
+          .get(i)));
     }
   }
 

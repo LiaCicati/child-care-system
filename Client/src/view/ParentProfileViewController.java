@@ -84,6 +84,7 @@ public class ParentProfileViewController extends ViewController
 
   public void onAddKidData()
   {
+    viewState.setSelectedParent("-1");
     getViewHandler().openView(View.ADD_EDIT_KID_DATA_VIEW);
   }
 

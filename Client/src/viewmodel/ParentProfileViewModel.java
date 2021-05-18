@@ -54,6 +54,7 @@ public class ParentProfileViewModel
 
   private void loadData()
   {
+    viewState.setSelectedParent("-1");
     firstName.set(viewState.getAccount().getFirstName());
     lastName.set(viewState.getAccount().getLastName());
     username.set(viewState.getAccount().getUserName());
