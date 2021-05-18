@@ -55,8 +55,8 @@ public class ModelManager implements Model
   @Override public void addBooking(Booking booking)
       throws IllegalArgumentException
   {
-    //        bookingList.addBooking(booking);    //TODO
-    //        property.firePropertyChange("add", null, booking);
+            bookingList.addBooking(booking);    //TODO
+            property.firePropertyChange("add", null, booking);
   }
 
   @Override public boolean isPasswordCorrect(String userName, String password)

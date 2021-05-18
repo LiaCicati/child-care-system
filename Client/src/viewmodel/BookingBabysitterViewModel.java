@@ -3,8 +3,7 @@ package viewmodel;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import model.AccountList;
-import model.LocalModel;
+import model.*;
 
 import java.rmi.RemoteException;
 import java.time.LocalDate;
@@ -177,14 +176,13 @@ public class BookingBabysitterViewModel
     this.babysitters = babysitters;
   }
 
-  public void updateBabysitters()
-  {
-    ////        babysitters = FXCollections.observableArrayList();
-    //        AccountList list = model.getBabysitterList();
-    //        for (int i = 0; i < list.getNumberOfBabysitterAccounts(); i++) {
-    //            babysitters.add(new BookingBabysitterTableRowData(list.getBabysitter(i)));
-    //        }
+  public void createBooking(){
+    // model.addBooking(new Booking(new TimeInterval(new MyDateTime(24,9,2021,15,30),new MyDateTime(24,9,2021,18,00)),model.getParent("lina"), model.getBabysitter("lori")));
+    System.out.println(model.getBabysitter("lori"));
+    System.out.println(model.getParent("ana"));
+  }
 
+  public void updateBabysitters() {
     babysitters.clear();
     for (int i = 0; i < model.getBabysitterList().getNumberOfAccounts(); i++)
     {

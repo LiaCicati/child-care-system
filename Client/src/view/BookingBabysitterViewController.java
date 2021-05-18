@@ -47,8 +47,11 @@ public class BookingBabysitterViewController extends ViewController
 
   }
 
-  public void bookBabysitter()
-  {
+  public void bookBabysitter() {
+    System.out.println("getitems " + babysittersTable.getSelectionModel().getSelectedItems());
+    System.out.println("getitem " + babysittersTable.getSelectionModel().getSelectedItem());
+
+    viewModel.createBooking();
   }
 
   public void onDateEntered() throws RemoteException {
@@ -63,6 +66,7 @@ public class BookingBabysitterViewController extends ViewController
   public void onHourEntered(ActionEvent actionEvent) throws RemoteException {
     viewModel.hour();
     viewModel.findAvailableBabysitters();
+
 
   }
 
