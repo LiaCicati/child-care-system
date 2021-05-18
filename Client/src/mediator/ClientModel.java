@@ -27,4 +27,6 @@ void close();
     AccountList getBabysitterList();
     Babysitter getBabysitter(String username);
     void logout(Account account);
+
+    BookingList getBookingList();
 }

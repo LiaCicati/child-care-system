@@ -229,6 +229,11 @@ public class Client implements ClientModel, RemoteListener<String, String>
     }
   }
 
+  @Override
+  public BookingList getBookingList() {
+    return remoteModel.getBookingList();
+  }
+
   @Override public void propertyChange(ObserverEvent<String, String> event)
       throws RemoteException
   {

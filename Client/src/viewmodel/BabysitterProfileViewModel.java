@@ -1,6 +1,7 @@
 package viewmodel;
 
 import javafx.beans.property.*;
+import javafx.collections.ObservableList;
 import model.LocalModel;
 
 public class BabysitterProfileViewModel
@@ -18,6 +19,7 @@ public class BabysitterProfileViewModel
   private StringProperty motherTongue;
   private StringProperty firstAidCertificate;
   private StringProperty errorLabel;
+  private ObservableList<model.Babysitter> babysitters;
 
   public BabysitterProfileViewModel(LocalModel model, ViewState viewState)
   {
@@ -62,6 +64,8 @@ public class BabysitterProfileViewModel
     motherTongue.set(viewState.getBabysitter().getMainLanguage());
     firstAidCertificate.set(viewState.getBabysitter().hasFirstAidCertificate() + "");
   }
+
+  public ObservableList<model.Babysitter> getAllBabysitters(){return babysitters;}
 
   public StringProperty getFirstName()
   {

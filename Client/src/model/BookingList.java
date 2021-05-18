@@ -9,6 +9,11 @@ public class BookingList
   public BookingList()
   {
     this.bookings = new ArrayList<>();
+    addBooking(new Booking(new TimeInterval(new MyDateTime(24,9,2021,15,30),
+            new MyDateTime(24,9,2021,18,00)), new Parent("ch", "password",
+            "email@email.com", "christine", "grabow"),new Babysitter("superNanny", "password",
+            "email@babysitter.com", "Lulu", "Lul")));
+
   }
 
   public void addBooking(Booking booking)

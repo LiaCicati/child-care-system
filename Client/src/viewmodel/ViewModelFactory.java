@@ -9,6 +9,8 @@ public class ViewModelFactory
   private BabysitterProfileViewModel babysitterProfileViewModel;
   private RegisterParentViewModel registerParentViewModel;
   private ParentProfileViewModel parentProfileViewModel;
+  private BookingBabysitterViewModel bookingBabysitterViewModel;
+
   private ViewState viewState;
 
   public ViewModelFactory(LocalModel localModel)
@@ -16,6 +18,8 @@ public class ViewModelFactory
     this.viewState = new ViewState();
     this.registerBabysitterViewModel = new RegisterBabysitterViewModel(
         localModel);
+    this.bookingBabysitterViewModel = new BookingBabysitterViewModel(
+            localModel);
     this.registerParentViewModel = new RegisterParentViewModel(localModel);
     this.loginViewModel = new LoginViewModel(localModel, viewState);
     this.babysitterProfileViewModel = new BabysitterProfileViewModel(localModel,
@@ -48,4 +52,8 @@ public class ViewModelFactory
   {
     return parentProfileViewModel;
   }
+
+    public BookingBabysitterViewModel getBookingBabysitterViewModel() {
+      return bookingBabysitterViewModel;
+    }
 }

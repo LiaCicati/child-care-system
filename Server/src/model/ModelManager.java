@@ -16,6 +16,7 @@ public class ModelManager implements Model
   private AccountList babysitterList;
   private AccountList parentList;
   private AccountList loggedInList;
+  private BookingList bookingList;
   private PropertyChangeAction<Booking, Booking> property;
   //    private PropertyChangeAction<Account, Account> accountProperty; //TODO incomment again when account class isimplemented
 
@@ -27,6 +28,7 @@ public class ModelManager implements Model
     this.babysitterList = new AccountList();
     this.parentList = new AccountList();
     this.loggedInList = new AccountList();
+    this.bookingList = new BookingList();
     this.property = new PropertyChangeProxy<>(this);
     addDummyData();
   }
@@ -251,6 +253,10 @@ public class ModelManager implements Model
     {
       throw new IllegalArgumentException("Nonexistent account");
     }
+  }
+
+  public BookingList getBookingList() {
+    return bookingList;
   }
 
   @Override public boolean addListener(

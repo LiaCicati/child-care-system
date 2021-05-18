@@ -34,4 +34,6 @@ Account login(String username, String password) throws RemoteException;
  AccountList getBabysitterList() throws RemoteException;
  Babysitter getBabysitter(String username) throws RemoteException;
  void logout(Account account) throws RemoteException;
+
+ BookingList getBookingList();
 }

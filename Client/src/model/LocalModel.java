@@ -8,9 +8,8 @@ import java.time.LocalDate;
 public interface LocalModel extends LocalSubject<String, String>
 {
   void addBooking(Booking booking) throws RemoteException;
-  boolean isPasswordCorrect(String userName, String password)
-      throws RemoteException;
-  public void close();
+  boolean isPasswordCorrect(String userName, String password) throws RemoteException;
+  void close();
   Account login(String username, String password);
   void registerBabysitter(String userName, String password, String email,
       String firstName, String lastName, LocalDate birthday,
@@ -28,4 +27,5 @@ public interface LocalModel extends LocalSubject<String, String>
   AccountList getBabysitterList();
   Babysitter getBabysitter(String username);
   void logout(Account account);
+  BookingList getBookingList();
 }
