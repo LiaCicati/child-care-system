@@ -84,5 +84,9 @@ public void setSelectedChild(int id) {
   public void setSelectedParent(String id) {
     this.selectedParent = id;
   }
+  public void removeSelectedKid()
+  {
+    selectedChild = -1;
+  }
 
 }

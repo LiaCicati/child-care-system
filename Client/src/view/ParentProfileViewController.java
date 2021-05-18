@@ -31,13 +31,11 @@ public class ParentProfileViewController extends ViewController
   @FXML private TableColumn<KidViewModel, String> healthConditionColumn;
 
   @FXML private Label errorLabel;
-  private ViewState viewState;
   @FXML private Label nrOfKids;
   @FXML private VBox container;
 
   @Override protected void init()
   {
-    this.viewState = new ViewState();
     viewModel = getViewModelFactory().getParentProfileViewModel();
     greetingName.textProperty().bind(viewModel.getFirstName());
     firstName.textProperty().bind(viewModel.getFirstName());
@@ -58,6 +56,8 @@ public class ParentProfileViewController extends ViewController
     errorLabel.textProperty().bind(kidListViewModel.getError());
     kidTable.setItems(kidListViewModel.getKids());
     reset();
+    kidTable.getSelectionModel().selectedItemProperty().addListener(
+        (obs, oldValue, newValue) -> kidListViewModel.setSelectedKid(newValue));
   }
 
   @Override public void reset()
@@ -84,21 +84,14 @@ public class ParentProfileViewController extends ViewController
 
   public void onAddKidData()
   {
-    viewState.setSelectedParent("-1");
     getViewHandler().openView(View.ADD_EDIT_KID_DATA_VIEW);
   }
 
   public void onEditKidData()
   {
-    KidViewModel selectedItem = kidTable.getSelectionModel().getSelectedItem();
-    if (selectedItem != null)
+    if (kidListViewModel.edit())
     {
-      viewState.setSelectedChild(selectedItem.getId().getValue());
       getViewHandler().openView(View.ADD_EDIT_KID_DATA_VIEW);
-    }
-    else
-    {
-      kidListViewModel.edit();
     }
   }
 }

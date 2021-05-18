@@ -287,18 +287,6 @@ public class ModelManager implements Model
     return parents;
   }
 
-  //  public Parent getParentByUsername(String username) {
-  //    for(int i = 0; i < parents.size(); i++)
-  //    {
-  //      if(parentList.getByUserName(username).getUserName().equals(username)) {
-  //        return parents.get(i);
-  //      }
-  //    }
-  //    return null;
-  //  }
-
-
-
 
   @Override public void addKid(Parent parent, Kid kid)
   {
@@ -306,10 +294,7 @@ public class ModelManager implements Model
     parent.addKid(kid);
   }
 
-  //  @Override public Account getParentKids(Parent parent)
-  //  {
-  //    return parentList.getAccount(parent.getKids());
-  //  }
+
 
   @Override public boolean addListener(
       GeneralListener<Booking, Booking> listener, String... propertyNames)

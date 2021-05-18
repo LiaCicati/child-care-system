@@ -76,14 +76,17 @@ public class Parent extends Account
     return kid;
   }
 
-  public Kid getKid(int index){
+  public Kid getKid(int index)
+  {
     return kids.get(index);
   }
+
 
   public ArrayList<Kid> getAllKids()
   {
     return kids;
   }
+
   public String toString()
   {
     return super.toString() + "\n" + "Number ofKids: " + nrOfKids + "\n"
