@@ -135,26 +135,7 @@ public class LocalModelManager
   {
     return serverModel.getAllKids(parent);
   }
-
-  @Override public void addKid( Kid kid)
-  {
-    serverModel.addKid( kid);
-  }
-
-  @Override public ArrayList<Kid> getKids(Parent parent)
-  {
-    return serverModel.getKids(parent);
-  }
-
-  @Override public ArrayList<Parent> getAllParents()
-  {
-    return serverModel.getAllParents();
-  }
-
-  @Override public Account getParentByUsername(String username)
-  {
-    return serverModel.getParentByUsername(username);
-  }
+  
 
   @Override public void addKid(Parent parent, Kid kid)
   {

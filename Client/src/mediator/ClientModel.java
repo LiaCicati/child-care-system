@@ -31,9 +31,5 @@ void close();
     ArrayList<Kid> getKidList();
     void editKidData(String username, int id, Kid kid);
     ArrayList<Kid> getAllKids(Parent parent);
-    void addKid( Kid kid);
-    ArrayList<Kid> getKids(Parent parent);
-    ArrayList<Parent> getAllParents();
-    Account getParentByUsername(String username);
     void addKid(Parent parent, Kid kid);
 }

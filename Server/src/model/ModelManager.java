@@ -52,7 +52,7 @@ public class ModelManager implements Model
     accountList.addAccount(babysitter2);
     //    kids.add(kid);
     parent1.addKid(kid);
-    System.out.println(getKids(parent1));
+    System.out.println(getAllKids(parent1));
     System.out.println(parent1.getNrOfKids());
     accountList.addAccount(parent1);
     accountList.addAccount(parent2);
@@ -281,10 +281,6 @@ public class ModelManager implements Model
     return parent.getKids();
   }
 
-  @Override public ArrayList<Kid> getKids(Parent parent)
-  {
-    return parent.getKids();
-  }
 
   @Override public ArrayList<Parent> getAllParents()
   {
@@ -301,22 +297,8 @@ public class ModelManager implements Model
   //    return null;
   //  }
 
-  @Override public Account getParentByUsername(String username)
-  {
-    for (int i = 0; i < parentList.getNumberOfAccounts(); i++)
-    {
-      if (parentList.getAccount(i).getUserName().equals(username))
-      {
-        return parentList.getAccount(i);
-      }
-    }
-    return null;
-  }
 
-  @Override public void addKid(Kid kid)
-  {
-    kids.add(kid);
-  }
+
 
   @Override public void addKid(Parent parent, Kid kid)
   {

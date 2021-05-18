@@ -146,26 +146,6 @@ public class Server implements RemoteModel, LocalListener<Booking, Booking>
     return model.getAllKids(parent);
   }
 
-  @Override public void addKid( Kid kid) throws RemoteException
-  {
-    model.addKid( kid);
-  }
-
-  @Override public ArrayList<Kid> getKids(Parent parent) throws RemoteException
-  {
-    return model.getKids(parent);
-  }
-
-  @Override public ArrayList<Parent> getAllParents() throws RemoteException
-  {
-    return model.getAllParents();
-  }
-
-  @Override public Account getParentByUsername(String username)
-      throws RemoteException
-  {
-    return model.getParentByUsername(username);
-  }
 
   @Override public void addKid(Parent parent, Kid kid) throws RemoteException
   {
