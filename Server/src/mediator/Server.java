@@ -135,10 +135,10 @@ public class Server implements RemoteModel, LocalListener<Booking, Booking>
     return model.getKidList();
   }
 
-  @Override public void editKidData(String username, int id, Kid kid)
+  @Override public void editKidData(Parent parent, int id, Kid kid)
       throws RemoteException
   {
-    model.editKidData(username, id, kid);
+    model.editKidData(parent, id, kid);
   }
 
   @Override public ArrayList<Kid> getAllKids(Parent parent)
@@ -150,6 +150,11 @@ public class Server implements RemoteModel, LocalListener<Booking, Booking>
   @Override public void addKid(Parent parent, Kid kid) throws RemoteException
   {
      model.addKid(parent, kid);
+  }
+
+  @Override public Kid getKidById(int id)
+  {
+    return model.getKidById(id);
   }
 
   @Override public void propertyChange(ObserverEvent<Booking, Booking> event)

@@ -58,12 +58,14 @@ public class ParentProfileViewController extends ViewController
     reset();
     kidTable.getSelectionModel().selectedItemProperty().addListener(
         (obs, oldValue, newValue) -> kidListViewModel.setSelectedKid(newValue));
+    reset();
   }
 
   @Override public void reset()
   {
     viewModel.reset();
     kidListViewModel.reset();
+
   }
 
   public void onHome()
@@ -84,6 +86,7 @@ public class ParentProfileViewController extends ViewController
 
   public void onAddKidData()
   {
+    kidListViewModel.onAdd();
     getViewHandler().openView(View.ADD_EDIT_KID_DATA_VIEW);
   }
 

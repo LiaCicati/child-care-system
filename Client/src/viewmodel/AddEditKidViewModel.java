@@ -1,6 +1,7 @@
 package viewmodel;
 
 import javafx.beans.property.*;
+import model.Babysitter;
 import model.Kid;
 import model.LocalModel;
 import model.Parent;
@@ -38,13 +39,13 @@ public class AddEditKidViewModel
 
   public void addData()
   {
-    viewState.setSelectedParent("-1");
+    System.out.println(viewState.getSelectedChild());
     if (viewState.getSelectedChild() > -1)
     {
-      id.setValue(viewState.getSelectedKid().getId());
-      //      age.setValue(viewState.getSelectedKid().getAge());
-      gender.set(viewState.getSelectedKid().getGender());
-      healthCondition.set(viewState.getSelectedKid().getHealthConditions());
+//      Kid kid = ((Parent) model.getParentList().getByUserName(viewState.getParent().getUserName())
+//      id.setValue(kid.getId());
+//      gender.set(kid.getGender());
+//      healthCondition.set(kid.getHealthConditions());
     }
     else
     {
@@ -52,6 +53,7 @@ public class AddEditKidViewModel
       age.setValue(null);
       gender.setValue(null);
       healthCondition.set("");
+      error.set("");
     }
 
   }
@@ -61,15 +63,15 @@ public class AddEditKidViewModel
     Kid kid = new Kid(id.get(), age.get().getDayOfYear(),
         age.get().getMonthValue(), age.get().getYear(), gender.get(),
         healthCondition.get());
-    model.addKid(viewState.getParent(), kid);
-  }
-
-  public void editData()
-  {
-    //    error.set("");
-    //    try {
-    //      Kid kid = model.editKidData(viewState.getParent().getUserName(), );
-    //    }
+    if (viewState.getSelectedChild() > -1)
+    {
+      model.editKidData(viewState.getParent(), viewState.getSelectedChild(),
+          kid);
+    }
+    else
+    {
+      model.addKid(viewState.getParent(), kid);
+    }
   }
 
   public IntegerProperty getId()
@@ -90,5 +92,10 @@ public class AddEditKidViewModel
   public StringProperty getHealthCondition()
   {
     return healthCondition;
+  }
+
+  public StringProperty getError()
+  {
+    return error;
   }
 }

@@ -126,9 +126,9 @@ public class LocalModelManager
     return serverModel.getKidList();
   }
 
-  @Override public void editKidData(String username, int id, Kid kid)
+  @Override public void editKidData(Parent parent, int id, Kid kid)
   {
-    serverModel.editKidData(username, id, kid);
+    serverModel.editKidData(parent, id, kid);
   }
 
   @Override public ArrayList<Kid> getAllKids(Parent parent)
@@ -140,6 +140,11 @@ public class LocalModelManager
   @Override public void addKid(Parent parent, Kid kid)
   {
     serverModel.addKid(parent, kid);
+  }
+
+  @Override public Kid getKidById(int id)
+  {
+    return serverModel.getKidById(id);
   }
 
   @Override public boolean addListener(GeneralListener<String, String> listener,

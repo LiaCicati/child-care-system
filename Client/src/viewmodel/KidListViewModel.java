@@ -33,6 +33,8 @@ public class KidListViewModel
 
   public void reset()
   {
+
+
     error.set("");
     //    kids.clear();
     update();
@@ -46,6 +48,9 @@ public class KidListViewModel
 public void onAdd()
 {
   viewState.removeSelectedKid();
+//  if(selectedKid.get() != null) {
+//    viewState.setSelectedKid(viewState.getKid());
+//  }
 }
   public void update()
   {
@@ -75,7 +80,8 @@ public void onAdd()
 
   public boolean edit()
   {
-    System.out.println(selectedKid.getValue());
+//    System.out.println(selectedKid.getValue());
+
     if(selectedKid.get() != null)
     {
       viewState.setSelectedChild(selectedKid.get().getId().get());

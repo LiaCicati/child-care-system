@@ -8,6 +8,7 @@ import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 
 public class ModelManager implements Model
 {
@@ -47,7 +48,7 @@ public class ModelManager implements Model
         "Peters");
     Account parent2 = new Parent("lina", "password", "lina@gmail.com", "Lina",
         "Peters", true);
-    Kid kid = new Kid(1, 13, 2, 2017, true, "nothing");
+    Kid kid = new Kid(1, 13, 2, 2017, false, "nothing");
     accountList.addAccount(babysitter);
     accountList.addAccount(babysitter2);
     //    kids.add(kid);
@@ -269,11 +270,14 @@ public class ModelManager implements Model
     return kids;
   }
 
-  @Override public void editKidData(String username, int id, Kid kid)
+  @Override public void editKidData(Parent parent, int id,
+      Kid kid)
   {
-    parentList.getAllParentAccounts().get(0).getByID(id)
-        .editData(kid.getId(), kid.getAge(), kid.getAge(), kid.getAge(),
-            kid.getGender(), kid.getHealthConditions());
+
+    parent = (Parent) parentList.getByUserName(parent.getUserName());
+    parent.getByID(id).editData(kid.getId(), kid.getDateOfBirth().getDay(),
+        kid.getDateOfBirth().getMonth(), kid.getDateOfBirth().getYear(),
+        kid.getGender(), kid.getHealthConditions());
   }
 
   @Override public ArrayList<Kid> getAllKids(Parent parent)
@@ -281,12 +285,10 @@ public class ModelManager implements Model
     return parent.getKids();
   }
 
-
   @Override public ArrayList<Parent> getAllParents()
   {
     return parents;
   }
-
 
   @Override public void addKid(Parent parent, Kid kid)
   {
@@ -294,7 +296,24 @@ public class ModelManager implements Model
     parent.addKid(kid);
   }
 
-
+  @Override public Kid getKidById(int id)
+  {
+    try
+    {
+      for (int i = 0; i < kids.size(); i++)
+      {
+        if (kids.get(i).getId() == id)
+        {
+          return kids.get(i);
+        }
+      }
+    }
+    catch (InputMismatchException e)
+    {
+      e.printStackTrace();
+    }
+    return null;
+  }
 
   @Override public boolean addListener(
       GeneralListener<Booking, Booking> listener, String... propertyNames)

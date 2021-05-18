@@ -36,7 +36,8 @@ Account login(String username, String password) throws RemoteException;
  Babysitter getBabysitter(String username) throws RemoteException;
  void logout(Account account) throws RemoteException;
  ArrayList<Kid> getKidList() throws RemoteException;
- void editKidData(String username, int id, Kid kid) throws RemoteException;
+ void editKidData(Parent parent,  int id, Kid kid) throws RemoteException;
  ArrayList<Kid> getAllKids(Parent parent) throws RemoteException;
  void addKid(Parent parent, Kid kid) throws RemoteException;
+ Kid getKidById(int id) throws RemoteException;
 }

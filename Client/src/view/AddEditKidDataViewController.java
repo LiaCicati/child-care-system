@@ -28,10 +28,13 @@ public class AddEditKidDataViewController extends ViewController
         new StringIntegerConverter(0));
     age.valueProperty().bindBidirectional(viewModel.getAge());
     healthCondition.textProperty().bindBidirectional(viewModel.getHealthCondition());
+    errorLabel.textProperty().bind(viewModel.getError());
+    reset();
   }
 
   @Override public void reset()
   {
+    viewModel.reset();
 
   }
 

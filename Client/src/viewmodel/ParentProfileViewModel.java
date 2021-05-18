@@ -56,6 +56,7 @@ public class ParentProfileViewModel
     email.set(viewState.getAccount().getEmail());
     //    hasPets.set(viewState.getParent().hasPets() + "");
 
+
   }
 
   public StringProperty getFirstName()
