@@ -13,26 +13,32 @@ public class BookingBabysitterTableRowData {
 
     public BookingBabysitterTableRowData(Babysitter babysitter)
     {
-        babysitter = new Babysitter("superNanny", "password",
-                "email@babysitter.com", "Lulu", "Lul", new MyDateTime(9,10,1996),
-         125.5,  "danish", 2.3, true);
-        String babysitterName = null;
-        Integer babysitterAge = null;
-        Double babysitterBabysittingExperience = null;
-        Double babysitterPaymentPerHour = null;
-        if (babysitter != null)
-        {
-            babysitterName = babysitter.getFirstName();
-            babysitterAge = babysitter.getAge();
-            babysitterBabysittingExperience = babysitter.getBabysittingExperience();
-            babysitterPaymentPerHour = babysitter.getPaymentPerHour();
+//    {
+//        babysitter = new Babysitter("superNanny", "password",
+//                "email@babysitter.com", "Lulu", "Lul", new MyDateTime(9,10,1996),
+//         125.5,  "danish", 2.3, true);
+//        String babysitterName = null;
+//        Integer babysitterAge = null;
+//        Double babysitterBabysittingExperience = null;
+//        Double babysitterPaymentPerHour = null;
+//        if (babysitter != null)
+//        {
+//            babysitterName = babysitter.getFirstName();
+//            babysitterAge = babysitter.getAge();
+//            babysitterBabysittingExperience = babysitter.getBabysittingExperience();
+//            babysitterPaymentPerHour = babysitter.getPaymentPerHour();
+//
+//        }
+//
+//        setName(new SimpleStringProperty(babysitterName));
+//        setAge(new SimpleIntegerProperty(babysitterAge));
+//        setBabysittingExperience(new SimpleDoubleProperty(babysitterBabysittingExperience));
+//        setPaymentPerHour(new SimpleDoubleProperty(babysitterPaymentPerHour));
 
-        }
-
-        setName(new SimpleStringProperty(babysitterName));
-        setAge(new SimpleIntegerProperty(babysitterAge));
-        setBabysittingExperience(new SimpleDoubleProperty(babysitterBabysittingExperience));
-        setPaymentPerHour(new SimpleDoubleProperty(babysitterPaymentPerHour));
+    name = new SimpleStringProperty(babysitter.getFirstName());
+    age = new SimpleIntegerProperty(babysitter.getAge());
+    babysittingExperience = new SimpleDoubleProperty(babysitter.getBabysittingExperience());
+    paymentPerHour = new SimpleDoubleProperty(babysitter.getPaymentPerHour());
 
 
     }
