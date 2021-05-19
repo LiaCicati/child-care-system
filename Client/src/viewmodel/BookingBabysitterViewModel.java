@@ -31,6 +31,9 @@ public class BookingBabysitterViewModel
   int selectedDay = 0;
   int selectedHour = 0;
   int selectedMinute = 0;
+  int selectedDurationHour = 0;
+  int getSelectedDurationMinute = 0;
+
 
   public BookingBabysitterViewModel(LocalModel model)
   {
@@ -78,7 +81,6 @@ public class BookingBabysitterViewModel
 
   public void hour() throws RemoteException {
     try {
-
       selectedHour = Integer.parseInt(hour.getValue());
       System.out.println(selectedHour);
     }
@@ -91,6 +93,27 @@ public class BookingBabysitterViewModel
     try {
       selectedMinute = Integer.parseInt(minute.getValue());
       System.out.println(selectedMinute);
+    }
+    catch (Exception e) {
+      errorLabel.set("unintended " + e.getMessage());
+    }
+  }
+
+  public void durationHour() throws RemoteException {
+    try {
+
+      selectedDurationHour = Integer.parseInt(durationHours.getValue());
+      System.out.println(selectedDurationHour);
+    }
+    catch (Exception e) {
+      errorLabel.set("unintended " + e.getMessage());
+    }
+  }
+
+  public void durationMinute() throws RemoteException {
+    try {
+      getSelectedDurationMinute = Integer.parseInt(durationMinutes.getValue());
+      System.out.println(getSelectedDurationMinute);
     }
     catch (Exception e) {
       errorLabel.set("unintended " + e.getMessage());
@@ -113,6 +136,18 @@ public class BookingBabysitterViewModel
     }
     MyDateTime startTime = new MyDateTime(selectedDay, selectedMonth ,selectedYear , selectedHour , selectedMinute);
     return startTime;
+  }
+
+  public MyDateTime getEndTime(){
+    if (selectedDurationHour==0){
+      errorMessage = "Please select for how log you want you child babysat";
+      errorLabel.set(errorMessage);
+    }else if (getSelectedDurationMinute==0){
+      errorMessage = "Please select for how long you want you child babysat";
+      errorLabel.set(errorMessage);
+    }
+    MyDateTime endTime = new MyDateTime(selectedDay,selectedMonth,selectedYear,selectedHour+selectedDurationHour,selectedMinute+getSelectedDurationMinute);
+    return endTime;
   }
 
   public StringProperty getHour()
@@ -150,7 +185,7 @@ public class BookingBabysitterViewModel
         System.out.println("vælg tid");
       }else if (getStartTime().getTime()!=0){
         reset();
-        Booking myBooking = new Booking(new TimeInterval(getStartTime(), new MyDateTime(24, 9, 2021, 18, 00)), model.getLoggedInParent(), model.getBabysitter(babysitter));
+        Booking myBooking = new Booking(new TimeInterval(getStartTime(), getEndTime()), model.getLoggedInParent(), model.getBabysitter(babysitter));
         model.addBooking(myBooking);
         System.out.println(myBooking);
       }

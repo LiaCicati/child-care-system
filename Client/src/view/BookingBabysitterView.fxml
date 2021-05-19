@@ -1,26 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import javafx.collections.FXCollections?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SplitMenuButton?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane minHeight="-Infinity" prefHeight="683.0" prefWidth="414.0" style="-fx-background-color: E6E1FF;" userData="Edit personal data" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.BookingBabysitterViewController">
+<AnchorPane minHeight="-Infinity" prefHeight="683.0" prefWidth="414.0" style="-fx-background-color: E6E1FF;" userData="Edit personal data" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.BookingBabysitterViewController">
     <children>
         <ImageView fitHeight="111.0" fitWidth="174.0" layoutX="126.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@resources/logo.png" />
@@ -127,7 +117,7 @@
             </Label>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <ComboBox fx:id="durationHoursComboBox" maxWidth="106.0" minWidth="106.0" prefWidth="106.0">
+                  <ComboBox fx:id="durationHoursComboBox" maxWidth="106.0" minWidth="106.0" onAction="#onDurationHourEntered" prefWidth="106.0">
                       <items>
                           <FXCollections fx:factory="observableArrayList">
                               <String fx:value="1" />
@@ -163,7 +153,7 @@
                      </HBox.margin>
 
                   </Label>
-                  <ComboBox fx:id="durationMinutesComboBox" maxWidth="106.0" minWidth="106.0" prefWidth="106.0">
+                  <ComboBox fx:id="durationMinutesComboBox" maxWidth="106.0" minWidth="106.0" onAction="#onDurationMinutesEntered" prefWidth="106.0">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>

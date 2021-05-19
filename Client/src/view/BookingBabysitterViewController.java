@@ -78,4 +78,11 @@ public class BookingBabysitterViewController extends ViewController
   }
 
 
+  public void onDurationHourEntered(ActionEvent actionEvent) throws RemoteException {
+  viewModel.durationHour();
+  }
+
+  public void onDurationMinutesEntered(ActionEvent actionEvent) throws RemoteException {
+    viewModel.durationMinute();
+  }
 }
