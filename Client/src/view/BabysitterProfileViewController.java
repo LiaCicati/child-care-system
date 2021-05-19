@@ -1,6 +1,7 @@
 package view;
 
 import javafx.beans.binding.Bindings;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import viewmodel.BabysitterProfileViewModel;
@@ -66,5 +67,10 @@ public class BabysitterProfileViewController extends ViewController
   {
     viewModel.logout();
     getViewHandler().openView(View.ACCOUNT_TYPE_VIEW);
+  }
+
+  public void onNotifications()
+  {
+    getViewHandler().openView(View.BABYSITTER_NOTIFICATIONS_VIEW);
   }
 }

@@ -11,7 +11,8 @@ public enum View
   EDIT_BABYSITTER_PROFILE_VIEW("EditBabysitterProfileView.fxml"),
   ADD_EDIT_KID_DATA_VIEW("AddEditKidDataView.fxml"),
   EDIT_PARENT_DATA_VIEW("EditParentProfileView.fxml"),
-  BOOKING_BABYSITTERS_VIEW("BookingBabysitterView.fxml");
+  BOOKING_BABYSITTERS_VIEW("BookingBabysitterView.fxml"),
+  BABYSITTER_NOTIFICATIONS_VIEW("BabysitterNotificationsView.fxml");
 
 
   private String fxmlFile;

@@ -61,7 +61,7 @@
         </HBox>
         <SplitMenuButton layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Menu">
             <items>
-                <MenuItem mnemonicParsing="false" onAction="#onHome" text="Home" />
+                <MenuItem mnemonicParsing="false" onAction="#onNotifications" text="Notifications" />
             </items>
         </SplitMenuButton>
         <Button layoutX="166.0" layoutY="684.0" mnemonicParsing="false" onAction="#onLogOut" style="-fx-background-radius: 37; -fx-background-color: transparent;" text="Log Out" textFill="#ff6584">
