@@ -45,6 +45,7 @@ public class EditBabysitterProfileViewController extends ViewController
         hasCertificate.selectedProperty()
             .bindBidirectional(viewModel.getHasCertificate());
         errorLabel.textProperty().bind(viewModel.getError());
+        reset();
     }
 
     @Override public void reset()
