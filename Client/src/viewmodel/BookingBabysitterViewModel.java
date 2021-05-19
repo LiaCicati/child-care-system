@@ -1,6 +1,7 @@
 package viewmodel;
 
 import javafx.beans.property.*;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.*;
@@ -176,14 +177,14 @@ public class BookingBabysitterViewModel
     this.babysitters = babysitters;
   }
 
-  public void createBooking(){
+  public void createBooking(String babysitter){
     try {
-      model.addBooking(new Booking(new TimeInterval(new MyDateTime(24,9,2021,15,30),new MyDateTime(24,9,2021,18,00)),model.getParent("ana"), model.getBabysitter("lori")));
+      Booking myBooking = new Booking(new TimeInterval(new MyDateTime(24,9,2021,15,30),new MyDateTime(24,9,2021,18,00)),model.getParent("ana"), model.getBabysitter(babysitter));
+      model.addBooking(myBooking);
+      System.out.println(myBooking);
     } catch (RemoteException e) {
       e.printStackTrace();
     }
-    System.out.println(model.getBabysitter("lori"));
-    System.out.println(model.getParent("ana"));
   }
 
   public void updateBabysitters() {
@@ -195,5 +196,6 @@ public class BookingBabysitterViewModel
     }
 
   }
+
 }
 

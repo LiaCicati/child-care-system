@@ -48,10 +48,10 @@ public class BookingBabysitterViewController extends ViewController
   }
 
   public void bookBabysitter() {
-    System.out.println("getitems " + babysittersTable.getSelectionModel().getSelectedItems());
-    System.out.println("getitem " + babysittersTable.getSelectionModel().getSelectedItem());
 
-    viewModel.createBooking();
+    String chosenBabysitter = String.valueOf(babysittersTable.getSelectionModel().getSelectedItem());
+    System.out.println(chosenBabysitter);
+    viewModel.createBooking(chosenBabysitter);
   }
 
   public void onDateEntered() throws RemoteException {
