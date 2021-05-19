@@ -21,13 +21,15 @@ public class AddEditKidDataViewController extends ViewController
 
   @Override protected void init()
   {
+
     viewModel = getViewModelFactory().getAddEditKidViewModel();
     girl.setToggleGroup(groupToggle);
     boy.setToggleGroup(groupToggle);
     Bindings.bindBidirectional(id.textProperty(), viewModel.getId(),
         new StringIntegerConverter(0));
     age.valueProperty().bindBidirectional(viewModel.getAge());
-    healthCondition.textProperty().bindBidirectional(viewModel.getHealthCondition());
+    healthCondition.textProperty()
+        .bindBidirectional(viewModel.getHealthCondition());
     errorLabel.textProperty().bind(viewModel.getError());
     reset();
   }

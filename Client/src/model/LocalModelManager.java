@@ -147,6 +147,11 @@ public class LocalModelManager
     return serverModel.getKidById(id);
   }
 
+  @Override public Kid getKid(int index)
+  {
+    return serverModel.getKid(index);
+  }
+
   @Override public boolean addListener(GeneralListener<String, String> listener,
       String... propertyNames)
   {

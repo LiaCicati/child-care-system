@@ -8,6 +8,7 @@ import model.Parent;
 import view.View;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class AddEditKidViewModel
 {
@@ -28,7 +29,6 @@ public class AddEditKidViewModel
     this.gender = new SimpleBooleanProperty();
     this.healthCondition = new SimpleStringProperty();
     this.error = new SimpleStringProperty();
-    reset();
   }
 
   public void reset()
@@ -40,14 +40,16 @@ public class AddEditKidViewModel
   public void addData()
   {
     System.out.println(viewState.getSelectedChild());
-    if (viewState.getSelectedChild() > -1)
+    if (viewState.getSelectedChild() > -1) // edit state
     {
-//      Kid kid = ((Parent) model.getParentList().getByUserName(viewState.getParent().getUserName())
+
+//      Kid kid = viewState.getParent().getKidByID(viewState.getSelectedChild());
+//      Kid kid = model.getAllKids(model.getParentList().getByUserName(viewState.getParent().getUserName())).
 //      id.setValue(kid.getId());
 //      gender.set(kid.getGender());
 //      healthCondition.set(kid.getHealthConditions());
     }
-    else
+    else // add
     {
       id.setValue(0);
       age.setValue(null);

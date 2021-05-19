@@ -54,7 +54,7 @@ public class Parent extends Account
     return kids;
   }
 
-  public Kid getByID(int id)
+  public Kid getKidByID(int id)
   {
     for (int i = 0; i < kids.size(); i++)
     {

@@ -157,6 +157,11 @@ public class Server implements RemoteModel, LocalListener<Booking, Booking>
     return model.getKidById(id);
   }
 
+  @Override public Kid getKid(int index) throws RemoteException
+  {
+    return model.getKid(index);
+  }
+
   @Override public void propertyChange(ObserverEvent<Booking, Booking> event)
   {
     property

@@ -275,7 +275,7 @@ public class ModelManager implements Model
   {
 
     parent = (Parent) parentList.getByUserName(parent.getUserName());
-    parent.getByID(id).editData(kid.getId(), kid.getDateOfBirth().getDay(),
+    parent.getKidByID(id).editData(kid.getId(), kid.getDateOfBirth().getDay(),
         kid.getDateOfBirth().getMonth(), kid.getDateOfBirth().getYear(),
         kid.getGender(), kid.getHealthConditions());
   }
@@ -313,6 +313,11 @@ public class ModelManager implements Model
       e.printStackTrace();
     }
     return null;
+  }
+
+  @Override public Kid getKid(int index)
+  {
+    return kids.get(index);
   }
 
   @Override public boolean addListener(
