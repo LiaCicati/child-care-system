@@ -54,7 +54,7 @@ public class EditBabysitterProfileViewController extends ViewController
 
     public void onSave()
     {
-        //TODO make a save method!
+        viewModel.onSave();
         getViewHandler().openView(View.BABYSITTER_PROFILE_VIEW);
     }
 

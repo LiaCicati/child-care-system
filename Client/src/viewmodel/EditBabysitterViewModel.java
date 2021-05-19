@@ -1,6 +1,7 @@
 package viewmodel;
 
 import javafx.beans.property.*;
+import model.Babysitter;
 import model.LocalModel;
 
 import java.time.LocalDate;
@@ -38,6 +39,7 @@ public class EditBabysitterViewModel
         language4 = new SimpleStringProperty();
         hasCertificate = new SimpleObjectProperty<>();
         errorLabel = new SimpleStringProperty();
+//        reset();
     }
 
     public void reset()
@@ -48,18 +50,29 @@ public class EditBabysitterViewModel
 
     private void loadData()
     {
-        firstName.set(viewState.getAccount().getFirstName());
-        lastName.set(viewState.getAccount().getLastName());
-        username.set(viewState.getAccount().getUserName());
+        firstName.set(viewState.getBabysitter().getFirstName());
+        lastName.set(viewState.getBabysitter().getLastName());
+        username.set(viewState.getBabysitter().getUserName());
         age.setValue(LocalDate.ofEpochDay(viewState.getBabysitter().getAge()));
         babysittingExperience
             .set(viewState.getBabysitter().getBabysittingExperience());
         paymentPerHour.set(viewState.getBabysitter().getPaymentPerHour());
         language1.set(viewState.getBabysitter().getMainLanguage());
-//        language2.set(viewState.getBabysitter().getLanguages().get(1));
-//        language3.set(viewState.getBabysitter().getLanguages().get(2));
-//        language4.set(viewState.getBabysitter().getLanguages().get(3));
+        //        language2.set(viewState.getBabysitter().getLanguages().get(1));
+        //        language3.set(viewState.getBabysitter().getLanguages().get(2));
+        //        language4.set(viewState.getBabysitter().getLanguages().get(3));
         hasCertificate.set(viewState.getBabysitter().hasFirstAidCertificate());
+    }
+
+    public void onSave()
+    {
+        Babysitter babysitter = new Babysitter(getUsername().get(),
+            viewState.getBabysitter().getPassword(),
+            viewState.getBabysitter().getEmail(), getFirstName().get(),
+            getLastName().get(), viewState.getBabysitter().getDateOfBirth(),
+            getPaymentPerHour().get(), getLanguage1().get(),
+            getBabysittingExperience().get(), getHasCertificate().get());
+        viewState.setBabysitter(babysitter);
     }
 
     public StringProperty getFirstName()
