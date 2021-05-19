@@ -30,6 +30,11 @@ public class AddEditKidDataViewController extends ViewController
     age.valueProperty().bindBidirectional(viewModel.getAge());
     healthCondition.textProperty()
         .bindBidirectional(viewModel.getHealthCondition());
+
+    girl.selectedProperty().bindBidirectional(viewModel.getGender());
+//    boy.selectedProperty().bindBidirectional(viewModel.getGender());
+//    groupToggle.getSelectedToggle().selectedProperty().bindBidirectional(viewModel.getGender());
+
     errorLabel.textProperty().bind(viewModel.getError());
     reset();
   }

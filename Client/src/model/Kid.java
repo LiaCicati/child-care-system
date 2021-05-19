@@ -72,9 +72,9 @@ public class Kid implements Serializable
     }
   }
 
-  public MyDateTime getDateOfBirth()
+  public LocalDate getDateOfBirth()
   {
-    return dateOfBirth;
+    return LocalDate.of(dateOfBirth.getYear(), dateOfBirth.getMonth(), dateOfBirth.getDay());
   }
 
   public void setDateOfBirth(MyDateTime dateOfBirth)

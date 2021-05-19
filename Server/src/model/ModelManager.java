@@ -275,8 +275,8 @@ public class ModelManager implements Model
   {
 
     parent = (Parent) parentList.getByUserName(parent.getUserName());
-    parent.getKidByID(id).editData(kid.getId(), kid.getDateOfBirth().getDay(),
-        kid.getDateOfBirth().getMonth(), kid.getDateOfBirth().getYear(),
+    parent.getKidByID(id).editData(kid.getId(), kid.getDateOfBirth().getDayOfMonth(),
+        kid.getDateOfBirth().getMonthValue(), kid.getDateOfBirth().getYear(),
         kid.getGender(), kid.getHealthConditions());
   }
 

@@ -43,11 +43,13 @@ public class AddEditKidViewModel
     if (viewState.getSelectedChild() > -1) // edit state
     {
 
-//      Kid kid = viewState.getParent().getKidByID(viewState.getSelectedChild());
-//      Kid kid = model.getAllKids(model.getParentList().getByUserName(viewState.getParent().getUserName())).
-//      id.setValue(kid.getId());
-//      gender.set(kid.getGender());
-//      healthCondition.set(kid.getHealthConditions());
+      Kid kid = viewState.getParent().getKidByID(viewState.getSelectedChild());
+//      Kid kid = model.getAllKids(model.getParentList().getByUserName(viewState.getParent().getUserName()));
+//      Kid kid = model.getAllKids(model.getParent(viewState.getParent().getUserName()));
+      id.setValue(kid.getId());
+      gender.set(kid.getGender());
+      healthCondition.set(kid.getHealthConditions());
+      age.setValue(kid.getDateOfBirth());
     }
     else // add
     {
