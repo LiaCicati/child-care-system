@@ -53,7 +53,7 @@ public class Server implements RemoteModel, LocalListener<Booking, Booking>
   @Override public void addBooking(Booking booking) throws RemoteException
   {
     model.addBooking(booking);
-    property.firePropertyChange("add", null, booking);
+   // property.firePropertyChange("add", null, booking);
   }
 
   @Override public boolean isPasswordCorrect(String userName, String password)

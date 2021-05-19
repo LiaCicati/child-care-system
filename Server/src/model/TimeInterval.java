@@ -1,6 +1,8 @@
 package model;
 
-public class TimeInterval
+import java.io.Serializable;
+
+public class TimeInterval implements Serializable
 {
   private MyDateTime startTime;
   private MyDateTime endTime;

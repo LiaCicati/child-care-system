@@ -177,7 +177,11 @@ public class BookingBabysitterViewModel
   }
 
   public void createBooking(){
-    // model.addBooking(new Booking(new TimeInterval(new MyDateTime(24,9,2021,15,30),new MyDateTime(24,9,2021,18,00)),model.getParent("lina"), model.getBabysitter("lori")));
+    try {
+      model.addBooking(new Booking(new TimeInterval(new MyDateTime(24,9,2021,15,30),new MyDateTime(24,9,2021,18,00)),model.getParent("ana"), model.getBabysitter("lori")));
+    } catch (RemoteException e) {
+      e.printStackTrace();
+    }
     System.out.println(model.getBabysitter("lori"));
     System.out.println(model.getParent("ana"));
   }
