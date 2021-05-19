@@ -129,6 +129,11 @@ public class Server implements RemoteModel, LocalListener<Booking, Booking>
     model.logout(account);
   }
 
+  @Override
+  public Parent getLoggedInParent() throws RemoteException{
+    return model.getLoggedInParent();
+  }
+
   @Override public void propertyChange(ObserverEvent<Booking, Booking> event)
   {
     property

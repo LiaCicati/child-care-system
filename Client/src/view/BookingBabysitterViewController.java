@@ -13,6 +13,8 @@ import java.time.LocalDate;
 public class BookingBabysitterViewController extends ViewController
 {
 
+  @FXML private ComboBox durationHoursComboBox;
+  @FXML private ComboBox durationMinutesComboBox;
   @FXML private ComboBox minuteComboBox;
   @FXML private ComboBox hourComboBox;
   @FXML private DatePicker bookingDatePicker;
@@ -32,6 +34,8 @@ public class BookingBabysitterViewController extends ViewController
     bookingDatePicker.valueProperty().bindBidirectional(viewModel.getDate());
     hourComboBox.valueProperty().bindBidirectional(viewModel.getHour());
     minuteComboBox.valueProperty().bindBidirectional(viewModel.getMinute());
+    durationHoursComboBox.valueProperty().bindBidirectional(viewModel.getDurationHours());
+    durationMinutesComboBox.valueProperty().bindBidirectional(viewModel.getDurationMinutes());
     errorLabel.textProperty().bind(viewModel.getError());
 
     babysitterNameColumn.setCellValueFactory(d -> d.getValue().getName());

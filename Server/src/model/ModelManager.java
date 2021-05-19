@@ -7,11 +7,11 @@ import utility.observer.subject.PropertyChangeProxy;
 import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 
 public class ModelManager implements Model
 {
-  //    private BookingList bookingList;    //TODO
-  //    private AccountList accountList; //TODO
+
   private AccountList accountList;
   private AccountList babysitterList;
   private AccountList parentList;
@@ -22,8 +22,6 @@ public class ModelManager implements Model
 
   public ModelManager()
   {
-    //        this.bookingList = new BookingList();   //TODO
-    //        this.accountList = new AccoubtList(); //TODO
     this.accountList = new AccountList();
     this.babysitterList = new AccountList();
     this.parentList = new AccountList();
@@ -234,6 +232,13 @@ public class ModelManager implements Model
     {
       return null;
     }
+  }
+
+  @Override public Parent getLoggedInParent(){
+    ArrayList<Parent> parentLoggedIn = loggedInList.getAllParentAccounts();
+    int lengthParentLoggedIn = parentLoggedIn.size();
+    System.out.println(lengthParentLoggedIn);
+    return parentLoggedIn.get(0);
   }
 
   @Override public void logout(Account account)

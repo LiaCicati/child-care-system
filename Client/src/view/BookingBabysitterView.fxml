@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -15,11 +17,9 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.collections.FXCollections?>
-<?import java.lang.String?>
-<?import java.lang.Number?>
 <AnchorPane minHeight="-Infinity" prefHeight="683.0" prefWidth="414.0" style="-fx-background-color: E6E1FF;" userData="Edit personal data" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.BookingBabysitterViewController">
     <children>
         <ImageView fitHeight="111.0" fitWidth="174.0" layoutX="126.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
@@ -45,7 +45,7 @@
                 <Font size="13.0" />
             </font>
         </Label>
-      <TableView fx:id="babysittersTable" layoutX="18.0" layoutY="213.0" prefHeight="302.0" prefWidth="378.0">
+      <TableView fx:id="babysittersTable" layoutX="18.0" layoutY="226.0" prefHeight="302.0" prefWidth="378.0">
         <columns>
           <TableColumn fx:id="babysitterNameColumn" prefWidth="75.0" text="Name" />
           <TableColumn fx:id="babysitterAgeColumn" prefWidth="75.0" text="Age" />
@@ -58,64 +58,94 @@
             <MenuItem mnemonicParsing="false" onAction="#onProfile" text="Profile" />
          </items>
       </SplitMenuButton>
-      <HBox layoutX="19.0" layoutY="170.0" prefHeight="41.0" prefWidth="378.0">
+      <VBox layoutX="18.0" layoutY="125.0" prefHeight="93.0" prefWidth="378.0">
          <children>
-            <DatePicker fx:id="bookingDatePicker" onAction="#onDateEntered" prefHeight="26.0" prefWidth="189.0" />
-            <ComboBox fx:id="hourComboBox" onAction="#onHourEntered" prefWidth="150.0">
-               <HBox.margin>
-                  <Insets left="10.0" />
-               </HBox.margin>
-                <items>
-                    <FXCollections fx:factory="observableArrayList">
-                        <String fx:value="1" />
-                        <String fx:value="2" />
-                        <String fx:value="3" />
-                        <String fx:value="4" />
-                        <String fx:value="5" />
-                        <String fx:value="6" />
-                        <String fx:value="7" />
-                        <String fx:value="8" />
-                        <String fx:value="9" />
-                        <String fx:value="10" />
-                        <String fx:value="11" />
-                        <String fx:value="12" />
-                        <String fx:value="13" />
-                        <String fx:value="14" />
-                        <String fx:value="15" />
-                        <String fx:value="16" />
-                        <String fx:value="17" />
-                        <String fx:value="18" />
-                        <String fx:value="19" />
-                        <String fx:value="20" />
-                        <String fx:value="21" />
-                        <String fx:value="22" />
-                        <String fx:value="23" />
-                        <String fx:value="24" />
-                    </FXCollections>
-                </items>
-            </ComboBox>
-            <ComboBox fx:id="minuteComboBox" onAction="#onMinuteEntered" prefWidth="150.0">
-               <HBox.margin>
-                  <Insets left="10.0" />
-               </HBox.margin>
-                <items>
-                    <FXCollections fx:factory="observableArrayList">
-                        <String fx:value="0" />
-                        <String fx:value="5" />
-                        <String fx:value="10" />
-                        <String fx:value="15" />
-                        <String fx:value="20" />
-                        <String fx:value="25" />
-                        <String fx:value="30" />
-                        <String fx:value="35" />
-                        <String fx:value="40" />
-                        <String fx:value="45" />
-                        <String fx:value="50" />
-                        <String fx:value="55" />
-                    </FXCollections>
-                </items>
-            </ComboBox>
+            <Label alignment="CENTER" prefHeight="17.0" prefWidth="382.0" text="Date and time you need a babysitter" />
+            <HBox prefHeight="41.0" prefWidth="298.0">
+               <children>
+                  <DatePicker fx:id="bookingDatePicker" onAction="#onDateEntered" prefHeight="26.0" prefWidth="189.0" />
+                  <ComboBox fx:id="hourComboBox" maxWidth="106.0" minWidth="106.0" onAction="#onHourEntered" prefWidth="106.0">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                      <items>
+                          <FXCollections fx:factory="observableArrayList">
+                              <String fx:value="1" />
+                              <String fx:value="2" />
+                              <String fx:value="3" />
+                              <String fx:value="4" />
+                              <String fx:value="5" />
+                              <String fx:value="6" />
+                              <String fx:value="7" />
+                              <String fx:value="8" />
+                              <String fx:value="9" />
+                              <String fx:value="10" />
+                              <String fx:value="11" />
+                              <String fx:value="12" />
+                              <String fx:value="13" />
+                              <String fx:value="14" />
+                              <String fx:value="15" />
+                              <String fx:value="16" />
+                              <String fx:value="17" />
+                              <String fx:value="18" />
+                              <String fx:value="19" />
+                              <String fx:value="20" />
+                              <String fx:value="21" />
+                              <String fx:value="22" />
+                              <String fx:value="23" />
+                              <String fx:value="24" />
+                          </FXCollections>
+                      </items>
+                  </ComboBox>
+                  <ComboBox fx:id="minuteComboBox" maxWidth="106.0" minWidth="106.0" onAction="#onMinuteEntered" prefWidth="106.0">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                      <items>
+                          <FXCollections fx:factory="observableArrayList">
+                              <String fx:value="0" />
+                              <String fx:value="5" />
+                              <String fx:value="10" />
+                              <String fx:value="15" />
+                              <String fx:value="20" />
+                              <String fx:value="25" />
+                              <String fx:value="30" />
+                              <String fx:value="35" />
+                              <String fx:value="40" />
+                              <String fx:value="45" />
+                              <String fx:value="50" />
+                              <String fx:value="55" />
+                          </FXCollections>
+                      </items>
+                  </ComboBox>
+               </children>
+            </HBox>
+            <Label alignment="CENTER" prefHeight="17.0" prefWidth="389.0" text="Duration you need a babysitter">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Label>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <ComboBox fx:id="durationHoursComboBox" maxWidth="106.0" minWidth="106.0" prefWidth="106.0" />
+                  <Label minWidth="-Infinity" text="Hour(s)">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </Label>
+                  <ComboBox fx:id="durationMinutesComboBox" maxWidth="106.0" minWidth="106.0" prefWidth="106.0">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </ComboBox>
+                  <Label minWidth="-Infinity" text="Minutes">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
          </children>
-      </HBox>
+      </VBox>
     </children>
 </AnchorPane>

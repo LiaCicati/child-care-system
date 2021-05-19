@@ -27,5 +27,6 @@ public interface LocalModel extends LocalSubject<String, String>
   AccountList getBabysitterList();
   Babysitter getBabysitter(String username);
   void logout(Account account);
+  public Parent getLoggedInParent();
   BookingList getBookingList();
 }

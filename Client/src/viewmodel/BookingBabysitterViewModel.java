@@ -17,6 +17,10 @@ public class BookingBabysitterViewModel
   private StringProperty minute;
   private ObjectProperty<LocalDate> date;
   private StringProperty errorLabel;
+  private StringProperty durationHours;
+  private StringProperty durationMinutes;
+
+
   private ObservableList<BookingBabysitterTableRowData> babysitters;
 
   private String errorMessage;
@@ -35,6 +39,8 @@ public class BookingBabysitterViewModel
     date = new SimpleObjectProperty<>();
     errorLabel = new SimpleStringProperty("");
     this.babysitters = FXCollections.observableArrayList();
+    durationHours = new SimpleStringProperty();
+    durationMinutes = new SimpleStringProperty();
     reset();
 
   }
@@ -179,9 +185,16 @@ public class BookingBabysitterViewModel
 
   public void createBooking(String babysitter){
     try {
-      Booking myBooking = new Booking(new TimeInterval(new MyDateTime(24,9,2021,15,30),new MyDateTime(24,9,2021,18,00)),model.getParent("ana"), model.getBabysitter(babysitter));
-      model.addBooking(myBooking);
-      System.out.println(myBooking);
+      if (model.getBabysitter(babysitter) == null){
+        errorMessage = "Please pick a babysitter";
+        errorLabel.set(errorMessage);
+      }else {
+        reset();
+        Booking myBooking = new Booking(new TimeInterval(new MyDateTime(24, 9, 2021, 15, 30), new MyDateTime(24, 9, 2021, 18, 00)), model.getLoggedInParent(), model.getBabysitter(babysitter));
+        model.addBooking(myBooking);
+        System.out.println(myBooking);
+      }
+      System.out.println(model.getLoggedInParent());
     } catch (RemoteException e) {
       e.printStackTrace();
     }
@@ -197,5 +210,12 @@ public class BookingBabysitterViewModel
 
   }
 
+  public StringProperty getDurationHours() {
+    return durationHours;
+  }
+
+  public StringProperty getDurationMinutes() {
+    return durationMinutes;
+  }
 }
 

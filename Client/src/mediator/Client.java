@@ -230,6 +230,11 @@ public class Client implements ClientModel, RemoteListener<String, String>
   }
 
   @Override
+  public Parent getLoggedInParent() {
+    return remoteModel.getLoggedInParent();
+  }
+
+  @Override
   public BookingList getBookingList() {
     return remoteModel.getBookingList();
   }

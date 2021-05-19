@@ -121,6 +121,11 @@ public class LocalModelManager
   }
 
   @Override
+  public Parent getLoggedInParent() {
+    return serverModel.getLoggedInParent();
+  }
+
+  @Override
   public BookingList getBookingList() {
     return serverModel.getBookingList();
   }

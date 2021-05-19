@@ -31,4 +31,5 @@ public interface Model extends LocalSubject<Booking, Booking>
   Babysitter getBabysitter(String username);
   void logout(Account account);
   BookingList getBookingList();
+  public Parent getLoggedInParent();
 }
