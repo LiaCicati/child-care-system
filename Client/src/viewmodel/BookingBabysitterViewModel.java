@@ -8,6 +8,7 @@ import model.*;
 
 import java.rmi.RemoteException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class BookingBabysitterViewModel
 {
@@ -57,104 +58,61 @@ public class BookingBabysitterViewModel
     return errorLabel;
   }
 
-  public void date() throws RemoteException
-  {
-    try
-    {
-      if ((selectedHour == 0) && (selectedMinute == 0))
-      {
-        errorMessage += "Select time you need a babysitter";
-        errorLabel.set(errorMessage);
-        System.out.println("date første if");
-      }
-      else if (selectedHour == 0)
-      {
-        errorMessage += "Select time you need a babysitter (hour)";
-        errorLabel.set(errorMessage);
-        System.out.println("date anden if ");
-      }
-      else if (selectedMinute == 0)
-      {
-        errorMessage += "Select time you need a babysitter (minute)";
-        errorLabel.set(errorMessage);
-        System.out.println("date tredje if");
-      }
-      selectedYear = Integer.parseInt(errorMessage.substring(4, 8));
-      selectedMonth = Integer.parseInt(errorMessage.substring(9, 11));
-      selectedDay = Integer.parseInt(errorMessage.substring(12, 14));
-      System.out.println(errorMessage);
-      System.out
-          .println(selectedYear + " " + selectedMonth + " " + selectedDay);
+  public void date() throws RemoteException {
+    try {
+
+      LocalDate selectedDate = getDate().get();
+
+      String selectedDateString = String.valueOf(selectedDate);
+
+      selectedYear = Integer.parseInt(selectedDateString.substring(0, 4));
+      selectedMonth = Integer.parseInt(selectedDateString.substring(5, 7));
+      selectedDay = Integer.parseInt(selectedDateString.substring(8, 10));
+      System.out.println(selectedDay+" "+selectedMonth+" "+selectedYear);
     }
-    catch (Exception e)
-    {
+    catch (Exception e) {
       errorLabel.set("unintended " + e.getMessage());
       System.out.println("date exception");
     }
   }
 
-  public void hour() throws RemoteException
-  {
-    try
-    {
-      if (selectedDay == 0)
-      {
-        errorMessage += "Select date your need a babysitter";
-        errorLabel.set(errorMessage);
-        System.out.println("vælg dag");
-      }
-      errorMessage = hour.getValue();
-      selectedHour = Integer.parseInt(errorMessage);
-      System.out.println(getHour());
+  public void hour() throws RemoteException {
+    try {
+
+      selectedHour = Integer.parseInt(hour.getValue());
       System.out.println(selectedHour);
     }
-    catch (Exception e)
-    {
+    catch (Exception e) {
       errorLabel.set("unintended " + e.getMessage());
     }
   }
 
-  public void minute() throws RemoteException
-  {
-    try
-    {
-      if (selectedHour == 0)
-      {
-        errorMessage += "Select time you need a babysitter (hour)";
-        errorLabel.set(errorMessage);
-      }
-      selectedMinute = Integer.parseInt(errorMessage);
-      System.out.println(minute.getValue());
+  public void minute() throws RemoteException {
+    try {
+      selectedMinute = Integer.parseInt(minute.getValue());
       System.out.println(selectedMinute);
     }
-    catch (Exception e)
-    {
+    catch (Exception e) {
       errorLabel.set("unintended " + e.getMessage());
     }
   }
 
-  public void findAvailableBabysitters() throws RemoteException
-  {
-    if (getDate() == null)
-    {
-      errorLabel.set("Select a date");
+  public MyDateTime getStartTime(){
+    if ((selectedDay == 0)&&(selectedDay == 0)&&(selectedMinute == 0)){
+      errorMessage = "Please specify when you need a babysitter";
+      errorLabel.set(errorMessage);
+    }else if (selectedDay == 0){
+      errorMessage = "Please select date you need a babysitter";
+      errorLabel.set(errorMessage);
+    } else if (selectedHour == 0){
+      errorMessage = "Please select time you need a babysitter (hour)";
+      errorLabel.set(errorMessage);
+    }else if (selectedMinute == 0){
+      errorMessage = "Please select time you need a babysitter (minute)";
+      errorLabel.set(errorMessage);
     }
-    else if (getHour().equals(null) || getHour() == null)
-    {
-      errorLabel.set("Select a time (hour)");
-    }
-    else if (getMinute() == null)
-    {
-      errorLabel.set("Select a time (minute)");
-    }
-    try
-    {
-
-    }
-    catch (Exception e)
-    {
-      errorLabel.set(e.getMessage());
-    }
+    MyDateTime startTime = new MyDateTime(selectedDay, selectedMonth ,selectedYear , selectedHour , selectedMinute);
+    return startTime;
   }
 
   public StringProperty getHour()
@@ -188,9 +146,11 @@ public class BookingBabysitterViewModel
       if (model.getBabysitter(babysitter) == null){
         errorMessage = "Please pick a babysitter";
         errorLabel.set(errorMessage);
-      }else {
+      }else if (getStartTime().getHour()==0) {
+        System.out.println("vælg tid");
+      }else if (getStartTime().getTime()!=0){
         reset();
-        Booking myBooking = new Booking(new TimeInterval(new MyDateTime(24, 9, 2021, 15, 30), new MyDateTime(24, 9, 2021, 18, 00)), model.getLoggedInParent(), model.getBabysitter(babysitter));
+        Booking myBooking = new Booking(new TimeInterval(getStartTime(), new MyDateTime(24, 9, 2021, 18, 00)), model.getLoggedInParent(), model.getBabysitter(babysitter));
         model.addBooking(myBooking);
         System.out.println(myBooking);
       }

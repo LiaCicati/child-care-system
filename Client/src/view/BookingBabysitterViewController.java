@@ -60,7 +60,6 @@ public class BookingBabysitterViewController extends ViewController
 
   public void onDateEntered() throws RemoteException {
     viewModel.date();
-    viewModel.findAvailableBabysitters();
   }
   public void onProfile()
   {
@@ -69,14 +68,12 @@ public class BookingBabysitterViewController extends ViewController
 
   public void onHourEntered(ActionEvent actionEvent) throws RemoteException {
     viewModel.hour();
-    viewModel.findAvailableBabysitters();
 
 
   }
 
   public void onMinuteEntered(ActionEvent actionEvent) throws RemoteException {
     viewModel.minute();
-    viewModel.findAvailableBabysitters();
 
   }
 

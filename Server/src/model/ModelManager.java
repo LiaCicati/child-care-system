@@ -236,8 +236,6 @@ public class ModelManager implements Model
 
   @Override public Parent getLoggedInParent(){
     ArrayList<Parent> parentLoggedIn = loggedInList.getAllParentAccounts();
-    int lengthParentLoggedIn = parentLoggedIn.size();
-    System.out.println(lengthParentLoggedIn);
     return parentLoggedIn.get(0);
   }
 
