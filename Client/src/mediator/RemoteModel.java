@@ -36,5 +36,5 @@ Account login(String username, String password) throws RemoteException;
  void logout(Account account) throws RemoteException;
  public Parent getLoggedInParent();
 
- BookingList getBookingList();
+ BookingList getBookingList() throws RemoteException;
 }

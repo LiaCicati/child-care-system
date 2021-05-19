@@ -29,6 +29,7 @@ public interface RemoteModel extends RemoteSubject<Booking, Booking>
   AccountList getBabysitterList() throws RemoteException;
   Babysitter getBabysitter(String username) throws RemoteException;
   void logout(Account account) throws RemoteException;
-  public Parent getLoggedInParent() throws RemoteException;
+  Parent getLoggedInParent() throws RemoteException;
+  BookingList getBookingList() throws RemoteException;
 
 }

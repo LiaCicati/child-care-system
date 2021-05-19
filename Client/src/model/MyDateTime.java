@@ -284,11 +284,35 @@ public class MyDateTime implements Serializable
     return getTime() < time.getTime();
   }
 
+  public boolean isAfter(MyDateTime time)
+  {
+    return getTime() > time.getTime();
+  }
+
+  public int getDateTime(){
+    return year * 400 + month * 31 + day + (hour * 60 * 60) + (minute * 60);
+  }
+
+  public boolean isBeforeDateTime(MyDateTime dateTime){
+    return getDateTime() < dateTime.getDateTime();
+  }
+
+  public boolean isAfterDateTime(MyDateTime dateTime){
+    return getDateTime() > dateTime.getDateTime();
+  }
+
   public boolean isBeforeDate(MyDateTime other)
   {
     int dummyDaysOfThis = year * 400 + month * 31 + day;
     int dummyDaysOfOther = other.year * 400 + other.month * 31 + other.day;
     return dummyDaysOfThis < dummyDaysOfOther;
+  }
+
+  public boolean isAfterDate(MyDateTime other)
+  {
+    int dummyDaysOfThis = year * 400 + month * 31 + day;
+    int dummyDaysOfOther = other.year * 400 + other.month * 31 + other.day;
+    return dummyDaysOfThis >dummyDaysOfOther;
   }
 
   public int yearsBetween(MyDateTime other)

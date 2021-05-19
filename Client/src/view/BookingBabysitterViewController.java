@@ -55,7 +55,7 @@ public class BookingBabysitterViewController extends ViewController
 
     String chosenBabysitter = String.valueOf(babysittersTable.getSelectionModel().getSelectedItem());
     System.out.println(chosenBabysitter);
-    viewModel.createBooking(chosenBabysitter);
+    viewModel.createBooking(chosenBabysitter, errorLabel);
   }
 
   public void onDateEntered() throws RemoteException {
@@ -84,5 +84,7 @@ public class BookingBabysitterViewController extends ViewController
 
   public void onDurationMinutesEntered(ActionEvent actionEvent) throws RemoteException {
     viewModel.durationMinute();
+    viewModel.getBookedBabysitters();
+
   }
 }
