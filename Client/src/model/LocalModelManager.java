@@ -10,6 +10,7 @@ import utility.observer.subject.PropertyChangeProxy;
 
 import java.rmi.RemoteException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class LocalModelManager
     implements LocalModel, LocalListener<String, String>
@@ -120,14 +121,48 @@ public class LocalModelManager
     serverModel.logout(account);
   }
 
+
   @Override
   public Parent getLoggedInParent() {
     return serverModel.getLoggedInParent();
   }
 
   @Override
-  public BookingList getBookingList() {
+  public BookingList getBookingList()
+  {
     return serverModel.getBookingList();
+  }
+
+  @Override public ArrayList<Kid> getKidList()
+  {
+    return serverModel.getKidList();
+  }
+
+  @Override public void editKidData(Parent parent, int id, Kid kid)
+  {
+    serverModel.editKidData(parent, id, kid);
+  }
+
+  @Override public ArrayList<Kid> getAllKids(Parent parent)
+  {
+    return serverModel.getAllKids(parent);
+  }
+  
+
+  @Override public void addKid(Parent parent, Kid kid)
+  {
+    serverModel.addKid(parent, kid);
+  }
+
+  @Override public Kid getKidById(int id)
+  {
+    return serverModel.getKidById(id);
+  }
+
+  @Override public Kid getKid(int index)
+  {
+    return serverModel.getKid(index);
+
   }
 
   @Override public boolean addListener(GeneralListener<String, String> listener,

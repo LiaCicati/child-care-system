@@ -1,58 +1,93 @@
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Kid
+public class Kid implements Serializable
 {
   private int age;
+  private int id;
   private boolean gender; //false = boy, true = girl
   private String healthConditions;
   private MyDateTime dateOfBirth;
 
-  public Kid(int birthDay, int birthMonth, int birthYear, boolean gender,
-      String healthConditions)
+  public Kid(int id, int birthDay, int birthMonth, int birthYear,
+      boolean gender, String healthConditions)
   {
     setDateOfBirth(new MyDateTime(birthDay, birthMonth, birthYear));
     setGender(gender);
     setHealthConditions(healthConditions);
+    setId(id);
+
   }
 
-  public int getAge(MyDateTime dateOfBirth)
+  public int getId()
   {
-    int currentDay = LocalDate.now().getDayOfMonth();
-    int currentMonth = LocalDate.now().getMonthValue();
-    int currentYear = LocalDate.now().getYear();
+    return id;
+  }
 
-    int birthDay = dateOfBirth.getDay();
-    int birthMonth = dateOfBirth.getMonth();
-    int birthYear = dateOfBirth.getYear();
-
-    int age = currentYear - birthYear;
-
-    int differenceInDays = currentDay - birthDay;
-    int differenceInMonths = currentMonth - birthMonth;
-    if (differenceInDays < 0)
+  public void setId(int id)
+  {
+    if (id == 0)
     {
-      differenceInMonths = differenceInMonths - 1;
+      throw new IllegalArgumentException("Id field can not be empty and should be a number");
     }
-    if (differenceInMonths < 0)
+
+    this.id = id;
+  }
+  //  public int getAge(MyDateTime dateOfBirth)
+  //  {
+  //    int currentDay = LocalDate.now().getDayOfMonth();
+  //    int currentMonth = LocalDate.now().getMonthValue();
+  //    int currentYear = LocalDate.now().getYear();
+  //
+  //    int birthDay = dateOfBirth.getDay();
+  //    int birthMonth = dateOfBirth.getMonth();
+  //    int birthYear = dateOfBirth.getYear();
+  //
+  //    int age = currentYear - birthYear;
+  //
+  //    int differenceInDays = currentDay - birthDay;
+  //    int differenceInMonths = currentMonth - birthMonth;
+  //    if (differenceInDays < 0)
+  //    {
+  //      differenceInMonths = differenceInMonths - 1;
+  //    }
+  //    if (differenceInMonths < 0)
+  //    {
+  //      return age - 1;
+  //    }
+  //    else
+  //    {
+  //      return age;
+  //    }
+  //  }
+
+  public int getAge()
+  {
+    LocalDate localDate = LocalDate.now();
+    MyDateTime date = new MyDateTime(localDate.getDayOfMonth(),
+        localDate.getMonthValue(), localDate.getYear());
+    if (dateOfBirth == null)
     {
-      return age - 1;
+      return 0;
     }
     else
     {
-      return age;
+      return date.yearsBetween(this.dateOfBirth);
     }
   }
 
-  public MyDateTime getDateOfBirth()
+  public LocalDate getDateOfBirth()
   {
-    return dateOfBirth;
+    return LocalDate.of(dateOfBirth.getYear(), dateOfBirth.getMonth(),
+        dateOfBirth.getDay());
   }
 
   public void setDateOfBirth(MyDateTime dateOfBirth)
   {
     this.dateOfBirth = dateOfBirth;
+
   }
 
   public String getHealthConditions()
@@ -79,6 +114,16 @@ public class Kid
   public void setGender(boolean gender)
   {
     this.gender = gender;
+  }
+
+  public void editData(int id, int birthDay, int birthMonth, int birthYear,
+      boolean gender, String healthConditions)
+  {
+    setId(id);
+    setDateOfBirth(new MyDateTime(birthDay, birthMonth, birthYear));
+    setGender(gender);
+    setHealthConditions(healthConditions);
+
   }
 
   public boolean equals(Object obj)

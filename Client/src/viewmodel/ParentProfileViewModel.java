@@ -1,8 +1,13 @@
 package viewmodel;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import model.Kid;
 import model.LocalModel;
+import view.View;
+
+import java.time.LocalDate;
 
 public class ParentProfileViewModel
 {
@@ -44,16 +49,23 @@ public class ParentProfileViewModel
 
   private void loadData()
   {
+
     firstName.set(viewState.getAccount().getFirstName());
     lastName.set(viewState.getAccount().getLastName());
     username.set(viewState.getAccount().getUserName());
     email.set(viewState.getAccount().getEmail());
+
     if(viewState.getParent().hasPets())
     {
       hasPets.set("yes");
     } else {
       hasPets.set("no");
     }
+
+    //    hasPets.set(viewState.getParent().hasPets() + "");
+
+
+
   }
 
   public StringProperty getFirstName()
@@ -90,4 +102,6 @@ public class ParentProfileViewModel
   {
     return errorLabel;
   }
+
+
 }

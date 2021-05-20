@@ -20,7 +20,7 @@ public class Parent extends Account
       String firstName, String lastName)
   {
     super(userName, password, email, firstName, lastName);
-
+    this.kids = new ArrayList<>();
   }
 
   public int getNrOfKids()
@@ -54,13 +54,39 @@ public class Parent extends Account
     return kids;
   }
 
+  public Kid getKidByID(int id)
+  {
+    for (int i = 0; i < kids.size(); i++)
+    {
+      if (kids.get(i).getId() == id)
+      {
+        return kids.get(i);
+      }
+    }
+    return null;
+  }
+
   public void addKid(Kid kid)
   {
-    if (kid == null)
+    for (int i = 0; i < kids.size(); i++)
     {
-      throw new IllegalArgumentException("Add data");
+      if (kids.get(i).getId() == kid.getId())
+      {
+        throw new IllegalArgumentException("A kid with this ID already exists");
+      }
     }
     kids.add(kid);
+
+  }
+
+  public Kid getKid(int index)
+  {
+    return kids.get(index);
+  }
+
+  public ArrayList<Kid> getAllKids()
+  {
+    return kids;
   }
 
   public String toString()

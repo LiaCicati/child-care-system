@@ -2,10 +2,11 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -14,6 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.ToggleGroup?>
 <AnchorPane prefHeight="750.0" prefWidth="414.0" style="-fx-background-color: E6E1FF;" userData="Edit kid data" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.AddEditKidDataViewController">
     <children>
         <ImageView fitHeight="111.0" fitWidth="174.0" layoutX="126.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
@@ -58,13 +60,22 @@
                       <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="62.0" prefWidth="138.0" spacing="5.0">
                           <children>
                               <Label text="Gender" />
-                              <ComboBox fx:id="gender" prefWidth="150.0" promptText="Select gender" />
+                        <RadioButton fx:id="girl" mnemonicParsing="false" text="girl">
+                            <toggleGroup>
+                                <ToggleGroup fx:id="groupToggle">
+
+                                </ToggleGroup>
+                            </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="boy" mnemonicParsing="false" text="boy" />
                           </children>
                       </VBox>
                   </children>
               </HBox>
             <Label text="Health condition" />
             <TextArea fx:id="healthCondition" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="88.0" prefWidth="348.0" />
+            <Label text="Id" />
+            <TextField fx:id="id" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="171.0" style="-fx-background-radius: 37;" />
          </children>
       </VBox>
       <Label fx:id="errorLabel" layoutX="33.0" layoutY="556.0" prefHeight="26.0" prefWidth="348.0" text="Error label" textFill="#f9494b">

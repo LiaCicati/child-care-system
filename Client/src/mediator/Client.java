@@ -13,6 +13,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Client implements ClientModel, RemoteListener<String, String>
 {
@@ -229,45 +230,120 @@ public class Client implements ClientModel, RemoteListener<String, String>
     }
   }
 
+
   @Override
   public Parent getLoggedInParent() {
     return remoteModel.getLoggedInParent();
   }
 
   @Override
-  public BookingList getBookingList() {
-    try {
+  public BookingList getBookingList()
+  {
+    try
+    {
       return remoteModel.getBookingList();
-    } catch (RemoteException e) {
+    }
+    catch (RemoteException e)
+    {
       e.printStackTrace();
       throw new IllegalStateException(getExceptionMessage(e), e);
-
     }
   }
+      @Override public ArrayList<Kid> getKidList () {
+      try
+      {
+        return remoteModel.getKidList();
+      }
+      catch (RemoteException e)
+      {
+        throw new IllegalStateException(getExceptionMessage(e), e);
+      }
+    }
 
-  @Override public void propertyChange(ObserverEvent<String, String> event)
-      throws RemoteException
-  {
-    property.firePropertyChange(event);
-  }
+      @Override public void editKidData (Parent parent,int id, Kid kid)
+      {
+        try
+        {
+          remoteModel.editKidData(parent, id, kid);
+        }
+        catch (RemoteException e)
+        {
+          throw new IllegalStateException(getExceptionMessage(e), e);
+        }
+      }
 
-  @Override public boolean addListener(GeneralListener<String, String> listener,
-      String... propertyNames)
-  {
-    return property.addListener(listener, propertyNames);
-  }
+      @Override public ArrayList<Kid> getAllKids (Parent parent)
+      {
+        try
+        {
+          return remoteModel.getAllKids(parent);
+        }
+        catch (RemoteException e)
+        {
+          throw new IllegalStateException(getExceptionMessage(e), e);
+        }
+      }
 
-  @Override public boolean removeListener(
-      GeneralListener<String, String> listener, String... propertyNames)
-  {
-    return property.removeListener(listener, propertyNames);
-  }
+      @Override public void addKid (Parent parent, Kid kid)
+      {
+        try
+        {
+          remoteModel.addKid(parent, kid);
+        }
+        catch (RemoteException e)
+        {
+          throw new IllegalStateException(getExceptionMessage(e), e);
+        }
+      }
 
-  private String getExceptionMessage(Exception e)
-  {
-    String message = e.getMessage();
-    if (message != null)
-      message = message.split(";")[0];
-    return message;
-  }
-}
+      @Override public Kid getKidById ( int id)
+      {
+        try
+        {
+          return remoteModel.getKidById(id);
+        }
+        catch (RemoteException e)
+        {
+          throw new IllegalStateException(getExceptionMessage(e), e);
+        }
+      }
+
+      @Override public Kid getKid ( int index)
+      {
+        try
+        {
+          return remoteModel.getKid(index);
+        }
+        catch (RemoteException e)
+        {
+          throw new IllegalStateException(getExceptionMessage(e), e);
+
+        }
+      }
+
+      @Override public void propertyChange (ObserverEvent < String, String > event)
+      throws RemoteException {
+      property.firePropertyChange(event);
+    }
+
+      @Override public boolean addListener
+      (GeneralListener < String, String > listener, String...propertyNames)
+      {
+        return property.addListener(listener, propertyNames);
+      }
+
+      @Override public boolean removeListener
+      (GeneralListener < String, String > listener, String...propertyNames)
+      {
+        return property.removeListener(listener, propertyNames);
+      }
+
+      private String getExceptionMessage (Exception e)
+      {
+        String message = e.getMessage();
+        if (message != null)
+          message = message.split(";")[0];
+        return message;
+      }
+    }
+

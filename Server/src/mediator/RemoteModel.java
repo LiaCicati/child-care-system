@@ -6,6 +6,7 @@ import utility.observer.subject.RemoteSubject;
 
 import java.rmi.RemoteException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public interface RemoteModel extends RemoteSubject<Booking, Booking>
 {
@@ -29,7 +30,16 @@ public interface RemoteModel extends RemoteSubject<Booking, Booking>
   AccountList getBabysitterList() throws RemoteException;
   Babysitter getBabysitter(String username) throws RemoteException;
   void logout(Account account) throws RemoteException;
+
   Parent getLoggedInParent() throws RemoteException;
   BookingList getBookingList() throws RemoteException;
+
+  ArrayList<Kid> getKidList() throws RemoteException;
+  void editKidData(Parent parent, int id, Kid kid) throws RemoteException;
+  ArrayList<Kid> getAllKids(Parent parent) throws RemoteException;
+  void addKid(Parent parent, Kid kid) throws RemoteException;
+  Kid getKidById(int id) throws RemoteException;
+  Kid getKid(int index) throws RemoteException;
+
 
 }

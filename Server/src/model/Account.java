@@ -115,6 +115,11 @@ public abstract class Account implements Serializable
     this.password = password;
   }
 
+  public String getParent()
+  {
+     return "Hello";
+  }
+
   @Override public boolean equals(Object obj)
   {
     if (!(obj instanceof Account))

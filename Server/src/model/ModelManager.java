@@ -9,14 +9,23 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 
+
+import java.util.InputMismatchException;
+
+
 public class ModelManager implements Model
 {
 
   private AccountList accountList;
   private AccountList babysitterList;
   private AccountList parentList;
+  private ArrayList<Parent> parents;
   private AccountList loggedInList;
+
   private BookingList bookingList;
+
+  ArrayList<Kid> kids;
+
   private PropertyChangeAction<Booking, Booking> property;
   //    private PropertyChangeAction<Account, Account> accountProperty; //TODO incomment again when account class isimplemented
 
@@ -26,7 +35,12 @@ public class ModelManager implements Model
     this.babysitterList = new AccountList();
     this.parentList = new AccountList();
     this.loggedInList = new AccountList();
+
     this.bookingList = new BookingList();
+
+    this.kids = new ArrayList<>();
+    this.parents = new ArrayList<>();
+
     this.property = new PropertyChangeProxy<>(this);
     addDummyData();
   }
@@ -38,10 +52,17 @@ public class ModelManager implements Model
     Account babysitter2 = new Babysitter("lori", "lialialia", "lori@mail.ru",
         "Loredana", "Cicati", new MyDateTime(13, 2, 2001), 30, "English", 2,
         false);
-    Account parent1 = new Parent("ana", "password", "ana@gmail.com", "Ana",  "Peters");
-    Account parent2 = new Parent("lina", "password", "lina@gmail.com", "Lina",  "Peters", true);
+    Parent parent1 = new Parent("ana", "password", "ana@gmail.com", "Ana",
+        "Peters");
+    Account parent2 = new Parent("lina", "password", "lina@gmail.com", "Lina",
+        "Peters", true);
+    Kid kid = new Kid(1, 13, 2, 2017, false, "nothing");
     accountList.addAccount(babysitter);
     accountList.addAccount(babysitter2);
+    //    kids.add(kid);
+    parent1.addKid(kid);
+    System.out.println(getAllKids(parent1));
+    System.out.println(parent1.getNrOfKids());
     accountList.addAccount(parent1);
     accountList.addAccount(parent2);
     babysitterList.addAccount(babysitter);
@@ -257,8 +278,70 @@ public class ModelManager implements Model
     }
   }
 
-  public BookingList getBookingList() {
+
+  public BookingList getBookingList()
+  {
     return bookingList;
+  }
+
+  @Override public ArrayList<Kid> getKidList()
+  {
+    return kids;
+  }
+
+  @Override public void editKidData(Parent parent, int id,
+      Kid kid)
+  {
+
+    parent = (Parent) parentList.getByUserName(parent.getUserName());
+    parent.getKidByID(id).editData(kid.getId(), kid.getDateOfBirth().getDayOfMonth(),
+        kid.getDateOfBirth().getMonthValue(), kid.getDateOfBirth().getYear(),
+        kid.getGender(), kid.getHealthConditions());
+  }
+
+  @Override public ArrayList<Kid> getAllKids(Parent parent)
+  {
+    return parent.getKids();
+  }
+
+  @Override public ArrayList<Parent> getAllParents()
+  {
+    return parents;
+  }
+
+  @Override public void addKid(Parent parent, Kid kid)
+  { if(kid != null && kid.getId() != 0 && !kid.getHealthConditions().isEmpty())
+  {
+    parent = (Parent) parentList.getByUserName(parent.getUserName());
+    parent.addKid(kid);
+  } else {
+    throw new IllegalArgumentException("Please fill out all the data");
+  }
+  }
+
+  @Override public Kid getKidById(int id)
+  {
+    try
+    {
+      for (int i = 0; i < kids.size(); i++)
+      {
+        if (kids.get(i).getId() == id)
+        {
+          return kids.get(i);
+        }
+      }
+    }
+    catch (InputMismatchException e)
+    {
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+  @Override public Kid getKid(int index)
+  {
+    return kids.get(index);
+
   }
 
   @Override public boolean addListener(

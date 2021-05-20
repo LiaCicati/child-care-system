@@ -15,6 +15,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Server implements RemoteModel, LocalListener<Booking, Booking>
 {
@@ -26,7 +27,7 @@ public class Server implements RemoteModel, LocalListener<Booking, Booking>
     this.property = new PropertyChangeProxy<>(this, true);
     this.model = model;
     //        this.model.addListener(this, "add");
-    startRegistry();
+        startRegistry();
     startServer();
   }
 
@@ -53,7 +54,7 @@ public class Server implements RemoteModel, LocalListener<Booking, Booking>
   @Override public void addBooking(Booking booking) throws RemoteException
   {
     model.addBooking(booking);
-   // property.firePropertyChange("add", null, booking);
+    // property.firePropertyChange("add", null, booking);
   }
 
   @Override public boolean isPasswordCorrect(String userName, String password)
@@ -129,39 +130,63 @@ public class Server implements RemoteModel, LocalListener<Booking, Booking>
     model.logout(account);
   }
 
-  @Override
-  public Parent getLoggedInParent() throws RemoteException{
+  @Override public Parent getLoggedInParent() throws RemoteException
+  {
     return model.getLoggedInParent();
   }
 
-  @Override
-  public BookingList getBookingList() throws RemoteException {
+  @Override public BookingList getBookingList() throws RemoteException
+  {
     return model.getBookingList();
   }
 
-  @Override public void propertyChange(ObserverEvent<Booking, Booking> event)
-  {
-    property
-        .firePropertyChange(event.getPropertyName(), null, event.getValue2());
+    @Override public ArrayList<Kid> getKidList () throws RemoteException {
+    return model.getKidList();
   }
 
-  @Override public boolean addListener(
-      GeneralListener<Booking, Booking> listener, String... propertyNames)
-      throws RemoteException
-  {
+    @Override public void editKidData (Parent parent,int id, Kid kid)
+      throws RemoteException {
+    model.editKidData(parent, id, kid);
+  }
+
+    @Override public ArrayList<Kid> getAllKids (Parent parent)
+    {
+      return model.getAllKids(parent);
+    }
+
+    @Override public void addKid (Parent parent, Kid kid) throws RemoteException
+    {
+      model.addKid(parent, kid);
+    }
+
+    @Override public Kid getKidById ( int id)
+    {
+      return model.getKidById(id);
+    }
+
+    @Override public Kid getKid ( int index) throws RemoteException {
+    return model.getKid(index);
+
+  }
+
+    @Override public void propertyChange (ObserverEvent < Booking, Booking > event)
+    {
+      property.firePropertyChange(event.getPropertyName(), null, event.getValue2());
+    }
+
+    @Override public boolean addListener (GeneralListener < Booking, Booking > listener, String...propertyNames)
+      throws RemoteException {
     boolean check = property.addListener(listener, propertyNames);
     return check;
   }
 
-  @Override public boolean removeListener(
-      GeneralListener<Booking, Booking> listener, String... propertyNames)
-      throws RemoteException
-  {
+    @Override public boolean removeListener
+    (GeneralListener < Booking, Booking > listener, String...propertyNames)
+      throws RemoteException {
     return property.removeListener(listener, propertyNames);
   }
 
-  private void startRegistry() throws RemoteException
-  {
+    private void startRegistry () throws RemoteException {
     try
     {
       Registry reg = LocateRegistry.createRegistry(1099);
@@ -172,4 +197,5 @@ public class Server implements RemoteModel, LocalListener<Booking, Booking>
       System.out.println("Registry already started?" + " " + ex.getMessage());
     }
   }
-}
+  }
+

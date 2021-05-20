@@ -7,6 +7,7 @@ import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public interface RemoteModel extends RemoteSubject<String, String>
 {
@@ -34,7 +35,16 @@ Account login(String username, String password) throws RemoteException;
  AccountList getBabysitterList() throws RemoteException;
  Babysitter getBabysitter(String username) throws RemoteException;
  void logout(Account account) throws RemoteException;
+
  public Parent getLoggedInParent();
 
  BookingList getBookingList() throws RemoteException;
+
+ ArrayList<Kid> getKidList() throws RemoteException;
+ void editKidData(Parent parent,  int id, Kid kid) throws RemoteException;
+ ArrayList<Kid> getAllKids(Parent parent) throws RemoteException;
+ void addKid(Parent parent, Kid kid) throws RemoteException;
+ Kid getKidById(int id) throws RemoteException;
+ Kid getKid(int index) throws RemoteException;
+
 }
