@@ -1,7 +1,6 @@
 package viewmodel;
 
 import javafx.beans.property.*;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
@@ -10,7 +9,6 @@ import model.*;
 
 import java.rmi.RemoteException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class BookingBabysitterViewModel
@@ -39,7 +37,10 @@ public class BookingBabysitterViewModel
   int selectedHour = 0;
   int selectedMinute = 0;
   int selectedDurationHour = 0;
-  int getSelectedDurationMinute = 0;
+  int SelectedDurationMinute = 0;
+
+  MyDateTime startTime = new MyDateTime(0,0,0,0,0);
+  MyDateTime endTime = new MyDateTime(0,0,0,0,0);
 
 
   public BookingBabysitterViewModel(LocalModel model)
@@ -61,7 +62,7 @@ public class BookingBabysitterViewModel
   public void reset()
   {
     updateBabysitters();
-    hour.set(null);
+   // hour.set(null);
     errorLabel.set("");
   }
 
@@ -116,7 +117,7 @@ public class BookingBabysitterViewModel
 
   public void durationMinute() throws RemoteException {
     try {
-      getSelectedDurationMinute = Integer.parseInt(durationMinutes.getValue());
+      SelectedDurationMinute = Integer.parseInt(durationMinutes.getValue());
     }
     catch (Exception e) {
       errorLabel.set("unintended " + e.getMessage());
@@ -124,32 +125,14 @@ public class BookingBabysitterViewModel
   }
 
   public MyDateTime getStartTime(){
-    if ((selectedDay == 0)&&(selectedDay == 0)&&(selectedMinute == 0)){
-      errorMessage = "Please specify when you need a babysitter";
-      errorLabel.set(errorMessage);
-    }else if (selectedDay == 0){
-      errorMessage = "Please select date you need a babysitter";
-      errorLabel.set(errorMessage);
-    } else if (selectedHour == 0){
-      errorMessage = "Please select time you need a babysitter (hour)";
-      errorLabel.set(errorMessage);
-    }else if (selectedMinute == 0){
-      errorMessage = "Please select time you need a babysitter (minute)";
-      errorLabel.set(errorMessage);
-    }
-    MyDateTime startTime = new MyDateTime(selectedDay, selectedMonth ,selectedYear , selectedHour , selectedMinute);
+
+    startTime.set(selectedDay, selectedMonth ,selectedYear , selectedHour , selectedMinute);
     return startTime;
   }
 
   public MyDateTime getEndTime(){
-    if (selectedDurationHour==0){
-      errorMessage = "Please select for how log you want you child babysat";
-      errorLabel.set(errorMessage);
-    }else if (getSelectedDurationMinute==0){
-      errorMessage = "Please select for how long you want you child babysat";
-      errorLabel.set(errorMessage);
-    }
-    MyDateTime endTime = new MyDateTime(selectedDay,selectedMonth,selectedYear,selectedHour+selectedDurationHour,selectedMinute+getSelectedDurationMinute);
+
+    endTime.set(selectedDay, selectedMonth, selectedYear, selectedHour + selectedDurationHour, selectedMinute + SelectedDurationMinute);
     return endTime;
   }
 
@@ -181,7 +164,21 @@ public class BookingBabysitterViewModel
 
   public void createBooking(String babysitter, Label label){
     try {
-      if (model.getBabysitter(babysitter) == null){
+      getEndTime();
+      getStartTime();
+      if (endTime.equals(new MyDateTime(0,0,0,0,0))){
+        errorMessage = "Please select for how long you want you child babysat";
+        errorLabel.set(errorMessage);
+      }else if (startTime.equals(new MyDateTime(0,0,0,0,0))){
+        errorMessage = "Please specify when you need a babysitter";
+        errorLabel.set(errorMessage);
+      }else if (selectedDay == 0){
+        errorMessage = "Please select date you need a babysitter";
+        errorLabel.set(errorMessage);
+      } else if (selectedHour == 0){
+        errorMessage = "Please select time you need a babysitter (hour)";
+        errorLabel.set(errorMessage);
+      }else if (model.getBabysitter(babysitter) == null){
         errorMessage = "Please pick a babysitter";
         errorLabel.set(errorMessage);
       }else if (getStartTime().getTime()!=0){
@@ -198,66 +195,58 @@ public class BookingBabysitterViewModel
   }
 
 
-  public void getBookedBabysitters(){
+  public void getBookedBabysitters() {
     bookedBabysitters.clear();
     ArrayList<Booking> bookings = new ArrayList<>();
     bookings.clear();
     bookings = model.getBookingList().getAllBookings();
-    System.out.println("fra bookings: "+ bookings);
-    for (int i=0; i<bookings.size();i++) {
-      MyDateTime startOfBooking = bookings.get(i).getTime().getStartTime();
-      System.out.println("det her er start of booking: " + startOfBooking + " det her er start på den ønskede booking: "+ getStartTime());
-      System.out.println("er før? "+startOfBooking.isBeforeDate(getStartTime()) + " er efter? "+startOfBooking.isAfterDate(getStartTime()));
-      MyDateTime endOfBooking = bookings.get(i).getTime().getEndTime();
-      System.out.println("det her er end of booking: " + endOfBooking + " det her er end på den ønskede booking: "+ getEndTime());
-      if ((startOfBooking.isAfterDate(getStartTime())==false && startOfBooking.isBeforeDate(getStartTime())==false)
-              && (getStartTime().isAfterDateTime(startOfBooking) && getEndTime().isBeforeDateTime(endOfBooking))) {
-        bookedBabysitters.add(bookings.get(i).getBabysitter());
-        System.out.println(1);
-      } else if ((startOfBooking.isAfterDate(getStartTime())==false && startOfBooking.isBeforeDate(getStartTime())==false)
-              && (getStartTime().isBeforeDateTime(endOfBooking) && getEndTime().isAfterDateTime(endOfBooking))) {
-        bookedBabysitters.add(bookings.get(i).getBabysitter());
-        System.out.println(2);
-      } else if ((startOfBooking.isAfterDate(getStartTime())==false && startOfBooking.isBeforeDate(getStartTime())==false)
-              && (getStartTime().isBeforeDateTime(endOfBooking) && getEndTime().isBeforeDateTime(endOfBooking))) {
-        bookedBabysitters.add(bookings.get(i).getBabysitter());
-        System.out.println(3);
-      } else if ((startOfBooking.isAfterDate(getStartTime())==false && startOfBooking.isBeforeDate(getStartTime())==false)
-              && (getStartTime().isBeforeDateTime(endOfBooking) && getEndTime().isAfterDateTime(endOfBooking))) {
-        bookedBabysitters.add(bookings.get(i).getBabysitter());
-        System.out.println(4);
-      } else if ((startOfBooking.isAfterDate(getStartTime())==false && startOfBooking.isBeforeDate(getStartTime())==false)
-              && (getStartTime().isBeforeDateTime(startOfBooking) && getEndTime().isAfterDateTime(startOfBooking))) {
-        bookedBabysitters.add(bookings.get(i).getBabysitter());
-        System.out.println(5);
-      } else if ((startOfBooking.isAfterDate(getStartTime())==false && startOfBooking.isBeforeDate(getStartTime())==false)
-              && (getStartTime().isBeforeDateTime(startOfBooking) && getEndTime().isAfterDateTime(endOfBooking))) {
-        bookedBabysitters.add(bookings.get(i).getBabysitter());
-        System.out.println(6);
+    System.out.println(bookings);
+    if (selectedHour==0){
+
+    }else {
+      for (int i = 0; i < bookings.size(); i++) {
+        MyDateTime startOfBooking = bookings.get(i).getTime().getStartTime();
+        MyDateTime endOfBooking = bookings.get(i).getTime().getEndTime();
+        if ((startOfBooking.isAfterDate(getStartTime()) == false && startOfBooking.isBeforeDate(getStartTime()) == false)
+                && (getStartTime().isAfterDateTime(startOfBooking) && getEndTime().isBeforeDateTime(endOfBooking))) {
+          bookedBabysitters.add(bookings.get(i).getBabysitter());
+        } else if ((startOfBooking.isAfterDate(getStartTime()) == false && startOfBooking.isBeforeDate(getStartTime()) == false)
+                && (getStartTime().isBeforeDateTime(endOfBooking) && getEndTime().isAfterDateTime(endOfBooking))) {
+          bookedBabysitters.add(bookings.get(i).getBabysitter());
+        } else if ((startOfBooking.isAfterDate(getStartTime()) == false && startOfBooking.isBeforeDate(getStartTime()) == false)
+                && (getStartTime().isBeforeDateTime(endOfBooking) && getEndTime().isBeforeDateTime(endOfBooking))) {
+          bookedBabysitters.add(bookings.get(i).getBabysitter());
+        } else if ((startOfBooking.isAfterDate(getStartTime()) == false && startOfBooking.isBeforeDate(getStartTime()) == false)
+                && (getStartTime().isBeforeDateTime(endOfBooking) && getEndTime().isAfterDateTime(endOfBooking))) {
+          bookedBabysitters.add(bookings.get(i).getBabysitter());
+        } else if ((startOfBooking.isAfterDate(getStartTime()) == false && startOfBooking.isBeforeDate(getStartTime()) == false)
+                && (getStartTime().isBeforeDateTime(startOfBooking) && getEndTime().isAfterDateTime(startOfBooking))) {
+          bookedBabysitters.add(bookings.get(i).getBabysitter());
+        } else if ((startOfBooking.isAfterDate(getStartTime()) == false && startOfBooking.isBeforeDate(getStartTime()) == false)
+                && (getStartTime().isBeforeDateTime(startOfBooking) && getEndTime().isAfterDateTime(endOfBooking))) {
+          bookedBabysitters.add(bookings.get(i).getBabysitter());
+        }
       }
     }
-    System.out.println("fra booked babysitters: " + bookedBabysitters);
-
-   /* System.out.println("is the requested booking before the end of booking? " + getStartTime().isBefore(endOfBooking));
-    System.out.println("is the requested booking after the start of booking?" + getStartTime().isAfter(startOfBooking));
-    System.out.println(bookings);
-    System.out.println("\n"  + bookings.size());
-    System.out.println("the time im getting; " + bookings.get(0).getTime().getStartTime());
-    System.out.println("the time im getting; " + bookings.get(0).getTime().getEndTime());*/
-
-
-
-
-
+    updateBabysitters();
   }
+
 
   public void updateBabysitters() {
     babysitters.clear();
     for (int i = 0; i < model.getBabysitterList().getNumberOfAccounts(); i++) {
-      babysitters.add(new BookingBabysitterTableRowData(
-          model.getBabysitterList().getAllBabysitterAccounts().get(i)));
-    }
+      if (bookedBabysitters.size()>0) {
+        for (Babysitter bookedBabysitter : bookedBabysitters) {
+          if (!model.getBabysitterList().getAllBabysitterAccounts().get(i).equals(bookedBabysitter))
+            babysitters.add(new BookingBabysitterTableRowData(
+                    model.getBabysitterList().getAllBabysitterAccounts().get(i)));
 
+        }
+      }else{
+        babysitters.add(new BookingBabysitterTableRowData(
+                model.getBabysitterList().getAllBabysitterAccounts().get(i)));
+      }
+    }
   }
 
   public StringProperty getDurationHours() {

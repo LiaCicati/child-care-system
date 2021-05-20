@@ -51,40 +51,39 @@ public class BookingBabysitterViewController extends ViewController
 
   }
 
-  public void bookBabysitter() {
-
-    String chosenBabysitter = String.valueOf(babysittersTable.getSelectionModel().getSelectedItem());
-    System.out.println(chosenBabysitter);
-    viewModel.createBooking(chosenBabysitter, errorLabel);
-  }
-
-  public void onDateEntered() throws RemoteException {
-    viewModel.date();
-  }
   public void onProfile()
   {
     getViewHandler().openView(View.PARENT_PROFILE_VIEW);
   }
 
+  public void bookBabysitter() {
+    String chosenBabysitter = String.valueOf(babysittersTable.getSelectionModel().getSelectedItem());
+    viewModel.createBooking(chosenBabysitter, errorLabel);
+  }
+
+  public void onDateEntered() throws RemoteException {
+    viewModel.date();
+    viewModel.getBookedBabysitters();
+  }
+
   public void onHourEntered(ActionEvent actionEvent) throws RemoteException {
     viewModel.hour();
-
-
+    viewModel.getBookedBabysitters();
   }
 
   public void onMinuteEntered(ActionEvent actionEvent) throws RemoteException {
     viewModel.minute();
-
+    viewModel.getBookedBabysitters();
   }
 
 
   public void onDurationHourEntered(ActionEvent actionEvent) throws RemoteException {
-  viewModel.durationHour();
+    viewModel.durationHour();
+    viewModel.getBookedBabysitters();
   }
 
   public void onDurationMinutesEntered(ActionEvent actionEvent) throws RemoteException {
     viewModel.durationMinute();
     viewModel.getBookedBabysitters();
-
   }
 }

@@ -17,7 +17,7 @@ public class BookingBabysitterTableRowData {
     age = new SimpleIntegerProperty(babysitter.getAge());
     babysittingExperience = new SimpleDoubleProperty(babysitter.getBabysittingExperience());
     paymentPerHour = new SimpleDoubleProperty(babysitter.getPaymentPerHour());
-    userName = new SimpleStringProperty(babysitter.getUserName());
+    setUserName(new SimpleStringProperty(babysitter.getUserName()));
 
     }
 
@@ -65,7 +65,15 @@ public class BookingBabysitterTableRowData {
 
     public String toString()
     {
-        return userName.get();
+        return getUserName().get();
                 //name.get() + " " + age.get() + " " + babysittingExperience.get() + " " + paymentPerHour.get() +" " + userName.get();
+    }
+
+    public StringProperty getUserName() {
+        return userName;
+    }
+
+    public void setUserName(StringProperty userName) {
+        this.userName = userName;
     }
 }
