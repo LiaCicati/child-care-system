@@ -39,7 +39,7 @@ public class RegisterParentViewModel
     email.set("");
     password.set("");
     errorLabel.set("");
-    hasPets.set(null);
+    hasPets.set(true);
   }
 
   public StringProperty getFirstName()
@@ -103,7 +103,7 @@ public boolean hasPets()
     try
     {
       model.registerParent(username.get(), password.get(), email.get(),
-          firstName.get(), lastName.getValue(), hasPets());
+          firstName.get(), lastName.getValue(), hasPets.get());
       errorLabel.set("");
       return true;
     }

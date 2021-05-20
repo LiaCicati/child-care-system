@@ -48,7 +48,12 @@ public class ParentProfileViewModel
     lastName.set(viewState.getAccount().getLastName());
     username.set(viewState.getAccount().getUserName());
     email.set(viewState.getAccount().getEmail());
-//    hasPets.set(viewState.getParent().hasPets() + "");
+    if(viewState.getParent().hasPets())
+    {
+      hasPets.set("yes");
+    } else {
+      hasPets.set("no");
+    }
   }
 
   public StringProperty getFirstName()

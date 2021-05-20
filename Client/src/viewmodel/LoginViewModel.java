@@ -37,6 +37,7 @@ public class LoginViewModel
       Account loggedIn = model.login(username.get(), password.get());
       viewState.setAccount(loggedIn);
       viewState.setBabysitter(model.getBabysitter(username.get()));
+      viewState.setParent(model.getParent(username.get()));
       if (loggedIn instanceof Babysitter)
       {
         return 2;

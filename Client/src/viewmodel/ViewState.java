@@ -47,4 +47,9 @@ public class ViewState
     this.babysitter = babysitter;
   }
 
+  public void setParent(Parent parent)
+  {
+    this.parent = parent;
+  }
+
 }

@@ -32,6 +32,7 @@ public class RegisterParentViewController extends ViewController
     password.textProperty().bindBidirectional(viewModel.getPassword());
     hasPets.selectedProperty().bindBidirectional(viewModel.getHasPets());
     errorLabel.textProperty().bind(viewModel.getError());
+    reset();
   }
 
   @Override public void reset()

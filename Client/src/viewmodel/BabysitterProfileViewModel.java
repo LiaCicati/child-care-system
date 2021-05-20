@@ -60,7 +60,12 @@ public class BabysitterProfileViewModel
         .set(viewState.getBabysitter().getBabysittingExperience());
     paymentPerHour.set(viewState.getBabysitter().getPaymentPerHour());
     motherTongue.set(viewState.getBabysitter().getMainLanguage());
-    firstAidCertificate.set(viewState.getBabysitter().hasFirstAidCertificate() + "");
+  if(viewState.getBabysitter().hasFirstAidCertificate())
+  {
+    firstAidCertificate.set("Possess");
+  } else {
+    firstAidCertificate.set("Do not possess");
+  }
   }
 
   public StringProperty getFirstName()

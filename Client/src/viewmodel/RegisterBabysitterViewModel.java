@@ -129,6 +129,7 @@ public class RegisterBabysitterViewModel
     }
   }
 
+
   public boolean register() throws RemoteException
   {
     try
