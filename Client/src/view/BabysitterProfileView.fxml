@@ -18,7 +18,7 @@
         <ImageView fitHeight="111.0" fitWidth="174.0" layoutX="126.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@resources/logo.png" />
         </ImageView>
-        <Button layoutX="35.0" layoutY="600.0" minHeight="70.0" minWidth="342.0" mnemonicParsing="false" onAction="#onEdit" style="-fx-background-radius: 37; -fx-background-color: #A094E3;" text="Edit" textFill="WHITE">
+        <Button fx:id="editBabysitter" layoutX="35.0" layoutY="600.0" minHeight="70.0" minWidth="342.0" mnemonicParsing="false" onAction="#onEdit" style="-fx-background-radius: 37; -fx-background-color: #A094E3;" text="Edit" textFill="WHITE">
             <font>
                 <Font size="16.0" />
             </font>

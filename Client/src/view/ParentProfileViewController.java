@@ -1,6 +1,7 @@
 package view;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -22,6 +23,7 @@ public class ParentProfileViewController extends ViewController
   @FXML private Label greetingName;
   @FXML private Label email;
   @FXML private Label hasPets;
+  @FXML private Button editParentButton;
 
   private KidListViewModel kidListViewModel;
   @FXML private TableView<KidViewModel> kidTable;
@@ -29,6 +31,8 @@ public class ParentProfileViewController extends ViewController
   @FXML private TableColumn<KidViewModel, Number> ageColumn;
   @FXML private TableColumn<KidViewModel, String> genderColumn;
   @FXML private TableColumn<KidViewModel, String> healthConditionColumn;
+
+  @FXML private Button editKidButton;
 
   @FXML private Label errorLabel;
   @FXML private Label nrOfKids;
@@ -45,6 +49,8 @@ public class ParentProfileViewController extends ViewController
     //    password.textProperty().bindBidirectional(viewModel.getPassword());
     hasPets.textProperty().bindBidirectional(viewModel.getHasPets());
 
+    editParentButton.setDisable(true);
+
     // Kid tab
     kidListViewModel = getViewModelFactory().getKidListViewModel();
     ageColumn.setCellValueFactory(cellData -> cellData.getValue().getAge());
@@ -58,6 +64,8 @@ public class ParentProfileViewController extends ViewController
     reset();
     kidTable.getSelectionModel().selectedItemProperty().addListener(
         (obs, oldValue, newValue) -> kidListViewModel.setSelectedKid(newValue));
+
+    editKidButton.setDisable(true);
     reset();
   }
 

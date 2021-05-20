@@ -40,25 +40,25 @@ public class AddEditKidViewModel
   public void addData()
   {
     System.out.println(viewState.getSelectedChild());
-    if (viewState.getSelectedChild() > -1) // edit state
-    {
-
-      Kid kid = viewState.getParent().getKidByID(viewState.getSelectedChild());
-//      Kid kid = model.getAllKids(model.getParentList().getByUserName(viewState.getParent().getUserName()));
-//      Kid kid = model.getAllKids(model.getParent(viewState.getParent().getUserName()));
-      id.setValue(kid.getId());
-      gender.set(kid.getGender());
-      healthCondition.set(kid.getHealthConditions());
-      age.setValue(kid.getDateOfBirth());
-    }
-    else // add
-    {
+//    if (viewState.getSelectedChild() > -1) // edit state
+//    {
+//
+//      Kid kid = viewState.getParent().getKidByID(viewState.getSelectedChild());
+////      Kid kid = model.getAllKids(model.getParentList().getByUserName(viewState.getParent().getUserName()));
+////      Kid kid = model.getAllKids(model.getParent(viewState.getParent().getUserName()));
+//      id.setValue(kid.getId());
+//      gender.set(kid.getGender());
+//      healthCondition.set(kid.getHealthConditions());
+//      age.setValue(kid.getDateOfBirth());
+//    }
+//    else // add
+//    {
       id.setValue(0);
       age.setValue(null);
       gender.setValue(null);
       healthCondition.set("");
       error.set("");
-    }
+//    }
 
   }
 

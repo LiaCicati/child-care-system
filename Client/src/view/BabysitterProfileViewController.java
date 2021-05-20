@@ -2,6 +2,7 @@ package view;
 
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import viewmodel.BabysitterProfileViewModel;
 import viewmodel.DoubleStringConverter;
@@ -19,6 +20,7 @@ public class BabysitterProfileViewController extends ViewController
   @FXML private Label experience;
   @FXML private Label firstAidCertificate;
   @FXML private Label greetingName;
+  @FXML private Button editBabysitter;
 
   private BabysitterProfileViewModel viewModel;
 
@@ -44,6 +46,7 @@ public class BabysitterProfileViewController extends ViewController
         .bindBidirectional(viewModel.getFirstAidCertificate());
     //
     //    errorLabel.textProperty().bind(viewModel.getError());
+    editBabysitter.setDisable(true);
     reset();
   }
 
