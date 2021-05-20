@@ -22,7 +22,13 @@ public class Babysitter extends Account
     setFirstAidCertificate(hasFirstAidCertificate);
 
     this.languages = new ArrayList<>();
-    addLanguage(mainLanguage);
+    if(mainLanguage == null || mainLanguage.equals(""))
+    {
+      throw new IllegalArgumentException("Please specify your main language");
+    } else
+    {
+      addLanguage(mainLanguage);
+    }
     setDateOfBirth(dateOfBirth);
 
   }
@@ -119,6 +125,10 @@ public class Babysitter extends Account
     {
       this.paymentPerHour = 500;
     }
+    else if(paymentPerHour == 0)
+    {
+      throw new IllegalArgumentException("Please specify how much you ask for an hour");
+    }
     else
     {
       this.paymentPerHour = paymentPerHour;
@@ -153,6 +163,10 @@ public class Babysitter extends Account
     else if (babysittingExperience > 70)
     {
       this.babysittingExperience = 70;
+    }
+    else if(babysittingExperience == 0)
+    {
+      throw new IllegalArgumentException("Please specify your experience");
     }
     else
     {

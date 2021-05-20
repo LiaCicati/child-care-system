@@ -44,6 +44,7 @@ public class RegisterBabysitterViewController extends ViewController
     hasCertificate.selectedProperty()
         .bindBidirectional(viewModel.getHasCertificate());
     errorLabel.textProperty().bind(viewModel.getError());
+    reset();
 
   }
 
@@ -59,10 +60,10 @@ public class RegisterBabysitterViewController extends ViewController
       onLogIn();
     }
 
-    if (viewModel.registerWithRequiredData())
-    {
-      onLogIn();
-    }
+//    if (viewModel.registerWithRequiredData())
+//    {
+//      onLogIn();
+//    }
   }
 
   public void onLogIn()

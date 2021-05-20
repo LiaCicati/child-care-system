@@ -28,17 +28,17 @@ public class RegisterBabysitterViewModel
   public RegisterBabysitterViewModel(LocalModel model)
   {
     this.model = model;
-    firstName = new SimpleStringProperty("");
-    lastName = new SimpleStringProperty("");
-    username = new SimpleStringProperty("");
-    email = new SimpleStringProperty("");
-    password = new SimpleStringProperty("");
+    firstName = new SimpleStringProperty();
+    lastName = new SimpleStringProperty();
+    username = new SimpleStringProperty();
+    email = new SimpleStringProperty();
+    password = new SimpleStringProperty();
     age = new SimpleObjectProperty<>();
     hasCertificate = new SimpleObjectProperty<>();
     babysittingExperience = new SimpleDoubleProperty();
     paymentPerHour = new SimpleDoubleProperty();
     motherTongue = new SimpleStringProperty();
-    errorLabel = new SimpleStringProperty("");
+    errorLabel = new SimpleStringProperty();
   }
 
   public void reset()

@@ -101,7 +101,6 @@ public class ModelManager implements Model
       boolean hasFirstAidCertificate)
   {
 
-
     if (!accountList.containsUsername(userName) && !accountList
         .containsEmail(email))
     {

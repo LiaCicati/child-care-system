@@ -9,6 +9,7 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -17,7 +18,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.scene.control.ToggleGroup?>
 <AnchorPane prefHeight="750.0" prefWidth="414.0" style="-fx-background-color: #E6E1FF;" userData="Register" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.RegisterBabysitterViewController">
     <children>
         <ImageView fitHeight="117.0" fitWidth="143.0" layoutX="135.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
@@ -80,7 +80,7 @@
             </PasswordField>
             <VBox prefHeight="63.0" prefWidth="327.0" spacing="5.0">
                <children>
-                  <Label text="Age" />
+                  <Label text="* Age" />
                   <DatePicker fx:id="age" />
                </children>
             </VBox>
@@ -88,13 +88,13 @@
                <children>
                   <VBox prefHeight="68.0" prefWidth="151.0" spacing="5.0">
                      <children>
-                        <Label text="Experience" />
+                        <Label text="* Experience" />
                         <TextField fx:id="babysittingExperience" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" style="-fx-background-radius: 37;" />
                      </children>
                   </VBox>
                   <VBox prefHeight="68.0" prefWidth="152.0" spacing="5.0">
                      <children>
-                        <Label text="Payment/hour" />
+                        <Label text="* Payment/hour" />
                         <TextField fx:id="paymentPerHour" prefHeight="30.0" style="-fx-background-radius: 37;" />
                      </children>
                   </VBox>
@@ -104,13 +104,13 @@
                <children>
                   <VBox prefHeight="95.0" prefWidth="150.0" spacing="5.0">
                      <children>
-                        <Label text="Mother tongue" />
+                        <Label text="* Mother tongue" />
                         <TextField fx:id="motherTongue" prefHeight="30.0" style="-fx-background-radius: 37;" />
                      </children>
                   </VBox>
                   <VBox prefHeight="95.0" prefWidth="154.0" spacing="5.0">
                      <children>
-                        <Label text="First aid certificate" />
+                        <Label text="* First aid certificate" />
                         <RadioButton fx:id="hasCertificate" mnemonicParsing="false" text="yes">
                            <toggleGroup>
                            <ToggleGroup fx:id="groupToggle">

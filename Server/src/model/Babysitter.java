@@ -22,7 +22,13 @@ public class Babysitter extends Account
     setFirstAidCertificate(hasFirstAidCertificate);
 
     this.languages = new ArrayList<>();
-    addLanguage(mainLanguage);
+    if(mainLanguage == null || mainLanguage.equals(""))
+    {
+      throw new IllegalArgumentException("Please specify your main language");
+    } else
+    {
+      addLanguage(mainLanguage);
+    }
     setDateOfBirth(dateOfBirth);
 
   }
@@ -77,17 +83,17 @@ public class Babysitter extends Account
     }
   }
 
-//  public String getFirstAidCertificate()
-//  {
-//    if (hasFirstAidCertificate())
-//    {
-//      return "Possess";
-//    }
-//    else
-//    {
-//      return "Do not posses";
-//    }
-//  }
+  //  public String getFirstAidCertificate()
+  //  {
+  //    if (hasFirstAidCertificate())
+  //    {
+  //      return "Possess";
+  //    }
+  //    else
+  //    {
+  //      return "Do not posses";
+  //    }
+  //  }
 
   public MyDateTime getDateOfBirth()
   {
@@ -118,6 +124,10 @@ public class Babysitter extends Account
     else if (paymentPerHour > 500)
     {
       this.paymentPerHour = 500;
+    }
+    else if(paymentPerHour == 0)
+    {
+      throw new IllegalArgumentException("Please specify how much you ask for an hour");
     }
     else
     {
@@ -153,6 +163,10 @@ public class Babysitter extends Account
     else if (babysittingExperience > 70)
     {
       this.babysittingExperience = 70;
+    }
+    else if(babysittingExperience == 0)
+    {
+      throw new IllegalArgumentException("Please specify your experience");
     }
     else
     {
@@ -196,3 +210,4 @@ public class Babysitter extends Account
         + "Birthday: " + dateOfBirth;
   }
 }
+
