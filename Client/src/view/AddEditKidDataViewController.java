@@ -47,8 +47,11 @@ public class AddEditKidDataViewController extends ViewController
 
   public void onSave()
   {
-    viewModel.onSave();
-    getViewHandler().openView(View.PARENT_PROFILE_VIEW);
+
+   if(viewModel.onSave())
+   {
+     getViewHandler().openView(View.PARENT_PROFILE_VIEW);
+   }
   }
 
   public void onCancel()

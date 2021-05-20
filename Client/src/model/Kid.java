@@ -18,6 +18,7 @@ public class Kid implements Serializable
     setGender(gender);
     setHealthConditions(healthConditions);
     setId(id);
+
   }
 
   public int getId()
@@ -27,6 +28,11 @@ public class Kid implements Serializable
 
   public void setId(int id)
   {
+    if (id == 0)
+    {
+      throw new IllegalArgumentException("Id field can not be empty and should be a number");
+    }
+
     this.id = id;
   }
   //  public int getAge(MyDateTime dateOfBirth)
@@ -74,12 +80,14 @@ public class Kid implements Serializable
 
   public LocalDate getDateOfBirth()
   {
-    return LocalDate.of(dateOfBirth.getYear(), dateOfBirth.getMonth(), dateOfBirth.getDay());
+    return LocalDate.of(dateOfBirth.getYear(), dateOfBirth.getMonth(),
+        dateOfBirth.getDay());
   }
 
   public void setDateOfBirth(MyDateTime dateOfBirth)
   {
     this.dateOfBirth = dateOfBirth;
+
   }
 
   public String getHealthConditions()

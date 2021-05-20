@@ -66,21 +66,23 @@ public class Parent extends Account
     return null;
   }
 
-  public Kid addKid(Kid kid)
+  public void addKid(Kid kid)
   {
-    if (kid == null)
+    for (int i = 0; i < kids.size(); i++)
     {
-      throw new IllegalArgumentException("Add data");
+      if (kids.get(i).getId() == kid.getId())
+      {
+        throw new IllegalArgumentException("A kid with this ID already exists");
+      }
     }
     kids.add(kid);
-    return kid;
+
   }
 
   public Kid getKid(int index)
   {
     return kids.get(index);
   }
-
 
   public ArrayList<Kid> getAllKids()
   {

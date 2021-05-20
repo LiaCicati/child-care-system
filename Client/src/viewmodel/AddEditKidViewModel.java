@@ -1,14 +1,10 @@
 package viewmodel;
 
 import javafx.beans.property.*;
-import model.Babysitter;
 import model.Kid;
 import model.LocalModel;
-import model.Parent;
-import view.View;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class AddEditKidViewModel
 {
@@ -33,49 +29,62 @@ public class AddEditKidViewModel
 
   public void reset()
   {
-    error.set("");
     addData();
   }
 
   public void addData()
   {
     System.out.println(viewState.getSelectedChild());
-//    if (viewState.getSelectedChild() > -1) // edit state
-//    {
-//
-//      Kid kid = viewState.getParent().getKidByID(viewState.getSelectedChild());
-////      Kid kid = model.getAllKids(model.getParentList().getByUserName(viewState.getParent().getUserName()));
-////      Kid kid = model.getAllKids(model.getParent(viewState.getParent().getUserName()));
-//      id.setValue(kid.getId());
-//      gender.set(kid.getGender());
-//      healthCondition.set(kid.getHealthConditions());
-//      age.setValue(kid.getDateOfBirth());
-//    }
-//    else // add
-//    {
-      id.setValue(0);
-      age.setValue(null);
-      gender.setValue(null);
-      healthCondition.set("");
-      error.set("");
-//    }
+    //    if (viewState.getSelectedChild() > -1) // edit state
+    //    {
+    //
+    //      Kid kid = viewState.getParent().getKidByID(viewState.getSelectedChild());
+    ////      Kid kid = model.getAllKids(model.getParentList().getByUserName(viewState.getParent().getUserName()));
+    ////      Kid kid = model.getAllKids(model.getParent(viewState.getParent().getUserName()));
+    //      id.setValue(kid.getId());
+    //      gender.set(kid.getGender());
+    //      healthCondition.set(kid.getHealthConditions());
+    //      age.setValue(kid.getDateOfBirth());
+    //    }
+    //    else // add
+    //    {
+    id.setValue(0);
+    age.setValue(LocalDate.now());
+    gender.setValue(true);
+    healthCondition.set("");
+    error.set("");
+    //    }
 
   }
 
-  public void onSave()
+  public boolean onSave()
   {
-    Kid kid = new Kid(id.get(), age.get().getDayOfYear(),
-        age.get().getMonthValue(), age.get().getYear(), gender.get(),
-        healthCondition.get());
-    if (viewState.getSelectedChild() > -1)
+    try
     {
-      model.editKidData(viewState.getParent(), viewState.getSelectedChild(),
-          kid);
+
+
+      Kid kid = new Kid(id.get(), age.get().getDayOfYear(),
+          age.get().getMonthValue(), age.get().getYear(), gender.get(),
+          healthCondition.get());
+      //    if (viewState.getSelectedChild() > -1)
+      //    {
+      //      model.editKidData(viewState.getParent(), viewState.getSelectedChild(),
+      //          kid);
+      //    }
+      if (age.get().isAfter(LocalDate.now()))
+        throw new IllegalArgumentException(
+            "Date of birth cannot be a future date.");
+
+        model.addKid(viewState.getParent(), kid);
+
+      return true;
     }
-    else
+    catch (Exception e)
     {
-      model.addKid(viewState.getParent(), kid);
+      error.set(e.getMessage());
+      return false;
     }
+
   }
 
   public IntegerProperty getId()

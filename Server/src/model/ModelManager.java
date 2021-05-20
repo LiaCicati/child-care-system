@@ -291,9 +291,13 @@ public class ModelManager implements Model
   }
 
   @Override public void addKid(Parent parent, Kid kid)
+  { if(kid != null && kid.getId() != 0 && !kid.getHealthConditions().isEmpty())
   {
     parent = (Parent) parentList.getByUserName(parent.getUserName());
     parent.addKid(kid);
+  } else {
+    throw new IllegalArgumentException("Please fill out all the data");
+  }
   }
 
   @Override public Kid getKidById(int id)
