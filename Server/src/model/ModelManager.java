@@ -7,26 +7,26 @@ import utility.observer.subject.PropertyChangeProxy;
 import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 
 public class ModelManager implements Model
 {
-  //    private BookingList bookingList;    //TODO
-  //    private AccountList accountList; //TODO
+
   private AccountList accountList;
   private AccountList babysitterList;
   private AccountList parentList;
   private AccountList loggedInList;
+  private BookingList bookingList;
   private PropertyChangeAction<Booking, Booking> property;
   //    private PropertyChangeAction<Account, Account> accountProperty; //TODO incomment again when account class isimplemented
 
   public ModelManager()
   {
-    //        this.bookingList = new BookingList();   //TODO
-    //        this.accountList = new AccoubtList(); //TODO
     this.accountList = new AccountList();
     this.babysitterList = new AccountList();
     this.parentList = new AccountList();
     this.loggedInList = new AccountList();
+    this.bookingList = new BookingList();
     this.property = new PropertyChangeProxy<>(this);
     addDummyData();
   }
@@ -53,8 +53,8 @@ public class ModelManager implements Model
   @Override public void addBooking(Booking booking)
       throws IllegalArgumentException
   {
-    //        bookingList.addBooking(booking);    //TODO
-    //        property.firePropertyChange("add", null, booking);
+            bookingList.addBooking(booking);    //TODO
+         //   property.firePropertyChange("add", null, booking);
   }
 
   @Override public boolean isPasswordCorrect(String userName, String password)
@@ -233,6 +233,11 @@ public class ModelManager implements Model
     }
   }
 
+  @Override public Parent getLoggedInParent(){
+    ArrayList<Parent> parentLoggedIn = loggedInList.getAllParentAccounts();
+    return parentLoggedIn.get(0);
+  }
+
   @Override public void logout(Account account)
   {
     if (accountList.contains(account))
@@ -250,6 +255,10 @@ public class ModelManager implements Model
     {
       throw new IllegalArgumentException("Nonexistent account");
     }
+  }
+
+  public BookingList getBookingList() {
+    return bookingList;
   }
 
   @Override public boolean addListener(

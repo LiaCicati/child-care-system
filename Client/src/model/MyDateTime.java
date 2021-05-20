@@ -56,9 +56,9 @@ public class MyDateTime implements Serializable
     {
       day = 1;
     }
-    else if (day > numberOfDaysInMonth())
+    else if (day > numberOfDaysInMonth(month))
     {
-      day = numberOfDaysInMonth();
+      day = numberOfDaysInMonth(month);
     }
     this.day = day;
 
@@ -105,9 +105,9 @@ public class MyDateTime implements Serializable
     {
       day = 1;
     }
-    else if (day > numberOfDaysInMonth())
+    else if (day > numberOfDaysInMonth(month))
     {
-      day = numberOfDaysInMonth();
+      day = numberOfDaysInMonth(month);
     }
     this.day = day;
   }
@@ -127,7 +127,7 @@ public class MyDateTime implements Serializable
    *
    * @return the number of days
    */
-  public int numberOfDaysInMonth()
+  public int numberOfDaysInMonth(int month)
   {
     switch (month)
     {
@@ -231,6 +231,10 @@ public class MyDateTime implements Serializable
 
   public void setDay(int day)
   {
+    if (day>numberOfDaysInMonth(getMonth())){
+      setMonth(getMonth()+1);
+      day = day - numberOfDaysInMonth(getMonth());
+    }
     this.day = day;
   }
 
@@ -241,6 +245,10 @@ public class MyDateTime implements Serializable
 
   public void setMonth(int month)
   {
+    if (month>12){
+      setYear(getYear()+1);
+      month=month-12;
+    }
     this.month = month;
   }
 
@@ -261,6 +269,10 @@ public class MyDateTime implements Serializable
 
   public void setHour(int hour)
   {
+    if (hour>24){
+      setDay(getDay()+1);
+      hour = hour-24;
+    }
     this.hour = hour;
   }
 
@@ -271,6 +283,10 @@ public class MyDateTime implements Serializable
 
   public void setMinute(int minute)
   {
+    if (minute>60){
+      setHour(getHour()+1);
+      minute = minute-60;
+    }
     this.minute = minute;
   }
 
@@ -284,11 +300,35 @@ public class MyDateTime implements Serializable
     return getTime() < time.getTime();
   }
 
+  public boolean isAfter(MyDateTime time)
+  {
+    return getTime() > time.getTime();
+  }
+
+  public int getDateTime(){
+    return year * 400 + month * 31 + day + (hour * 60 * 60) + (minute * 60);
+  }
+
+  public boolean isBeforeDateTime(MyDateTime dateTime){
+    return getDateTime() < dateTime.getDateTime();
+  }
+
+  public boolean isAfterDateTime(MyDateTime dateTime){
+    return getDateTime() > dateTime.getDateTime();
+  }
+
   public boolean isBeforeDate(MyDateTime other)
   {
     int dummyDaysOfThis = year * 400 + month * 31 + day;
     int dummyDaysOfOther = other.year * 400 + other.month * 31 + other.day;
     return dummyDaysOfThis < dummyDaysOfOther;
+  }
+
+  public boolean isAfterDate(MyDateTime other)
+  {
+    int dummyDaysOfThis = year * 400 + month * 31 + day;
+    int dummyDaysOfOther = other.year * 400 + other.month * 31 + other.day;
+    return dummyDaysOfThis >dummyDaysOfOther;
   }
 
   public int yearsBetween(MyDateTime other)

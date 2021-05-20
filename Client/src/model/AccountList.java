@@ -7,9 +7,13 @@ public class AccountList implements Serializable
 {
     private ArrayList<Account> accounts;
 
+    private ArrayList<Babysitter> babysitters;
+
+
     public AccountList()
     {
         this.accounts = new ArrayList<>();
+        this.babysitters = new ArrayList<>();
     }
 
     public void addAccount(Account account)
@@ -73,16 +77,22 @@ public class AccountList implements Serializable
 
     public ArrayList<Babysitter> getAllBabysitterAccounts()
     {
-        ArrayList<Babysitter> temp = new ArrayList<>();
+//        ArrayList<Babysitter> babysitters = new ArrayList<>();
         for (Account account : accounts)
         {
             if (account instanceof Babysitter)
             {
-                temp.add((Babysitter) account);
+                babysitters.add((Babysitter) account);
             }
         }
-        return temp;
+        return babysitters;
     }
+
+    public Babysitter getBabysitter(int index)
+    {
+        return babysitters.get(index);
+    }
+
 
     public ArrayList<Babysitter> getByPayRate(int payPerHour)
     {

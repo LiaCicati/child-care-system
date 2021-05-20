@@ -53,7 +53,7 @@ public class Server implements RemoteModel, LocalListener<Booking, Booking>
   @Override public void addBooking(Booking booking) throws RemoteException
   {
     model.addBooking(booking);
-    property.firePropertyChange("add", null, booking);
+   // property.firePropertyChange("add", null, booking);
   }
 
   @Override public boolean isPasswordCorrect(String userName, String password)
@@ -127,6 +127,16 @@ public class Server implements RemoteModel, LocalListener<Booking, Booking>
   @Override public void logout(Account account) throws RemoteException
   {
     model.logout(account);
+  }
+
+  @Override
+  public Parent getLoggedInParent() throws RemoteException{
+    return model.getLoggedInParent();
+  }
+
+  @Override
+  public BookingList getBookingList() throws RemoteException {
+    return model.getBookingList();
   }
 
   @Override public void propertyChange(ObserverEvent<Booking, Booking> event)

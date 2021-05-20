@@ -120,6 +120,16 @@ public class LocalModelManager
     serverModel.logout(account);
   }
 
+  @Override
+  public Parent getLoggedInParent() {
+    return serverModel.getLoggedInParent();
+  }
+
+  @Override
+  public BookingList getBookingList() {
+    return serverModel.getBookingList();
+  }
+
   @Override public boolean addListener(GeneralListener<String, String> listener,
       String... propertyNames)
   {

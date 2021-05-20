@@ -229,6 +229,22 @@ public class Client implements ClientModel, RemoteListener<String, String>
     }
   }
 
+  @Override
+  public Parent getLoggedInParent() {
+    return remoteModel.getLoggedInParent();
+  }
+
+  @Override
+  public BookingList getBookingList() {
+    try {
+      return remoteModel.getBookingList();
+    } catch (RemoteException e) {
+      e.printStackTrace();
+      throw new IllegalStateException(getExceptionMessage(e), e);
+
+    }
+  }
+
   @Override public void propertyChange(ObserverEvent<String, String> event)
       throws RemoteException
   {

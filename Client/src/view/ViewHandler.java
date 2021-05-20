@@ -23,6 +23,8 @@ public class ViewHandler extends ViewCreator
     this.primaryStage = primaryStage;
     this.currentScene = new Scene(new Region());
     openView(View.ACCOUNT_TYPE_VIEW);
+
+   // openView(View.BOOKING_BABYSITTERS_VIEW);
   }
 
   public void openView(View view)
