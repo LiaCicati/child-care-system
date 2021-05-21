@@ -19,15 +19,15 @@ public interface RemoteModel extends RemoteSubject<String, String>
   boolean doesUserNameExist(String userName) throws RemoteException;
   boolean isPasswordCorrect(String userName, String password) throws RemoteException;*/
 Account login(String username, String password) throws RemoteException;
- void registerBabysitter(String userName, String password, String email,
-     String firstName, String lastName, MyDateTime birthday, double paymentPerHour, String mainLanguage,
-     double babysittingExperience, boolean hasFirstAidCertificate) throws RemoteException;
- void registerBabysitter(String userName, String password, String email,
-     String firstName, String lastName) throws RemoteException;
- void registerParent(String userName, String password, String email,
-     String firstName, String lastName) throws RemoteException;
- void registerParent(String userName, String password, String email,
-     String firstName, String lastName, boolean hasPets) throws RemoteException;
+ void registerBabysitter(String firstName, String lastName, String userName,String email, String password,
+                         MyDateTime birthday, double babysittingExperience,
+                         double paymentPerHour, String mainLanguage,
+                         boolean hasFirstAidCertificate) throws RemoteException;
+ //void registerBabysitter(String userName, String password, String email,String firstName, String lastName) throws RemoteException;
+ void registerParent(String userName, String password, String email, String firstName, String lastName)
+         throws RemoteException;
+ void registerParent(String userName, String password, String email, String firstName, String lastName,
+                     boolean hasPets) throws RemoteException;
  AccountList getParentList() throws RemoteException;
  Parent getParent(String username) throws RemoteException;
  AccountList getAccountList() throws RemoteException;

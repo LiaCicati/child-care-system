@@ -33,18 +33,17 @@ public class ModelManager implements Model
 
   private void addDummyData()
   {
-    Account babysitter = new Babysitter("lia", "lialialia", "lia@mail.ru",
-        "Lia", "Cicati");
-    Account babysitter2 = new Babysitter("lori", "lialialia", "lori@mail.ru",
-        "Loredana", "Cicati", new MyDateTime(13, 2, 2001), 30, "English", 2,
+  //  Account babysitter = new Babysitter("lia", "lialialia", "lia@mail.ru", "Lia", "Cicati");
+    Account babysitter2 = new Babysitter("Loredana", "Cicati","lori","lori@mail.ru", "lialialia",
+         new MyDateTime(13, 2, 2001),2, 30, "English",
         false);
     Account parent1 = new Parent("ana", "password", "ana@gmail.com", "Ana",  "Peters");
     Account parent2 = new Parent("lina", "password", "lina@gmail.com", "Lina",  "Peters", true);
-    accountList.addAccount(babysitter);
+    //accountList.addAccount(babysitter);
     accountList.addAccount(babysitter2);
     accountList.addAccount(parent1);
     accountList.addAccount(parent2);
-    babysitterList.addAccount(babysitter);
+    //babysitterList.addAccount(babysitter);
     babysitterList.addAccount(babysitter2);
     parentList.addAccount(parent1);
     parentList.addAccount(parent2);
@@ -95,19 +94,19 @@ public class ModelManager implements Model
     }
   }
 
-  @Override public void registerBabysitter(String userName, String password,
-      String email, String firstName, String lastName, MyDateTime birthday,
-      double paymentPerHour, String mainLanguage, double babysittingExperience,
-      boolean hasFirstAidCertificate)
+  @Override public void registerBabysitter(String firstName, String lastName, String userName,String email, String password,
+                                           MyDateTime birthday, double babysittingExperience,
+                                           double paymentPerHour, String mainLanguage,
+                                           boolean hasFirstAidCertificate)
   {
 
 
     if (!accountList.containsUsername(userName) && !accountList
         .containsEmail(email))
     {
-      Account account = new Babysitter(userName, password, email, firstName,
-          lastName, birthday, paymentPerHour, mainLanguage,
-          babysittingExperience, hasFirstAidCertificate);
+      Account account = new Babysitter(firstName, lastName,userName,email, password,
+              birthday,  babysittingExperience, paymentPerHour, mainLanguage,
+              hasFirstAidCertificate);
       accountList.addAccount(account);
       babysitterList.addAccount(account);
     }
@@ -124,7 +123,7 @@ public class ModelManager implements Model
 
   }
 
-  @Override public void registerBabysitter(String userName, String password,
+ /* @Override public void registerBabysitter(String userName, String password,
       String email, String firstName, String lastName)
   {
     if (!accountList.containsUsername(userName) && !accountList
@@ -146,7 +145,7 @@ public class ModelManager implements Model
           "An user with this email is already registered in the system");
     }
   }
-
+*/
   @Override public void registerParent(String userName, String password,
       String email, String firstName, String lastName)
   {

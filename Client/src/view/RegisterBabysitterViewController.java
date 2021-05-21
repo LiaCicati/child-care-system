@@ -59,10 +59,10 @@ public class RegisterBabysitterViewController extends ViewController
       onLogIn();
     }
 
-    if (viewModel.registerWithRequiredData())
+/*    if (viewModel.registerWithRequiredData())
     {
       onLogIn();
-    }
+    }*/
   }
 
   public void onLogIn()

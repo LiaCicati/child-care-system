@@ -11,8 +11,7 @@ import utility.observer.subject.PropertyChangeProxy;
 import java.rmi.RemoteException;
 import java.time.LocalDate;
 
-public class LocalModelManager
-    implements LocalModel, LocalListener<String, String>
+public class LocalModelManager implements LocalModel, LocalListener<String, String>
 {
   private ClientModel serverModel;
   private PropertyChangeAction<String, String> property;
@@ -45,7 +44,6 @@ public class LocalModelManager
   {
     try
     {
-      //      property.close();
       serverModel.close();
     }
     catch (Exception e)
@@ -59,35 +57,30 @@ public class LocalModelManager
     return serverModel.login(username, password);
   }
 
-  @Override public void registerBabysitter(String userName, String password,
-      String email, String firstName, String lastName, MyDateTime birthday,
-      double paymentPerHour, String mainLanguage, double babysittingExperience,
-      boolean hasFirstAidCertificate)
+  @Override public void registerBabysitter(String firstName, String lastName, String userName,String email,
+                                           String password, MyDateTime birthday, double babysittingExperience,
+                                           double paymentPerHour, String mainLanguage, boolean hasFirstAidCertificate)
   {
-    serverModel
-        .registerBabysitter(userName, password, email, firstName, lastName,
-            birthday, paymentPerHour, mainLanguage, babysittingExperience,
-            hasFirstAidCertificate);
+    serverModel.registerBabysitter(firstName, lastName,userName,email, password, birthday, babysittingExperience,
+            paymentPerHour, mainLanguage, hasFirstAidCertificate);
   }
 
-  @Override public void registerBabysitter(String userName, String password,
-      String email, String firstName, String lastName)
+  /*@Override public void registerBabysitter(String userName, String password, String email, String firstName,
+                                           String lastName)
   {
-    serverModel
-        .registerBabysitter(userName, password, email, firstName, lastName);
-  }
+    serverModel.registerBabysitter(userName, password, email, firstName, lastName);
+  }*/
 
-  @Override public void registerParent(String userName, String password,
-      String email, String firstName, String lastName)
+  @Override public void registerParent(String userName, String password, String email, String firstName,
+                                       String lastName)
   {
     serverModel.registerParent(userName, password, email, firstName, lastName);
   }
 
-  @Override public void registerParent(String userName, String password,
-      String email, String firstName, String lastName, boolean hasPets)
+  @Override public void registerParent(String userName, String password, String email, String firstName,
+                                       String lastName, boolean hasPets)
   {
-    serverModel.registerParent(userName, password, email, firstName, lastName,
-        hasPets);
+    serverModel.registerParent(userName, password, email, firstName, lastName, hasPets);
   }
 
   @Override public AccountList getParentList()
@@ -130,14 +123,12 @@ public class LocalModelManager
     return serverModel.getBookingList();
   }
 
-  @Override public boolean addListener(GeneralListener<String, String> listener,
-      String... propertyNames)
+  @Override public boolean addListener(GeneralListener<String, String> listener, String... propertyNames)
   {
     return property.addListener(listener, propertyNames);
   }
 
-  @Override public boolean removeListener(
-      GeneralListener<String, String> listener, String... propertyNames)
+  @Override public boolean removeListener(GeneralListener<String, String> listener, String... propertyNames)
   {
     return property.removeListener(listener, propertyNames);
   }

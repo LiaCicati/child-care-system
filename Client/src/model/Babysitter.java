@@ -11,10 +11,10 @@ public class Babysitter extends Account
   private boolean hasFirstAidCertificate;
   private MyDateTime dateOfBirth;
 
-  public Babysitter(String userName, String password, String email,
-      String firstName, String lastName, MyDateTime dateOfBirth,
-      double paymentPerHour, String mainLanguage, double babysittingExperience,
-      boolean hasFirstAidCertificate)
+  public Babysitter(String firstName, String lastName, String userName,String email, String password,
+                    MyDateTime birthday, double babysittingExperience,
+                    double paymentPerHour, String mainLanguage,
+                    boolean hasFirstAidCertificate)
   {
     super(userName, password, email, firstName, lastName);
     setPaymentPerHour(paymentPerHour);
@@ -27,40 +27,11 @@ public class Babysitter extends Account
 
   }
 
-  public Babysitter(String userName, String password, String email,
-      String firstName, String lastName)
+/*  public Babysitter(String userName, String password, String email, String firstName, String lastName)
   {
     super(userName, password, email, firstName, lastName);
 
-  }
-
-  //  public int getAge(LocalDate dateOfBirth)
-  //  {
-  //    int currentDay = LocalDate.now().getDayOfMonth();
-  //    int currentMonth = LocalDate.now().getMonthValue();
-  //    int currentYear = LocalDate.now().getYear();
-  //
-  //    int birthDay = dateOfBirth.getDayOfMonth();
-  //    int birthMonth = dateOfBirth.getMonthValue();
-  //    int birthYear = dateOfBirth.getYear();
-  //
-  //    int age = currentYear - birthYear;
-  //
-  //    int differenceInDays = currentDay - birthDay;
-  //    int differenceInMonths = currentMonth - birthMonth;
-  //    if (differenceInDays < 0)
-  //    {
-  //      differenceInMonths = differenceInMonths - 1;
-  //    }
-  //    if (differenceInMonths < 0)
-  //    {
-  //      return age - 1;
-  //    }
-  //    else
-  //    {
-  //      return age;
-  //    }
-  //  }
+  }*/
 
   public int getAge()
   {
@@ -77,17 +48,6 @@ public class Babysitter extends Account
     }
   }
 
-//  public String getFirstAidCertificate()
-//  {
-//    if (hasFirstAidCertificate())
-//    {
-//      return "Possess";
-//    }
-//    else
-//    {
-//      return "Do not posses";
-//    }
-//  }
 
   public MyDateTime getDateOfBirth()
   {

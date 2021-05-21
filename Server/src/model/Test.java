@@ -9,7 +9,7 @@ public class Test
     System.out.println(dateTime.toString());
 
     Babysitter babysitter = new Babysitter("lori", "lialialia", "lori@mail.ru", "Loredana",
-        "Cicati", new MyDateTime(13, 2, 2034), 30, "English", 2, true);
+        "Cicati", new MyDateTime(13, 2, 2034),2,  30, "English", true);
 //    babysitter.addLanguage("Danish");
 //    System.out.println(babysitter);
 //    System.out.println(babysitter.getLanguages());

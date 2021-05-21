@@ -11,16 +11,13 @@ public interface LocalModel extends LocalSubject<String, String>
   boolean isPasswordCorrect(String userName, String password) throws RemoteException;
   void close();
   Account login(String username, String password);
-  void registerBabysitter(String userName, String password, String email,
-      String firstName, String lastName, MyDateTime birthday,
-      double paymentPerHour, String mainLanguage, double babysittingExperience,
-      boolean hasFirstAidCertificate);
-  void registerBabysitter(String userName, String password, String email,
-      String firstName, String lastName);
-  void registerParent(String userName, String password, String email,
-      String firstName, String lastName);
-  void registerParent(String userName, String password, String email,
-      String firstName, String lastName, boolean hasPets);
+  void registerBabysitter(String firstName, String lastName, String userName,String email, String password,
+                          MyDateTime birthday, double babysittingExperience, double paymentPerHour, String mainLanguage,
+                          boolean hasFirstAidCertificate);
+  //void registerBabysitter(String userName, String password, String email, String firstName, String lastName);
+  void registerParent(String userName, String password, String email, String firstName, String lastName);
+  void registerParent(String userName, String password, String email, String firstName, String lastName,
+                      boolean hasPets);
   AccountList getParentList();
   Parent getParent(String username);
   AccountList getAccountList();

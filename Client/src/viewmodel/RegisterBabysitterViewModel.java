@@ -118,7 +118,7 @@ public class RegisterBabysitterViewModel
     return errorLabel;
   }
 
-  public boolean registerWithRequiredData() throws RemoteException
+  /*public boolean registerWithRequiredData() throws RemoteException
   {
 
     try
@@ -134,32 +134,38 @@ public class RegisterBabysitterViewModel
       errorLabel.set(e.getMessage());
       return false;
     }
-  }
+  }*/
 
   public boolean register() throws RemoteException
   {
     try
     {
       selectedBirthDate = getAge().get();
-      selectedBirthDateString = String.valueOf(selectedBirthDate);
+      if (selectedBirthDate==null){
+        errorLabel.set("føz");
+      }else {
+        System.out.println(selectedBirthDate);
+        selectedBirthDateString = String.valueOf(selectedBirthDate);
 
-      selectedBirthDay = Integer.parseInt(selectedBirthDateString.substring(0, 4));
-      selectedBirthMonth = Integer.parseInt(selectedBirthDateString.substring(5, 7));
-      selectedBirthYear = Integer.parseInt(selectedBirthDateString.substring(8, 10));
+        selectedBirthDay = Integer.parseInt(selectedBirthDateString.substring(0, 4));
+        selectedBirthMonth = Integer.parseInt(selectedBirthDateString.substring(5, 7));
+        selectedBirthYear = Integer.parseInt(selectedBirthDateString.substring(8, 10));
 
-      selectedBirthDateMyDateTime = new MyDateTime(selectedBirthDay,selectedBirthMonth,selectedBirthYear);
+        selectedBirthDateMyDateTime = new MyDateTime(selectedBirthDay, selectedBirthMonth, selectedBirthYear);
 
-
-      model.registerBabysitter(username.get(), password.get(), email.get(),
-          firstName.get(), lastName.getValue(), selectedBirthDateMyDateTime, paymentPerHour.get(),
-          motherTongue.get(), babysittingExperience.get(),
-          hasCertificate.get());
-      errorLabel.set("");
-      return true;
+        model.registerBabysitter(firstName.get(), lastName.getValue(), username.get(), email.get(), password.get(),
+                selectedBirthDateMyDateTime, babysittingExperience.get(), paymentPerHour.get(),
+                motherTongue.get(),
+                hasCertificate.get());
+        errorLabel.set("");
+        return true;
+      }
+return false;
     }
     catch (Exception e)
     {
-      errorLabel.set(e.getMessage());
+      System.out.println("exception: "+e.getMessage());
+      errorLabel.set("exception: "+e.getMessage());
       return false;
     }
   }
