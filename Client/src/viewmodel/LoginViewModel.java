@@ -49,7 +49,6 @@ public class LoginViewModel
         }
         catch (Exception e) //couldn't log in
         {
-            System.out.println("Is it working?");
             error.set(e.getMessage());
             return 0;
         }
