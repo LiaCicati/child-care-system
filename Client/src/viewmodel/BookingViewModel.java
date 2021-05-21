@@ -1,14 +1,11 @@
 package viewmodel;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import model.Booking;
 
 public class BookingViewModel
 {
-  private IntegerProperty id;
   private StringProperty parent;
   private StringProperty dateTime;
   private StringProperty date;
@@ -17,23 +14,21 @@ public class BookingViewModel
 
   public BookingViewModel(Booking booking)
   {
-    id = new SimpleIntegerProperty(booking.getBookingID());
     parent = new SimpleStringProperty(booking.getParent().getFirstName());
     dateTime = new SimpleStringProperty(booking.getDateTimeOfBooking());
-    date = new SimpleStringProperty(booking.getTime().getStartTime().getSimpleDate());
-    startTime = new SimpleStringProperty(booking.getTime().getStartTime().getSimpleTime());
-    endTime = new SimpleStringProperty(booking.getTime().getEndTime().getSimpleTime());
-  }
-
-  public IntegerProperty getId()
-  {
-    return id;
+    date = new SimpleStringProperty(
+        booking.getTime().getStartTime().getSimpleDate());
+    startTime = new SimpleStringProperty(
+        booking.getTime().getStartTime().getSimpleTime());
+    endTime = new SimpleStringProperty(
+        booking.getTime().getEndTime().getSimpleTime());
   }
 
   public StringProperty getDateTime()
   {
     return dateTime;
   }
+
   public StringProperty getDate()
   {
     return date;

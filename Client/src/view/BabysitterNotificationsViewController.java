@@ -11,7 +11,6 @@ public class BabysitterNotificationsViewController extends ViewController
 {
   private BookingListViewModel viewModel;
   @FXML private TableView<BookingViewModel> bookingsTable;
-  @FXML private TableColumn<BookingViewModel, Number> idColumn;
   @FXML private TableColumn<BookingViewModel, String> dateTimeColumn;
   @FXML private TableColumn<BookingViewModel, String> dateColumn;
   @FXML private TableColumn<BookingViewModel, String> startTimeColumn;
@@ -23,7 +22,6 @@ public class BabysitterNotificationsViewController extends ViewController
   {
     viewModel = getViewModelFactory().getBookingListViewModel();
     errorLabel.textProperty().bind(viewModel.getError());
-    idColumn.setCellValueFactory(cellData -> cellData.getValue().getId());
     dateTimeColumn
         .setCellValueFactory(cellData -> cellData.getValue().getDateTime());
     dateColumn.setCellValueFactory(cellData -> cellData.getValue().getDate());

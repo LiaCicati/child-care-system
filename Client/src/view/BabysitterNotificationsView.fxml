@@ -22,12 +22,11 @@
         </SplitMenuButton>
       <TableView fx:id="bookingsTable" layoutX="2.0" layoutY="172.0" prefHeight="426.0" prefWidth="409.0">
         <columns>
-          <TableColumn fx:id="idColumn" prefWidth="43.199951171875" text="ID" />
-          <TableColumn fx:id="dateTimeColumn" prefWidth="102.4000244140625" text="Made at" />
-            <TableColumn fx:id="parentColumn" prefWidth="68.79998779296875" text="Parent" />
-            <TableColumn fx:id="dateColumn" prefWidth="77.59991455078125" text="When" />
-            <TableColumn fx:id="startTimeColumn" prefWidth="52.800048828125" text="Starts at" />
-            <TableColumn fx:id="endTimeColumn" prefWidth="63.99993896484375" text="Ends at" />
+          <TableColumn fx:id="dateTimeColumn" prefWidth="104.800048828125" text="Made at" />
+            <TableColumn fx:id="parentColumn" prefWidth="73.5999755859375" text="Parent" />
+            <TableColumn fx:id="dateColumn" prefWidth="88.0" text="Date" />
+            <TableColumn fx:id="startTimeColumn" prefWidth="65.5999755859375" text="Starts at" />
+            <TableColumn fx:id="endTimeColumn" prefWidth="78.39996337890625" text="Ends at" />
         </columns>
       </TableView>
       <Label fx:id="errorLabel" layoutX="28.0" layoutY="637.0" prefHeight="38.0" prefWidth="358.0" text="Error label" textFill="#f9494b">
