@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitMenuButton?>
-<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.text.Font?>
 
 <AnchorPane minHeight="-Infinity" prefHeight="740.0" prefWidth="414.0" style="-fx-background-color: E6E1FF;" userData="Notifications" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.BabysitterNotificationsViewController">
     <children>
@@ -22,32 +18,12 @@
                 <MenuItem mnemonicParsing="false" onAction="#onProfile" text="Profile" />
             </items>
         </SplitMenuButton>
-      <ListView fx:id="list" layoutX="11.0" layoutY="147.0" prefHeight="455.0" prefWidth="391.0" />
-      <HBox alignment="CENTER" layoutX="40.0" layoutY="617.0" prefHeight="100.0" prefWidth="333.0" spacing="34.0">
-         <children>
-            <Button minHeight="56.0" minWidth="140.0" mnemonicParsing="false" onAction="#onAccept" style="-fx-background-radius: 37; -fx-background-color: #36C1AD;" text="Accept" textFill="WHITE">
-               <font>
-                  <Font size="16.0" />
-               </font>
-               <effect>
-                  <DropShadow color="rgba(82, 67, 154, 0.25);" />
-               </effect>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button minHeight="56.0" minWidth="140.0" mnemonicParsing="false" onAction="#onReject" style="-fx-background-radius: 37; -fx-background-color: #D93856;" text="Reject" textFill="WHITE">
-               <font>
-                  <Font size="16.0" />
-               </font>
-               <effect>
-                  <DropShadow color="rgba(82, 67, 154, 0.25);" />
-               </effect>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-         </children>
-      </HBox>
+      <TableView fx:id="bookingsTable" layoutX="30.0" layoutY="172.0" prefHeight="426.0" prefWidth="350.0">
+        <columns>
+          <TableColumn fx:id="dateColumn" prefWidth="99.20001220703125" text="Date" />
+          <TableColumn fx:id="timeColumn" prefWidth="116.79998779296875" text="Time" />
+            <TableColumn fx:id="parentColumn" prefWidth="135.20001220703125" text="Parent" />
+        </columns>
+      </TableView>
     </children>
 </AnchorPane>

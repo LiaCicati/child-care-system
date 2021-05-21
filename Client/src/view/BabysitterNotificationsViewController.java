@@ -1,12 +1,22 @@
 package view;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 
 public class BabysitterNotificationsViewController extends ViewController
 {
-  @FXML private ListView<String> list;
+  @FXML
+  private TableView<?> bookingsTable;
+
+  @FXML
+  private TableColumn<?, ?> dateColumn;
+
+  @FXML
+  private TableColumn<?, ?> timeColumn;
+
+  @FXML
+  private TableColumn<?, ?> parentColumn;
 
   @Override protected void init()
   {
@@ -23,11 +33,5 @@ public class BabysitterNotificationsViewController extends ViewController
     getViewHandler().openView(View.BABYSITTER_PROFILE_VIEW);
   }
 
-  public void onAccept()
-  {
-  }
 
-  public void onReject()
-  {
-  }
 }
