@@ -46,5 +46,6 @@ Account login(String username, String password) throws RemoteException;
  void addKid(Parent parent, Kid kid) throws RemoteException;
  Kid getKidById(int id) throws RemoteException;
  Kid getKid(int index) throws RemoteException;
+ ArrayList<Booking> getAllBookings(Babysitter babysitter) throws RemoteException;
 
 }

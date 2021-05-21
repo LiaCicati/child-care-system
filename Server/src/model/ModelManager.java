@@ -6,7 +6,6 @@ import utility.observer.subject.PropertyChangeProxy;
 
 import java.rmi.RemoteException;
 import java.time.LocalDate;
-import java.time.Period;
 import java.util.ArrayList;
 
 
@@ -52,13 +51,20 @@ public class ModelManager implements Model
     Account babysitter2 = new Babysitter("lori", "lialialia", "lori@mail.ru",
         "Loredana", "Cicati", new MyDateTime(13, 2, 2001), 30, "English", 2,
         false);
+    Babysitter babysitter3 = new Babysitter("anca", "password", "anca@gmail.com",
+        "Anca", "Evans", new MyDateTime(13, 2, 2001), 30, "English", 2,
+        true);
     Parent parent1 = new Parent("ana", "password", "ana@gmail.com", "Ana",
         "Peters");
     Account parent2 = new Parent("lina", "password", "lina@gmail.com", "Lina",
         "Peters", true);
     Kid kid = new Kid(1, 13, 2, 2017, false, "nothing");
+    Booking booking1 = new Booking(new TimeInterval(new MyDateTime(22, 5, 2021, 12, 5), new MyDateTime(22, 5, 2021, 14, 5)), parent1, babysitter3);
+    bookingList.addBooking(booking1);
+//    System.out.println(getAllBookings(babysitter3));
     accountList.addAccount(babysitter);
     accountList.addAccount(babysitter2);
+    accountList.addAccount(babysitter3);
     //    kids.add(kid);
     parent1.addKid(kid);
     System.out.println(getAllKids(parent1));
@@ -67,6 +73,7 @@ public class ModelManager implements Model
     accountList.addAccount(parent2);
     babysitterList.addAccount(babysitter);
     babysitterList.addAccount(babysitter2);
+    babysitterList.addAccount(babysitter3);
     parentList.addAccount(parent1);
     parentList.addAccount(parent2);
   }
@@ -342,6 +349,11 @@ public class ModelManager implements Model
   {
     return kids.get(index);
 
+  }
+
+  @Override public ArrayList<Booking> getAllBookings(Babysitter babysitter)
+  {
+    return bookingList.getBabysitterBookings(babysitter);
   }
 
   @Override public boolean addListener(

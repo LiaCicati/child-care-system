@@ -42,6 +42,6 @@ public interface Model extends LocalSubject<Booking, Booking>
   void addKid(Parent parent, Kid kid);
   Kid getKidById(int id);
   Kid getKid(int index);
-
+ArrayList<Booking> getAllBookings(Babysitter babysitter);
 
 }

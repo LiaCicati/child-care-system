@@ -165,6 +165,11 @@ public class LocalModelManager
 
   }
 
+  @Override public ArrayList<Booking> getAllBookings(Babysitter babysitter)
+  {
+    return serverModel.getAllBookings(babysitter);
+  }
+
   @Override public boolean addListener(GeneralListener<String, String> listener,
       String... propertyNames)
   {

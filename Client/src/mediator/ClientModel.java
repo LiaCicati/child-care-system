@@ -39,5 +39,6 @@ void close();
     void addKid(Parent parent, Kid kid);
     Kid getKidById(int id);
     Kid getKid(int index);
+    ArrayList<Booking> getAllBookings(Babysitter babysitter);
 
 }

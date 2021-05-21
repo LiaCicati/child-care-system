@@ -40,6 +40,7 @@ public interface RemoteModel extends RemoteSubject<Booking, Booking>
   void addKid(Parent parent, Kid kid) throws RemoteException;
   Kid getKidById(int id) throws RemoteException;
   Kid getKid(int index) throws RemoteException;
+  ArrayList<Booking> getAllBookings(Babysitter babysitter) throws RemoteException;
 
 
 }

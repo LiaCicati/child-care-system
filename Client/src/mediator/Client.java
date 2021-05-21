@@ -321,7 +321,20 @@ public class Client implements ClientModel, RemoteListener<String, String>
         }
       }
 
-      @Override public void propertyChange (ObserverEvent < String, String > event)
+  @Override public ArrayList<Booking> getAllBookings(Babysitter babysitter)
+  {
+    try
+    {
+      return remoteModel.getAllBookings(babysitter);
+    }
+    catch (RemoteException e)
+    {
+      throw new IllegalStateException(getExceptionMessage(e), e);
+
+    }
+  }
+
+  @Override public void propertyChange (ObserverEvent < String, String > event)
       throws RemoteException {
       property.firePropertyChange(event);
     }
