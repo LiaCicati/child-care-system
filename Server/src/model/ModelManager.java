@@ -121,7 +121,7 @@ public class ModelManager implements Model
     }
 
     @Override public void registerBabysitter(String userName, String password,
-        String email, String firstName, String lastName, LocalDate birthday,
+        String email, String firstName, String lastName, MyDateTime birthday,
         double paymentPerHour, String mainLanguage,
         double babysittingExperience, boolean hasFirstAidCertificate)
     {
@@ -130,8 +130,7 @@ public class ModelManager implements Model
             .containsEmail(email))
         {
             Account account = new Babysitter(userName, password, email,
-                firstName, lastName, new MyDateTime(birthday.getDayOfMonth(),
-                birthday.getMonthValue(), birthday.getYear()), paymentPerHour,
+                firstName, lastName, birthday, paymentPerHour,
                 mainLanguage, babysittingExperience, hasFirstAidCertificate);
             accountList.addAccount(account);
             babysitterList.addAccount(account);
