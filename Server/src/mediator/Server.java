@@ -69,7 +69,7 @@ public class Server implements RemoteModel, LocalListener<Booking, Booking>
   }
 
   @Override public void registerBabysitter(String userName, String password,
-      String email, String firstName, String lastName, LocalDate birthday,
+      String email, String firstName, String lastName, MyDateTime birthday,
       double paymentPerHour, String mainLanguage, double babysittingExperience,
       boolean hasFirstAidCertificate) throws RemoteException
   {

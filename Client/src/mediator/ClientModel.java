@@ -13,7 +13,7 @@ public interface ClientModel extends LocalSubject<String, String> {
 void close();
     Account login(String username, String password);
     void registerBabysitter(String userName, String password, String email,
-        String firstName, String lastName, LocalDate birthday, double paymentPerHour, String mainLanguage,
+        String firstName, String lastName, MyDateTime birthday, double paymentPerHour, String mainLanguage,
         double babysittingExperience, boolean hasFirstAidCertificate);
     void registerBabysitter(String userName, String password, String email,
         String firstName, String lastName);

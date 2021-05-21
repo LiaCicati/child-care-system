@@ -20,7 +20,7 @@ public interface RemoteModel extends RemoteSubject<String, String>
   boolean isPasswordCorrect(String userName, String password) throws RemoteException;*/
 Account login(String username, String password) throws RemoteException;
  void registerBabysitter(String userName, String password, String email,
-     String firstName, String lastName, LocalDate birthday, double paymentPerHour, String mainLanguage,
+     String firstName, String lastName, MyDateTime birthday, double paymentPerHour, String mainLanguage,
      double babysittingExperience, boolean hasFirstAidCertificate) throws RemoteException;
  void registerBabysitter(String userName, String password, String email,
      String firstName, String lastName) throws RemoteException;

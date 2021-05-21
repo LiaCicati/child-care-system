@@ -25,6 +25,13 @@ public class RegisterBabysitterViewModel
   private ObjectProperty<Boolean> hasCertificate;
   private StringProperty errorLabel;
 
+  LocalDate selectedBirthDate;
+  String selectedBirthDateString;
+  int selectedBirthDay;
+  int selectedBirthMonth;
+  int selectedBirthYear;
+  MyDateTime selectedBirthDateMyDateTime;
+
   public RegisterBabysitterViewModel(LocalModel model)
   {
     this.model = model;
@@ -133,8 +140,18 @@ public class RegisterBabysitterViewModel
   {
     try
     {
+      selectedBirthDate = getAge().get();
+      selectedBirthDateString = String.valueOf(selectedBirthDate);
+
+      selectedBirthDay = Integer.parseInt(selectedBirthDateString.substring(0, 4));
+      selectedBirthMonth = Integer.parseInt(selectedBirthDateString.substring(5, 7));
+      selectedBirthYear = Integer.parseInt(selectedBirthDateString.substring(8, 10));
+
+      selectedBirthDateMyDateTime = new MyDateTime(selectedBirthDay,selectedBirthMonth,selectedBirthYear);
+
+
       model.registerBabysitter(username.get(), password.get(), email.get(),
-          firstName.get(), lastName.getValue(), age.get(), paymentPerHour.get(),
+          firstName.get(), lastName.getValue(), selectedBirthDateMyDateTime, paymentPerHour.get(),
           motherTongue.get(), babysittingExperience.get(),
           hasCertificate.get());
       errorLabel.set("");
