@@ -7,7 +7,7 @@ import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public interface ClientModel extends LocalSubject<String, String> {
+public interface ClientModel extends LocalSubject<Booking, Booking> {
     void addBooking(Booking booking);
 
     boolean isPasswordCorrect(String userName, String password);

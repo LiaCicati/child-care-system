@@ -2,6 +2,7 @@ package model;
 
 import utility.observer.listener.GeneralListener;
 import utility.observer.subject.PropertyChangeAction;
+import utility.observer.subject.PropertyChangeHandler;
 import utility.observer.subject.PropertyChangeProxy;
 
 import java.rmi.RemoteException;
@@ -25,7 +26,7 @@ public class ModelManager implements Model
 
   ArrayList<Kid> kids;
 
-  private PropertyChangeAction<Booking, Booking> property;
+  private PropertyChangeHandler<Booking, Booking> property;
   //    private PropertyChangeAction<Account, Account> accountProperty; //TODO incomment again when account class isimplemented
 
   public ModelManager()
@@ -40,7 +41,7 @@ public class ModelManager implements Model
     this.kids = new ArrayList<>();
     this.parents = new ArrayList<>();
 
-    this.property = new PropertyChangeProxy<>(this);
+    this.property = new PropertyChangeHandler<>(this);
     addDummyData();
   }
 
@@ -82,7 +83,7 @@ public class ModelManager implements Model
       throws IllegalArgumentException
   {
             bookingList.addBooking(booking);    //TODO
-         //   property.firePropertyChange("add", null, booking);
+            property.firePropertyChange("add", null, booking);
   }
 
   @Override public boolean isPasswordCorrect(String userName, String password)
@@ -100,7 +101,7 @@ public class ModelManager implements Model
 
   @Override public void close()
   {
-    //        property.close();
+//            property.close();
   }
 
   @Override public Account login(String username, String password)

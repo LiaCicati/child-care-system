@@ -1,14 +1,18 @@
 package viewmodel;
 
+import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import model.Booking;
 import model.LocalModel;
+import utility.observer.event.ObserverEvent;
+import utility.observer.listener.LocalListener;
 
-public class BookingListViewModel
+public class BookingListViewModel implements LocalListener<Booking, Booking>
 {
   private ObservableList<BookingViewModel> bookings;
   private ObjectProperty<BookingViewModel> selectedBooking;
@@ -23,6 +27,7 @@ public class BookingListViewModel
     this.bookings = FXCollections.observableArrayList();
     this.selectedBooking = new SimpleObjectProperty<>();
     this.error = new SimpleStringProperty();
+    model.addListener(this, "add");
   }
 
   public void reset()
@@ -52,4 +57,9 @@ public class BookingListViewModel
     return error;
   }
 
+  @Override public void propertyChange(ObserverEvent<Booking, Booking> event)
+  {
+    Platform.runLater(() ->
+        bookings.add(new BookingViewModel(event.getValue2())));
+  }
 }

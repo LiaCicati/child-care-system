@@ -6,6 +6,7 @@ import utility.observer.event.ObserverEvent;
 import utility.observer.listener.GeneralListener;
 import utility.observer.listener.LocalListener;
 import utility.observer.subject.PropertyChangeAction;
+import utility.observer.subject.PropertyChangeHandler;
 import utility.observer.subject.PropertyChangeProxy;
 
 import java.net.MalformedURLException;
@@ -20,13 +21,12 @@ import java.util.ArrayList;
 public class Server implements RemoteModel, LocalListener<Booking, Booking>
 {
   private Model model;
-  private PropertyChangeAction<Booking, Booking> property;
+  private PropertyChangeHandler<Booking, Booking> property;
 
   public Server(Model model) throws RemoteException, MalformedURLException
   {
-    this.property = new PropertyChangeProxy<>(this, true);
+    this.property = new PropertyChangeHandler<>(this, true);
     this.model = model;
-    //        this.model.addListener(this, "add");
         startRegistry();
     startServer();
   }
@@ -40,7 +40,7 @@ public class Server implements RemoteModel, LocalListener<Booking, Booking>
 
   public void close()
   {
-    property.close();
+//    property.close();
     try
     {
       UnicastRemoteObject.unexportObject(this, true);
@@ -54,7 +54,7 @@ public class Server implements RemoteModel, LocalListener<Booking, Booking>
   @Override public void addBooking(Booking booking) throws RemoteException
   {
     model.addBooking(booking);
-    // property.firePropertyChange("add", null, booking);
+     property.firePropertyChange("add", null, booking);
   }
 
   @Override public boolean isPasswordCorrect(String userName, String password)
@@ -175,19 +175,19 @@ public class Server implements RemoteModel, LocalListener<Booking, Booking>
     return model.getAllBookings(babysitter);
   }
 
-  @Override public void propertyChange (ObserverEvent < Booking, Booking > event)
+  @Override public void propertyChange (ObserverEvent <Booking, Booking> event)
     {
       property.firePropertyChange(event.getPropertyName(), null, event.getValue2());
     }
 
-    @Override public boolean addListener (GeneralListener < Booking, Booking > listener, String...propertyNames)
+    @Override public boolean addListener (GeneralListener <Booking, Booking> listener, String...propertyNames)
       throws RemoteException {
     boolean check = property.addListener(listener, propertyNames);
     return check;
   }
 
     @Override public boolean removeListener
-    (GeneralListener < Booking, Booking > listener, String...propertyNames)
+    (GeneralListener <Booking, Booking> listener, String...propertyNames)
       throws RemoteException {
     return property.removeListener(listener, propertyNames);
   }

@@ -15,13 +15,13 @@ import java.rmi.server.UnicastRemoteObject;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Client implements ClientModel, RemoteListener<String, String>
+public class Client implements ClientModel, RemoteListener<Booking, Booking>
 {
   private static final String HOST = "localhost";
   private String host;
   private LocalModel localModel;
   private RemoteModel remoteModel;
-  private PropertyChangeAction<String, String> property;
+  private PropertyChangeAction<Booking, Booking> property;
 
   public Client(LocalModel localModel, String host)
       throws RemoteException, NotBoundException, MalformedURLException
@@ -32,7 +32,8 @@ public class Client implements ClientModel, RemoteListener<String, String>
     this.remoteModel = (RemoteModel) Naming
         .lookup("rmi://" + host + ":1099/App");
     UnicastRemoteObject.exportObject(this, 0);
-    this.property = new PropertyChangeProxy<>(this);
+    this.remoteModel.addListener(this, "add");
+    this.property = new PropertyChangeProxy<>(this, true);
   }
 
   public Client(LocalModel localModel)
@@ -334,19 +335,19 @@ public class Client implements ClientModel, RemoteListener<String, String>
     }
   }
 
-  @Override public void propertyChange (ObserverEvent < String, String > event)
+  @Override public void propertyChange (ObserverEvent <Booking, Booking> event)
       throws RemoteException {
       property.firePropertyChange(event);
     }
 
       @Override public boolean addListener
-      (GeneralListener < String, String > listener, String...propertyNames)
+      (GeneralListener <Booking, Booking> listener, String...propertyNames)
       {
         return property.addListener(listener, propertyNames);
       }
 
       @Override public boolean removeListener
-      (GeneralListener < String, String > listener, String...propertyNames)
+      (GeneralListener <Booking, Booking > listener, String...propertyNames)
       {
         return property.removeListener(listener, propertyNames);
       }

@@ -13,22 +13,24 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class LocalModelManager
-    implements LocalModel, LocalListener<String, String>
+    implements LocalModel, LocalListener<Booking, Booking>
 {
   private ClientModel serverModel;
-  private PropertyChangeAction<String, String> property;
+  private PropertyChangeAction<Booking, Booking> property;
 
   public LocalModelManager()
   {
     try
     {
       this.serverModel = new Client(this);
+      serverModel.addListener(this, "add");
     }
     catch (Exception e)
     {
       e.printStackTrace();
     }
-    this.property = new PropertyChangeProxy<>(this);
+    this.property = new PropertyChangeProxy<>(this, true);
+
   }
 
   @Override public void addBooking(Booking booking) throws RemoteException
@@ -46,7 +48,7 @@ public class LocalModelManager
   {
     try
     {
-      //      property.close();
+            property.close();
       serverModel.close();
     }
     catch (Exception e)
@@ -170,20 +172,21 @@ public class LocalModelManager
     return serverModel.getAllBookings(babysitter);
   }
 
-  @Override public boolean addListener(GeneralListener<String, String> listener,
+  @Override public boolean addListener(GeneralListener<Booking, Booking> listener,
       String... propertyNames)
   {
     return property.addListener(listener, propertyNames);
   }
 
   @Override public boolean removeListener(
-      GeneralListener<String, String> listener, String... propertyNames)
+      GeneralListener<Booking, Booking> listener, String... propertyNames)
   {
     return property.removeListener(listener, propertyNames);
   }
 
-  @Override public void propertyChange(ObserverEvent<String, String> event)
+  @Override public void propertyChange(ObserverEvent<Booking, Booking> event)
   {
-    property.firePropertyChange(event);
+
+    property.firePropertyChange("add", null, event.getValue2());
   }
 }
