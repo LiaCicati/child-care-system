@@ -8,15 +8,9 @@ public class BabysitterNotificationsViewController extends ViewController
 {
   @FXML
   private TableView<?> bookingsTable;
-
-  @FXML
-  private TableColumn<?, ?> dateColumn;
-
-  @FXML
-  private TableColumn<?, ?> timeColumn;
-
-  @FXML
-  private TableColumn<?, ?> parentColumn;
+  @FXML private TableColumn<?, ?> idColumn;
+  @FXML private TableColumn<?, ?> dateTimeColumn;
+  @FXML private TableColumn<?, ?> parentColumn;
 
   @Override protected void init()
   {

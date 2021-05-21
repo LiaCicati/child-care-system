@@ -20,9 +20,9 @@
         </SplitMenuButton>
       <TableView fx:id="bookingsTable" layoutX="30.0" layoutY="172.0" prefHeight="426.0" prefWidth="350.0">
         <columns>
-          <TableColumn fx:id="dateColumn" prefWidth="99.20001220703125" text="Date" />
-          <TableColumn fx:id="timeColumn" prefWidth="116.79998779296875" text="Time" />
-            <TableColumn fx:id="parentColumn" prefWidth="135.20001220703125" text="Parent" />
+          <TableColumn fx:id="idColumn" prefWidth="62.4000244140625" text="ID" />
+          <TableColumn fx:id="dateTimeColumn" prefWidth="166.4000244140625" text="Date/Time" />
+            <TableColumn fx:id="parentColumn" prefWidth="124.0" text="Parent" />
         </columns>
       </TableView>
     </children>
