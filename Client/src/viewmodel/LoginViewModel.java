@@ -8,64 +8,65 @@ import model.LocalModel;
 
 public class LoginViewModel
 {
-  private StringProperty username;
-  private StringProperty password;
-  private StringProperty error;
-  private LocalModel model;
-  private ViewState viewState;
+    private StringProperty username;
+    private StringProperty password;
+    private StringProperty error;
+    private LocalModel model;
+    private ViewState viewState;
 
-  public LoginViewModel(LocalModel model, ViewState viewState)
-  {
-    this.model = model;
-    this.viewState = viewState;
-    username = new SimpleStringProperty("");
-    password = new SimpleStringProperty("");
-    error = new SimpleStringProperty("");
-  }
-
-  public void reset()
-  {
-    error.setValue("");
-    username.setValue("");
-    password.setValue("");
-  }
-
-  public int login()
-  {
-    try
+    public LoginViewModel(LocalModel model, ViewState viewState)
     {
-      Account loggedIn = model.login(username.get(), password.get());
-      viewState.setAccount(loggedIn);
-      viewState.setBabysitter(model.getBabysitter(username.get()));
-      viewState.setParent(model.getParent(username.get()));
-      if (loggedIn instanceof Babysitter)
-      {
-        return 2;
-      }
-      else // parent
-      {
-        return 1;
-      }
+        this.model = model;
+        this.viewState = viewState;
+        username = new SimpleStringProperty("");
+        password = new SimpleStringProperty("");
+        error = new SimpleStringProperty("");
     }
-    catch (Exception e) //couldn't log in
+
+    public void reset()
     {
-      error.set(e.getMessage());
-      return 0;
+        error.setValue("");
+        username.setValue("");
+        password.setValue("");
     }
-  }
 
-  public StringProperty getUsername()
-  {
-    return username;
-  }
+    public int login()
+    {
+        try
+        {
+            Account loggedIn = model.login(username.get(), password.get());
+            viewState.setAccount(loggedIn);
+            viewState.setBabysitter(model.getBabysitter(username.get()));
+            viewState.setParent(model.getParent(username.get()));
+            if (loggedIn instanceof Babysitter)
+            {
+                return 2;
+            }
+            else // parent
+            {
+                return 1;
+            }
+        }
+        catch (Exception e) //couldn't log in
+        {
+            System.out.println("Is it working?");
+            error.set(e.getMessage());
+            return 0;
+        }
+    }
 
-  public StringProperty getPassword()
-  {
-    return password;
-  }
+    public StringProperty getUsername()
+    {
+        return username;
+    }
 
-  public StringProperty getError()
-  {
-    return error;
-  }
+    public StringProperty getPassword()
+    {
+        return password;
+    }
+
+    public StringProperty getError()
+    {
+        return error;
+    }
 }

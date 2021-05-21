@@ -117,6 +117,7 @@ public abstract class Account implements Serializable
   {
     return "Hello";
   }
+
   @Override public boolean equals(Object obj)
   {
     if (!(obj instanceof Account))
