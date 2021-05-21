@@ -26,9 +26,8 @@ public abstract class Account implements Serializable
     return password;
   }
 
-  public String getUserName()
-  {
-    return userName;
+  public String getUserName() {
+      return userName;
   }
 
   public String getEmail()

@@ -40,5 +40,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="MyObserver-1.32" level="application" />
+    <orderEntry type="library" name="JUnit4" level="application" />
   </component>
 </module>

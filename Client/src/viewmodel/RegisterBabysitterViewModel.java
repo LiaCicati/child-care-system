@@ -25,6 +25,12 @@ public class RegisterBabysitterViewModel
   private ObjectProperty<Boolean> hasCertificate;
   private StringProperty errorLabel;
 
+
+  int selectedBirthYear = 0;
+  int selectedBirthMonth = 0;
+  int selectedBirthDay = 0;
+  String selectedBirthDateString;
+
   public RegisterBabysitterViewModel(LocalModel model)
   {
     this.model = model;
@@ -130,12 +136,31 @@ public class RegisterBabysitterViewModel
   }
 
 
-  public boolean register() throws RemoteException
+  public boolean register()
   {
     try
     {
+      errorLabel.set("All fields marked with * is mandatory to fill out.");
+      System.out.println("hje");
+
+      LocalDate selectedBirthDate = age.get();
+      if (selectedBirthDateString==null) {
+      }else {
+        selectedBirthDateString = String.valueOf(selectedBirthDate);
+        System.out.println(selectedBirthDateString);
+
+
+        selectedBirthYear = Integer.parseInt(selectedBirthDateString.substring(0, 4));
+        selectedBirthMonth = Integer.parseInt(selectedBirthDateString.substring(5, 7));
+        selectedBirthDay = Integer.parseInt(selectedBirthDateString.substring(8, 10));
+        System.out.println(selectedBirthDay +" "+ selectedBirthMonth +" "+ selectedBirthYear);
+      }
+
+
+      MyDateTime selectedBirthDateMyDateTime = new MyDateTime(selectedBirthDay, selectedBirthMonth, selectedBirthYear);
+
       model.registerBabysitter(username.get(), password.get(), email.get(),
-          firstName.get(), lastName.getValue(), age.get(), paymentPerHour.get(),
+          firstName.get(), lastName.getValue(), selectedBirthDateMyDateTime, paymentPerHour.get(),
           motherTongue.get(), babysittingExperience.get(),
           hasCertificate.get());
       errorLabel.set("");
@@ -144,6 +169,7 @@ public class RegisterBabysitterViewModel
     catch (Exception e)
     {
       errorLabel.set(e.getMessage());
+      System.out.println("error");
       return false;
     }
   }

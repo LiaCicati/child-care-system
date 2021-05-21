@@ -1,8 +1,7 @@
 package model;
 
 import java.io.Serializable;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.regex.*;
 
 public abstract class Account implements Serializable
 {
@@ -13,7 +12,7 @@ public abstract class Account implements Serializable
   private String lastName;
 
   public Account(String userName, String password, String email,
-      String firstName, String lastName)
+                 String firstName, String lastName)
   {
     setUserName(userName);
     setPassword(password);
@@ -27,8 +26,7 @@ public abstract class Account implements Serializable
     return password;
   }
 
-  public String getUserName()
-  {
+  public String getUserName() {
     return userName;
   }
 
@@ -91,7 +89,7 @@ public abstract class Account implements Serializable
     if (!validateUserName(userName))
     {
       throw new IllegalArgumentException(
-          "The username can not have more than 16 characters or be empty");
+              "The username can not have more than 16 characters or be empty");
     }
     this.userName = userName;
   }
@@ -110,16 +108,14 @@ public abstract class Account implements Serializable
     if (!validatePassword(password))
     {
       throw new IllegalArgumentException(
-          "The password must contain from 8 to 16 characters");
+              "The password must contain from 8 to 16 characters");
     }
     this.password = password;
   }
-
   public String getParent()
   {
-     return "Hello";
+    return "Hello";
   }
-
   @Override public boolean equals(Object obj)
   {
     if (!(obj instanceof Account))
@@ -128,14 +124,14 @@ public abstract class Account implements Serializable
     }
     Account other = (Account) obj;
     return userName.equals(other.userName) && password.equals(other.password)
-        && email.equals(other.email) && firstName.equals(other.firstName)
-        && lastName.equals(other.lastName);
+            && email.equals(other.email) && firstName.equals(other.firstName)
+            && lastName.equals(other.lastName);
   }
 
   @Override public String toString()
   {
     return "Username: " + userName + "\n" + "Password: " + password + "\n"
-        + "Email: " + email + "\n" + "First name: " + firstName + "\n"
-        + "Last name: " + lastName;
+            + "Email: " + email + "\n" + "First name: " + firstName + "\n"
+            + "Last name: " + lastName;
   }
 }

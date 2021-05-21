@@ -9,19 +9,12 @@ import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public interface RemoteModel extends RemoteSubject<String, String>
-{
-
+public interface RemoteModel extends RemoteSubject<String, String> {
  void addBooking(Booking booking) throws RemoteException;
  boolean isPasswordCorrect(String userName, String password) throws RemoteException;
-
-/*  void connect() throws RemoteException, MalformedURLException, NotBoundException;
-  void addBooking(Booking booking) throws RemoteException;
-  boolean doesUserNameExist(String userName) throws RemoteException;
-  boolean isPasswordCorrect(String userName, String password) throws RemoteException;*/
-Account login(String username, String password) throws RemoteException;
+ Account login(String username, String password) throws RemoteException;
  void registerBabysitter(String userName, String password, String email,
-     String firstName, String lastName, LocalDate birthday, double paymentPerHour, String mainLanguage,
+     String firstName, String lastName, MyDateTime birthday, double paymentPerHour, String mainLanguage,
      double babysittingExperience, boolean hasFirstAidCertificate) throws RemoteException;
  void registerBabysitter(String userName, String password, String email,
      String firstName, String lastName) throws RemoteException;

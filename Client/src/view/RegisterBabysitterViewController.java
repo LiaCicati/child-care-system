@@ -1,6 +1,7 @@
 package view;
 
 import javafx.beans.binding.Bindings;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import viewmodel.DoubleStringConverter;
@@ -53,21 +54,28 @@ public class RegisterBabysitterViewController extends ViewController
     viewModel.reset();
   }
 
-  public void onRegister() throws RemoteException
-  {
-    if (viewModel.register())
-    {
-      onLogIn();
-    }
+//  public void onRegister() throws RemoteException
+//  {
+//    if (viewModel.register())
+//    {
+//      onLogIn();
+//    }
 
 //    if (viewModel.registerWithRequiredData())
 //    {
 //      onLogIn();
 //    }
-  }
 
   public void onLogIn()
   {
     getViewHandler().openView(View.LOGIN_VIEW);
+  }
+
+  public void onRegister(ActionEvent actionEvent) throws RemoteException {
+
+   if (viewModel.register())
+   {
+      onLogIn();
+    }
   }
 }

@@ -76,6 +76,9 @@ public class Babysitter extends Account
     if (dateOfBirth == null)
     {
       return 0;
+    }else if (dateOfBirth.isAfterDate(date)){
+      throw new IllegalArgumentException("You must be above the age of 13 to sign up at Kinder.");
+
     }
     else
     {
@@ -184,9 +187,15 @@ public class Babysitter extends Account
     this.hasFirstAidCertificate = hasFirstAidCertificate;
   }
 
-  public void setDateOfBirth(MyDateTime dateOfBirth)
-  {
-    this.dateOfBirth = dateOfBirth;
+  public void setDateOfBirth(MyDateTime dateOfBirth) {
+    int thisDay = LocalDate.now().getDayOfMonth();
+    int thisMonth = LocalDate.now().getDayOfMonth();
+    int legalYear = LocalDate.now().getYear() - 13;
+    if (dateOfBirth.isAfterDate(new MyDateTime(thisDay, thisMonth, legalYear))) {
+      throw new IllegalArgumentException("You must be above the age of 13 to sign up at Kinder.");
+    } else {
+      this.dateOfBirth = dateOfBirth;
+    }
   }
 
   public boolean equals(Object obj)

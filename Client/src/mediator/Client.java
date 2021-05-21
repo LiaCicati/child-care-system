@@ -98,10 +98,11 @@ public class Client implements ClientModel, RemoteListener<String, String>
   }
 
   @Override public void registerBabysitter(String userName, String password,
-      String email, String firstName, String lastName, LocalDate birthday,
+      String email, String firstName, String lastName, MyDateTime birthday,
       double paymentPerHour, String mainLanguage, double babysittingExperience,
       boolean hasFirstAidCertificate)
   {
+
     try
     {
 
@@ -112,6 +113,7 @@ public class Client implements ClientModel, RemoteListener<String, String>
     }
     catch (RemoteException e)
     {
+      System.out.println(e.getMessage());
       throw new IllegalStateException(getExceptionMessage(e), e);
     }
   }

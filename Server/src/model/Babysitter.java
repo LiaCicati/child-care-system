@@ -12,9 +12,9 @@ public class Babysitter extends Account
   private MyDateTime dateOfBirth;
 
   public Babysitter(String userName, String password, String email,
-      String firstName, String lastName, MyDateTime dateOfBirth,
-      double paymentPerHour, String mainLanguage, double babysittingExperience,
-      boolean hasFirstAidCertificate)
+                    String firstName, String lastName, MyDateTime dateOfBirth,
+                    double paymentPerHour, String mainLanguage, double babysittingExperience,
+                    boolean hasFirstAidCertificate)
   {
     super(userName, password, email, firstName, lastName);
     setPaymentPerHour(paymentPerHour);
@@ -34,7 +34,7 @@ public class Babysitter extends Account
   }
 
   public Babysitter(String userName, String password, String email,
-      String firstName, String lastName)
+                    String firstName, String lastName)
   {
     super(userName, password, email, firstName, lastName);
 
@@ -72,10 +72,13 @@ public class Babysitter extends Account
   {
     LocalDate localDate = LocalDate.now();
     MyDateTime date = new MyDateTime(localDate.getDayOfMonth(),
-        localDate.getMonthValue(), localDate.getYear());
+            localDate.getMonthValue(), localDate.getYear());
     if (dateOfBirth == null)
     {
       return 0;
+    }else if (dateOfBirth.isAfterDate(date)){
+      throw new IllegalArgumentException("You must be above the age of 13 to sign up at Kinder.");
+
     }
     else
     {
@@ -83,17 +86,17 @@ public class Babysitter extends Account
     }
   }
 
-  //  public String getFirstAidCertificate()
-  //  {
-  //    if (hasFirstAidCertificate())
-  //    {
-  //      return "Possess";
-  //    }
-  //    else
-  //    {
-  //      return "Do not posses";
-  //    }
-  //  }
+//  public String getFirstAidCertificate()
+//  {
+//    if (hasFirstAidCertificate())
+//    {
+//      return "Possess";
+//    }
+//    else
+//    {
+//      return "Do not posses";
+//    }
+//  }
 
   public MyDateTime getDateOfBirth()
   {
@@ -184,9 +187,15 @@ public class Babysitter extends Account
     this.hasFirstAidCertificate = hasFirstAidCertificate;
   }
 
-  public void setDateOfBirth(MyDateTime dateOfBirth)
-  {
-    this.dateOfBirth = dateOfBirth;
+  public void setDateOfBirth(MyDateTime dateOfBirth) {
+    int thisDay = LocalDate.now().getDayOfMonth();
+    int thisMonth = LocalDate.now().getDayOfMonth();
+    int legalYear = LocalDate.now().getYear() - 13;
+    if (dateOfBirth.isAfterDate(new MyDateTime(thisDay, thisMonth, legalYear))) {
+      throw new IllegalArgumentException("You must be above the age of 13 to sign up at Kinder.");
+    } else {
+      this.dateOfBirth = dateOfBirth;
+    }
   }
 
   public boolean equals(Object obj)
@@ -197,17 +206,16 @@ public class Babysitter extends Account
     }
     Babysitter other = (Babysitter) obj;
     return super.equals(obj) && paymentPerHour == other.paymentPerHour
-        && babysittingExperience == other.babysittingExperience
-        && hasFirstAidCertificate == other.hasFirstAidCertificate;
+            && babysittingExperience == other.babysittingExperience
+            && hasFirstAidCertificate == other.hasFirstAidCertificate;
   }
 
   @Override public String toString()
   {
     return super.toString() + "\n" + "Payment per hour: " + paymentPerHour
-        + "\n" + "Main language: " + getMainLanguage() + "\n" + "Languages: "
-        + languages + "\n" + "Years of experience: " + babysittingExperience
-        + "\n" + "Has CPR certificate: " + hasFirstAidCertificate + "\n"
-        + "Birthday: " + dateOfBirth;
+            + "\n" + "Main language: " + getMainLanguage() + "\n" + "Languages: "
+            + languages + "\n" + "Years of experience: " + babysittingExperience
+            + "\n" + "Has CPR certificate: " + hasFirstAidCertificate + "\n"
+            + "Birthday: " + dateOfBirth;
   }
 }
-
