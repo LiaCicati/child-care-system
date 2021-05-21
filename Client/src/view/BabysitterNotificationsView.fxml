@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitMenuButton?>
 <?import javafx.scene.control.TableColumn?>
@@ -7,6 +8,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane minHeight="-Infinity" prefHeight="740.0" prefWidth="414.0" style="-fx-background-color: E6E1FF;" userData="Notifications" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.BabysitterNotificationsViewController">
     <children>
@@ -25,5 +27,10 @@
             <TableColumn fx:id="parentColumn" prefWidth="124.0" text="Parent" />
         </columns>
       </TableView>
+      <Label fx:id="errorLabel" layoutX="28.0" layoutY="637.0" prefHeight="38.0" prefWidth="358.0" text="Error label" textFill="#f9494b">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>
