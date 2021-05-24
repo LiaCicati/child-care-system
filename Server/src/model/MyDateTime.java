@@ -338,7 +338,7 @@ public class MyDateTime implements Serializable
     {
       years = other.year - this.year;
       if (this.month > other.month || (this.month == other.month
-              && this.day > other.day))
+          && this.day > other.day))
       {
         years--;
       }
@@ -347,7 +347,7 @@ public class MyDateTime implements Serializable
     {
       years = this.year - other.year;
       if (other.month > this.month || (other.month == this.month
-              && other.day > this.day))
+          && other.day > this.day))
       {
         years--;
       }
@@ -363,7 +363,7 @@ public class MyDateTime implements Serializable
     }
     MyDateTime other = (MyDateTime) obj;
     return day == other.day && month == other.month && year == other.year
-            && hour == other.hour && minute == other.minute;
+        && hour == other.hour && minute == other.minute;
   }
 
   public String toString()
@@ -382,10 +382,19 @@ public class MyDateTime implements Serializable
     {
       s += month + "/" + year;
     }
+
     else
     {
       s += month + "/" + year + " " + hour + ":" + minute;
     }
     return s;
+  }
+
+  public String getSimpleTime() {
+    return String.format("%02d:%02d", this.hour, this.minute);
+  }
+
+  public String getSimpleDate() {
+    return String.format("%02d/%02d", this.day, this.month) + "/" + this.year;
   }
 }

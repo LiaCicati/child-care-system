@@ -382,10 +382,19 @@ public class MyDateTime implements Serializable
     {
       s += month + "/" + year;
     }
+
     else
     {
       s += month + "/" + year + " " + hour + ":" + minute;
     }
     return s;
+  }
+
+  public String getSimpleTime() {
+    return String.format("%02d:%02d", this.hour, this.minute);
+  }
+
+  public String getSimpleDate() {
+    return String.format("%02d/%02d", this.day, this.month) + "/" + this.year;
   }
 }

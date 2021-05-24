@@ -5,8 +5,10 @@ public class Test
     public static void main(String[] args)
     {
 
-        MyDateTime dateTime = new MyDateTime(1, 5, 2021, 3, 45);
+        MyDateTime dateTime = new MyDateTime(1, 5, 2021, 3, 5);
         System.out.println(dateTime.toString());
+        System.out.println(dateTime.getSimpleTime());
+        System.out.println(dateTime.getSimpleDate());
 
         //    Babysitter babysitter = new Babysitter("Loredana", 13, 2, 2001, 56,"English", 3, false);
         //    babysitter.addLanguage("Danish");

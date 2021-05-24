@@ -9,7 +9,9 @@ import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public interface RemoteModel extends RemoteSubject<String, String> {
+public interface RemoteModel extends RemoteSubject<Account, Booking>
+{
+
  void addBooking(Booking booking) throws RemoteException;
  boolean isPasswordCorrect(String userName, String password) throws RemoteException;
  Account login(String username, String password) throws RemoteException;
@@ -39,5 +41,6 @@ public interface RemoteModel extends RemoteSubject<String, String> {
  void addKid(Parent parent, Kid kid) throws RemoteException;
  Kid getKidById(int id) throws RemoteException;
  Kid getKid(int index) throws RemoteException;
+ ArrayList<Booking> getAllBookings(Babysitter babysitter) throws RemoteException;
 
 }

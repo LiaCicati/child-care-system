@@ -188,6 +188,7 @@ public class BookingBabysitterViewModel
         errorMessage = "Booking of babysitter completed!";
         label.setTextFill(Color.web("black"));
         errorLabel.set(errorMessage);
+
       }
     } catch (RemoteException e) {
       e.printStackTrace();

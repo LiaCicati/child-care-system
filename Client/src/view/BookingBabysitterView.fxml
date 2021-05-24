@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane minHeight="-Infinity" prefHeight="683.0" prefWidth="414.0" style="-fx-background-color: E6E1FF;" userData="Edit personal data" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.BookingBabysitterViewController">
+<AnchorPane minHeight="-Infinity" prefHeight="683.0" prefWidth="414.0" style="-fx-background-color: E6E1FF;" userData="Book babysitters" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.BookingBabysitterViewController">
     <children>
         <ImageView fitHeight="111.0" fitWidth="174.0" layoutX="126.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@resources/logo.png" />

@@ -7,7 +7,7 @@ import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public interface ClientModel extends LocalSubject<String, String> {
+public interface ClientModel extends LocalSubject<Account, Booking> {
     void addBooking(Booking booking);
 
     boolean isPasswordCorrect(String userName, String password);
@@ -39,5 +39,6 @@ void close();
     void addKid(Parent parent, Kid kid);
     Kid getKidById(int id);
     Kid getKid(int index);
+    ArrayList<Booking> getAllBookings(Babysitter babysitter);
 
 }
