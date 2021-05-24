@@ -17,10 +17,9 @@ public interface RemoteModel extends RemoteSubject<Booking, Booking>
                           double paymentPerHour, String mainLanguage,
                           boolean hasFirstAidCertificate) throws RemoteException;
  // void registerBabysitter(String userName, String password, String email, String firstName, String lastName) throws RemoteException;
-  void registerParent(String firstName, String lastName, String userName,String email, String password)
-          throws RemoteException;
-  void registerParent(String firstName, String lastName, String userName,String email, String password,
-                      boolean hasPets) throws RemoteException;
+//  void registerParent(String firstName, String lastName, String userName,String email, String password)
+//          throws RemoteException;
+  void registerParent(String firstName, String lastName, String userName,String email, String password, boolean hasPets) throws RemoteException;
   AccountList getParentList() throws RemoteException;
   Parent getParent(String username) throws RemoteException;
   AccountList getAccountList() throws RemoteException;

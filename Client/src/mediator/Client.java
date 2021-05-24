@@ -129,25 +129,24 @@ public class Client implements ClientModel, RemoteListener<String, String>
     }
   }
 */
-  @Override public void registerParent(String firstName, String lastName, String userName,String email, String password)
-  {
-    try
-    {
-      remoteModel
-          .registerParent( firstName,  lastName,  userName, email,  password);
-    }
-    catch (RemoteException e)
-    {
-      throw new IllegalStateException(getExceptionMessage(e), e);
-    }
-  }
+//  @Override public void registerParent(String firstName, String lastName, String userName,String email, String password)
+//  {
+//    try
+//    {
+//      remoteModel
+//          .registerParent( firstName,  lastName,  userName, email,  password);
+//    }
+//    catch (RemoteException e)
+//    {
+//      throw new IllegalStateException(getExceptionMessage(e), e);
+//    }
+//  }
 
   @Override public void registerParent(String firstName, String lastName, String userName,String email, String password, boolean hasPets)
   {
     try
     {
-      remoteModel.registerParent( firstName,  lastName,  userName, email,  password,
-          hasPets);
+      remoteModel.registerParent(firstName, lastName, userName, email, password, hasPets);
     }
     catch (RemoteException e)
     {

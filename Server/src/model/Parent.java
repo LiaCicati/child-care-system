@@ -15,11 +15,11 @@ public class Parent extends Account
         this.kids = new ArrayList<Kid>();
     }
 
-    public Parent(String firstName, String lastName, String userName,String email, String password)
-    {
-        super( firstName, lastName, userName, email, password);
-
-    }
+//    public Parent(String firstName, String lastName, String userName,String email, String password)
+//    {
+//        super( firstName, lastName, userName, email, password);
+//
+//    }
 
     public int getNrOfKids()
     {

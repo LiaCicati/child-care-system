@@ -39,7 +39,7 @@ public class RegisterParentViewModel
     email.set("");
     password.set("");
     errorLabel.set("");
-    hasPets.set(null);
+    hasPets.set(true);
   }
 
   public StringProperty getFirstName()
@@ -77,23 +77,23 @@ public class RegisterParentViewModel
     return errorLabel;
   }
 
-  public boolean registerWithRequiredData() throws RemoteException
-  {
-
-    try
-    {
-      model.registerParent(username.get(), password.get(), email.get(),
-          firstName.get(), lastName.get());
-      errorLabel.set("");
-
-      return true;
-    }
-    catch (Exception e)
-    {
-      errorLabel.set(e.getMessage());
-      return false;
-    }
-  }
+//  public boolean registerWithRequiredData() throws RemoteException
+//  {
+//
+//    try
+//    {
+//      model.registerParent(username.get(), password.get(), email.get(),
+//          firstName.get(), lastName.get());
+//      errorLabel.set("");
+//
+//      return true;
+//    }
+//    catch (Exception e)
+//    {
+//      errorLabel.set(e.getMessage());
+//      return false;
+//    }
+//  }
 public boolean hasPets()
 {
   return hasPets.getValue();
@@ -102,13 +102,15 @@ public boolean hasPets()
   {
     try
     {
-      model.registerParent(username.get(), password.get(), email.get(),
-          firstName.get(), lastName.getValue(), hasPets());
+      
+      model.registerParent(firstName.get(), lastName.get(), username.get(),
+          email.get(), password.getValue(), hasPets());
       errorLabel.set("");
       return true;
     }
     catch (Exception e)
     {
+      System.out.println(e.getMessage());
       errorLabel.set(e.getMessage());
       return false;
     }

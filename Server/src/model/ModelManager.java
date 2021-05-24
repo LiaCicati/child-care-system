@@ -5,8 +5,6 @@ import utility.observer.subject.PropertyChangeAction;
 import utility.observer.subject.PropertyChangeProxy;
 
 import java.rmi.RemoteException;
-import java.time.LocalDate;
-import java.time.Period;
 import java.util.ArrayList;
 
 public class ModelManager implements Model
@@ -33,12 +31,14 @@ public class ModelManager implements Model
 
   private void addDummyData()
   {
-  //  Account babysitter = new Babysitter("lia", "lialialia", "lia@mail.ru", "Lia", "Cicati");
-    Account babysitter2 = new Babysitter("Loredana", "Cicati","lori","lori@mail.ru", "lialialia",
-         new MyDateTime(13, 2, 2001),2, 30, "English",
-        false);
-    Account parent1 = new Parent("Ana",  "Peters","ana", "ana@gmail.com", "password" );
-    Account parent2 = new Parent("Lina",  "Peters","lina", "lina@gmail.com", "password",  true);
+    //  Account babysitter = new Babysitter("lia", "lialialia", "lia@mail.ru", "Lia", "Cicati");
+    Account babysitter2 = new Babysitter("Loredana", "Cicati", "lori",
+        "lori@mail.ru", "lialialia", new MyDateTime(13, 2, 2001), 2, 30,
+        "English", false);
+    Account parent1 = new Parent("Ana", "Peters", "ana", "ana@gmail.com",
+        "password", false);
+    Account parent2 = new Parent("Lina", "Peters", "lina", "lina@gmail.com",
+        "password", true);
     //accountList.addAccount(babysitter);
     accountList.addAccount(babysitter2);
     accountList.addAccount(parent1);
@@ -52,8 +52,8 @@ public class ModelManager implements Model
   @Override public void addBooking(Booking booking)
       throws IllegalArgumentException
   {
-            bookingList.addBooking(booking);    //TODO
-         //   property.firePropertyChange("add", null, booking);
+    bookingList.addBooking(booking);    //TODO
+    //   property.firePropertyChange("add", null, booking);
   }
 
   @Override public boolean isPasswordCorrect(String userName, String password)
@@ -94,19 +94,18 @@ public class ModelManager implements Model
     }
   }
 
-  @Override public void registerBabysitter(String firstName, String lastName, String userName,String email, String password,
-                                           MyDateTime birthday, double babysittingExperience,
-                                           double paymentPerHour, String mainLanguage,
-                                           boolean hasFirstAidCertificate)
+  @Override public void registerBabysitter(String firstName, String lastName,
+      String userName, String email, String password, MyDateTime birthday,
+      double babysittingExperience, double paymentPerHour, String mainLanguage,
+      boolean hasFirstAidCertificate)
   {
-
 
     if (!accountList.containsUsername(userName) && !accountList
         .containsEmail(email))
     {
-      Account account = new Babysitter(firstName, lastName,userName,email, password,
-              birthday,  babysittingExperience, paymentPerHour, mainLanguage,
-              hasFirstAidCertificate);
+      Account account = new Babysitter(firstName, lastName, userName, email,
+          password, birthday, babysittingExperience, paymentPerHour,
+          mainLanguage, hasFirstAidCertificate);
       accountList.addAccount(account);
       babysitterList.addAccount(account);
     }
@@ -146,35 +145,36 @@ public class ModelManager implements Model
     }
   }
 */
-  @Override public void registerParent(String firstName, String lastName, String userName,String email, String password)
-  {
-    if (!accountList.containsUsername(userName) && !accountList
-        .containsEmail(email))
-    {
-      Account account = new Parent(userName, password, email, firstName,
-          lastName);
-      accountList.addAccount(account);
-      parentList.addAccount(account);
-    }
-    else if (accountList.containsUsername(userName))
-    {
-      throw new IllegalStateException(
-          "An user with this username is already registered in the system");
-    }
-    else if (accountList.containsEmail(email))
-    {
-      throw new IllegalStateException(
-          "An user with this email is already registered in the system");
-    }
-  }
+  //  @Override public void registerParent(String firstName, String lastName, String userName,String email, String password)
+  //  {
+  //    if (!accountList.containsUsername(userName) && !accountList
+  //        .containsEmail(email))
+  //    {
+  //      Account account = new Parent(userName, password, email, firstName,
+  //          lastName);
+  //      accountList.addAccount(account);
+  //      parentList.addAccount(account);
+  //    }
+  //    else if (accountList.containsUsername(userName))
+  //    {
+  //      throw new IllegalStateException(
+  //          "An user with this username is already registered in the system");
+  //    }
+  //    else if (accountList.containsEmail(email))
+  //    {
+  //      throw new IllegalStateException(
+  //          "An user with this email is already registered in the system");
+  //    }
+  //  }
 
-  @Override public void registerParent(String firstName, String lastName, String userName,String email, String password, boolean hasPets)
+  @Override public void registerParent(String firstName, String lastName,
+      String userName, String email, String password, boolean hasPets)
   {
     if (!accountList.containsUsername(userName) && !accountList
         .containsEmail(email))
     {
-      Account account = new Parent(userName, password, email, firstName,
-          lastName, hasPets);
+      Account account = new Parent(firstName, lastName, userName, email,
+          password, hasPets);
       accountList.addAccount(account);
       parentList.addAccount(account);
     }
@@ -229,7 +229,8 @@ public class ModelManager implements Model
     }
   }
 
-  @Override public Parent getLoggedInParent(){
+  @Override public Parent getLoggedInParent()
+  {
     ArrayList<Parent> parentLoggedIn = loggedInList.getAllParentAccounts();
     return parentLoggedIn.get(0);
   }
@@ -253,7 +254,8 @@ public class ModelManager implements Model
     }
   }
 
-  public BookingList getBookingList() {
+  public BookingList getBookingList()
+  {
     return bookingList;
   }
 

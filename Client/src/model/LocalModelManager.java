@@ -71,14 +71,14 @@ public class LocalModelManager implements LocalModel, LocalListener<String, Stri
     serverModel.registerBabysitter(userName, password, email, firstName, lastName);
   }*/
 
-  @Override public void registerParent(String firstName, String lastName, String userName,String email, String password)
-  {
-    serverModel.registerParent( firstName,  lastName,  userName, email,  password);
-  }
+//  @Override public void registerParent(String firstName, String lastName, String userName,String email, String password)
+//  {
+//    serverModel.registerParent( firstName,  lastName,  userName, email,  password);
+//  }
 
   @Override public void registerParent(String firstName, String lastName, String userName,String email, String password, boolean hasPets)
   {
-    serverModel.registerParent( firstName,  lastName,  userName, email,  password, hasPets);
+    serverModel.registerParent(firstName, lastName, userName, email, password, hasPets);
   }
 
   @Override public AccountList getParentList()
