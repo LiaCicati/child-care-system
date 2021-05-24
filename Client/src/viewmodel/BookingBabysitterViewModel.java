@@ -222,16 +222,16 @@ public class BookingBabysitterViewModel {
             errorMessage = "nej";
             errorLabel.set(errorMessage);
           } else {
-//            model.addBooking(myBooking);
-//            errorMessage = "Booking of babysitter completed!";
-//            label.setTextFill(Color.web("black"));
-//            errorLabel.set(errorMessage);
-//            updateBabysitters();
-//            getBookedBabysitters();
+            model.addBooking(myBooking);
+            errorMessage = "Booking of babysitter completed!";
+            label.setTextFill(Color.web("black"));
+            errorLabel.set(errorMessage);
+            updateBabysitters();
+            getBookedBabysitters();
           }
         }
         }
-
+        System.out.println("\n det her er bookings :\n"+model.getBookingList().getAllBookings()+"\n det her er slut på bookings.\n");
       }
     } catch (RemoteException e) {
       e.printStackTrace();
@@ -301,10 +301,9 @@ public class BookingBabysitterViewModel {
       for (int i = 0; i < model.getBabysitterList().getNumberOfAccounts(); i++) {
         if (bookedBabysitters.size() > 0) {
           for (Babysitter bookedBabysitter : bookedBabysitters) {
-            if (!model.getBabysitterList().getAllBabysitterAccounts().get(i).equals(bookedBabysitter))
-              babysitters.add(new BookingBabysitterTableRowData(
-                      model.getBabysitterList().getAllBabysitterAccounts().get(i)));
-
+            if (!model.getBabysitterList().getAllBabysitterAccounts().get(i).equals(bookedBabysitter)) {
+              babysitters.add(new BookingBabysitterTableRowData(model.getBabysitterList().getAllBabysitterAccounts().get(i)));
+            }
           }
         } else {
           babysitters.add(new BookingBabysitterTableRowData(
