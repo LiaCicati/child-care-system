@@ -88,7 +88,7 @@ public class Babysitter extends Account
     {
       double positivePaymentPerHour = Math.abs(paymentPerHour);
       this.paymentPerHour = positivePaymentPerHour;
-      throw new IllegalArgumentException("You cannot charge a negative number - so we have made it positive for you");
+      throw new IllegalArgumentException("You cannot charge a negative number");
     }
     else if (paymentPerHour > 500)
     {
@@ -123,7 +123,7 @@ public class Babysitter extends Account
     {
       double positiveBabysittingExperience = Math.abs(babysittingExperience);
       this.babysittingExperience = positiveBabysittingExperience;
-      throw new IllegalArgumentException("You cannot have negative experience - so we have made it positive for you");
+      throw new IllegalArgumentException("You cannot have negative experience");
 
     }
 /*    else if  (babysittingExperience>getAge(getDateOfBirth())){
@@ -132,7 +132,7 @@ public class Babysitter extends Account
     else if (babysittingExperience > 70)
     {
       this.babysittingExperience = 70;
-    }  
+    }
     else
     {
       this.babysittingExperience = babysittingExperience;
