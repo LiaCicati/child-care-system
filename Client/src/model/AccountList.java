@@ -132,37 +132,37 @@ public class AccountList implements Serializable
         return temp;
     }
 
-    public ArrayList<Parent> getWithPets()
-    {
-        ArrayList<Parent> temp = new ArrayList<>();
-        for (Account account : accounts)
-        {
-            if (account instanceof Parent)
-            {
-                if (((Parent) account).hasPets())
-                {
-                    temp.add((Parent) account);
-                }
-            }
-        }
-        return temp;
-    }
+    //    public ArrayList<Parent> getWithPets()
+    //    {
+    //        ArrayList<Parent> temp = new ArrayList<>();
+    //        for (Account account : accounts)
+    //        {
+    //            if (account instanceof Parent)
+    //            {
+    //                if (((Parent) account).hasPets())
+    //                {
+    //                    temp.add((Parent) account);
+    //                }
+    //            }
+    //        }
+    //        return temp;
+    //    }
 
-    public ArrayList<Parent> getWithoutPets()
-    {
-        ArrayList<Parent> temp = new ArrayList<>();
-        for (Account account : accounts)
-        {
-            if (account instanceof Parent)
-            {
-                if (!((Parent) account).hasPets())
-                {
-                    temp.add((Parent) account);
-                }
-            }
-        }
-        return temp;
-    }
+    //    public ArrayList<Parent> getWithoutPets()
+    //    {
+    //        ArrayList<Parent> temp = new ArrayList<>();
+    //        for (Account account : accounts)
+    //        {
+    //            if (account instanceof Parent)
+    //            {
+    //                if (!((Parent) account).hasPets())
+    //                {
+    //                    temp.add((Parent) account);
+    //                }
+    //            }
+    //        }
+    //        return temp;
+    //    }
 
     public Account getByUserName(String userName)
     {
@@ -248,8 +248,7 @@ public class AccountList implements Serializable
         return false;
     }
 
-    public Account getAccount(int index)
-    {
+    public Account getAccount(int index) {
         return accounts.get(index);
     }
 

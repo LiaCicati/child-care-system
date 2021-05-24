@@ -98,18 +98,19 @@ public class Client implements ClientModel, RemoteListener<Account, Booking>
     }
   }
 
-  @Override public void registerBabysitter(String userName, String password,
-      String email, String firstName, String lastName, MyDateTime birthday,
-      double paymentPerHour, String mainLanguage, double babysittingExperience,
+  @Override public void registerBabysitter(String firstName, String lastName,
+      String userName, String email, String password, MyDateTime birthday,
+      double babysittingExperience, double paymentPerHour, String mainLanguage,
       boolean hasFirstAidCertificate)
+
   {
 
     try
     {
 
       remoteModel
-          .registerBabysitter(userName, password, email, firstName, lastName,
-              birthday, paymentPerHour, mainLanguage, babysittingExperience,
+          .registerBabysitter(firstName, lastName, userName, email, password,
+              birthday, babysittingExperience, paymentPerHour, mainLanguage,
               hasFirstAidCertificate);
     }
     catch (RemoteException e)
@@ -119,7 +120,7 @@ public class Client implements ClientModel, RemoteListener<Account, Booking>
     }
   }
 
-  @Override public void registerBabysitter(String userName, String password,
+  /*@Override public void registerBabysitter(String userName, String password,
       String email, String firstName, String lastName)
   {
     try
@@ -132,27 +133,26 @@ public class Client implements ClientModel, RemoteListener<Account, Booking>
       throw new IllegalStateException(getExceptionMessage(e), e);
     }
   }
+*/
+  //  @Override public void registerParent(String firstName, String lastName, String userName,String email, String password)
+  //  {
+  //    try
+  //    {
+  //      remoteModel
+  //          .registerParent( firstName,  lastName,  userName, email,  password);
+  //    }
+  //    catch (RemoteException e)
+  //    {
+  //      throw new IllegalStateException(getExceptionMessage(e), e);
+  //    }
+  //  }
 
-  @Override public void registerParent(String userName, String password,
-      String email, String firstName, String lastName)
+  @Override public void registerParent(String firstName, String lastName,
+      String userName, String email, String password, boolean hasPets)
   {
     try
     {
-      remoteModel
-          .registerParent(userName, password, email, firstName, lastName);
-    }
-    catch (RemoteException e)
-    {
-      throw new IllegalStateException(getExceptionMessage(e), e);
-    }
-  }
-
-  @Override public void registerParent(String userName, String password,
-      String email, String firstName, String lastName, boolean hasPets)
-  {
-    try
-    {
-      remoteModel.registerParent(userName, password, email, firstName, lastName,
+      remoteModel.registerParent(firstName, lastName, userName, email, password,
           hasPets);
     }
     catch (RemoteException e)
@@ -165,7 +165,7 @@ public class Client implements ClientModel, RemoteListener<Account, Booking>
   {
     try
     {
-     return remoteModel.getParentList();
+      return remoteModel.getParentList();
     }
     catch (RemoteException e)
     {
@@ -233,14 +233,12 @@ public class Client implements ClientModel, RemoteListener<Account, Booking>
     }
   }
 
-
-  @Override
-  public Parent getLoggedInParent() {
+  @Override public Parent getLoggedInParent()
+  {
     return remoteModel.getLoggedInParent();
   }
 
-  @Override
-  public BookingList getBookingList()
+  @Override public BookingList getBookingList()
   {
     try
     {
@@ -252,77 +250,79 @@ public class Client implements ClientModel, RemoteListener<Account, Booking>
       throw new IllegalStateException(getExceptionMessage(e), e);
     }
   }
-      @Override public ArrayList<Kid> getKidList () {
-      try
-      {
-        return remoteModel.getKidList();
-      }
-      catch (RemoteException e)
-      {
-        throw new IllegalStateException(getExceptionMessage(e), e);
-      }
+
+  @Override public ArrayList<Kid> getKidList()
+  {
+    try
+    {
+      return remoteModel.getKidList();
     }
+    catch (RemoteException e)
+    {
+      throw new IllegalStateException(getExceptionMessage(e), e);
+    }
+  }
 
-      @Override public void editKidData (Parent parent,int id, Kid kid)
-      {
-        try
-        {
-          remoteModel.editKidData(parent, id, kid);
-        }
-        catch (RemoteException e)
-        {
-          throw new IllegalStateException(getExceptionMessage(e), e);
-        }
-      }
+  @Override public void editKidData(Parent parent, int id, Kid kid)
+  {
+    try
+    {
+      remoteModel.editKidData(parent, id, kid);
+    }
+    catch (RemoteException e)
+    {
+      throw new IllegalStateException(getExceptionMessage(e), e);
+    }
+  }
 
-      @Override public ArrayList<Kid> getAllKids (Parent parent)
-      {
-        try
-        {
-          return remoteModel.getAllKids(parent);
-        }
-        catch (RemoteException e)
-        {
-          throw new IllegalStateException(getExceptionMessage(e), e);
-        }
-      }
+  @Override public ArrayList<Kid> getAllKids(Parent parent)
+  {
+    try
+    {
+      return remoteModel.getAllKids(parent);
+    }
+    catch (RemoteException e)
+    {
+      throw new IllegalStateException(getExceptionMessage(e), e);
+    }
+  }
 
-      @Override public void addKid (Parent parent, Kid kid)
-      {
-        try
-        {
-          remoteModel.addKid(parent, kid);
-        }
-        catch (RemoteException e)
-        {
-          throw new IllegalStateException(getExceptionMessage(e), e);
-        }
-      }
+  @Override public void addKid(Parent parent, Kid kid)
+  {
+    try
+    {
+      remoteModel.addKid(parent, kid);
+    }
+    catch (RemoteException e)
+    {
+      throw new IllegalStateException(getExceptionMessage(e), e);
+    }
+  }
 
-      @Override public Kid getKidById ( int id)
-      {
-        try
-        {
-          return remoteModel.getKidById(id);
-        }
-        catch (RemoteException e)
-        {
-          throw new IllegalStateException(getExceptionMessage(e), e);
-        }
-      }
+  @Override public Kid getKidById(int id)
+  {
+    try
+    {
+      return remoteModel.getKidById(id);
+    }
+    catch (RemoteException e)
+    {
+      throw new IllegalStateException(getExceptionMessage(e), e);
+    }
+  }
 
-      @Override public Kid getKid ( int index)
-      {
-        try
-        {
-          return remoteModel.getKid(index);
-        }
-        catch (RemoteException e)
-        {
-          throw new IllegalStateException(getExceptionMessage(e), e);
+  @Override public Kid getKid(int index)
+  {
+    try
+    {
+      return remoteModel.getKid(index);
+    }
+    catch (RemoteException e)
+    {
+      throw new IllegalStateException(getExceptionMessage(e), e);
 
-        }
-      }
+    }
+  }
 
   @Override public ArrayList<Booking> getAllBookings(Babysitter babysitter)
   {
@@ -337,29 +337,30 @@ public class Client implements ClientModel, RemoteListener<Account, Booking>
     }
   }
 
-  @Override public void propertyChange (ObserverEvent <Account, Booking> event)
-      throws RemoteException {
-      property.firePropertyChange(event);
-    }
+  @Override public void propertyChange(ObserverEvent<Account, Booking> event)
+      throws RemoteException
+  {
+    property.firePropertyChange(event);
+  }
 
-      @Override public boolean addListener
-      (GeneralListener <Account, Booking> listener, String...propertyNames)
-      {
-        return property.addListener(listener, propertyNames);
-      }
+  @Override public boolean addListener(
+      GeneralListener<Account, Booking> listener, String... propertyNames)
+  {
+    return property.addListener(listener, propertyNames);
+  }
 
-      @Override public boolean removeListener
-      (GeneralListener <Account, Booking > listener, String...propertyNames)
-      {
-        return property.removeListener(listener, propertyNames);
-      }
+  @Override public boolean removeListener(
+      GeneralListener<Account, Booking> listener, String... propertyNames)
+  {
+    return property.removeListener(listener, propertyNames);
+  }
 
-      private String getExceptionMessage (Exception e)
-      {
-        String message = e.getMessage();
-        if (message != null)
-          message = message.split(";")[0];
-        return message;
-      }
-    }
+  private String getExceptionMessage(Exception e)
+  {
+    String message = e.getMessage();
+    if (message != null)
+      message = message.split(";")[0];
+    return message;
+  }
+}
 

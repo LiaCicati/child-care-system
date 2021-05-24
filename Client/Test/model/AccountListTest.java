@@ -21,9 +21,9 @@ class AccountListTest
         list = new AccountList();
         parent = new Parent("Parent", "password", "parent@gmail.com", "Santa",
             "Clause", false);
-        babysitter = new Babysitter("babysitter", "password",
-            "babysitter@gmail.com", "Chuck", "Norris",
-            new MyDateTime(1, 5, 1999), 75, "English", 5, true);
+        babysitter = new Babysitter("Anne", "Marie",
+            "anne", "babysitter@gmail.com", "password",
+            new MyDateTime(1, 5, 1999), 2, 40, "English", true);
         list.addAccount(parent);
         list.addAccount(babysitter);
     }

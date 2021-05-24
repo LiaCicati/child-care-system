@@ -23,9 +23,9 @@ class BookingListTest
         list = new BookingList();
         parent = new Parent("Parent", "password", "parent@gmail.com", "Santa",
             "Clause", false);
-        babysitter = new Babysitter("babysitter", "password",
-            "babysitter@gmail.com", "Chuck", "Norris",
-            new MyDateTime(1, 5, 1999), 75, "English", 5, true);
+        babysitter = new Babysitter("Anne", "Marie",
+            "anne", "babysitter@gmail.com", "password",
+            new MyDateTime(1, 5, 1999), 2, 40, "English", true);
         booking1 = new Booking(
             new TimeInterval(new MyDateTime(13, 3, 2021, 12, 30),
                 new MyDateTime(13, 3, 2001, 19, 0)), parent, babysitter);

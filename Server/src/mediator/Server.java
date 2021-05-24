@@ -69,34 +69,33 @@ public class Server implements RemoteModel, LocalListener<Account, Booking>
     return model.login(username, password);
   }
 
-  @Override public void registerBabysitter(String userName, String password,
-      String email, String firstName, String lastName, MyDateTime birthday,
-      double paymentPerHour, String mainLanguage, double babysittingExperience,
-      boolean hasFirstAidCertificate) throws RemoteException
+
+  @Override public void registerBabysitter(String firstName, String lastName, String userName,String email, String password,
+                                           MyDateTime birthday, double babysittingExperience,
+                                           double paymentPerHour, String mainLanguage,
+                                           boolean hasFirstAidCertificate) throws RemoteException
+
   {
-    model.registerBabysitter(userName, password, email, firstName, lastName,
-        birthday, paymentPerHour, mainLanguage, babysittingExperience,
-        hasFirstAidCertificate);
+    model.registerBabysitter(firstName, lastName,userName,email, password,
+            birthday,  babysittingExperience,paymentPerHour, mainLanguage,
+            hasFirstAidCertificate);
   }
 
-  @Override public void registerBabysitter(String userName, String password,
+/*  @Override public void registerBabysitter(String userName, String password,
       String email, String firstName, String lastName) throws RemoteException
   {
     model.registerBabysitter(userName, password, email, firstName, lastName);
-  }
+  }*/
 
-  @Override public void registerParent(String userName, String password,
-      String email, String firstName, String lastName) throws RemoteException
-  {
-    model.registerParent(userName, password, email, firstName, lastName);
-  }
+//  @Override public void registerParent(String firstName, String lastName, String userName,String email, String password) throws RemoteException
+//  {
+//    model.registerParent( firstName,  lastName,  userName, email,  password);
+//  }
 
-  @Override public void registerParent(String userName, String password,
-      String email, String firstName, String lastName, boolean hasPets)
+  @Override public void registerParent(String firstName, String lastName, String userName,String email, String password, boolean hasPets)
       throws RemoteException
   {
-    model.registerParent(userName, password, email, firstName, lastName,
-        hasPets);
+    model.registerParent(firstName, lastName, userName, email, password, hasPets);
   }
 
   @Override public AccountList getParentList() throws RemoteException

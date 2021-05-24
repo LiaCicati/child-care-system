@@ -11,17 +11,22 @@ public class Babysitter extends Account
   private boolean hasFirstAidCertificate;
   private MyDateTime dateOfBirth;
 
-  public Babysitter(String userName, String password, String email,
-                    String firstName, String lastName, MyDateTime dateOfBirth,
-                    double paymentPerHour, String mainLanguage, double babysittingExperience,
-                    boolean hasFirstAidCertificate)
+  public Babysitter(String firstName, String lastName, String userName,String email, String password,
+      MyDateTime dateOfBirth, double babysittingExperience,
+      double paymentPerHour, String mainLanguage,
+      boolean hasFirstAidCertificate)
   {
-    super(userName, password, email, firstName, lastName);
+    super(firstName, lastName, userName, email, password );
     setPaymentPerHour(paymentPerHour);
     setBabysittingExperience(babysittingExperience);
     setFirstAidCertificate(hasFirstAidCertificate);
+    if(dateOfBirth == null)
+    {
+      throw new IllegalArgumentException("Please enter your date of birth");
+    }
+    setDateOfBirth(dateOfBirth);
 
-    this.languages = new ArrayList<>();
+    this.setLanguages(new ArrayList<>());
     if(mainLanguage == null || mainLanguage.equals(""))
     {
       throw new IllegalArgumentException("Please specify your main language");
@@ -29,50 +34,20 @@ public class Babysitter extends Account
     {
       addLanguage(mainLanguage);
     }
-    setDateOfBirth(dateOfBirth);
 
   }
 
-  public Babysitter(String userName, String password, String email,
-                    String firstName, String lastName)
+/*  public Babysitter(String userName, String password, String email, String firstName, String lastName)
   {
     super(userName, password, email, firstName, lastName);
 
-  }
-
-  //  public int getAge(LocalDate dateOfBirth)
-  //  {
-  //    int currentDay = LocalDate.now().getDayOfMonth();
-  //    int currentMonth = LocalDate.now().getMonthValue();
-  //    int currentYear = LocalDate.now().getYear();
-  //
-  //    int birthDay = dateOfBirth.getDayOfMonth();
-  //    int birthMonth = dateOfBirth.getMonthValue();
-  //    int birthYear = dateOfBirth.getYear();
-  //
-  //    int age = currentYear - birthYear;
-  //
-  //    int differenceInDays = currentDay - birthDay;
-  //    int differenceInMonths = currentMonth - birthMonth;
-  //    if (differenceInDays < 0)
-  //    {
-  //      differenceInMonths = differenceInMonths - 1;
-  //    }
-  //    if (differenceInMonths < 0)
-  //    {
-  //      return age - 1;
-  //    }
-  //    else
-  //    {
-  //      return age;
-  //    }
-  //  }
+  }*/
 
   public int getAge()
   {
     LocalDate localDate = LocalDate.now();
     MyDateTime date = new MyDateTime(localDate.getDayOfMonth(),
-            localDate.getMonthValue(), localDate.getYear());
+        localDate.getMonthValue(), localDate.getYear());
     if (dateOfBirth == null)
     {
       return 0;
@@ -86,17 +61,6 @@ public class Babysitter extends Account
     }
   }
 
-//  public String getFirstAidCertificate()
-//  {
-//    if (hasFirstAidCertificate())
-//    {
-//      return "Possess";
-//    }
-//    else
-//    {
-//      return "Do not posses";
-//    }
-//  }
 
   public MyDateTime getDateOfBirth()
   {
@@ -119,14 +83,21 @@ public class Babysitter extends Account
 
   public void setPaymentPerHour(double paymentPerHour)
   {
-    if (paymentPerHour < 0)
+    if (paymentPerHour==0.0){
+      throw new IllegalArgumentException("Please enter your payment per hour");
+
+    }
+    else if (paymentPerHour < 0)
     {
       double positivePaymentPerHour = Math.abs(paymentPerHour);
       this.paymentPerHour = positivePaymentPerHour;
+      throw new IllegalArgumentException("You cannot charge a negative number");
     }
     else if (paymentPerHour > 500)
     {
       this.paymentPerHour = 500;
+      throw new IllegalArgumentException("You cannot charge more than 500 per hour");
+
     }
     else if(paymentPerHour == 0)
     {
@@ -159,6 +130,8 @@ public class Babysitter extends Account
     {
       double positiveBabysittingExperience = Math.abs(babysittingExperience);
       this.babysittingExperience = positiveBabysittingExperience;
+      throw new IllegalArgumentException("You cannot have negative experience");
+
     }
 /*    else if  (babysittingExperience>getAge(getDateOfBirth())){
       this.babysittingExperience = getAge(getDateOfBirth());
@@ -167,10 +140,7 @@ public class Babysitter extends Account
     {
       this.babysittingExperience = 70;
     }
-    else if(babysittingExperience == 0)
-    {
-      throw new IllegalArgumentException("Please specify your experience");
-    }
+
     else
     {
       this.babysittingExperience = babysittingExperience;
@@ -187,15 +157,18 @@ public class Babysitter extends Account
     this.hasFirstAidCertificate = hasFirstAidCertificate;
   }
 
-  public void setDateOfBirth(MyDateTime dateOfBirth) {
-    int thisDay = LocalDate.now().getDayOfMonth();
-    int thisMonth = LocalDate.now().getDayOfMonth();
-    int legalYear = LocalDate.now().getYear() - 13;
-    if (dateOfBirth.isAfterDate(new MyDateTime(thisDay, thisMonth, legalYear))) {
-      throw new IllegalArgumentException("You must be above the age of 13 to sign up at Kinder.");
-    } else {
-      this.dateOfBirth = dateOfBirth;
+  public void setDateOfBirth(MyDateTime dateOfBirth)
+  {
+    LocalDate today = LocalDate.now();
+    MyDateTime legalBirthDate = new MyDateTime(today.getDayOfMonth(),
+        today.getMonthValue(), today.getYear()-13);
+    System.out.println("legal: "+legalBirthDate);
+    System.out.println("actual: "+dateOfBirth);
+    System.out.println(dateOfBirth.isAfterDate(legalBirthDate));
+    if (dateOfBirth.isAfterDate(legalBirthDate)){
+      throw new IllegalArgumentException("You have got to be over the age of 13 to sign up for Kinder");
     }
+    this.dateOfBirth = dateOfBirth;
   }
 
   public boolean equals(Object obj)
@@ -206,16 +179,24 @@ public class Babysitter extends Account
     }
     Babysitter other = (Babysitter) obj;
     return super.equals(obj) && paymentPerHour == other.paymentPerHour
-            && babysittingExperience == other.babysittingExperience
-            && hasFirstAidCertificate == other.hasFirstAidCertificate;
+        && babysittingExperience == other.babysittingExperience
+        && hasFirstAidCertificate == other.hasFirstAidCertificate;
   }
 
   @Override public String toString()
   {
     return super.toString() + "\n" + "Payment per hour: " + paymentPerHour
-            + "\n" + "Main language: " + getMainLanguage() + "\n" + "Languages: "
-            + languages + "\n" + "Years of experience: " + babysittingExperience
-            + "\n" + "Has CPR certificate: " + hasFirstAidCertificate + "\n"
-            + "Birthday: " + dateOfBirth;
+        + "\n" + "Main language: " + getMainLanguage() + "\n" + "Languages: "
+        + languages + "\n" + "Years of experience: " + babysittingExperience
+        + "\n" + "Has CPR certificate: " + hasFirstAidCertificate + "\n"
+        + "Birthday: " + dateOfBirth;
+  }
+
+  public void setLanguages(ArrayList<String> languages) {
+    if (languages == null)
+    {
+      throw new IllegalArgumentException("Please enter your mother tongue");
+    }
+    this.languages = languages;
   }
 }

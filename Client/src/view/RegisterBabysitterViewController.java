@@ -47,6 +47,10 @@ public class RegisterBabysitterViewController extends ViewController
     errorLabel.textProperty().bind(viewModel.getError());
     reset();
 
+    viewModel.reset();
+    hasCertificate.setSelected(false);
+    doNotHaveCertificate.setSelected(true);
+
   }
 
   @Override public void reset()
@@ -54,28 +58,17 @@ public class RegisterBabysitterViewController extends ViewController
     viewModel.reset();
   }
 
-//  public void onRegister() throws RemoteException
-//  {
-//    if (viewModel.register())
-//    {
-//      onLogIn();
-//    }
 
-//    if (viewModel.registerWithRequiredData())
-//    {
-//      onLogIn();
-//    }
+  public void onRegister() throws RemoteException
+  {
+    if (viewModel.register())
+    {
+      onLogIn();
+    }
+  }
 
   public void onLogIn()
   {
     getViewHandler().openView(View.LOGIN_VIEW);
-  }
-
-  public void onRegister(ActionEvent actionEvent) throws RemoteException {
-
-   if (viewModel.register())
-   {
-      onLogIn();
-    }
   }
 }

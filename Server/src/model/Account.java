@@ -11,14 +11,13 @@ public abstract class Account implements Serializable
   private String firstName;
   private String lastName;
 
-  public Account(String userName, String password, String email,
-                 String firstName, String lastName)
+  public Account(String firstName, String lastName, String userName, String email, String password)
   {
-    setUserName(userName);
-    setPassword(password);
-    setEmail(email);
     setFirstName(firstName);
     setLastName(lastName);
+    setUserName(userName);
+    setEmail(email);
+    setPassword(password);
   }
 
   public String getPassword()

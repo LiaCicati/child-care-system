@@ -18,8 +18,8 @@ class AccountTest
     list = new AccountList();
     parent = new Parent("ana", "password", "ana@gmail.com", "Anna", "Mary",
         true);
-    babysitter = new Babysitter("ciocarlia", "password", "ciocarlia@gmail.com",
-        "Lia", "Cicati", new MyDateTime(13, 2, 2001), 30, "English", 1, true);
+    babysitter = new Babysitter("Lia", "Cicati", "ciocarlia","ciocarlia@gmail.com", "password",
+        new MyDateTime(13, 2, 2001), 1,30, "English", true);
   }
 
   @AfterEach void tearDown()

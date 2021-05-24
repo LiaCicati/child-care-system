@@ -46,11 +46,6 @@ public class RegisterParentViewController extends ViewController
     {
       onLogIn();
     }
-
-//    if (viewModel.registerWithRequiredData())
-//    {
-//      onLogIn();
-//    }
   }
 
   public void onLogIn()

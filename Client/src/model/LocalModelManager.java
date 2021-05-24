@@ -62,35 +62,28 @@ public class LocalModelManager
     return serverModel.login(username, password);
   }
 
-  @Override public void registerBabysitter(String userName, String password,
-      String email, String firstName, String lastName, MyDateTime birthday,
-      double paymentPerHour, String mainLanguage, double babysittingExperience,
-      boolean hasFirstAidCertificate)
+  @Override public void registerBabysitter(String firstName, String lastName, String userName,String email,
+                                           String password, MyDateTime birthday, double babysittingExperience,
+                                           double paymentPerHour, String mainLanguage, boolean hasFirstAidCertificate)
   {
-    serverModel
-        .registerBabysitter(userName, password, email, firstName, lastName,
-            birthday, paymentPerHour, mainLanguage, babysittingExperience,
-            hasFirstAidCertificate);
+    serverModel.registerBabysitter(firstName, lastName,userName,email, password, birthday, babysittingExperience,
+            paymentPerHour, mainLanguage, hasFirstAidCertificate);
   }
 
-  @Override public void registerBabysitter(String userName, String password,
-      String email, String firstName, String lastName)
+  /*@Override public void registerBabysitter(String userName, String password, String email, String firstName,
+                                           String lastName)
   {
-    serverModel
-        .registerBabysitter(userName, password, email, firstName, lastName);
-  }
+    serverModel.registerBabysitter(userName, password, email, firstName, lastName);
+  }*/
 
-  @Override public void registerParent(String userName, String password,
-      String email, String firstName, String lastName)
-  {
-    serverModel.registerParent(userName, password, email, firstName, lastName);
-  }
+//  @Override public void registerParent(String firstName, String lastName, String userName,String email, String password)
+//  {
+//    serverModel.registerParent( firstName,  lastName,  userName, email,  password);
+//  }
 
-  @Override public void registerParent(String userName, String password,
-      String email, String firstName, String lastName, boolean hasPets)
+  @Override public void registerParent(String firstName, String lastName, String userName,String email, String password, boolean hasPets)
   {
-    serverModel.registerParent(userName, password, email, firstName, lastName,
-        hasPets);
+    serverModel.registerParent(firstName, lastName, userName, email, password, hasPets);
   }
 
   @Override public AccountList getParentList()
@@ -156,21 +149,20 @@ public class LocalModelManager
     serverModel.addKid(parent, kid);
   }
 
-  @Override public Kid getKidById(int id)
-  {
+
+  @Override public Kid getKidById(int id) {
     return serverModel.getKidById(id);
   }
 
-  @Override public Kid getKid(int index)
-  {
-    return serverModel.getKid(index);
 
-  }
+  @Override public Kid getKid(int index) {
+    return serverModel.getKid(index); }
 
-  @Override public ArrayList<Booking> getAllBookings(Babysitter babysitter)
-  {
-    return serverModel.getAllBookings(babysitter);
+
+  @Override public ArrayList<Booking> getAllBookings(Babysitter babysitter) {
+return serverModel.getAllBookings(babysitter);
   }
+  
 
   @Override public boolean addListener(GeneralListener<Account, Booking> listener,
       String... propertyNames)
