@@ -69,6 +69,7 @@ public class BookingBabysitterViewController extends ViewController
     viewModel.resetLabel(errorLabel);
     String chosenBabysitter = String.valueOf(babysittersTable.getSelectionModel().getSelectedItem());
     viewModel.createBooking(chosenBabysitter, errorLabel);
+    viewModel.updateBabysitters();
   }
 
   public void onDateEntered() throws RemoteException {
