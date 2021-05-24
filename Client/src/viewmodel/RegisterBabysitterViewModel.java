@@ -143,6 +143,7 @@ public class RegisterBabysitterViewModel
   public boolean register() throws RemoteException
   {
     try {
+
       selectedBirthDate = null;
       selectedBirthDateString ="";
       setCprCertificate(hasCertificate);
@@ -156,7 +157,9 @@ public class RegisterBabysitterViewModel
         if (selectedBirthDateString==null){
           System.out.println("vi er i if");
           selectedBirthDateMyDateTime=null;
-        }else if (selectedBirthDateString!=null){
+        }
+        else
+        {
           selectedBirthDateString = String.valueOf(selectedBirthDate);
 
           System.out.println("vi er i else");
@@ -170,7 +173,6 @@ public class RegisterBabysitterViewModel
 
         }
       System.out.println("mydatetime: "+selectedBirthDateMyDateTime);
-
 
       System.out.println("pay: "+paymentPerHour.get());
         model.registerBabysitter(firstName.get(), lastName.getValue(), username.get(), email.get(), password.get(),
