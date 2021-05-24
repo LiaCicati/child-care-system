@@ -44,11 +44,20 @@ public class BookingBabysitterViewController extends ViewController
     babysitterPaymentColumn.setCellValueFactory(d -> d.getValue().getPaymentPerHour());
 
     babysittersTable.setItems(viewModel.getBabysitters());
+
+    viewModel.resetLabel(errorLabel);
+    reset();
   }
 
   @Override public void reset()
   {
-
+    bookingDatePicker.setValue(null);
+    durationHoursComboBox.setValue(null);
+    durationMinutesComboBox.setValue(null);
+    minuteComboBox.setValue(null);
+    hourComboBox.setValue(null);
+    bookingDatePicker.setValue(null);
+    viewModel.reset();
   }
 
   public void onProfile()
@@ -57,32 +66,38 @@ public class BookingBabysitterViewController extends ViewController
   }
 
   public void bookBabysitter() {
+    viewModel.resetLabel(errorLabel);
     String chosenBabysitter = String.valueOf(babysittersTable.getSelectionModel().getSelectedItem());
     viewModel.createBooking(chosenBabysitter, errorLabel);
   }
 
   public void onDateEntered() throws RemoteException {
+    viewModel.resetLabel(errorLabel);
     viewModel.date();
     viewModel.getBookedBabysitters();
   }
 
   public void onHourEntered(ActionEvent actionEvent) throws RemoteException {
+    viewModel.resetLabel(errorLabel);
     viewModel.hour();
     viewModel.getBookedBabysitters();
   }
 
   public void onMinuteEntered(ActionEvent actionEvent) throws RemoteException {
+    viewModel.resetLabel(errorLabel);
     viewModel.minute();
     viewModel.getBookedBabysitters();
   }
 
 
   public void onDurationHourEntered(ActionEvent actionEvent) throws RemoteException {
+    viewModel.resetLabel(errorLabel);
     viewModel.durationHour();
     viewModel.getBookedBabysitters();
   }
 
   public void onDurationMinutesEntered(ActionEvent actionEvent) throws RemoteException {
+    viewModel.resetLabel(errorLabel);
     viewModel.durationMinute();
     viewModel.getBookedBabysitters();
   }
