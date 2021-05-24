@@ -6,7 +6,7 @@ import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public interface Model extends LocalSubject<Booking, Booking>
+public interface Model extends LocalSubject<Account, Booking>
 {
   void addBooking(Booking booking) throws IllegalArgumentException;
 

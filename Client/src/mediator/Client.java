@@ -15,13 +15,13 @@ import java.rmi.server.UnicastRemoteObject;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Client implements ClientModel, RemoteListener<Booking, Booking>
+public class Client implements ClientModel, RemoteListener<Account, Booking>
 {
   private static final String HOST = "localhost";
   private String host;
   private LocalModel localModel;
   private RemoteModel remoteModel;
-  private PropertyChangeAction<Booking, Booking> property;
+  private PropertyChangeAction<Account, Booking> property;
 
   public Client(LocalModel localModel, String host)
       throws RemoteException, NotBoundException, MalformedURLException
@@ -335,19 +335,19 @@ public class Client implements ClientModel, RemoteListener<Booking, Booking>
     }
   }
 
-  @Override public void propertyChange (ObserverEvent <Booking, Booking> event)
+  @Override public void propertyChange (ObserverEvent <Account, Booking> event)
       throws RemoteException {
       property.firePropertyChange(event);
     }
 
       @Override public boolean addListener
-      (GeneralListener <Booking, Booking> listener, String...propertyNames)
+      (GeneralListener <Account, Booking> listener, String...propertyNames)
       {
         return property.addListener(listener, propertyNames);
       }
 
       @Override public boolean removeListener
-      (GeneralListener <Booking, Booking > listener, String...propertyNames)
+      (GeneralListener <Account, Booking > listener, String...propertyNames)
       {
         return property.removeListener(listener, propertyNames);
       }

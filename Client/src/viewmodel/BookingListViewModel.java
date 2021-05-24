@@ -7,12 +7,14 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import model.Account;
 import model.Booking;
 import model.LocalModel;
+import model.Parent;
 import utility.observer.event.ObserverEvent;
 import utility.observer.listener.LocalListener;
 
-public class BookingListViewModel implements LocalListener<Booking, Booking>
+public class BookingListViewModel implements LocalListener<Account, Booking>
 {
   private ObservableList<BookingViewModel> bookings;
   private ObjectProperty<BookingViewModel> selectedBooking;
@@ -57,9 +59,15 @@ public class BookingListViewModel implements LocalListener<Booking, Booking>
     return error;
   }
 
-  @Override public void propertyChange(ObserverEvent<Booking, Booking> event)
+  @Override public void propertyChange(ObserverEvent<Account, Booking> event)
   {
-    Platform.runLater(() ->
-        bookings.add(new BookingViewModel(event.getValue2())));
+    Platform.runLater(() -> {
+      if (event.getValue1()
+          .equals(viewState.getBabysitter()))
+      {
+        bookings.add(new BookingViewModel(event.getValue2()));
+      }
+    });
   }
+
 }

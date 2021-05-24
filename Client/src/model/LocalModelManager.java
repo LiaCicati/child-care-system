@@ -13,10 +13,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class LocalModelManager
-    implements LocalModel, LocalListener<Booking, Booking>
+    implements LocalModel, LocalListener<Account, Booking>
 {
   private ClientModel serverModel;
-  private PropertyChangeAction<Booking, Booking> property;
+  private PropertyChangeAction<Account, Booking> property;
 
   public LocalModelManager()
   {
@@ -172,21 +172,21 @@ public class LocalModelManager
     return serverModel.getAllBookings(babysitter);
   }
 
-  @Override public boolean addListener(GeneralListener<Booking, Booking> listener,
+  @Override public boolean addListener(GeneralListener<Account, Booking> listener,
       String... propertyNames)
   {
     return property.addListener(listener, propertyNames);
   }
 
   @Override public boolean removeListener(
-      GeneralListener<Booking, Booking> listener, String... propertyNames)
+      GeneralListener<Account, Booking> listener, String... propertyNames)
   {
     return property.removeListener(listener, propertyNames);
   }
 
-  @Override public void propertyChange(ObserverEvent<Booking, Booking> event)
+  @Override public void propertyChange(ObserverEvent<Account, Booking> event)
   {
 
-    property.firePropertyChange("add", null, event.getValue2());
+    property.firePropertyChange("add", event.getValue1(), event.getValue2());
   }
 }

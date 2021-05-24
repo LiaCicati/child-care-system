@@ -26,7 +26,7 @@ public class ModelManager implements Model
 
   ArrayList<Kid> kids;
 
-  private PropertyChangeHandler<Booking, Booking> property;
+  private PropertyChangeHandler<Account, Booking> property;
   //    private PropertyChangeAction<Account, Account> accountProperty; //TODO incomment again when account class isimplemented
 
   public ModelManager()
@@ -83,7 +83,8 @@ public class ModelManager implements Model
       throws IllegalArgumentException
   {
             bookingList.addBooking(booking);    //TODO
-            property.firePropertyChange("add", null, booking);
+    property.firePropertyChange("add",booking.getBabysitter(), booking);
+
   }
 
   @Override public boolean isPasswordCorrect(String userName, String password)
@@ -352,19 +353,20 @@ public class ModelManager implements Model
 
   }
 
+
   @Override public ArrayList<Booking> getAllBookings(Babysitter babysitter)
   {
     return bookingList.getBabysitterBookings(babysitter);
   }
 
   @Override public boolean addListener(
-      GeneralListener<Booking, Booking> listener, String... propertyNames)
+      GeneralListener<Account, Booking> listener, String... propertyNames)
   {
     return property.addListener(listener, propertyNames);
   }
 
   @Override public boolean removeListener(
-      GeneralListener<Booking, Booking> listener, String... propertyNames)
+      GeneralListener<Account, Booking> listener, String... propertyNames)
   {
     return property.removeListener(listener, propertyNames);
 

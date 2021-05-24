@@ -9,7 +9,7 @@ import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public interface RemoteModel extends RemoteSubject<Booking, Booking>
+public interface RemoteModel extends RemoteSubject<Account, Booking>
 {
 
  void addBooking(Booking booking) throws RemoteException;

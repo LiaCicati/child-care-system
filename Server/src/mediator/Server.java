@@ -18,10 +18,10 @@ import java.rmi.server.UnicastRemoteObject;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Server implements RemoteModel, LocalListener<Booking, Booking>
+public class Server implements RemoteModel, LocalListener<Account, Booking>
 {
   private Model model;
-  private PropertyChangeHandler<Booking, Booking> property;
+  private PropertyChangeHandler<Account, Booking> property;
 
   public Server(Model model) throws RemoteException, MalformedURLException
   {
@@ -54,7 +54,7 @@ public class Server implements RemoteModel, LocalListener<Booking, Booking>
   @Override public void addBooking(Booking booking) throws RemoteException
   {
     model.addBooking(booking);
-     property.firePropertyChange("add", null, booking);
+     property.firePropertyChange("add", booking.getBabysitter(), booking);
   }
 
   @Override public boolean isPasswordCorrect(String userName, String password)
@@ -175,19 +175,19 @@ public class Server implements RemoteModel, LocalListener<Booking, Booking>
     return model.getAllBookings(babysitter);
   }
 
-  @Override public void propertyChange (ObserverEvent <Booking, Booking> event)
+  @Override public void propertyChange (ObserverEvent <Account, Booking> event)
     {
-      property.firePropertyChange(event.getPropertyName(), null, event.getValue2());
+      property.firePropertyChange(event.getPropertyName(), event.getValue1(), event.getValue2());
     }
 
-    @Override public boolean addListener (GeneralListener <Booking, Booking> listener, String...propertyNames)
+    @Override public boolean addListener (GeneralListener <Account, Booking> listener, String...propertyNames)
       throws RemoteException {
     boolean check = property.addListener(listener, propertyNames);
     return check;
   }
 
     @Override public boolean removeListener
-    (GeneralListener <Booking, Booking> listener, String...propertyNames)
+    (GeneralListener <Account, Booking> listener, String...propertyNames)
       throws RemoteException {
     return property.removeListener(listener, propertyNames);
   }
