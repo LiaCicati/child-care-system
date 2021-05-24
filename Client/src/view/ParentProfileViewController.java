@@ -83,7 +83,7 @@ public class ParentProfileViewController extends ViewController
 
   public void onLogOut()
   {
-    getViewHandler().openView(View.ACCOUNT_TYPE_VIEW);
+    getViewHandler().openView(View.LOGIN_VIEW);
   }
 
   public void onEditParentData()

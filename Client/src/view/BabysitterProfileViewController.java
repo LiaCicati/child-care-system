@@ -69,7 +69,7 @@ public class BabysitterProfileViewController extends ViewController
   public void onLogOut()
   {
     viewModel.logout();
-    getViewHandler().openView(View.ACCOUNT_TYPE_VIEW);
+    getViewHandler().openView(View.LOGIN_VIEW);
   }
 
   public void onNotifications()
