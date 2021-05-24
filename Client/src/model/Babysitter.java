@@ -22,9 +22,8 @@ public class Babysitter extends Account
     setFirstAidCertificate(hasFirstAidCertificate);
     setDateOfBirth(dateOfBirth);
 
-    this.languages = new ArrayList<>();
+    this.setLanguages(new ArrayList<>());
     addLanguage(mainLanguage);
-    setDateOfBirth(dateOfBirth);
 
   }
 
@@ -71,14 +70,21 @@ public class Babysitter extends Account
 
   public void setPaymentPerHour(double paymentPerHour)
   {
-    if (paymentPerHour < 0)
+    if (paymentPerHour==0.0){
+      throw new IllegalArgumentException("Please enter your payment per hour");
+
+    }
+    else if (paymentPerHour < 0)
     {
       double positivePaymentPerHour = Math.abs(paymentPerHour);
       this.paymentPerHour = positivePaymentPerHour;
+      throw new IllegalArgumentException("You cannot charge a negative number - so we have made it positive for you");
     }
     else if (paymentPerHour > 500)
     {
       this.paymentPerHour = 500;
+      throw new IllegalArgumentException("You cannot charge more than 500 per hour");
+
     }
     else
     {
@@ -107,6 +113,8 @@ public class Babysitter extends Account
     {
       double positiveBabysittingExperience = Math.abs(babysittingExperience);
       this.babysittingExperience = positiveBabysittingExperience;
+      throw new IllegalArgumentException("You cannot have negative experience - so we have made it positive for you");
+
     }
 /*    else if  (babysittingExperience>getAge(getDateOfBirth())){
       this.babysittingExperience = getAge(getDateOfBirth());
@@ -136,10 +144,13 @@ public class Babysitter extends Account
     LocalDate today = LocalDate.now();
     MyDateTime legalBirthDate = new MyDateTime(today.getDayOfMonth(),
             today.getMonthValue(), today.getYear()-13);
+    System.out.println("legal: "+legalBirthDate);
+    System.out.println("actual: "+dateOfBirth);
+    System.out.println(dateOfBirth.isAfterDate(legalBirthDate));
     if (dateOfBirth == null)
     {
       throw new IllegalArgumentException("Please enter your date of birth");
-    }else if (dateOfBirth.isAfterDateTime(legalBirthDate)){
+    }else if (dateOfBirth.isAfterDate(legalBirthDate)){
       throw new IllegalArgumentException("You have got to be over the age of 13 to sign up for Kinder");
     }
     this.dateOfBirth = dateOfBirth;
@@ -165,5 +176,13 @@ public class Babysitter extends Account
             + languages + "\n" + "Years of experience: " + babysittingExperience
             + "\n" + "Has CPR certificate: " + hasFirstAidCertificate + "\n"
             + "Birthday: " + dateOfBirth;
+  }
+
+  public void setLanguages(ArrayList<String> languages) {
+    if (languages == null)
+    {
+      throw new IllegalArgumentException("Please enter your mother tongue");
+    }
+    this.languages = languages;
   }
 }

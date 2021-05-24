@@ -145,21 +145,13 @@ public class RegisterBabysitterViewModel
     try {
       selectedBirthDate = null;
       selectedBirthDateString ="";
+      setCprCertificate(hasCertificate);
       selectedBirthDate = getAge().get();
-      System.out.println(selectedBirthDate);
+      System.out.println("localdate: "+selectedBirthDate);
       if (selectedBirthDate==null){
         System.out.println("vi er i aller første if");
         selectedBirthDateString = null;
       }
-
-      //
-      setCprCertificate(hasCertificate);
-      if (motherTongue.get()==null){
-        errorLabel.set("føz");
-      }
-//       else if (hasCertificate.get()==null){
-//        errorLabel.set("cpr");}
-      else{
         System.out.println("start af første else");
         if (selectedBirthDateString==null){
           System.out.println("vi er i if");
@@ -168,19 +160,19 @@ public class RegisterBabysitterViewModel
           selectedBirthDateString = String.valueOf(selectedBirthDate);
 
           System.out.println("vi er i else");
-          selectedBirthDay = Integer.parseInt(selectedBirthDateString.substring(0, 4));
+          selectedBirthYear = Integer.parseInt(selectedBirthDateString.substring(0, 4));
           System.out.println("day: "+selectedBirthDay);
           selectedBirthMonth = Integer.parseInt(selectedBirthDateString.substring(5, 7));
           System.out.println("month: "+selectedBirthMonth);
-          selectedBirthYear = Integer.parseInt(selectedBirthDateString.substring(8, 10));
+          selectedBirthDay = Integer.parseInt(selectedBirthDateString.substring(8, 10));
           System.out.println("year: "+selectedBirthYear);
           selectedBirthDateMyDateTime = new MyDateTime(selectedBirthDay, selectedBirthMonth, selectedBirthYear);
-          System.out.println("mydatetime: "+selectedBirthDateMyDateTime);
 
         }
+      System.out.println("mydatetime: "+selectedBirthDateMyDateTime);
 
-        System.out.println(selectedBirthDateMyDateTime);
 
+      System.out.println("pay: "+paymentPerHour.get());
         model.registerBabysitter(firstName.get(), lastName.getValue(), username.get(), email.get(), password.get(),
                 selectedBirthDateMyDateTime, babysittingExperience.get(), paymentPerHour.get(),
                 motherTongue.get(),
@@ -190,22 +182,7 @@ public class RegisterBabysitterViewModel
 
 
 
-
-
-        ObservableList<BookingBabysitterTableRowData> babysitters;
-        babysitters = FXCollections.observableArrayList();
-        for (int i = 0; i < model.getBabysitterList().getNumberOfAccounts(); i++) {
-
-            babysitters.add(new BookingBabysitterTableRowData(
-                    model.getBabysitterList().getAllBabysitterAccounts().get(i)));
-          }
-        System.out.println(babysitters);
-
-
-
         return true;
-            }
-return false;
     }
     catch (Exception e)
     {
