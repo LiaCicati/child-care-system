@@ -132,10 +132,7 @@ public class Babysitter extends Account
     else if (babysittingExperience > 70)
     {
       this.babysittingExperience = 70;
-    }  else if(babysittingExperience == 0)
-    {
-      throw new IllegalArgumentException("Please specify your experience");
-    }
+    }  
     else
     {
       this.babysittingExperience = babysittingExperience;
