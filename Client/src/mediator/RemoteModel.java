@@ -24,9 +24,9 @@ Account login(String username, String password) throws RemoteException;
                          double paymentPerHour, String mainLanguage,
                          boolean hasFirstAidCertificate) throws RemoteException;
  //void registerBabysitter(String userName, String password, String email,String firstName, String lastName) throws RemoteException;
- void registerParent(String userName, String password, String email, String firstName, String lastName)
+ void registerParent(String firstName, String lastName, String userName,String email, String password)
          throws RemoteException;
- void registerParent(String userName, String password, String email, String firstName, String lastName,
+ void registerParent(String firstName, String lastName, String userName,String email, String password,
                      boolean hasPets) throws RemoteException;
  AccountList getParentList() throws RemoteException;
  Parent getParent(String username) throws RemoteException;

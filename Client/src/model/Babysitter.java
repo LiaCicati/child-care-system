@@ -12,11 +12,11 @@ public class Babysitter extends Account
   private MyDateTime dateOfBirth;
 
   public Babysitter(String firstName, String lastName, String userName,String email, String password,
-                    MyDateTime birthday, double babysittingExperience,
+                    MyDateTime dateOfBirth, double babysittingExperience,
                     double paymentPerHour, String mainLanguage,
                     boolean hasFirstAidCertificate)
   {
-    super(userName, password, email, firstName, lastName);
+    super(firstName, lastName, userName, email, password );
     setPaymentPerHour(paymentPerHour);
     setBabysittingExperience(babysittingExperience);
     setFirstAidCertificate(hasFirstAidCertificate);
@@ -37,7 +37,7 @@ public class Babysitter extends Account
   {
     LocalDate localDate = LocalDate.now();
     MyDateTime date = new MyDateTime(localDate.getDayOfMonth(),
-        localDate.getMonthValue(), localDate.getYear());
+            localDate.getMonthValue(), localDate.getYear());
     if (dateOfBirth == null)
     {
       return 0;
@@ -132,7 +132,17 @@ public class Babysitter extends Account
 
   public void setDateOfBirth(MyDateTime dateOfBirth)
   {
+    LocalDate localDate = LocalDate.now();
+    MyDateTime legalBirthDate = new MyDateTime(localDate.getDayOfMonth(),
+            localDate.getMonthValue(), localDate.getYear()-13);
+    if (dateOfBirth == null)
+    {
+      throw new IllegalArgumentException("Please enter your date of birth");
+    }else if (dateOfBirth.isAfterDateTime(legalBirthDate)){
+      throw new IllegalArgumentException("You have got to be over the age of 13 to sign up for Kinder");
+    }
     this.dateOfBirth = dateOfBirth;
+
   }
 
   public boolean equals(Object obj)
@@ -143,16 +153,16 @@ public class Babysitter extends Account
     }
     Babysitter other = (Babysitter) obj;
     return super.equals(obj) && paymentPerHour == other.paymentPerHour
-        && babysittingExperience == other.babysittingExperience
-        && hasFirstAidCertificate == other.hasFirstAidCertificate;
+            && babysittingExperience == other.babysittingExperience
+            && hasFirstAidCertificate == other.hasFirstAidCertificate;
   }
 
   @Override public String toString()
   {
     return super.toString() + "\n" + "Payment per hour: " + paymentPerHour
-        + "\n" + "Main language: " + getMainLanguage() + "\n" + "Languages: "
-        + languages + "\n" + "Years of experience: " + babysittingExperience
-        + "\n" + "Has CPR certificate: " + hasFirstAidCertificate + "\n"
-        + "Birthday: " + dateOfBirth;
+            + "\n" + "Main language: " + getMainLanguage() + "\n" + "Languages: "
+            + languages + "\n" + "Years of experience: " + babysittingExperience
+            + "\n" + "Has CPR certificate: " + hasFirstAidCertificate + "\n"
+            + "Birthday: " + dateOfBirth;
   }
 }

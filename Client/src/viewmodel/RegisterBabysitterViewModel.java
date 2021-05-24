@@ -4,11 +4,13 @@ import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Babysitter;
+import model.Booking;
 import model.LocalModel;
 import model.MyDateTime;
 
 import java.rmi.RemoteException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class RegisterBabysitterViewModel
 {
@@ -23,6 +25,7 @@ public class RegisterBabysitterViewModel
   private DoubleProperty paymentPerHour;
   private StringProperty motherTongue;
   private ObjectProperty<Boolean> hasCertificate;
+  private ObjectProperty<Boolean> cprCertificate;
   private StringProperty errorLabel;
 
   LocalDate selectedBirthDate;
@@ -46,6 +49,7 @@ public class RegisterBabysitterViewModel
     paymentPerHour = new SimpleDoubleProperty();
     motherTongue = new SimpleStringProperty();
     errorLabel = new SimpleStringProperty("");
+    cprCertificate = new SimpleObjectProperty<>();
   }
 
   public void reset()
@@ -60,7 +64,7 @@ public class RegisterBabysitterViewModel
     paymentPerHour.set(0);
     motherTongue.set("");
     errorLabel.set("");
-    hasCertificate.set(true);
+  //  hasCertificate.set(true);
   }
 
   public StringProperty getFirstName()
@@ -138,12 +142,15 @@ public class RegisterBabysitterViewModel
 
   public boolean register() throws RemoteException
   {
-    try
-    {
+    try {
       selectedBirthDate = getAge().get();
-      if (selectedBirthDate==null){
+      setCprCertificate(hasCertificate);
+      if (motherTongue.get()==null){
         errorLabel.set("føz");
-      }else {
+      }
+//       else if (hasCertificate.get()==null){
+//        errorLabel.set("cpr");}
+        else{
         System.out.println(selectedBirthDate);
         selectedBirthDateString = String.valueOf(selectedBirthDate);
 
@@ -156,10 +163,26 @@ public class RegisterBabysitterViewModel
         model.registerBabysitter(firstName.get(), lastName.getValue(), username.get(), email.get(), password.get(),
                 selectedBirthDateMyDateTime, babysittingExperience.get(), paymentPerHour.get(),
                 motherTongue.get(),
-                hasCertificate.get());
+                cprCertificate.get());
         errorLabel.set("");
+
+
+
+
+
+        ObservableList<BookingBabysitterTableRowData> babysitters;
+        babysitters = FXCollections.observableArrayList();
+        for (int i = 0; i < model.getBabysitterList().getNumberOfAccounts(); i++) {
+
+            babysitters.add(new BookingBabysitterTableRowData(
+                    model.getBabysitterList().getAllBabysitterAccounts().get(i)));
+          }
+        System.out.println(babysitters);
+
+
+
         return true;
-      }
+            }
 return false;
     }
     catch (Exception e)
@@ -167,6 +190,18 @@ return false;
       System.out.println("exception: "+e.getMessage());
       errorLabel.set("exception: "+e.getMessage());
       return false;
+    }
+  }
+
+  public ObjectProperty<Boolean> getCprCertificate() {
+    return cprCertificate;
+  }
+
+  public void setCprCertificate(ObjectProperty<Boolean> cprCertificate) {
+    if (getHasCertificate().get()==null){
+      this.cprCertificate.set(false);
+    } else {
+      this.cprCertificate.set(true);
     }
   }
 }

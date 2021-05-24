@@ -37,8 +37,8 @@ public class ModelManager implements Model
     Account babysitter2 = new Babysitter("Loredana", "Cicati","lori","lori@mail.ru", "lialialia",
          new MyDateTime(13, 2, 2001),2, 30, "English",
         false);
-    Account parent1 = new Parent("ana", "password", "ana@gmail.com", "Ana",  "Peters");
-    Account parent2 = new Parent("lina", "password", "lina@gmail.com", "Lina",  "Peters", true);
+    Account parent1 = new Parent("Ana",  "Peters","ana", "ana@gmail.com", "password" );
+    Account parent2 = new Parent("Lina",  "Peters","lina", "lina@gmail.com", "password",  true);
     //accountList.addAccount(babysitter);
     accountList.addAccount(babysitter2);
     accountList.addAccount(parent1);
@@ -146,8 +146,7 @@ public class ModelManager implements Model
     }
   }
 */
-  @Override public void registerParent(String userName, String password,
-      String email, String firstName, String lastName)
+  @Override public void registerParent(String firstName, String lastName, String userName,String email, String password)
   {
     if (!accountList.containsUsername(userName) && !accountList
         .containsEmail(email))
@@ -169,8 +168,7 @@ public class ModelManager implements Model
     }
   }
 
-  @Override public void registerParent(String userName, String password,
-      String email, String firstName, String lastName, boolean hasPets)
+  @Override public void registerParent(String firstName, String lastName, String userName,String email, String password, boolean hasPets)
   {
     if (!accountList.containsUsername(userName) && !accountList
         .containsEmail(email))

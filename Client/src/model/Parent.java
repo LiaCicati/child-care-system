@@ -8,18 +8,16 @@ public class Parent extends Account
   private boolean hasPets;
   private ArrayList<Kid> kids;
 
-  public Parent(String userName, String password, String email,
-      String firstName, String lastName, boolean hasPets)
+  public Parent(String firstName, String lastName, String userName,String email, String password, boolean hasPets)
   {
-    super(userName, password, email, firstName, lastName);
+    super( firstName, lastName, userName, email, password);
     setHasPets(hasPets);
     this.kids = new ArrayList<Kid>();
   }
 
-  public Parent(String userName, String password, String email,
-      String firstName, String lastName)
+  public Parent(String firstName, String lastName, String userName,String email, String password)
   {
-    super(userName, password, email, firstName, lastName);
+    super( firstName, lastName, userName, email, password);
 
   }
 
@@ -46,7 +44,7 @@ public class Parent extends Account
     }
     Parent other = (Parent) obj;
     return super.equals(obj) && hasPets == other.hasPets && kids
-        .equals(other.kids);
+            .equals(other.kids);
   }
 
   public ArrayList<Kid> getKids()
@@ -66,6 +64,6 @@ public class Parent extends Account
   public String toString()
   {
     return super.toString() + "\n" + "Number ofKids: " + nrOfKids + "\n"
-        + " Has pets: " + hasPets + "\n" + " Kids: " + getKids();
+            + " Has pets: " + hasPets + "\n" + " Kids: " + getKids();
   }
 }

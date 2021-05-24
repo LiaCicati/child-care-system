@@ -12,11 +12,11 @@ public class Babysitter extends Account
   private MyDateTime dateOfBirth;
 
   public Babysitter(String firstName, String lastName, String userName,String email, String password,
-                    MyDateTime birthday, double babysittingExperience,
+                    MyDateTime dateOfBirth, double babysittingExperience,
                     double paymentPerHour, String mainLanguage,
                     boolean hasFirstAidCertificate)
   {
-    super(userName, password, email, firstName, lastName);
+    super(firstName, lastName, userName, email, password );
     setPaymentPerHour(paymentPerHour);
     setBabysittingExperience(babysittingExperience);
     setFirstAidCertificate(hasFirstAidCertificate);
@@ -30,6 +30,7 @@ public class Babysitter extends Account
 /*  public Babysitter(String userName, String password, String email, String firstName, String lastName)
   {
     super(userName, password, email, firstName, lastName);
+
   }*/
 
   public int getAge()
@@ -131,7 +132,17 @@ public class Babysitter extends Account
 
   public void setDateOfBirth(MyDateTime dateOfBirth)
   {
+    LocalDate localDate = LocalDate.now();
+    MyDateTime legalBirthDate = new MyDateTime(localDate.getDayOfMonth(),
+            localDate.getMonthValue(), localDate.getYear()-13);
+    if (dateOfBirth == null)
+    {
+      throw new IllegalArgumentException("Please enter your date of birth");
+    }else if (dateOfBirth.isAfterDateTime(legalBirthDate)){
+      throw new IllegalArgumentException("You have got to be over the age of 13 to sign up for Kinder");
+    }
     this.dateOfBirth = dateOfBirth;
+
   }
 
   public boolean equals(Object obj)

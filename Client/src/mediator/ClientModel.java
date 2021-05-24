@@ -17,8 +17,8 @@ void close();
                             double paymentPerHour, String mainLanguage,
                             boolean hasFirstAidCertificate);
 //    void registerBabysitter(String userName, String password, String email,String firstName, String lastName);
-    void registerParent(String userName, String password, String email, String firstName, String lastName);
-    void registerParent(String userName, String password, String email, String firstName, String lastName,
+    void registerParent(String firstName, String lastName, String userName,String email, String password);
+    void registerParent(String firstName, String lastName, String userName,String email, String password,
                         boolean hasPets);
     AccountList getParentList();
     Parent getParent(String username);

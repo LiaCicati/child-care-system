@@ -129,13 +129,12 @@ public class Client implements ClientModel, RemoteListener<String, String>
     }
   }
 */
-  @Override public void registerParent(String userName, String password,
-      String email, String firstName, String lastName)
+  @Override public void registerParent(String firstName, String lastName, String userName,String email, String password)
   {
     try
     {
       remoteModel
-          .registerParent(userName, password, email, firstName, lastName);
+          .registerParent( firstName,  lastName,  userName, email,  password);
     }
     catch (RemoteException e)
     {
@@ -143,12 +142,11 @@ public class Client implements ClientModel, RemoteListener<String, String>
     }
   }
 
-  @Override public void registerParent(String userName, String password,
-      String email, String firstName, String lastName, boolean hasPets)
+  @Override public void registerParent(String firstName, String lastName, String userName,String email, String password, boolean hasPets)
   {
     try
     {
-      remoteModel.registerParent(userName, password, email, firstName, lastName,
+      remoteModel.registerParent( firstName,  lastName,  userName, email,  password,
           hasPets);
     }
     catch (RemoteException e)

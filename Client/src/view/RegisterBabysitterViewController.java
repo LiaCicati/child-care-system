@@ -45,6 +45,10 @@ public class RegisterBabysitterViewController extends ViewController
         .bindBidirectional(viewModel.getHasCertificate());
     errorLabel.textProperty().bind(viewModel.getError());
 
+    viewModel.reset();
+    hasCertificate.setSelected(false);
+    doNotHaveCertificate.setSelected(true);
+
   }
 
   @Override public void reset()

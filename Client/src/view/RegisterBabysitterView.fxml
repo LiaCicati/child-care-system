@@ -114,10 +114,8 @@
                         <RadioButton fx:id="hasCertificate" mnemonicParsing="false" text="yes">
                            <toggleGroup>
                            <ToggleGroup fx:id="groupToggle">
-
                            </ToggleGroup>
                         </toggleGroup>
-
                         </RadioButton>
                         <RadioButton fx:id="doNotHaveCertificate" mnemonicParsing="false" text="no" />
                      </children>
