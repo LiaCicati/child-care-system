@@ -141,9 +141,20 @@ public class ModelManager implements Model
           mainLanguage, hasFirstAidCertificate);
       accountList.addAccount(account);
       babysitterList.addAccount(account);
-
     }
+    else if (accountList.containsUsername(userName))
+    {
+      throw new IllegalStateException(
+          "An user with this username is already registered in the system");
+    }
+    else if (accountList.containsEmail(email))
+    {
+      throw new IllegalStateException(
+          "An user with this email is already registered in the system");
+    }
+
   }
+
   //    @Override public void registerParent(String userName, String password,
   //        String email, String firstName, String lastName)
   //    {
@@ -237,6 +248,16 @@ public class ModelManager implements Model
       parentList.addAccount(account);
 
     }
+    else if (accountList.containsUsername(userName))
+          {
+            throw new IllegalStateException(
+                "An user with this username is already registered in the system");
+          }
+          else if (accountList.containsEmail(email))
+          {
+            throw new IllegalStateException(
+                "An user with this email is already registered in the system");
+          }
   }
 
   @Override public ArrayList<Kid> getKidList()
