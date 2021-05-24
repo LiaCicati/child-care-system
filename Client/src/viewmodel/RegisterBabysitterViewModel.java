@@ -62,7 +62,7 @@ public class RegisterBabysitterViewModel
     age.set(null);
     babysittingExperience.set(0);
     paymentPerHour.set(0);
-    motherTongue.set("");
+    motherTongue.set(null);
     errorLabel.set("");
   //  hasCertificate.set(true);
   }
@@ -143,27 +143,49 @@ public class RegisterBabysitterViewModel
   public boolean register() throws RemoteException
   {
     try {
+      selectedBirthDate = null;
+      selectedBirthDateString ="";
       selectedBirthDate = getAge().get();
+      System.out.println(selectedBirthDate);
+      if (selectedBirthDate==null){
+        System.out.println("vi er i aller første if");
+        selectedBirthDateString = null;
+      }
+
+      //
       setCprCertificate(hasCertificate);
       if (motherTongue.get()==null){
         errorLabel.set("føz");
       }
 //       else if (hasCertificate.get()==null){
 //        errorLabel.set("cpr");}
-        else{
-        System.out.println(selectedBirthDate);
-        selectedBirthDateString = String.valueOf(selectedBirthDate);
+      else{
+        System.out.println("start af første else");
+        if (selectedBirthDateString==null){
+          System.out.println("vi er i if");
+          selectedBirthDateMyDateTime=null;
+        }else if (selectedBirthDateString!=null){
+          selectedBirthDateString = String.valueOf(selectedBirthDate);
 
-        selectedBirthDay = Integer.parseInt(selectedBirthDateString.substring(0, 4));
-        selectedBirthMonth = Integer.parseInt(selectedBirthDateString.substring(5, 7));
-        selectedBirthYear = Integer.parseInt(selectedBirthDateString.substring(8, 10));
+          System.out.println("vi er i else");
+          selectedBirthDay = Integer.parseInt(selectedBirthDateString.substring(0, 4));
+          System.out.println("day: "+selectedBirthDay);
+          selectedBirthMonth = Integer.parseInt(selectedBirthDateString.substring(5, 7));
+          System.out.println("month: "+selectedBirthMonth);
+          selectedBirthYear = Integer.parseInt(selectedBirthDateString.substring(8, 10));
+          System.out.println("year: "+selectedBirthYear);
+          selectedBirthDateMyDateTime = new MyDateTime(selectedBirthDay, selectedBirthMonth, selectedBirthYear);
+          System.out.println("mydatetime: "+selectedBirthDateMyDateTime);
 
-        selectedBirthDateMyDateTime = new MyDateTime(selectedBirthDay, selectedBirthMonth, selectedBirthYear);
+        }
+
+        System.out.println(selectedBirthDateMyDateTime);
 
         model.registerBabysitter(firstName.get(), lastName.getValue(), username.get(), email.get(), password.get(),
                 selectedBirthDateMyDateTime, babysittingExperience.get(), paymentPerHour.get(),
                 motherTongue.get(),
                 cprCertificate.get());
+
         errorLabel.set("");
 
 

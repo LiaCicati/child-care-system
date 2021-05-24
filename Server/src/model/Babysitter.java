@@ -20,6 +20,7 @@ public class Babysitter extends Account
     setPaymentPerHour(paymentPerHour);
     setBabysittingExperience(babysittingExperience);
     setFirstAidCertificate(hasFirstAidCertificate);
+    setDateOfBirth(dateOfBirth);
 
     this.languages = new ArrayList<>();
     addLanguage(mainLanguage);
@@ -132,9 +133,9 @@ public class Babysitter extends Account
 
   public void setDateOfBirth(MyDateTime dateOfBirth)
   {
-    LocalDate localDate = LocalDate.now();
-    MyDateTime legalBirthDate = new MyDateTime(localDate.getDayOfMonth(),
-            localDate.getMonthValue(), localDate.getYear()-13);
+    LocalDate today = LocalDate.now();
+    MyDateTime legalBirthDate = new MyDateTime(today.getDayOfMonth(),
+            today.getMonthValue(), today.getYear()-13);
     if (dateOfBirth == null)
     {
       throw new IllegalArgumentException("Please enter your date of birth");
