@@ -12,6 +12,9 @@ public class BookingViewModel
   private StringProperty startTime;
   private StringProperty endTime;
 
+  private StringProperty babysitter;
+  private StringProperty status;
+
   public BookingViewModel(Booking booking)
   {
     parent = new SimpleStringProperty(booking.getParent().getFirstName());
@@ -22,6 +25,11 @@ public class BookingViewModel
         booking.getTime().getStartTime().getSimpleTime());
     endTime = new SimpleStringProperty(
         booking.getTime().getEndTime().getSimpleTime());
+
+    babysitter = new SimpleStringProperty(
+        booking.getBabysitter().getFirstName() + ", " + booking.getBabysitter()
+            .getAge());
+    status = new SimpleStringProperty("Pending");
   }
 
   public StringProperty getDateTime()
@@ -47,5 +55,15 @@ public class BookingViewModel
   public StringProperty getEndTime()
   {
     return endTime;
+  }
+
+  public StringProperty getBabysitter()
+  {
+    return babysitter;
+  }
+
+  public StringProperty getStatus()
+  {
+    return status;
   }
 }

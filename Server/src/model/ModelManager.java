@@ -340,6 +340,11 @@ public class ModelManager implements Model
     return bookingList.getBabysitterBookings(babysitter);
   }
 
+  @Override public ArrayList<Booking> getAllBookings(Parent parent)
+  {
+    return bookingList.getBookingsByParent(parent);
+  }
+
   @Override public boolean addListener(
       GeneralListener<Account, Booking> listener, String... propertyNames)
   {

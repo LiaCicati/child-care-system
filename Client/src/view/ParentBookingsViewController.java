@@ -4,24 +4,38 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import viewmodel.BookingListViewModel;
+import viewmodel.BookingViewModel;
 
 public class ParentBookingsViewController extends ViewController
 {
-  @FXML private TableView<?> bookingsTable;
-  @FXML private TableColumn<?, ?> babysitterColumn;
-  @FXML private TableColumn<?, ?> dateColumn;
-  @FXML private TableColumn<?, ?> startTimeColumn;
-  @FXML private TableColumn<?, ?> endTimeColumn;
-  @FXML private TableColumn<?, ?> statusColumn;
+  private BookingListViewModel viewModel;
+  @FXML private TableView<BookingViewModel> bookingsTable;
+  @FXML private TableColumn<BookingViewModel, String> babysitterColumn;
+  @FXML private TableColumn<BookingViewModel, String> dateColumn;
+  @FXML private TableColumn<BookingViewModel, String> startTimeColumn;
+  @FXML private TableColumn<BookingViewModel, String> endTimeColumn;
+  @FXML private TableColumn<BookingViewModel, String> statusColumn;
 
   @Override protected void init()
   {
+    viewModel = getViewModelFactory().getBookingListViewModel();
 
+    dateColumn.setCellValueFactory(cellData -> cellData.getValue().getDate());
+    startTimeColumn
+        .setCellValueFactory(cellData -> cellData.getValue().getStartTime());
+    endTimeColumn
+        .setCellValueFactory(cellData -> cellData.getValue().getEndTime());
+    babysitterColumn
+        .setCellValueFactory(cellData -> cellData.getValue().getBabysitter());
+    statusColumn.setCellValueFactory(cellData -> cellData.getValue().getStatus());
+    bookingsTable.setItems(viewModel.getBookings());
+    reset();
   }
 
   @Override public void reset()
   {
-
+viewModel.reset();
   }
 
   public void onProfile()

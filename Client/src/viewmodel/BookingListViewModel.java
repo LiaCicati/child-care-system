@@ -47,6 +47,13 @@ public class BookingListViewModel implements LocalListener<Account, Booking>
       bookings.add(new BookingViewModel(
           model.getAllBookings(viewState.getBabysitter()).get(i)));
     }
+
+    for (int i = 0;
+         i < model.getAllBookings(viewState.getParent()).size(); i++)
+    {
+      bookings.add(new BookingViewModel(
+          model.getAllBookings(viewState.getParent()).get(i)));
+    }
   }
 
   public ObservableList<BookingViewModel> getBookings()

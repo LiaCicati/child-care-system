@@ -174,6 +174,12 @@ public class Server implements RemoteModel, LocalListener<Account, Booking>
     return model.getAllBookings(babysitter);
   }
 
+  @Override public ArrayList<Booking> getAllBookings(Parent parent)
+      throws RemoteException
+  {
+    return model.getAllBookings(parent);
+  }
+
   @Override public void propertyChange (ObserverEvent <Account, Booking> event)
     {
       property.firePropertyChange(event.getPropertyName(), event.getValue1(), event.getValue2());
