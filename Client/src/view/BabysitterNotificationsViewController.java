@@ -53,4 +53,8 @@ public class BabysitterNotificationsViewController extends ViewController
   public void onReject()
   {
   }
+
+  public void onDetails()
+  {
+  }
 }
