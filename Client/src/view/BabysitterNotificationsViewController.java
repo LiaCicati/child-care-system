@@ -56,5 +56,6 @@ public class BabysitterNotificationsViewController extends ViewController
 
   public void onDetails()
   {
+    getViewHandler().openView(View.BABYSITTER_BOOKING_DETAILS_VIEW);
   }
 }
