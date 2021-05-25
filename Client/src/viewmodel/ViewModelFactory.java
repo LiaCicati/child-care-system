@@ -25,7 +25,7 @@ public class ViewModelFactory
     this.registerBabysitterViewModel = new RegisterBabysitterViewModel(
         localModel);
     this.bookingBabysitterViewModel = new BookingBabysitterViewModel(
-        localModel);
+        localModel, viewState);
     this.registerParentViewModel = new RegisterParentViewModel(localModel);
     this.loginViewModel = new LoginViewModel(localModel, viewState);
     this.babysitterProfileViewModel = new BabysitterProfileViewModel(localModel,

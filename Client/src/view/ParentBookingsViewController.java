@@ -29,7 +29,7 @@ public class ParentBookingsViewController extends ViewController
     babysitterColumn
         .setCellValueFactory(cellData -> cellData.getValue().getBabysitter());
     statusColumn.setCellValueFactory(cellData -> cellData.getValue().getStatus());
-    bookingsTable.setItems(viewModel.getBookings());
+    bookingsTable.setItems(viewModel.getParentBookings());
     reset();
   }
 

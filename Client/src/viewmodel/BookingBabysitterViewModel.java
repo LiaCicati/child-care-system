@@ -27,7 +27,7 @@ public class BookingBabysitterViewModel
 
   private ObservableList<BookingBabysitterTableRowData> bookings;
   ArrayList<Babysitter> bookedBabysitters;
-
+  private ViewState viewState;
 
   private String errorMessage;
 
@@ -43,9 +43,10 @@ public class BookingBabysitterViewModel
   MyDateTime endTime = new MyDateTime(0,0,0,0,0);
 
 
-  public BookingBabysitterViewModel(LocalModel model)
+  public BookingBabysitterViewModel(LocalModel model, ViewState viewState)
   {
     this.model = model;
+    this.viewState = viewState;
     hour = new SimpleStringProperty();
     minute = new SimpleStringProperty();
     date = new SimpleObjectProperty<>();
@@ -183,7 +184,7 @@ public class BookingBabysitterViewModel
         errorLabel.set(errorMessage);
       }else if (getStartTime().getTime()!=0){
         reset();
-        Booking myBooking = new Booking(new TimeInterval(getStartTime(), getEndTime()), model.getLoggedInParent(), model.getBabysitter(babysitter));
+        Booking myBooking = new Booking(new TimeInterval(getStartTime(), getEndTime()),viewState.getParent() , model.getBabysitter(babysitter));
         model.addBooking(myBooking);
         errorMessage = "Booking of babysitter completed!";
         label.setTextFill(Color.web("black"));

@@ -17,6 +17,7 @@ import utility.observer.listener.LocalListener;
 public class BookingListViewModel implements LocalListener<Account, Booking>
 {
   private ObservableList<BookingViewModel> bookings;
+  private ObservableList<BookingViewModel> parentBookings;
   private ObjectProperty<BookingViewModel> selectedBooking;
   private LocalModel model;
   private ViewState viewState;
@@ -27,6 +28,7 @@ public class BookingListViewModel implements LocalListener<Account, Booking>
     this.model = model;
     this.viewState = viewState;
     this.bookings = FXCollections.observableArrayList();
+    this.parentBookings = FXCollections.observableArrayList();
     this.selectedBooking = new SimpleObjectProperty<>();
     this.error = new SimpleStringProperty();
     model.addListener(this, "add");
@@ -36,6 +38,7 @@ public class BookingListViewModel implements LocalListener<Account, Booking>
   {
     error.set("");
     update();
+    updateParentBookings();
   }
 
   public void update()
@@ -48,10 +51,16 @@ public class BookingListViewModel implements LocalListener<Account, Booking>
           model.getAllBookings(viewState.getBabysitter()).get(i)));
     }
 
+  }
+
+  public void updateParentBookings()
+  {
+    System.out.println(viewState.getParent());
+    parentBookings.clear();
     for (int i = 0;
          i < model.getAllBookings(viewState.getParent()).size(); i++)
     {
-      bookings.add(new BookingViewModel(
+      parentBookings.add(new BookingViewModel(
           model.getAllBookings(viewState.getParent()).get(i)));
     }
   }
@@ -59,6 +68,9 @@ public class BookingListViewModel implements LocalListener<Account, Booking>
   public ObservableList<BookingViewModel> getBookings()
   {
     return bookings;
+  }
+  public ObservableList<BookingViewModel> getParentBookings() {
+    return parentBookings;
   }
 
   public StringProperty getError()
