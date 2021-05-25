@@ -56,12 +56,17 @@ public class BookingBabysitterViewModel
     durationHours = new SimpleStringProperty();
     durationMinutes = new SimpleStringProperty();
     this.bookedBabysitters = new ArrayList<>();
-    reset();
+
 
   }
 
   public void reset()
   {
+    hour.set("");
+    minute.set("");
+    date.set(null);
+    durationHours.set("");
+    durationMinutes.set("");
     updateBabysitters();
    // hour.set(null);
     errorLabel.set("");

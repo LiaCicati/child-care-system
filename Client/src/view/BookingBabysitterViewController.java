@@ -45,16 +45,17 @@ public class BookingBabysitterViewController extends ViewController
     babysitterPaymentColumn.setCellValueFactory(d -> d.getValue().getPaymentPerHour());
 
     babysittersTable.setItems(viewModel.getBabysitters());
+    reset();
   }
 
   @Override public void reset()
   {
-    bookingDatePicker.setValue(null);
-    durationHoursComboBox.setValue(null);
-    durationMinutesComboBox.setValue(null);
-    minuteComboBox.setValue(null);
-    hourComboBox.setValue(null);
-    bookingDatePicker.setValue(null);
+//    bookingDatePicker.setValue(null);
+//    durationHoursComboBox.setValue(null);
+//    durationMinutesComboBox.setValue(null);
+//    minuteComboBox.setValue(null);
+//    hourComboBox.setValue(null);
+//    bookingDatePicker.setValue(null);
     viewModel.reset();
   }
 
