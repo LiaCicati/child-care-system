@@ -9,6 +9,7 @@ import model.*;
 
 import java.rmi.RemoteException;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class BookingBabysitterViewModel
@@ -82,10 +83,15 @@ public class BookingBabysitterViewModel
       LocalDate selectedDate = getDate().get();
 
       String selectedDateString = String.valueOf(selectedDate);
+      System.out.println("the string date: "+selectedDateString);
 
       selectedYear = Integer.parseInt(selectedDateString.substring(0, 4));
+      System.out.println("year: "+selectedYear);
+
       selectedMonth = Integer.parseInt(selectedDateString.substring(5, 7));
+      System.out.println("month: "+ selectedMonth );
       selectedDay = Integer.parseInt(selectedDateString.substring(8, 10));
+      System.out.println("day; " + selectedDay);
     }
     catch (Exception e) {
       errorLabel.set("unintended " + e.getMessage());
@@ -169,6 +175,12 @@ public class BookingBabysitterViewModel
 
   public void createBooking(String babysitter, Label label){
     try {
+      int thisDay = LocalDate.now().getDayOfMonth();
+      int thisMonth = LocalDate.now().getMonthValue();
+      int thisYear = LocalDate.now().getYear();
+      int thisHour = LocalTime.now().getHour();
+      int thisMinute = LocalTime.now().getMinute();
+      MyDateTime today = new MyDateTime(thisDay, thisMonth, thisYear);
       getEndTime();
       getStartTime();
       if (selectedYear == 0&&selectedMonth == 0&& selectedDay == 0&&selectedHour == 0&&selectedMinute == 0&& selectedDurationHour == 0&&SelectedDurationMinute == 0) {
@@ -177,26 +189,36 @@ public class BookingBabysitterViewModel
       }else if (endTime.equals(startTime)){
           errorMessage = "Please select for how long you want you child babysat";
           errorLabel.set(errorMessage);
-        }else if (startTime.equals(new MyDateTime(0,0,0,0,0))){
+      }else if (startTime.equals(new MyDateTime(0,0,0,0,0))){
           errorMessage = "Please specify when you need a babysitter";
           errorLabel.set(errorMessage);
-        }else if (selectedDay == 0){
+      } else if (new MyDateTime(startTime.getDay(), startTime.getMonth(), startTime.getYear()).isBeforeDate(today)) {
+        errorMessage = "Selected date must be in the future";
+        errorLabel.set(errorMessage);
+        System.out.println("this: "+ new MyDateTime(startTime.getDay(), startTime.getMonth(), startTime.getYear())+" is before this: "+today+" : "+new MyDateTime(startTime.getDay(), startTime.getMonth(), startTime.getYear()).isBeforeDate(today));
+      } else if (new MyDateTime(startTime.getDay(), startTime.getMonth(), startTime.getYear()).equals(today) && selectedHour < thisHour ==true) {
+        errorMessage = "Selected time must be in the future";
+        errorLabel.set(errorMessage);
+      }else if (selectedHour < thisHour ==false && selectedMinute<thisMinute==true) {
+        errorMessage = "Selected time must be in the future";
+        errorLabel.set(errorMessage);
+      }else if (selectedDay == 0){
           errorMessage = "Please select date you need a babysitter";
           errorLabel.set(errorMessage);
-        } else if (selectedHour == 0){
+      } else if (selectedHour == 0){
           errorMessage = "Please select time you need a babysitter (hour)";
           errorLabel.set(errorMessage);
-        }else if (model.getBabysitter(babysitter) == null){
+      }else if (model.getBabysitter(babysitter) == null){
           errorMessage = "Please pick a babysitter";
           errorLabel.set(errorMessage);
-        }else if (getStartTime().getTime()!=0){
+      }else if (getStartTime().getTime()!=0){
           reset();
           Booking myBooking = new Booking(new TimeInterval(getStartTime(), getEndTime()), model.getLoggedInParent(), model.getBabysitter(babysitter));
           model.addBooking(myBooking);
           errorMessage = "Booking of babysitter completed!";
           label.setTextFill(Color.web("black"));
           errorLabel.set(errorMessage);
-        }
+      }
     } catch (RemoteException e) {
       e.printStackTrace();
     }
