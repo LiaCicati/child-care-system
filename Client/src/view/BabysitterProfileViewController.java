@@ -23,6 +23,8 @@ public class BabysitterProfileViewController extends ViewController
   @FXML private Label greetingName;
   @FXML private Button editBabysitter;
 
+  @FXML private Label pendingBookings;
+
   private BabysitterProfileViewModel viewModel;
 
   @Override protected void init()
@@ -48,6 +50,8 @@ public class BabysitterProfileViewController extends ViewController
     //
     //    errorLabel.textProperty().bind(viewModel.getError());
     editBabysitter.setDisable(true);
+
+    pendingBookings.textProperty().bindBidirectional(viewModel.getPendingBookings());
     reset();
   }
 

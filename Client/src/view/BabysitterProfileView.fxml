@@ -72,7 +72,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-      <HBox alignment="CENTER" layoutX="102.0" layoutY="160.0" prefHeight="64.0" prefWidth="287.0" spacing="5.0">
+      <HBox alignment="CENTER" layoutX="89.0" layoutY="142.0" prefHeight="52.0" prefWidth="287.0" spacing="5.0">
          <children>
               <Label text="Hello, ">
                   <font>
@@ -86,5 +86,17 @@
             </Label>
          </children>
       </HBox>
+      <Label layoutX="105.0" layoutY="194.0" text="You have" textFill="#6c63ff">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Label fx:id="pendingBookings" layoutX="170.0" layoutY="194.0" prefHeight="20.0" prefWidth="33.0" text="20" textFill="#38a796">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Label layoutX="194.0" layoutY="194.0" text="pending bookings" textFill="#6c63ff">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
     </children>
 </AnchorPane>

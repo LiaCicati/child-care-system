@@ -44,13 +44,17 @@ public class ModelManager implements Model
 
   private void addDummyData()
   {
-    Account babysitter2 = new Babysitter("Loredana", "Cicati", "lori",
+    Babysitter babysitter2 = new Babysitter("Loredana", "Cicati", "lori",
         "lori@mail.ru", "lialialia", new MyDateTime(13, 2, 2001), 2, 30,
         "English", false);
-    Account parent1 = new Parent("Ana", "Peters", "ana", "ana@gmail.com",
+    Parent parent1 = new Parent("Ana", "Peters", "ana", "ana@gmail.com",
         "password", false);
     Account parent2 = new Parent("Lina", "Peters", "lina", "lina@gmail.com",
         "password", true);
+    Booking booking1 = new Booking(new TimeInterval(new MyDateTime(22, 5, 2021, 12, 5), new MyDateTime(22, 5, 2021, 14, 5)), parent1, babysitter2);
+
+    bookingList.addBooking(booking1);
+    System.out.println(getAllBookings(babysitter2).size());
     //accountList.addAccount(babysitter);
     accountList.addAccount(babysitter2);
     accountList.addAccount(parent1);
