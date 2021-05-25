@@ -34,10 +34,10 @@ public class LoginViewModel
     {
         try
         {
-            Account loggedIn = model.login(username.get(), password.get());
+            Account loggedIn = model.login("ana", "password");//username.get(), password.get());
             viewState.setAccount(loggedIn);
             viewState.setBabysitter(model.getBabysitter(username.get()));
-            viewState.setParent(model.getParent(username.get()));
+            viewState.setParent(model.getParent("ana"));//username.get()));
             if (loggedIn instanceof Babysitter)
             {
                 return 2;
