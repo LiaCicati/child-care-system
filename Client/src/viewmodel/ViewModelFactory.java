@@ -16,6 +16,7 @@ public class ViewModelFactory
   private AddEditKidViewModel addEditKidViewModel;
 
   private BookingListViewModel bookingListViewModel;
+  private BookingDetailsViewModel bookingDetailsViewModel;
 
   private ViewState viewState;
 
@@ -35,6 +36,7 @@ public class ViewModelFactory
         viewState);
     this.addEditKidViewModel = new AddEditKidViewModel(localModel, viewState);
     this.bookingListViewModel = new BookingListViewModel(localModel, viewState);
+    this.bookingDetailsViewModel = new BookingDetailsViewModel(localModel, viewState);
   }
 
   public RegisterBabysitterViewModel getRegisterBabysitterViewModel()
@@ -80,6 +82,11 @@ public class ViewModelFactory
   public BookingListViewModel getBookingListViewModel()
   {
     return bookingListViewModel;
+  }
+
+  public BookingDetailsViewModel getBookingDetailsViewModel()
+  {
+    return bookingDetailsViewModel;
   }
 
 }

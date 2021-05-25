@@ -1,15 +1,13 @@
 package viewmodel;
 
-import model.Account;
-import model.Babysitter;
-import model.Kid;
-import model.Parent;
+import model.*;
 
 public class ViewState
 {
   private Account account;
   private Babysitter babysitter;
   private Parent parent;
+  private Booking booking;
   private Kid kid;
   private Kid selectedKid;
   private int selectedChild;
@@ -22,6 +20,7 @@ public class ViewState
     this.babysitter = null;
     this.parent = null;
     this.kid = null;
+    this.booking = null;
     this.selectedKid = null;
     this.selectedParent = -1;
     this.selectedChild = -1;
@@ -114,6 +113,16 @@ public class ViewState
   public void removeSelectedBooking()
   {
     selectedBooking = -1;
+  }
+
+  public Booking getBooking()
+  {
+    return booking;
+  }
+
+  public void setBooking(Booking booking)
+  {
+    this.booking = booking;
   }
 
 }
