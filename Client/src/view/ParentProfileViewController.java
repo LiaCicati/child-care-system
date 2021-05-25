@@ -1,5 +1,6 @@
 package view;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -76,7 +77,7 @@ public class ParentProfileViewController extends ViewController
 
   }
 
-  public void onHome()
+  public void onBookBabysitter()
   {
     getViewHandler().openView(View.BOOKING_BABYSITTERS_VIEW);
   }
@@ -104,5 +105,10 @@ public class ParentProfileViewController extends ViewController
     {
       getViewHandler().openView(View.ADD_EDIT_KID_DATA_VIEW);
     }
+  }
+
+  public void onMyBookings()
+  {
+    getViewHandler().openView(View.PARENT_BOOKINGS_VIEW);
   }
 }

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitMenuButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane minHeight="-Infinity" prefHeight="740.0" prefWidth="414.0" style="-fx-background-color: E6E1FF;" userData="Notifications" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ParentBookingsViewController">
+    <children>
+        <ImageView fitHeight="111.0" fitWidth="174.0" layoutX="126.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@resources/logo.png" />
+        </ImageView>
+        <SplitMenuButton layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Menu">
+            <items>
+                <MenuItem mnemonicParsing="false" onAction="#onProfile" text="Profile" />
+            <MenuItem mnemonicParsing="false" onAction="#onBookBabysitter" text="Book babysitter" />
+            </items>
+        </SplitMenuButton>
+        <TableView fx:id="bookingsTable" layoutX="2.0" layoutY="159.0" prefHeight="492.0" prefWidth="410.0">
+            <columns>
+                <TableColumn fx:id="babysitterColumn" prefWidth="86.4000244140625" text="Babysitter" />
+                <TableColumn fx:id="dateColumn" prefWidth="92.79998779296875" text="Date" />
+                <TableColumn fx:id="startTimeColumn" prefWidth="67.20001220703125" text="Starts at" />
+                <TableColumn fx:id="endTimeColumn" prefWidth="56.800048828125" text="Ends at" />
+            <TableColumn fx:id="statusColumn" prefWidth="114.39996337890625" text="Status" />
+            </columns>
+        </TableView>
+    </children>
+</AnchorPane>

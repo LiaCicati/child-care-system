@@ -86,4 +86,9 @@ public class BookingBabysitterViewController extends ViewController
     viewModel.durationMinute();
     viewModel.getBookedBabysitters();
   }
+
+  public void onMyBookings()
+  {
+    getViewHandler().openView(View.PARENT_BOOKINGS_VIEW);
+  }
 }

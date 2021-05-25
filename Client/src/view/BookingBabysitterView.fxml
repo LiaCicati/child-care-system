@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.collections.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitMenuButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane minHeight="-Infinity" prefHeight="683.0" prefWidth="414.0" style="-fx-background-color: E6E1FF;" userData="Book babysitters" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.BookingBabysitterViewController">
     <children>
@@ -46,6 +56,7 @@
       <SplitMenuButton layoutX="24.0" layoutY="24.0" mnemonicParsing="false" text="Menu">
          <items>
             <MenuItem mnemonicParsing="false" onAction="#onProfile" text="Profile" />
+            <MenuItem mnemonicParsing="false" onAction="#onMyBookings" text="My Bookings" />
          </items>
       </SplitMenuButton>
       <VBox layoutX="18.0" layoutY="125.0" prefHeight="93.0" prefWidth="378.0">
