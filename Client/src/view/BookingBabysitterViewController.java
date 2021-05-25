@@ -62,27 +62,32 @@ public class BookingBabysitterViewController extends ViewController
   }
 
   public void onDateEntered() throws RemoteException {
+    viewModel.resetLabel(errorLabel);
     viewModel.date();
     viewModel.getBookedBabysitters();
   }
 
   public void onHourEntered(ActionEvent actionEvent) throws RemoteException {
+    viewModel.resetLabel(errorLabel);
     viewModel.hour();
     viewModel.getBookedBabysitters();
   }
 
   public void onMinuteEntered(ActionEvent actionEvent) throws RemoteException {
+    viewModel.resetLabel(errorLabel);
     viewModel.minute();
     viewModel.getBookedBabysitters();
   }
 
 
   public void onDurationHourEntered(ActionEvent actionEvent) throws RemoteException {
+    viewModel.resetLabel(errorLabel);
     viewModel.durationHour();
     viewModel.getBookedBabysitters();
   }
 
   public void onDurationMinutesEntered(ActionEvent actionEvent) throws RemoteException {
+    viewModel.resetLabel(errorLabel);
     viewModel.durationMinute();
     viewModel.getBookedBabysitters();
   }

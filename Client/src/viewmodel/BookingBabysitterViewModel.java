@@ -66,6 +66,11 @@ public class BookingBabysitterViewModel
     errorLabel.set("");
   }
 
+  public void resetLabel(Label label){
+    label.setTextFill(Color.web("red"));
+    errorLabel.set("");
+  }
+
   public StringProperty getError()
   {
     return errorLabel;
