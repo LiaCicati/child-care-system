@@ -174,7 +174,7 @@ public class BookingBabysitterViewModel
       if (selectedYear == 0&&selectedMonth == 0&& selectedDay == 0&&selectedHour == 0&&selectedMinute == 0&& selectedDurationHour == 0&&SelectedDurationMinute == 0) {
         errorMessage = "Please specify information about booking";
         errorLabel.set(errorMessage);
-      }else if (endTime.equals(new MyDateTime(0,0,0,0,0))){
+      }else if (endTime.equals(startTime)){
           errorMessage = "Please select for how long you want you child babysat";
           errorLabel.set(errorMessage);
         }else if (startTime.equals(new MyDateTime(0,0,0,0,0))){
