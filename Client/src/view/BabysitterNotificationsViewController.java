@@ -1,5 +1,6 @@
 package view;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -45,4 +46,11 @@ public class BabysitterNotificationsViewController extends ViewController
     getViewHandler().openView(View.BABYSITTER_PROFILE_VIEW);
   }
 
+  public void onAccept()
+  {
+  }
+
+  public void onReject()
+  {
+  }
 }

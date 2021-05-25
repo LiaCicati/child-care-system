@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitMenuButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane minHeight="-Infinity" prefHeight="740.0" prefWidth="414.0" style="-fx-background-color: E6E1FF;" userData="Notifications" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.BabysitterNotificationsViewController">
@@ -20,7 +24,7 @@
                 <MenuItem mnemonicParsing="false" onAction="#onProfile" text="Profile" />
             </items>
         </SplitMenuButton>
-      <TableView fx:id="bookingsTable" layoutX="2.0" layoutY="172.0" prefHeight="426.0" prefWidth="409.0">
+      <TableView fx:id="bookingsTable" layoutX="2.0" layoutY="146.0" prefHeight="426.0" prefWidth="409.0">
         <columns>
           <TableColumn fx:id="dateTimeColumn" prefWidth="104.800048828125" text="Made at" />
             <TableColumn fx:id="parentColumn" prefWidth="73.5999755859375" text="Parent" />
@@ -29,10 +33,36 @@
             <TableColumn fx:id="endTimeColumn" prefWidth="78.39996337890625" text="Ends at" />
         </columns>
       </TableView>
-      <Label fx:id="errorLabel" layoutX="28.0" layoutY="637.0" prefHeight="38.0" prefWidth="358.0" text="Error label" textFill="#f9494b">
+      <Label fx:id="errorLabel" layoutX="15.0" layoutY="683.0" prefHeight="38.0" prefWidth="381.0" text="Error label" textFill="#f9494b">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
+      <HBox alignment="CENTER" layoutX="40.0" layoutY="582.0" prefHeight="100.0" prefWidth="333.0" spacing="34.0">
+         <children>
+            <Button minHeight="56.0" minWidth="140.0" mnemonicParsing="false" onAction="#onAccept" style="-fx-background-radius: 37; -fx-background-color: #36C1AD;" text="Accept" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <effect>
+                  <DropShadow color="rgba(82, 67, 154, 0.25);" />
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button minHeight="56.0" minWidth="140.0" mnemonicParsing="false" onAction="#onReject" style="-fx-background-radius: 37; -fx-background-color: #D93856;" text="Reject" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <effect>
+                  <DropShadow color="rgba(82, 67, 154, 0.25);" />
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </HBox>
     </children>
 </AnchorPane>
