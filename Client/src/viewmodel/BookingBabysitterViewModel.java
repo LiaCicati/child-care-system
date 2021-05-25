@@ -171,29 +171,32 @@ public class BookingBabysitterViewModel
     try {
       getEndTime();
       getStartTime();
-      if (endTime.equals(new MyDateTime(0,0,0,0,0))){
-        errorMessage = "Please select for how long you want you child babysat";
+      if (selectedYear == 0&&selectedMonth == 0&& selectedDay == 0&&selectedHour == 0&&selectedMinute == 0&& selectedDurationHour == 0&&SelectedDurationMinute == 0) {
+        errorMessage = "Please specify information about booking";
         errorLabel.set(errorMessage);
-      }else if (startTime.equals(new MyDateTime(0,0,0,0,0))){
-        errorMessage = "Please specify when you need a babysitter";
-        errorLabel.set(errorMessage);
-      }else if (selectedDay == 0){
-        errorMessage = "Please select date you need a babysitter";
-        errorLabel.set(errorMessage);
-      } else if (selectedHour == 0){
-        errorMessage = "Please select time you need a babysitter (hour)";
-        errorLabel.set(errorMessage);
-      }else if (model.getBabysitter(babysitter) == null){
-        errorMessage = "Please pick a babysitter";
-        errorLabel.set(errorMessage);
-      }else if (getStartTime().getTime()!=0){
-        reset();
-        Booking myBooking = new Booking(new TimeInterval(getStartTime(), getEndTime()), model.getLoggedInParent(), model.getBabysitter(babysitter));
-        model.addBooking(myBooking);
-        errorMessage = "Booking of babysitter completed!";
-        label.setTextFill(Color.web("black"));
-        errorLabel.set(errorMessage);
-      }
+      }else if (endTime.equals(new MyDateTime(0,0,0,0,0))){
+          errorMessage = "Please select for how long you want you child babysat";
+          errorLabel.set(errorMessage);
+        }else if (startTime.equals(new MyDateTime(0,0,0,0,0))){
+          errorMessage = "Please specify when you need a babysitter";
+          errorLabel.set(errorMessage);
+        }else if (selectedDay == 0){
+          errorMessage = "Please select date you need a babysitter";
+          errorLabel.set(errorMessage);
+        } else if (selectedHour == 0){
+          errorMessage = "Please select time you need a babysitter (hour)";
+          errorLabel.set(errorMessage);
+        }else if (model.getBabysitter(babysitter) == null){
+          errorMessage = "Please pick a babysitter";
+          errorLabel.set(errorMessage);
+        }else if (getStartTime().getTime()!=0){
+          reset();
+          Booking myBooking = new Booking(new TimeInterval(getStartTime(), getEndTime()), model.getLoggedInParent(), model.getBabysitter(babysitter));
+          model.addBooking(myBooking);
+          errorMessage = "Booking of babysitter completed!";
+          label.setTextFill(Color.web("black"));
+          errorLabel.set(errorMessage);
+        }
     } catch (RemoteException e) {
       e.printStackTrace();
     }
