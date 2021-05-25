@@ -29,7 +29,7 @@ public class BookingViewModel
     babysitter = new SimpleStringProperty(
         booking.getBabysitter().getFirstName() + ", " + booking.getBabysitter()
             .getAge());
-    status = new SimpleStringProperty("Pending");
+    status = new SimpleStringProperty(booking.getStatus());
   }
 
   public StringProperty getDateTime()

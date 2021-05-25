@@ -11,6 +11,10 @@ public class Booking implements Serializable
   private TimeInterval time;
   private Babysitter babysitter;
   private Parent parent;
+  private String status;
+  public static final String PENDING = "Pending";
+  public static final String ACCEPTED = "Accepted";
+  public static final String REJECTED = "Rejected";
 
   public Booking(TimeInterval time, Parent parent, Babysitter babysitter)
   {
@@ -21,6 +25,7 @@ public class Booking implements Serializable
     this.dateTimeOfBooking = LocalDateTime.now();
     this.parent = parent;
     this.babysitter = babysitter;
+    this.status = PENDING;
 
   }
 
@@ -41,12 +46,23 @@ public class Booking implements Serializable
 
   public String getDateTimeOfBooking()
   {
-    return dateTimeOfBooking.format(DateTimeFormatter.ofPattern("dd/MM/yyyy, hh:mm"));
+    return dateTimeOfBooking
+        .format(DateTimeFormatter.ofPattern("dd/MM/yyyy, hh:mm"));
   }
 
   public Parent getParent()
   {
     return parent;
+  }
+
+  public String getStatus()
+  {
+    return status;
+  }
+
+  public void setStatus(String status)
+  {
+    this.status = status;
   }
 
   public void setParent(Parent parent)
@@ -64,7 +80,7 @@ public class Booking implements Serializable
     if (dateTimeOfBooking == null)
     {
       throw new IllegalArgumentException(
-              "Please select the date and time of your booking");
+          "Please select the date and time of your booking");
     }
     this.dateTimeOfBooking = dateTimeOfBooking;
   }
@@ -77,7 +93,7 @@ public class Booking implements Serializable
   public String toString()
   {
     return "Booking id: " + bookingID + "\n" + "Parent: " + parent
-            + "Babysitter: " + babysitter + "\n" + "Time: " + time + "\n"
-            + "Date and time of booking: " + getDateTimeOfBooking();
+        + "Babysitter: " + babysitter + "\n" + "Time: " + time + "\n"
+        + "Date and time of booking: " + getDateTimeOfBooking();
   }
 }
