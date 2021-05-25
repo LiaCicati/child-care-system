@@ -61,10 +61,12 @@ public class ModelManager implements Model
     System.out.println(getAllBookings(parent2).size());
     //accountList.addAccount(babysitter);
     accountList.addAccount(babysitter2);
+    accountList.addAccount(babysitter1);
     accountList.addAccount(parent1);
     accountList.addAccount(parent2);
     //babysitterList.addAccount(babysitter);
     babysitterList.addAccount(babysitter2);
+    babysitterList.addAccount(babysitter1);
     parentList.addAccount(parent1);
     parentList.addAccount(parent2);
   }
