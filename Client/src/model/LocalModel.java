@@ -35,5 +35,6 @@ public interface LocalModel extends LocalSubject<Account, Booking>
   Kid getKid(int index);
   ArrayList<Booking> getAllBookings(Babysitter babysitter);
   ArrayList<Booking> getAllBookings(Parent parent);
+  Booking getBookingById(int id);
 
 }

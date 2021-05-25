@@ -14,6 +14,7 @@ public class ViewState
   private Kid selectedKid;
   private int selectedChild;
   private int selectedParent;
+  private int selectedBooking;
 
   public ViewState()
   {
@@ -24,6 +25,7 @@ public class ViewState
     this.selectedKid = null;
     this.selectedParent = -1;
     this.selectedChild = -1;
+    this.selectedBooking = -1;
   }
 
   public Account getAccount()
@@ -99,6 +101,19 @@ public class ViewState
   public void removeSelectedKid()
   {
     selectedChild = -1;
+  }
+  public int getSelectedBooking()
+  {
+    return selectedBooking;
+  }
+
+  public void setSelectedBooking(int selectedBooking)
+  {
+    this.selectedBooking = selectedBooking;
+  }
+  public void removeSelectedBooking()
+  {
+    selectedBooking = -1;
   }
 
 }

@@ -33,6 +33,8 @@ public class BabysitterNotificationsViewController extends ViewController
     parentColumn
         .setCellValueFactory(cellData -> cellData.getValue().getParent());
     bookingsTable.setItems(viewModel.getBookings());
+    bookingsTable.getSelectionModel().selectedItemProperty().addListener(
+        (obs, oldValue, newValue) -> viewModel.setSelectedBooking(newValue));
     reset();
   }
 
@@ -56,6 +58,10 @@ public class BabysitterNotificationsViewController extends ViewController
 
   public void onDetails()
   {
-    getViewHandler().openView(View.BABYSITTER_BOOKING_DETAILS_VIEW);
+    System.out.println(viewModel.onDetails());
+    if(viewModel.onDetails())
+    {
+      getViewHandler().openView(View.BABYSITTER_BOOKING_DETAILS_VIEW);
+    }
   }
 }

@@ -73,6 +73,27 @@ public class BookingListViewModel implements LocalListener<Account, Booking>
     return parentBookings;
   }
 
+  public boolean onDetails()
+  {
+      if (selectedBooking.get() != null)
+      {
+        viewState.setSelectedBooking(selectedBooking.get().getId().get());
+        return true;
+      }
+      else
+      {
+        viewState.removeSelectedBooking();
+        error.set("Please select a booking first");
+        return false;
+      }
+
+  }
+
+  public void setSelectedBooking(BookingViewModel selectedBooking)
+  {
+    this.selectedBooking.set(selectedBooking);
+  }
+
   public StringProperty getError()
   {
     return error;

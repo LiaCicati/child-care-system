@@ -180,6 +180,11 @@ public class Server implements RemoteModel, LocalListener<Account, Booking>
     return model.getAllBookings(parent);
   }
 
+  @Override public Booking getBookingById(int id) throws RemoteException
+  {
+    return model.getBookingById(id);
+  }
+
   @Override public void propertyChange (ObserverEvent <Account, Booking> event)
     {
       property.firePropertyChange(event.getPropertyName(), event.getValue1(), event.getValue2());

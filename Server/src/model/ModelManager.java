@@ -353,6 +353,11 @@ public class ModelManager implements Model
     return bookingList.getBookingsByParent(parent);
   }
 
+  @Override public Booking getBookingById(int id)
+  {
+    return bookingList.getBookingById(id);
+  }
+
   @Override public boolean addListener(
       GeneralListener<Account, Booking> listener, String... propertyNames)
   {

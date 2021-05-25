@@ -168,6 +168,11 @@ return serverModel.getAllBookings(babysitter);
     return serverModel.getAllBookings(parent);
   }
 
+  @Override public Booking getBookingById(int id)
+  {
+    return serverModel.getBookingById(id);
+  }
+
   @Override public boolean addListener(GeneralListener<Account, Booking> listener,
       String... propertyNames)
   {
