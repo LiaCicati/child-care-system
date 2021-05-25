@@ -29,8 +29,9 @@ public class BookingBabysitterViewController extends ViewController
 
   @Override protected void init()
   {
-    viewModel = getViewModelFactory().getBookingBabysitterViewModel();
 
+    viewModel = getViewModelFactory().getBookingBabysitterViewModel();
+    reset();
     bookingDatePicker.valueProperty().bindBidirectional(viewModel.getDate());
     hourComboBox.valueProperty().bindBidirectional(viewModel.getHour());
     minuteComboBox.valueProperty().bindBidirectional(viewModel.getMinute());
@@ -48,7 +49,13 @@ public class BookingBabysitterViewController extends ViewController
 
   @Override public void reset()
   {
-
+    bookingDatePicker.setValue(null);
+    durationHoursComboBox.setValue(null);
+    durationMinutesComboBox.setValue(null);
+    minuteComboBox.setValue(null);
+    hourComboBox.setValue(null);
+    bookingDatePicker.setValue(null);
+    viewModel.reset();
   }
 
   public void onProfile()
