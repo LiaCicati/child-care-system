@@ -1,12 +1,9 @@
 package view;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.layout.Background;
-import javafx.scene.paint.Color;
 import viewmodel.BookingListViewModel;
 import viewmodel.BookingViewModel;
 
@@ -20,14 +17,12 @@ public class BabysitterNotificationsViewController extends ViewController
   @FXML private TableColumn<BookingViewModel, String> endTimeColumn;
   @FXML private TableColumn<BookingViewModel, String> parentColumn;
   @FXML private TableColumn<BookingViewModel, String> statusColumn;
-  @FXML private Label errorLabel;
-  @FXML private Label successMessage;
+  @FXML private Label messageLabel;
 
   @Override protected void init()
   {
     viewModel = getViewModelFactory().getBookingListViewModel();
-    errorLabel.textProperty().bind(viewModel.getError());
-    successMessage.textProperty().bind(viewModel.getSuccessMessage());
+    messageLabel.textProperty().bind(viewModel.getMessage());
     dateTimeColumn
         .setCellValueFactory(cellData -> cellData.getValue().getDateTime());
     dateColumn.setCellValueFactory(cellData -> cellData.getValue().getDate());
@@ -40,7 +35,13 @@ public class BabysitterNotificationsViewController extends ViewController
     statusColumn.setCellValueFactory(cellData -> cellData.getValue().getStatus());
     bookingsTable.setItems(viewModel.getBookings());
     bookingsTable.getSelectionModel().selectedItemProperty().addListener(
-        (obs, oldValue, newValue) -> viewModel.setSelectedBooking(newValue));
+        (obs, oldValue, newValue) -> {
+          viewModel.setSelectedBooking(newValue);
+          if (newValue != null) {
+            viewModel.resetLabel();
+          }
+        });
+
     reset();
   }
 
@@ -56,19 +57,19 @@ public class BabysitterNotificationsViewController extends ViewController
 
   public void onAccept()
   {
-   viewModel.onAccept();
+   viewModel.onAccept(messageLabel);
 
   }
 
   public void onReject()
   {
-    viewModel.onReject();
+    viewModel.onReject(messageLabel);
   }
 
   public void onDetails()
   {
-    System.out.println(viewModel.onDetails());
-    if(viewModel.onDetails())
+    System.out.println(viewModel.onDetails(messageLabel));
+    if(viewModel.onDetails(messageLabel))
     {
       getViewHandler().openView(View.BABYSITTER_BOOKING_DETAILS_VIEW);
     }

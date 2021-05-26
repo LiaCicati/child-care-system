@@ -10,9 +10,13 @@ import javafx.collections.ObservableList;
 import model.Account;
 import model.Booking;
 import model.LocalModel;
-import model.Parent;
 import utility.observer.event.ObserverEvent;
 import utility.observer.listener.LocalListener;
+import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
+
+
+import java.awt.*;
 
 public class BookingListViewModel implements LocalListener<Account, Booking>
 {
@@ -21,8 +25,7 @@ public class BookingListViewModel implements LocalListener<Account, Booking>
   private ObjectProperty<BookingViewModel> selectedBooking;
   private LocalModel model;
   private ViewState viewState;
-  private StringProperty error;
-  private StringProperty successMessage;
+  private StringProperty message;
 
   public BookingListViewModel(LocalModel model, ViewState viewState)
   {
@@ -31,17 +34,19 @@ public class BookingListViewModel implements LocalListener<Account, Booking>
     this.bookings = FXCollections.observableArrayList();
     this.parentBookings = FXCollections.observableArrayList();
     this.selectedBooking = new SimpleObjectProperty<>();
-    this.error = new SimpleStringProperty();
-    this.successMessage = new SimpleStringProperty();
+    this.message = new SimpleStringProperty();
     model.addListener(this, "add");
   }
 
   public void reset()
   {
-    error.set("");
-    successMessage.set("");
+    message.set("");
     update();
     updateParentBookings();
+  }
+
+  public void resetLabel(){
+    message.set("");
   }
 
   public void update()
@@ -77,50 +82,64 @@ public class BookingListViewModel implements LocalListener<Account, Booking>
     return parentBookings;
   }
 
-  public boolean onAccept()
+  public boolean isBookingSelected(){
+    if (selectedBooking.get() != null)
+    {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
+  public boolean onAccept(Label label)
   {
     if (selectedBooking.get() != null)
     {
       viewState.setSelectedBooking(selectedBooking.get().getId().get());
       model.changeStatus(viewState.getSelectedBooking(), Booking.ACCEPTED);
-      successMessage.set("Status changed to " + model
+      label.setTextFill(Color.web("black"));
+      message.set("Status changed to " + model
           .getBookingById(viewState.getSelectedBooking()).getStatus());
       update();
-      error.set("");
+      //message.set("");
 
       return true;
     }
     else
     {
       viewState.removeSelectedBooking();
-      error.set("Please select a booking first");
+      label.setTextFill(Color.web("red"));
+      message.set("Please select a booking first");
       return false;
     }
 
   }
 
-  public void onReject()
+  public void onReject(Label label)
   {
     if (selectedBooking.get() != null)
     {
       viewState.setSelectedBooking(selectedBooking.get().getId().get());
       model.changeStatus(viewState.getSelectedBooking(), Booking.REJECTED);
-      successMessage.set("Status changed to " + model
+      label.setTextFill(Color.web("black"));
+      message.set("Status changed to " + model
           .getBookingById(viewState.getSelectedBooking()).getStatus());
 
       update();
-      error.set("");
+      //message.set("");
     }
     else
     {
       viewState.removeSelectedBooking();
-      error.set("Please select a booking first");
+      label.setTextFill(Color.web("red"));
+      message.set("Please select a booking first");
 
     }
 
   }
 
-  public boolean onDetails()
+  public boolean onDetails(Label label)
   {
     if (selectedBooking.get() != null)
     {
@@ -130,7 +149,9 @@ public class BookingListViewModel implements LocalListener<Account, Booking>
     else
     {
       viewState.removeSelectedBooking();
-      error.set("Please select a booking first");
+      label.setTextFill(Color.web("red"));
+
+      message.set("Please select a booking first");
       return false;
     }
 
@@ -143,11 +164,11 @@ public class BookingListViewModel implements LocalListener<Account, Booking>
 
   public StringProperty getError()
   {
-    return error;
+    return message;
   }
-  public StringProperty getSuccessMessage()
+  public StringProperty getMessage()
   {
-    return successMessage;
+    return message;
   }
 
   @Override public void propertyChange(ObserverEvent<Account, Booking> event)
