@@ -57,8 +57,7 @@ public class BookingListViewModel implements LocalListener<Account, Booking>
   {
     System.out.println(viewState.getParent());
     parentBookings.clear();
-    for (int i = 0;
-         i < model.getAllBookings(viewState.getParent()).size(); i++)
+    for (int i = 0; i < model.getAllBookings(viewState.getParent()).size(); i++)
     {
       parentBookings.add(new BookingViewModel(
           model.getAllBookings(viewState.getParent()).get(i)));
@@ -69,7 +68,9 @@ public class BookingListViewModel implements LocalListener<Account, Booking>
   {
     return bookings;
   }
-  public ObservableList<BookingViewModel> getParentBookings() {
+
+  public ObservableList<BookingViewModel> getParentBookings()
+  {
     return parentBookings;
   }
 
@@ -79,14 +80,15 @@ public class BookingListViewModel implements LocalListener<Account, Booking>
     {
       viewState.setSelectedBooking(selectedBooking.get().getId().get());
       model.changeStatus(viewState.getSelectedBooking(), Booking.ACCEPTED);
+      error.set("");
 
-return true;
+      return true;
     }
     else
     {
       viewState.removeSelectedBooking();
       error.set("Please select a booking first");
-return false;
+      return false;
     }
 
   }
@@ -96,10 +98,11 @@ return false;
     if (selectedBooking.get() != null)
     {
       viewState.setSelectedBooking(selectedBooking.get().getId().get());
-//      model.getBookingById(viewState.getSelectedBooking()).setStatus("Accepted");
-//      System.out.println(selectedBooking.get().getStatus());
-//      System.out.println(model.getBookingById(viewState.getSelectedBooking()).getStatus());
+      //      model.getBookingById(viewState.getSelectedBooking()).setStatus("Accepted");
+      //      System.out.println(selectedBooking.get().getStatus());
+      //      System.out.println(model.getBookingById(viewState.getSelectedBooking()).getStatus());
       model.changeStatus(viewState.getSelectedBooking(), Booking.REJECTED);
+      error.set("");
     }
     else
     {
@@ -109,19 +112,20 @@ return false;
     }
 
   }
+
   public boolean onDetails()
   {
-      if (selectedBooking.get() != null)
-      {
-        viewState.setSelectedBooking(selectedBooking.get().getId().get());
-        return true;
-      }
-      else
-      {
-        viewState.removeSelectedBooking();
-        error.set("Please select a booking first");
-        return false;
-      }
+    if (selectedBooking.get() != null)
+    {
+      viewState.setSelectedBooking(selectedBooking.get().getId().get());
+      return true;
+    }
+    else
+    {
+      viewState.removeSelectedBooking();
+      error.set("Please select a booking first");
+      return false;
+    }
 
   }
 
@@ -138,8 +142,7 @@ return false;
   @Override public void propertyChange(ObserverEvent<Account, Booking> event)
   {
     Platform.runLater(() -> {
-      if (event.getValue1()
-          .equals(viewState.getBabysitter()))
+      if (event.getValue1().equals(viewState.getBabysitter()))
       {
         bookings.add(new BookingViewModel(event.getValue2()));
       }
