@@ -76,5 +76,6 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
+      <Label fx:id="successMessage" layoutX="17.0" layoutY="572.0" prefHeight="18.0" prefWidth="258.0" text="Label" textFill="#1db765" />
     </children>
 </AnchorPane>

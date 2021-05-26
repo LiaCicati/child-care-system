@@ -22,6 +22,7 @@ public class BookingListViewModel implements LocalListener<Account, Booking>
   private LocalModel model;
   private ViewState viewState;
   private StringProperty error;
+  private StringProperty successMessage;
 
   public BookingListViewModel(LocalModel model, ViewState viewState)
   {
@@ -31,12 +32,14 @@ public class BookingListViewModel implements LocalListener<Account, Booking>
     this.parentBookings = FXCollections.observableArrayList();
     this.selectedBooking = new SimpleObjectProperty<>();
     this.error = new SimpleStringProperty();
+    this.successMessage = new SimpleStringProperty();
     model.addListener(this, "add");
   }
 
   public void reset()
   {
     error.set("");
+    successMessage.set("");
     update();
     updateParentBookings();
   }
@@ -80,6 +83,9 @@ public class BookingListViewModel implements LocalListener<Account, Booking>
     {
       viewState.setSelectedBooking(selectedBooking.get().getId().get());
       model.changeStatus(viewState.getSelectedBooking(), Booking.ACCEPTED);
+      successMessage.set("Status changed to " + model
+          .getBookingById(viewState.getSelectedBooking()).getStatus());
+      update();
       error.set("");
 
       return true;
@@ -98,10 +104,11 @@ public class BookingListViewModel implements LocalListener<Account, Booking>
     if (selectedBooking.get() != null)
     {
       viewState.setSelectedBooking(selectedBooking.get().getId().get());
-      //      model.getBookingById(viewState.getSelectedBooking()).setStatus("Accepted");
-      //      System.out.println(selectedBooking.get().getStatus());
-      //      System.out.println(model.getBookingById(viewState.getSelectedBooking()).getStatus());
       model.changeStatus(viewState.getSelectedBooking(), Booking.REJECTED);
+      successMessage.set("Status changed to " + model
+          .getBookingById(viewState.getSelectedBooking()).getStatus());
+
+      update();
       error.set("");
     }
     else
@@ -137,6 +144,10 @@ public class BookingListViewModel implements LocalListener<Account, Booking>
   public StringProperty getError()
   {
     return error;
+  }
+  public StringProperty getSuccessMessage()
+  {
+    return successMessage;
   }
 
   @Override public void propertyChange(ObserverEvent<Account, Booking> event)
