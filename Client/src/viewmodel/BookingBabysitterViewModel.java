@@ -205,7 +205,7 @@ public class BookingBabysitterViewModel
       } else if (new MyDateTime(startTime.getDay(), startTime.getMonth(), startTime.getYear()).equals(today) && selectedHour < thisHour ==true) {
         errorMessage = "Selected time must be in the future";
         errorLabel.set(errorMessage);
-      }else if (selectedHour < thisHour ==false && selectedMinute<thisMinute==true) {
+      }else if (new MyDateTime(startTime.getDay(), startTime.getMonth(), startTime.getYear()).equals(today) && (selectedHour == thisHour) && selectedMinute<thisMinute==true) {
         errorMessage = "Selected time must be in the future";
         errorLabel.set(errorMessage);
       }else if (selectedDay == 0){
