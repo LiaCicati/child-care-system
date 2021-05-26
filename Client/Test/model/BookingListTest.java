@@ -28,10 +28,10 @@ class BookingListTest
             new MyDateTime(1, 5, 1999), 2, 40, "English", true);
         booking1 = new Booking(
             new TimeInterval(new MyDateTime(13, 3, 2021, 12, 30),
-                new MyDateTime(13, 3, 2001, 19, 0)), parent, babysitter);
+                new MyDateTime(13, 3, 2001, 19, 0)), parent, babysitter, null);
         booking2 = new Booking(
             new TimeInterval(new MyDateTime(15, 3, 2021, 17, 30),
-                new MyDateTime(15, 3, 2001, 21, 45)), parent, babysitter);
+                new MyDateTime(15, 3, 2001, 21, 45)), parent, babysitter, null);
         list.addBooking(booking1);
         list.addBooking(booking2);
     }
@@ -45,7 +45,7 @@ class BookingListTest
     {
         Booking testBooking = new Booking(
             new TimeInterval(new MyDateTime(17, 3, 2021, 16, 45),
-                new MyDateTime(17, 3, 2001, 20, 15)), parent, babysitter);
+                new MyDateTime(17, 3, 2001, 20, 15)), parent, babysitter, null);
         list.addBooking(testBooking);
         assertThat(testBooking.toString(), is(list.getBooking(2).toString()));
     }
@@ -60,7 +60,7 @@ class BookingListTest
     {
         Booking testBooking = new Booking(
             new TimeInterval(new MyDateTime(17, 3, 2021, 16, 45),
-                new MyDateTime(17, 3, 2001, 20, 15)), parent, babysitter);
+                new MyDateTime(17, 3, 2001, 20, 15)), parent, babysitter, null);
         assertEquals(2, list.getNumberOfBookings());
         list.addBooking(testBooking);
         assertEquals(3, list.getNumberOfBookings());

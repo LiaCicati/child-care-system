@@ -54,7 +54,7 @@ public class ModelManager implements Model
         "password", false);
     Parent parent2 = new Parent("Lina", "Peters", "lina", "lina@gmail.com",
         "password", true);
-    Booking booking1 = new Booking(new TimeInterval(new MyDateTime(22, 5, 2021, 12, 5), new MyDateTime(22, 5, 2021, 14, 5)), parent1, babysitter2);
+    Booking booking1 = new Booking(new TimeInterval(new MyDateTime(22, 5, 2021, 12, 5), new MyDateTime(22, 5, 2021, 14, 5)), parent1, babysitter2, null);
     bookingList.addBooking(booking1);
 
     System.out.println(getAllBookings(parent1).size());

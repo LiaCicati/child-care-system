@@ -22,7 +22,7 @@ public class BookingBabysitterViewModel
   private StringProperty errorLabel;
   private StringProperty durationHours;
   private StringProperty durationMinutes;
-
+  private StringProperty description;
 
   private ObservableList<BookingBabysitterTableRowData> babysitters;
 
@@ -57,7 +57,7 @@ public class BookingBabysitterViewModel
     durationHours = new SimpleStringProperty();
     durationMinutes = new SimpleStringProperty();
     this.bookedBabysitters = new ArrayList<>();
-
+    this.description = new SimpleStringProperty();
 
   }
 
@@ -68,6 +68,7 @@ public class BookingBabysitterViewModel
     date.set(null);
     durationHours.set("");
     durationMinutes.set("");
+    description.set("");
     updateBabysitters();
    // hour.set(null);
     errorLabel.set("");
@@ -173,6 +174,11 @@ public class BookingBabysitterViewModel
     return babysitters;
   }
 
+  public StringProperty getDescription()
+  {
+    return description;
+  }
+
   public void setBabysitters(
       ObservableList<BookingBabysitterTableRowData> babysitters)
   {
@@ -219,13 +225,12 @@ public class BookingBabysitterViewModel
           errorLabel.set(errorMessage);
       }else if (getStartTime().getTime()!=0){
 //        reset();
-        Booking myBooking = new Booking(new TimeInterval(getStartTime(), getEndTime()),viewState.getParent() , model.getBabysitter(babysitter));
+        Booking myBooking = new Booking(new TimeInterval(getStartTime(), getEndTime()),viewState.getParent() , model.getBabysitter(babysitter), getDescription().get());
         model.addBooking(myBooking);
         
         errorMessage = "Booking of babysitter completed!";
         label.setTextFill(Color.web("black"));
         errorLabel.set(errorMessage);
-
       }
     } catch (RemoteException e) {
       e.printStackTrace();

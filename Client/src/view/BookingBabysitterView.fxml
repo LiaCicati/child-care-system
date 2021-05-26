@@ -12,6 +12,7 @@
 <?import javafx.scene.control.SplitMenuButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -45,7 +46,7 @@
                 <Font size="13.0" />
             </font>
         </Label>
-      <TableView fx:id="babysittersTable" layoutX="18.0" layoutY="226.0" prefHeight="302.0" prefWidth="378.0">
+      <TableView fx:id="babysittersTable" layoutX="18.0" layoutY="226.0" prefHeight="170.0" prefWidth="378.0">
         <columns>
           <TableColumn fx:id="babysitterNameColumn" prefWidth="75.0" text="Name" />
           <TableColumn fx:id="babysitterAgeColumn" prefWidth="75.0" text="Age" />
@@ -192,6 +193,12 @@
                   </Label>
                </children>
             </HBox>
+         </children>
+      </VBox>
+      <VBox layoutX="18.0" layoutY="406.0" prefHeight="123.0" prefWidth="378.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="17.0" prefWidth="378.0" text="Description" />
+            <TextArea fx:id="description" prefHeight="200.0" prefWidth="200.0" />
          </children>
       </VBox>
     </children>
