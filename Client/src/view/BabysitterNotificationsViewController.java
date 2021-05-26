@@ -19,6 +19,7 @@ public class BabysitterNotificationsViewController extends ViewController
   @FXML private TableColumn<BookingViewModel, String> startTimeColumn;
   @FXML private TableColumn<BookingViewModel, String> endTimeColumn;
   @FXML private TableColumn<BookingViewModel, String> parentColumn;
+  @FXML private TableColumn<BookingViewModel, String> statusColumn;
   @FXML private Label errorLabel;
 
   @Override protected void init()
@@ -34,6 +35,7 @@ public class BabysitterNotificationsViewController extends ViewController
         .setCellValueFactory(cellData -> cellData.getValue().getEndTime());
     parentColumn
         .setCellValueFactory(cellData -> cellData.getValue().getParent());
+    statusColumn.setCellValueFactory(cellData -> cellData.getValue().getStatus());
     bookingsTable.setItems(viewModel.getBookings());
     bookingsTable.getSelectionModel().selectedItemProperty().addListener(
         (obs, oldValue, newValue) -> viewModel.setSelectedBooking(newValue));

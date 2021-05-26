@@ -26,11 +26,12 @@
         </SplitMenuButton>
       <TableView fx:id="bookingsTable" layoutX="2.0" layoutY="146.0" prefHeight="405.0" prefWidth="410.0">
         <columns>
-          <TableColumn fx:id="dateTimeColumn" prefWidth="104.800048828125" text="Made at" />
-            <TableColumn fx:id="parentColumn" prefWidth="73.5999755859375" text="Parent" />
-            <TableColumn fx:id="dateColumn" prefWidth="88.0" text="Date" />
-            <TableColumn fx:id="startTimeColumn" prefWidth="65.5999755859375" text="Starts at" />
-            <TableColumn fx:id="endTimeColumn" prefWidth="78.39996337890625" text="Ends at" />
+          <TableColumn fx:id="dateTimeColumn" prefWidth="57.60003662109375" text="Made at" />
+            <TableColumn fx:id="parentColumn" prefWidth="56.79998779296875" text="Parent" />
+            <TableColumn fx:id="dateColumn" prefWidth="83.20001220703125" text="Date" />
+            <TableColumn fx:id="startTimeColumn" prefWidth="68.79998779296875" text="Starts at" />
+            <TableColumn fx:id="endTimeColumn" prefWidth="71.199951171875" text="Ends at" />
+            <TableColumn fx:id="statusColumn" prefWidth="73.5999755859375" text="Status" />
         </columns>
       </TableView>
       <Label fx:id="errorLabel" layoutX="15.0" layoutY="687.0" prefHeight="38.0" prefWidth="381.0" text="Error label" textFill="#f9494b">
@@ -64,7 +65,7 @@
             </Button>
          </children>
       </HBox>
-      <Button layoutX="301.0" layoutY="561.0" minHeight="38.0" minWidth="98.0" mnemonicParsing="false" onAction="#onDetails" style="-fx-background-radius: 37; -fx-background-color: #22AFD6;" text="View details" textFill="WHITE">
+      <Button layoutX="301.0" layoutY="561.0" minHeight="38.0" minWidth="98.0" mnemonicParsing="false" onAction="#onDetails" style="-fx-background-radius: 37; -fx-background-color: #7268A8;" text="View details" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>

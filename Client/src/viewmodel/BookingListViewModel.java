@@ -145,6 +145,7 @@ public class BookingListViewModel implements LocalListener<Account, Booking>
       if (event.getValue1().equals(viewState.getBabysitter()))
       {
         bookings.add(new BookingViewModel(event.getValue2()));
+        parentBookings.add(new BookingViewModel(event.getValue2()));
       }
     });
   }
