@@ -41,7 +41,7 @@ public class BookingDetailsViewModel
     date.set(booking.getTime().getStartTime().getSimpleDate());
     startTime.set(booking.getTime().getStartTime().getSimpleTime());
     endTime.set(booking.getTime().getEndTime().getSimpleTime());
-    description.set("description");
+    description.set(booking.getDescription());
   }
 
   public StringProperty getBookedAt()

@@ -24,6 +24,7 @@ public class BookingBabysitterViewController extends ViewController
   @FXML private TableColumn<BookingBabysitterTableRowData, Number> babysitterAgeColumn;
   @FXML private TableColumn<BookingBabysitterTableRowData, Number> babysitterExperienceColumn;
   @FXML private TableColumn<BookingBabysitterTableRowData, Number> babysitterPaymentColumn;
+  @FXML private TextArea description;
 
   private BookingBabysitterViewModel viewModel;
 
@@ -37,6 +38,7 @@ public class BookingBabysitterViewController extends ViewController
     minuteComboBox.valueProperty().bindBidirectional(viewModel.getMinute());
     durationHoursComboBox.valueProperty().bindBidirectional(viewModel.getDurationHours());
     durationMinutesComboBox.valueProperty().bindBidirectional(viewModel.getDurationMinutes());
+    description.textProperty().bindBidirectional(viewModel.getDescription());
     errorLabel.textProperty().bind(viewModel.getError());
 
     babysitterNameColumn.setCellValueFactory(d -> d.getValue().getName());
