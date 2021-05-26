@@ -70,6 +70,10 @@ public class BookingViewModel
   {
     return status;
   }
+  public void setStatus(StringProperty status)
+  {
+    this.status = status;
+  }
   public IntegerProperty getId()
   {
     return id;

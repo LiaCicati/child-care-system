@@ -244,6 +244,7 @@ public class BookingBabysitterViewModel
 //        reset();
         Booking myBooking = new Booking(new TimeInterval(getStartTime(), getEndTime()),viewState.getParent() , model.getBabysitter(babysitter));
         model.addBooking(myBooking);
+        viewState.setBooking(myBooking);
         
         errorMessage = "Booking of babysitter completed!";
         label.setTextFill(Color.web("black"));
