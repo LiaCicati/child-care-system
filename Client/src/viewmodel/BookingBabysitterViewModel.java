@@ -32,16 +32,17 @@ public class BookingBabysitterViewModel
 
   private String errorMessage;
 
-  int selectedYear = 0;
-  int selectedMonth = 0;
-  int selectedDay = 0;
-  int selectedHour = 0;
-  int selectedMinute = 0;
-  int selectedDurationHour = 0;
-  int SelectedDurationMinute = 0;
 
-  MyDateTime startTime = new MyDateTime(0,0,0,0,0);
-  MyDateTime endTime = new MyDateTime(0,0,0,0,0);
+  private int selectedYear;
+  private int selectedMonth;
+  private int selectedDay;
+  private int selectedHour;
+  private int selectedMinute;
+  private int selectedDurationHour;
+  private int SelectedDurationMinute;
+
+  private MyDateTime startTime;
+  private MyDateTime endTime;
 
 
   public BookingBabysitterViewModel(LocalModel model, ViewState viewState)
@@ -58,6 +59,17 @@ public class BookingBabysitterViewModel
     durationMinutes = new SimpleStringProperty();
     this.bookedBabysitters = new ArrayList<>();
 
+    this.selectedYear = 0;
+    this.selectedMonth = 0;
+    this.selectedDay = 0;
+    this.selectedHour = 0;
+    this.selectedMinute = 0;
+    this.selectedDurationHour = 0;
+    this.SelectedDurationMinute = 0;
+
+    this.startTime = new MyDateTime(0,0,0,0,0);
+    this.endTime = new MyDateTime(0,0,0,0,0);
+
 
   }
 
@@ -71,6 +83,17 @@ public class BookingBabysitterViewModel
     updateBabysitters();
    // hour.set(null);
     errorLabel.set("");
+
+     selectedYear = 0;
+     selectedMonth = 0;
+     selectedDay = 0;
+     selectedHour = 0;
+     selectedMinute = 0;
+     selectedDurationHour = 0;
+     SelectedDurationMinute = 0;
+
+     startTime.set(0,0,0,0,0);
+     endTime.set(0,0,0,0,0);
   }
 
   public void resetLabel(Label label){
