@@ -363,6 +363,19 @@ public class Client implements ClientModel, RemoteListener<Account, Booking>
     }
   }
 
+  @Override public void changeStatus(int id, String status)
+  {
+    try
+    {
+       remoteModel.changeStatus(id, status);
+    }
+    catch (RemoteException e)
+    {
+      throw new IllegalStateException(getExceptionMessage(e), e);
+
+    }
+  }
+
   @Override public void propertyChange(ObserverEvent<Account, Booking> event)
       throws RemoteException
   {

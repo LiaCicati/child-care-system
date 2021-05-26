@@ -360,6 +360,11 @@ public class ModelManager implements Model
     return bookingList.getBookingById(id);
   }
 
+  @Override public void changeStatus( int id, String status)
+  {
+    bookingList.getBookingById(id).setStatus(status);
+  }
+
   @Override public boolean addListener(
       GeneralListener<Account, Booking> listener, String... propertyNames)
   {

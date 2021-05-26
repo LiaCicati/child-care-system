@@ -173,6 +173,11 @@ return serverModel.getAllBookings(babysitter);
     return serverModel.getBookingById(id);
   }
 
+  @Override public void changeStatus(int id, String status)
+  {
+    serverModel.changeStatus(id, status);
+  }
+
   @Override public boolean addListener(GeneralListener<Account, Booking> listener,
       String... propertyNames)
   {

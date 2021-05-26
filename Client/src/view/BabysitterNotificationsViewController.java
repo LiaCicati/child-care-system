@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.Background;
+import javafx.scene.paint.Color;
 import viewmodel.BookingListViewModel;
 import viewmodel.BookingViewModel;
 
@@ -50,10 +52,12 @@ public class BabysitterNotificationsViewController extends ViewController
 
   public void onAccept()
   {
+    viewModel.onAccept();
   }
 
   public void onReject()
   {
+    viewModel.onReject();
   }
 
   public void onDetails()
