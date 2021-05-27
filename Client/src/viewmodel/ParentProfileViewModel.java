@@ -27,6 +27,7 @@ public class ParentProfileViewModel implements LocalListener<Account, Booking>
   private StringProperty hasPets;
   private StringProperty errorLabel;
   private StringProperty changedStatus;
+  private int notificationUpdate;
 
   public ParentProfileViewModel(LocalModel model, ViewState viewState)
   {
@@ -41,6 +42,7 @@ public class ParentProfileViewModel implements LocalListener<Account, Booking>
     errorLabel = new SimpleStringProperty();
     changedStatus = new SimpleStringProperty();
     model.addListener(this, "add");
+    notificationUpdate = 0;
   }
 
   public void reset()
@@ -48,7 +50,7 @@ public class ParentProfileViewModel implements LocalListener<Account, Booking>
     loadData();
     errorLabel.set("");
     changedStatus.set(
-        String.valueOf(model.getNotifications(viewState.getParent())));
+        String.valueOf(model.getNotifications(viewState.getParent()) - getNotificationUpdate()));
   }
 
   public void logout()
@@ -117,6 +119,16 @@ public class ParentProfileViewModel implements LocalListener<Account, Booking>
   public StringProperty getChangedStatus()
   {
     return changedStatus;
+  }
+
+  public int getNotificationUpdate()
+  {
+    return notificationUpdate;
+  }
+
+  public void updateNotifications()
+  {
+    notificationUpdate = model.getNotifications(viewState.getParent());
   }
 
   @Override public void propertyChange(ObserverEvent<Account, Booking> event)

@@ -111,6 +111,7 @@ public class ParentProfileViewController extends ViewController
 
   public void onMyBookings()
   {
+    viewModel.updateNotifications();
     getViewHandler().openView(View.PARENT_BOOKINGS_VIEW);
   }
 }
