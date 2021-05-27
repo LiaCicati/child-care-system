@@ -38,4 +38,5 @@ public interface LocalModel extends LocalSubject<Account, Booking>
   Booking getBookingById(int id);
   void changeStatus(int id, String status);
 
+  public int getNotifications(Parent parent);
 }

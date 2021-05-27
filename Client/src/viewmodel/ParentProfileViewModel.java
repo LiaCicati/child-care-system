@@ -48,9 +48,7 @@ public class ParentProfileViewModel implements LocalListener<Account, Booking>
     loadData();
     errorLabel.set("");
     changedStatus.set(
-        "maybe here should be called some method to get the size bookings of a specific parent with status accept/reject?");
-    // here should be called maybe a method from the model that will get all the
-    // bookings that have accepted/rejected status of the logged In parent (not sure, just a suggestion)
+        String.valueOf(model.getNotifications(viewState.getParent())));
   }
 
   public void logout()
