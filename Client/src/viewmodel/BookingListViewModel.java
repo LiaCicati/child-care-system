@@ -36,6 +36,7 @@ public class BookingListViewModel implements LocalListener<Account, Booking>
     this.selectedBooking = new SimpleObjectProperty<>();
     this.message = new SimpleStringProperty();
     model.addListener(this, "add");
+    model.addListener(this, "status");
   }
 
   public void reset()
@@ -178,6 +179,9 @@ public class BookingListViewModel implements LocalListener<Account, Booking>
       {
         bookings.add(new BookingViewModel(event.getValue2()));
         parentBookings.add(new BookingViewModel(event.getValue2()));
+      }
+      if (event.getPropertyName().equals("status")){
+        parentBookings.
       }
     });
   }

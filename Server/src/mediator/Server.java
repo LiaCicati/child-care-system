@@ -189,6 +189,7 @@ public class Server implements RemoteModel, LocalListener<Account, Booking>
       throws RemoteException
   {
     model.changeStatus(id, status);
+    property.firePropertyChange("status", null, getBookingById(id));
   }
 
   @Override public int getNotifications(Parent parent) throws RemoteException
