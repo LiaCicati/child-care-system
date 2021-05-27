@@ -52,17 +52,18 @@ public class BookingBabysitterViewController extends ViewController
 
   @Override public void reset()
   {
-//    bookingDatePicker.setValue(null);
-//    durationHoursComboBox.setValue(null);
-//    durationMinutesComboBox.setValue(null);
-//    minuteComboBox.setValue(null);
-//    hourComboBox.setValue(null);
-//    bookingDatePicker.setValue(null);
+    bookingDatePicker.setValue(null);
+    durationHoursComboBox.setValue(null);
+    durationMinutesComboBox.setValue(null);
+    minuteComboBox.setValue(null);
+    hourComboBox.setValue(null);
+    bookingDatePicker.setValue(null);
     viewModel.reset();
   }
 
   public void onProfile()
   {
+    reset();
     getViewHandler().openView(View.PARENT_PROFILE_VIEW);
   }
 
@@ -104,6 +105,7 @@ public class BookingBabysitterViewController extends ViewController
 
   public void onMyBookings()
   {
+    reset();
     getViewHandler().openView(View.PARENT_BOOKINGS_VIEW);
   }
 }
