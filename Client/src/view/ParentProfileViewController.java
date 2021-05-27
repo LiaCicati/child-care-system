@@ -32,6 +32,7 @@ public class ParentProfileViewController extends ViewController
   @FXML private TableColumn<KidViewModel, Number> ageColumn;
   @FXML private TableColumn<KidViewModel, String> genderColumn;
   @FXML private TableColumn<KidViewModel, String> healthConditionColumn;
+  @FXML private Label changedStatus;
 
   @FXML private Button editKidButton;
 
@@ -49,6 +50,7 @@ public class ParentProfileViewController extends ViewController
     email.textProperty().bindBidirectional(viewModel.getEmail());
     //    password.textProperty().bindBidirectional(viewModel.getPassword());
     hasPets.textProperty().bindBidirectional(viewModel.getHasPets());
+    changedStatus.textProperty().bindBidirectional(viewModel.getChangedStatus());
 
     editParentButton.setDisable(true);
 

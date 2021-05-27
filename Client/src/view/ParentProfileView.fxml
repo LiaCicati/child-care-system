@@ -80,6 +80,8 @@
                                   <Cursor fx:constant="HAND" />
                               </cursor>
                           </Button>
+                        <Label layoutX="50.0" layoutY="292.0" text="Bookings with changed status:" />
+                        <Label fx:id="changedStatus" layoutX="221.0" layoutY="292.0" text="Label" textFill="#ed0000" />
                      </children>
                   </AnchorPane>
             </content>

@@ -1,15 +1,21 @@
 package viewmodel;
 
+import javafx.application.Platform;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import model.Account;
+import model.Booking;
 import model.Kid;
 import model.LocalModel;
+import utility.observer.event.ObserverEvent;
+import utility.observer.listener.LocalListener;
 import view.View;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
-public class ParentProfileViewModel
+public class ParentProfileViewModel implements LocalListener<Account, Booking>
 {
   private LocalModel model;
   private ViewState viewState;
@@ -20,6 +26,7 @@ public class ParentProfileViewModel
   private StringProperty password;
   private StringProperty hasPets;
   private StringProperty errorLabel;
+  private StringProperty changedStatus;
 
   public ParentProfileViewModel(LocalModel model, ViewState viewState)
   {
@@ -32,12 +39,18 @@ public class ParentProfileViewModel
     password = new SimpleStringProperty();
     hasPets = new SimpleStringProperty();
     errorLabel = new SimpleStringProperty();
+    changedStatus = new SimpleStringProperty();
+    model.addListener(this, "add");
   }
 
   public void reset()
   {
     loadData();
     errorLabel.set("");
+    changedStatus.set(
+        "maybe here should be called some method to get the size bookings of a specific parent with status accept/reject?");
+    // here should be called maybe a method from the model that will get all the
+    // bookings that have accepted/rejected status of the logged In parent (not sure, just a suggestion)
   }
 
   public void logout()
@@ -55,16 +68,16 @@ public class ParentProfileViewModel
     username.set(viewState.getAccount().getUserName());
     email.set(viewState.getAccount().getEmail());
 
-    if(viewState.getParent().hasPets())
+    if (viewState.getParent().hasPets())
     {
       hasPets.set("yes");
-    } else {
+    }
+    else
+    {
       hasPets.set("no");
     }
 
     //    hasPets.set(viewState.getParent().hasPets() + "");
-
-
 
   }
 
@@ -103,5 +116,19 @@ public class ParentProfileViewModel
     return errorLabel;
   }
 
+  public StringProperty getChangedStatus()
+  {
+    return changedStatus;
+  }
 
+  @Override public void propertyChange(ObserverEvent<Account, Booking> event)
+  {
+
+    Platform.runLater(() -> {
+      if (event.getValue1().equals(viewState.getParent()))
+      {
+        // same as in reset label I guess
+      }
+    });
+  }
 }
