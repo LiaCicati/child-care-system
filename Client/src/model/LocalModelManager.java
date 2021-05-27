@@ -48,7 +48,7 @@ public class LocalModelManager
   {
     try
     {
-            property.close();
+      property.close();
       serverModel.close();
     }
     catch (Exception e)
@@ -62,12 +62,15 @@ public class LocalModelManager
     return serverModel.login(username, password);
   }
 
-  @Override public void registerBabysitter(String firstName, String lastName, String userName,String email,
-                                           String password, MyDateTime birthday, double babysittingExperience,
-                                           double paymentPerHour, String mainLanguage, boolean hasFirstAidCertificate)
+  @Override public void registerBabysitter(String firstName, String lastName,
+      String userName, String email, String password, MyDateTime birthday,
+      double babysittingExperience, double paymentPerHour, String mainLanguage,
+      boolean hasFirstAidCertificate)
   {
-    serverModel.registerBabysitter(firstName, lastName,userName,email, password, birthday, babysittingExperience,
-            paymentPerHour, mainLanguage, hasFirstAidCertificate);
+    serverModel
+        .registerBabysitter(firstName, lastName, userName, email, password,
+            birthday, babysittingExperience, paymentPerHour, mainLanguage,
+            hasFirstAidCertificate);
   }
 
   /*@Override public void registerBabysitter(String userName, String password, String email, String firstName,
@@ -76,14 +79,16 @@ public class LocalModelManager
     serverModel.registerBabysitter(userName, password, email, firstName, lastName);
   }*/
 
-//  @Override public void registerParent(String firstName, String lastName, String userName,String email, String password)
-//  {
-//    serverModel.registerParent( firstName,  lastName,  userName, email,  password);
-//  }
+  //  @Override public void registerParent(String firstName, String lastName, String userName,String email, String password)
+  //  {
+  //    serverModel.registerParent( firstName,  lastName,  userName, email,  password);
+  //  }
 
-  @Override public void registerParent(String firstName, String lastName, String userName,String email, String password, boolean hasPets)
+  @Override public void registerParent(String firstName, String lastName,
+      String userName, String email, String password, boolean hasPets)
   {
-    serverModel.registerParent(firstName, lastName, userName, email, password, hasPets);
+    serverModel.registerParent(firstName, lastName, userName, email, password,
+        hasPets);
   }
 
   @Override public AccountList getParentList()
@@ -116,14 +121,12 @@ public class LocalModelManager
     serverModel.logout(account);
   }
 
-
-  @Override
-  public Parent getLoggedInParent() {
+  @Override public Parent getLoggedInParent()
+  {
     return serverModel.getLoggedInParent();
   }
 
-  @Override
-  public BookingList getBookingList()
+  @Override public BookingList getBookingList()
   {
     return serverModel.getBookingList();
   }
@@ -142,25 +145,25 @@ public class LocalModelManager
   {
     return serverModel.getAllKids(parent);
   }
-  
 
   @Override public void addKid(Parent parent, Kid kid)
   {
     serverModel.addKid(parent, kid);
   }
 
-
-  @Override public Kid getKidById(int id) {
+  @Override public Kid getKidById(int id)
+  {
     return serverModel.getKidById(id);
   }
 
+  @Override public Kid getKid(int index)
+  {
+    return serverModel.getKid(index);
+  }
 
-  @Override public Kid getKid(int index) {
-    return serverModel.getKid(index); }
-
-
-  @Override public ArrayList<Booking> getAllBookings(Babysitter babysitter) {
-return serverModel.getAllBookings(babysitter);
+  @Override public ArrayList<Booking> getAllBookings(Babysitter babysitter)
+  {
+    return serverModel.getAllBookings(babysitter);
   }
 
   @Override public ArrayList<Booking> getAllBookings(Parent parent)
@@ -178,8 +181,8 @@ return serverModel.getAllBookings(babysitter);
     serverModel.changeStatus(id, status);
   }
 
-  @Override public boolean addListener(GeneralListener<Account, Booking> listener,
-      String... propertyNames)
+  @Override public boolean addListener(
+      GeneralListener<Account, Booking> listener, String... propertyNames)
   {
     return property.addListener(listener, propertyNames);
   }
@@ -198,14 +201,6 @@ return serverModel.getAllBookings(babysitter);
 
   @Override public int getNotifications(Parent parent)
   {
-    int check = 0;
-    for (Booking booking : serverModel.getAllBookings(parent))
-    {
-      if (!booking.getStatus().equals("Pending"))
-      {
-        check++;
-      }
-    }
-    return check;
+    return serverModel.getNotifications(parent);
   }
 }

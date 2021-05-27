@@ -376,6 +376,19 @@ public class Client implements ClientModel, RemoteListener<Account, Booking>
     }
   }
 
+  @Override public int getNotifications(Parent parent)
+  {
+    try
+    {
+      return remoteModel.getNotifications(parent);
+    }
+    catch (RemoteException e)
+    {
+      throw new IllegalStateException(getExceptionMessage(e), e);
+
+    }
+  }
+
   @Override public void propertyChange(ObserverEvent<Account, Booking> event)
       throws RemoteException
   {

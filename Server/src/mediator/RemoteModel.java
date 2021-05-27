@@ -40,6 +40,6 @@ public interface RemoteModel extends RemoteSubject<Account, Booking>
   ArrayList<Booking> getAllBookings(Parent parent) throws RemoteException;
   Booking getBookingById(int id) throws RemoteException;
   void changeStatus(int id, String status) throws RemoteException;
-
+  int getNotifications(Parent parent) throws RemoteException;
 
 }
