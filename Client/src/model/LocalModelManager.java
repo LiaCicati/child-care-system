@@ -195,4 +195,17 @@ return serverModel.getAllBookings(babysitter);
 
     property.firePropertyChange("add", event.getValue1(), event.getValue2());
   }
+
+  @Override public int getNotifications(Parent parent)
+  {
+    int check = 0;
+    for (Booking booking : serverModel.getAllBookings(parent))
+    {
+      if (!booking.getStatus().equals("Pending"))
+      {
+        check++;
+      }
+    }
+    return check;
+  }
 }

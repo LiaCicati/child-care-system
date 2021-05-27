@@ -55,6 +55,7 @@ public class ModelManager implements Model
     Parent parent2 = new Parent("Lina", "Peters", "lina", "lina@gmail.com",
         "password", true);
     Booking booking1 = new Booking(new TimeInterval(new MyDateTime(22, 5, 2021, 12, 5), new MyDateTime(22, 5, 2021, 14, 5)), parent1, babysitter2, null);
+    booking1.setStatus("Accepted");
     bookingList.addBooking(booking1);
 
     System.out.println(getAllBookings(parent1).size());
@@ -376,5 +377,18 @@ public class ModelManager implements Model
   {
     return property.removeListener(listener, propertyNames);
 
+  }
+
+  @Override public int getNotifications(Parent parent)
+  {
+    int check = 0;
+    for (Booking booking : bookingList.getBookingsByParent(parent))
+    {
+      if (!booking.getStatus().equals("Pending"))
+      {
+        check++;
+      }
+    }
+    return check;
   }
 }
