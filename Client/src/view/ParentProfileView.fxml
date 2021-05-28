@@ -22,7 +22,7 @@
         <ImageView fitHeight="111.0" fitWidth="174.0" layoutX="126.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@resources/logo.png" />
         </ImageView>
-        <Label layoutX="150.0" layoutY="143.0" text="Hello, ">
+        <Label layoutX="128.0" layoutY="140.0" text="Hello, ">
             <font>
                 <Font size="24.0" />
             </font>
@@ -41,7 +41,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-      <TabPane layoutX="14.0" layoutY="192.0" prefHeight="491.0" prefWidth="388.0" style="-fx-border-color: transparent; -fx-background-insets: none;" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutX="12.0" layoutY="213.0" prefHeight="462.0" prefWidth="388.0" style="-fx-border-color: transparent; -fx-background-insets: none;" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Personal data">
             <content>
@@ -69,7 +69,7 @@
                               </VBox>
                            </children>
                         </HBox>
-                          <Button fx:id="editParentButton" layoutX="22.0" layoutY="352.0" minHeight="70.0" minWidth="342.0" mnemonicParsing="false" onAction="#onEditParentData" style="-fx-background-radius: 37; -fx-background-color: #A094E3;" text="Edit" textFill="WHITE">
+                          <Button fx:id="editParentButton" layoutX="22.0" layoutY="336.0" minHeight="70.0" minWidth="342.0" mnemonicParsing="false" onAction="#onEditParentData" style="-fx-background-radius: 37; -fx-background-color: #A094E3;" text="Edit" textFill="WHITE">
                               <font>
                                   <Font size="16.0" />
                               </font>
@@ -80,8 +80,6 @@
                                   <Cursor fx:constant="HAND" />
                               </cursor>
                           </Button>
-                        <Label layoutX="50.0" layoutY="292.0" text="Bookings with changed status:" />
-                        <Label fx:id="changedStatus" layoutX="221.0" layoutY="292.0" text="Label" textFill="#ed0000" />
                      </children>
                   </AnchorPane>
             </content>
@@ -130,10 +128,12 @@
           </Tab>
         </tabs>
       </TabPane>
-      <Label fx:id="greetingName" layoutX="218.0" layoutY="143.0" prefHeight="35.0" prefWidth="127.0" text="Label">
+      <Label fx:id="greetingName" layoutX="196.0" layoutY="140.0" prefHeight="35.0" prefWidth="127.0" text="Label">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
+      <Label layoutX="106.0" layoutY="183.0" text="Bookings with changed status:" textFill="#6c63ff" />
+      <Label fx:id="changedStatus" layoutX="277.0" layoutY="183.0" text="Label" textFill="#38a796" />
     </children>
 </AnchorPane>

@@ -44,4 +44,5 @@ Booking getBookingById(int id);
 void changeStatus(int id, String status);
 
   int getNotifications(Parent parent);
+  int getBabysitterPendingBookings(Babysitter babysitter);
 }

@@ -54,7 +54,7 @@
             <TableColumn fx:id="babysitterPaymentColumn" prefWidth="89.5999755859375" text="Payment/h" />
         </columns>
       </TableView>
-      <SplitMenuButton layoutX="24.0" layoutY="24.0" mnemonicParsing="false" text="Menu">
+      <SplitMenuButton layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Menu">
          <items>
             <MenuItem mnemonicParsing="false" onAction="#onProfile" text="Profile" />
             <MenuItem mnemonicParsing="false" onAction="#onMyBookings" text="My Bookings" />

@@ -181,7 +181,7 @@ public class BookingListViewModel implements LocalListener<Account, Booking>
         parentBookings.add(new BookingViewModel(event.getValue2()));
       }
       if (event.getPropertyName().equals("status")){
-        parentBookings.
+//        parentBookings.
       }
     });
   }

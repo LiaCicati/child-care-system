@@ -49,4 +49,5 @@ public interface RemoteModel extends RemoteSubject<Account, Booking>
  Booking getBookingById(int id) throws RemoteException;
  void changeStatus(int id, String status) throws RemoteException;
  int getNotifications(Parent parent) throws RemoteException;
+ int getBabysitterPendingBookings(Babysitter babysitter) throws RemoteException;
 }

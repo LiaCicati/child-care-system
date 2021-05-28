@@ -1,10 +1,15 @@
 package viewmodel;
 
+import javafx.application.Platform;
 import javafx.beans.property.*;
 import javafx.collections.ObservableList;
+import model.Account;
+import model.Booking;
 import model.LocalModel;
+import utility.observer.event.ObserverEvent;
+import utility.observer.listener.LocalListener;
 
-public class BabysitterProfileViewModel
+public class BabysitterProfileViewModel implements LocalListener<Account, Booking>
 {
   private LocalModel model;
   private ViewState viewState;
@@ -19,6 +24,8 @@ public class BabysitterProfileViewModel
   private StringProperty motherTongue;
   private StringProperty firstAidCertificate;
   private StringProperty errorLabel;
+
+  private StringProperty pendingBookings;
   private ObservableList<model.Babysitter> babysitters;
 
   public BabysitterProfileViewModel(LocalModel model, ViewState viewState)
@@ -36,11 +43,15 @@ public class BabysitterProfileViewModel
     motherTongue = new SimpleStringProperty();
     firstAidCertificate = new SimpleStringProperty();
     errorLabel = new SimpleStringProperty();
+
+    this.pendingBookings = new SimpleStringProperty();
+    model.addListener(this, "add");
   }
 
   public void reset()
   {
     loadData();
+    pendingBookings.set(model.getBabysitterPendingBookings(viewState.getBabysitter()) + "");
     errorLabel.set("");
   }
 
@@ -125,5 +136,22 @@ public class BabysitterProfileViewModel
   public StringProperty getError()
   {
     return errorLabel;
+  }
+
+  public StringProperty getPendingBookings()
+  {
+    return pendingBookings;
+  }
+
+  @Override public void propertyChange(ObserverEvent<Account, Booking> event)
+  {
+
+    Platform.runLater(() -> {
+      if (event.getValue1()
+          .equals(viewState.getBabysitter()))
+      {
+        pendingBookings.set(model.getBabysitterPendingBookings(viewState.getBabysitter()) + "");
+      }
+    });
   }
 }

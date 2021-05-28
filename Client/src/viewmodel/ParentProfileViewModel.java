@@ -137,7 +137,6 @@ public class ParentProfileViewModel implements LocalListener<Account, Booking>
     Platform.runLater(() -> {
       if (event.getValue1().equals(viewState.getParent()))
       {
-        // same as in reset label I guess
       }
     });
   }

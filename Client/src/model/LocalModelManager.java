@@ -203,4 +203,9 @@ public class LocalModelManager
   {
     return serverModel.getNotifications(parent);
   }
+
+  @Override public int getBabysitterPendingBookings(Babysitter babysitter)
+  {
+    return serverModel.getBabysitterPendingBookings(babysitter);
+  }
 }

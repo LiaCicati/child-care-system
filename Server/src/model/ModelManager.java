@@ -260,15 +260,15 @@ public class ModelManager implements Model
 
     }
     else if (accountList.containsUsername(userName))
-          {
-            throw new IllegalStateException(
-                "An user with this username is already registered in the system");
-          }
-          else if (accountList.containsEmail(email))
-          {
-            throw new IllegalStateException(
-                "An user with this email is already registered in the system");
-          }
+    {
+      throw new IllegalStateException(
+          "An user with this username is already registered in the system");
+    }
+    else if (accountList.containsEmail(email))
+    {
+      throw new IllegalStateException(
+          "An user with this email is already registered in the system");
+    }
   }
 
   @Override public ArrayList<Kid> getKidList()
@@ -386,6 +386,19 @@ public class ModelManager implements Model
     for (Booking booking : bookingList.getBookingsByParent(parent))
     {
       if (!booking.getStatus().equals("Pending"))
+      {
+        check++;
+      }
+    }
+    return check;
+  }
+
+  @Override public int getBabysitterPendingBookings(Babysitter babysitter)
+  {
+    int check = 0;
+    for (Booking booking : bookingList.getBabysitterBookings(babysitter))
+    {
+      if (booking.getStatus().equals("Pending"))
       {
         check++;
       }
