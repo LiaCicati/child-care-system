@@ -385,7 +385,7 @@ public class ModelManager implements Model
     int check = 0;
     for (Booking booking : bookingList.getBookingsByParent(parent))
     {
-      if (!booking.getStatus().equals("Pending"))
+      if (!booking.getStatus().equals(Booking.PENDING))
       {
         check++;
       }
@@ -398,7 +398,7 @@ public class ModelManager implements Model
     int check = 0;
     for (Booking booking : bookingList.getBabysitterBookings(babysitter))
     {
-      if (booking.getStatus().equals("Pending"))
+      if (booking.getStatus().equals(Booking.PENDING))
       {
         check++;
       }
