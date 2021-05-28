@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitMenuButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane minHeight="-Infinity" prefHeight="740.0" prefWidth="414.0" style="-fx-background-color: E6E1FF;" userData="Notifications" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ParentBookingsViewController">
     <children>
@@ -19,7 +24,7 @@
             <MenuItem mnemonicParsing="false" onAction="#onBookBabysitter" text="Book babysitter" />
             </items>
         </SplitMenuButton>
-        <TableView fx:id="bookingsTable" layoutX="2.0" layoutY="159.0" prefHeight="492.0" prefWidth="410.0">
+        <TableView fx:id="bookingsTable" layoutX="2.0" layoutY="159.0" prefHeight="415.0" prefWidth="410.0">
             <columns>
                 <TableColumn fx:id="babysitterColumn" prefWidth="86.4000244140625" text="Babysitter" />
                 <TableColumn fx:id="dateColumn" prefWidth="92.79998779296875" text="Date" />
@@ -28,5 +33,20 @@
             <TableColumn fx:id="statusColumn" prefWidth="114.39996337890625" text="Status" />
             </columns>
         </TableView>
+      <HBox alignment="CENTER" layoutY="616.0" prefHeight="66.0" prefWidth="414.0" spacing="30.0">
+         <children>
+            <Button minHeight="46.0" minWidth="120.0" mnemonicParsing="false" onAction="#onCancelBooking" style="-fx-background-radius: 37; -fx-background-color: #D93856;" text="Cancel" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <effect>
+                  <DropShadow color="rgba(82, 67, 154, 0.25);" />
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </HBox>
     </children>
 </AnchorPane>

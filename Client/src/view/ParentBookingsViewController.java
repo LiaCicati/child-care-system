@@ -47,4 +47,8 @@ viewModel.reset();
   {
     getViewHandler().openView(View.BOOKING_BABYSITTERS_VIEW);
   }
+
+  public void onCancelBooking()
+  {
+  }
 }
