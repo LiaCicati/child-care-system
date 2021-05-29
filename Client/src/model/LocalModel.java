@@ -40,4 +40,5 @@ public interface LocalModel extends LocalSubject<Account, Booking>
 
    int getNotifications(Parent parent);
   int getBabysitterPendingBookings(Babysitter babysitter);
+  void cancelBooking(Booking booking);
 }

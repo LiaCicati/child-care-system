@@ -2,8 +2,10 @@ package view;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import viewmodel.BookingBabysitterViewModel;
 import viewmodel.BookingListViewModel;
 import viewmodel.BookingViewModel;
 
@@ -16,6 +18,7 @@ public class ParentBookingsViewController extends ViewController
   @FXML private TableColumn<BookingViewModel, String> startTimeColumn;
   @FXML private TableColumn<BookingViewModel, String> endTimeColumn;
   @FXML private TableColumn<BookingViewModel, String> statusColumn;
+  @FXML private Label errorLabel;
 
   @Override protected void init()
   {
@@ -30,6 +33,15 @@ public class ParentBookingsViewController extends ViewController
         .setCellValueFactory(cellData -> cellData.getValue().getBabysitter());
     statusColumn.setCellValueFactory(cellData -> cellData.getValue().getStatus());
     bookingsTable.setItems(viewModel.getParentBookings());
+    bookingsTable.getSelectionModel().selectedItemProperty().addListener(
+        (obs, oldValue, newValue) -> {
+          viewModel.setSelectedBooking(newValue);
+          if (newValue != null) {
+            viewModel.resetLabel();
+          }
+        });
+
+    errorLabel.textProperty().bind(viewModel.getError());
     reset();
   }
 
@@ -50,5 +62,10 @@ viewModel.reset();
 
   public void onCancelBooking()
   {
+//viewModel.onCancelBooking();
+//      bookingsTable.getSelectionModel().clearSelection();
+
+//    reset();
+viewModel.onCancelBooking(errorLabel);
   }
 }

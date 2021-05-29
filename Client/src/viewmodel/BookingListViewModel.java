@@ -7,16 +7,15 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import model.Account;
-import model.Booking;
-import model.LocalModel;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import model.*;
 import utility.observer.event.ObserverEvent;
 import utility.observer.listener.LocalListener;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 
-
-import java.awt.*;
+import java.util.Optional;
 
 public class BookingListViewModel implements LocalListener<Account, Booking>
 {
@@ -35,8 +34,7 @@ public class BookingListViewModel implements LocalListener<Account, Booking>
     this.parentBookings = FXCollections.observableArrayList();
     this.selectedBooking = new SimpleObjectProperty<>();
     this.message = new SimpleStringProperty();
-    model.addListener(this, "add");
-    model.addListener(this, "status");
+    model.addListener(this, "add", "remove");
   }
 
   public void reset()
@@ -46,7 +44,8 @@ public class BookingListViewModel implements LocalListener<Account, Booking>
     updateParentBookings();
   }
 
-  public void resetLabel(){
+  public void resetLabel()
+  {
     message.set("");
   }
 
@@ -64,13 +63,24 @@ public class BookingListViewModel implements LocalListener<Account, Booking>
 
   public void updateParentBookings()
   {
-    System.out.println(viewState.getParent());
+
     parentBookings.clear();
     for (int i = 0; i < model.getAllBookings(viewState.getParent()).size(); i++)
     {
       parentBookings.add(new BookingViewModel(
           model.getAllBookings(viewState.getParent()).get(i)));
     }
+  }
+
+  public void remove()
+  {
+    parentBookings.clear();
+    for (int i = 0; i < model.getAllBookings(viewState.getParent()).size(); i++)
+    {
+      parentBookings.remove(new BookingViewModel(
+          model.getAllBookings(viewState.getParent()).get(i)));
+    }
+
   }
 
   public ObservableList<BookingViewModel> getBookings()
@@ -83,12 +93,14 @@ public class BookingListViewModel implements LocalListener<Account, Booking>
     return parentBookings;
   }
 
-  public boolean isBookingSelected(){
+  public boolean isBookingSelected()
+  {
     if (selectedBooking.get() != null)
     {
       return true;
     }
-    else {
+    else
+    {
       return false;
     }
   }
@@ -158,6 +170,51 @@ public class BookingListViewModel implements LocalListener<Account, Booking>
 
   }
 
+  public void onCancelBooking(Label label)
+  {
+
+    if (selectedBooking.get() != null)
+    {
+      if (confirmation())
+      {
+        viewState.setSelectedBooking(selectedBooking.get().getId().get());
+        Booking booking = model.getBookingList()
+            .getBookingById(selectedBooking.get().getId().get());
+
+        model.cancelBooking(booking);
+        parentBookings.remove(selectedBooking.get());
+        System.out
+            .println("size: " + model.getBookingList().getNumberOfBookings());
+        label.setTextFill(Color.web("green"));
+        message.set("Booking successfully canceled");
+      }
+    }
+    else
+    {
+      System.out.println(selectedBooking.getValue());
+      viewState.removeSelectedBooking();
+      label.setTextFill(Color.web("red"));
+      message.set("Please select a booking");
+
+    }
+  }
+
+  private boolean confirmation()
+  {
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    Optional<ButtonType> result = null;
+    alert.setTitle("Confirm cancelling a booking");
+    alert.setHeaderText(
+        "Are you sure you want to cancel this booking? \n\n" + "Babysitter: "
+            + selectedBooking.get().getBabysitter().getValue() + "\n" + "Date: "
+            + selectedBooking.get().getDate().getValue() + "\n" + "Duration: "
+            + selectedBooking.get().getStartTime().getValue() + " - "
+            + selectedBooking.get().getEndTime().getValue());
+    result = alert.showAndWait();
+
+    return result.isPresent() && result.get() == ButtonType.OK;
+  }
+
   public void setSelectedBooking(BookingViewModel selectedBooking)
   {
     this.selectedBooking.set(selectedBooking);
@@ -167,6 +224,7 @@ public class BookingListViewModel implements LocalListener<Account, Booking>
   {
     return message;
   }
+
   public StringProperty getMessage()
   {
     return message;
@@ -174,16 +232,7 @@ public class BookingListViewModel implements LocalListener<Account, Booking>
 
   @Override public void propertyChange(ObserverEvent<Account, Booking> event)
   {
-    Platform.runLater(() -> {
-      if (event.getValue1().equals(viewState.getBabysitter()))
-      {
-        bookings.add(new BookingViewModel(event.getValue2()));
-        parentBookings.add(new BookingViewModel(event.getValue2()));
-      }
-      if (event.getPropertyName().equals("status")){
-//        parentBookings.
-      }
-    });
+    Platform.runLater(this::update);
   }
 
 }

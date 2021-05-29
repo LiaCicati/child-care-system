@@ -34,7 +34,7 @@ public class BookingList implements Serializable
 
   public void removeBookingById(int bookingID)
   {
-    bookings.remove(bookingID);
+    bookings.remove(getBookingById(bookingID));
   }
 
   public boolean contains(Booking booking)

@@ -32,7 +32,7 @@ public class Client implements ClientModel, RemoteListener<Account, Booking>
     this.remoteModel = (RemoteModel) Naming
         .lookup("rmi://" + host + ":1099/App");
     UnicastRemoteObject.exportObject(this, 0);
-    this.remoteModel.addListener(this, "add");
+    this.remoteModel.addListener(this, "add", "remove");
     this.property = new PropertyChangeProxy<>(this, true);
   }
 
@@ -394,6 +394,19 @@ public class Client implements ClientModel, RemoteListener<Account, Booking>
     try
     {
       return remoteModel.getBabysitterPendingBookings(babysitter);
+    }
+    catch (RemoteException e)
+    {
+      throw new IllegalStateException(getExceptionMessage(e), e);
+
+    }
+  }
+
+  @Override public void cancelBooking(Booking booking)
+  {
+    try
+    {
+      remoteModel.cancelBooking(booking);
     }
     catch (RemoteException e)
     {

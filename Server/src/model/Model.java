@@ -29,7 +29,7 @@ public interface Model extends LocalSubject<Account, Booking>
   Babysitter getBabysitter(String username);
   void logout(Account account);
   BookingList getBookingList();
-  public Parent getLoggedInParent();
+ Parent getLoggedInParent();
 
   ArrayList<Kid> getKidList();
   void editKidData(Parent parent, int id, Kid kid);
@@ -39,10 +39,12 @@ public interface Model extends LocalSubject<Account, Booking>
   Kid getKidById(int id);
   Kid getKid(int index);
 ArrayList<Booking> getAllBookings(Babysitter babysitter);
-ArrayList<Booking> getAllBookings(Parent parent);
+  ArrayList<Booking> getAllBookings(Parent parent);
 Booking getBookingById(int id);
 void changeStatus(int id, String status);
 
   int getNotifications(Parent parent);
   int getBabysitterPendingBookings(Babysitter babysitter);
+  void cancelBooking(Booking booking);
+  void cancelBooking(Parent parent, int bookingID);
 }

@@ -42,5 +42,6 @@ public interface ClientModel extends LocalSubject<Account, Booking> {
     void changeStatus(int id, String status);
     int getNotifications(Parent parent);
     int getBabysitterPendingBookings(Babysitter babysitter);
+    void cancelBooking(Booking booking);
 
 }

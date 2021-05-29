@@ -23,7 +23,7 @@ public class LocalModelManager
     try
     {
       this.serverModel = new Client(this);
-      serverModel.addListener(this, "add");
+      serverModel.addListener(this, "add", "remove");
     }
     catch (Exception e)
     {
@@ -197,6 +197,7 @@ public class LocalModelManager
   {
 
     property.firePropertyChange("add", event.getValue1(), event.getValue2());
+    property.firePropertyChange("remove", event.getValue1(), event.getValue2());
   }
 
   @Override public int getNotifications(Parent parent)
@@ -207,5 +208,10 @@ public class LocalModelManager
   @Override public int getBabysitterPendingBookings(Babysitter babysitter)
   {
     return serverModel.getBabysitterPendingBookings(babysitter);
+  }
+
+  @Override public void cancelBooking(Booking booking)
+  {
+    serverModel.cancelBooking(booking);
   }
 }

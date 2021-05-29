@@ -54,12 +54,11 @@ public class ModelManager implements Model
         "password", false);
     Parent parent2 = new Parent("Lina", "Peters", "lina", "lina@gmail.com",
         "password", true);
-    Booking booking1 = new Booking(new TimeInterval(new MyDateTime(22, 5, 2021, 12, 5), new MyDateTime(22, 5, 2021, 14, 5)), parent1, babysitter2, null);
+    Booking booking1 = new Booking(
+        new TimeInterval(new MyDateTime(22, 5, 2021, 12, 5),
+            new MyDateTime(22, 5, 2021, 14, 5)), parent1, babysitter2, null);
     booking1.setStatus("Accepted");
     bookingList.addBooking(booking1);
-
-    System.out.println(getAllBookings(parent1).size());
-    System.out.println(getAllBookings(parent2).size());
     //accountList.addAccount(babysitter);
     accountList.addAccount(babysitter2);
     accountList.addAccount(babysitter1);
@@ -77,6 +76,19 @@ public class ModelManager implements Model
   {
     bookingList.addBooking(booking);    //TODO
     property.firePropertyChange("add", booking.getBabysitter(), booking);
+  }
+
+  @Override public void cancelBooking(Booking booking)
+      throws IllegalStateException
+  {
+
+    bookingList.removeBookingById(booking.getBookingID());
+    property.firePropertyChange("remove", booking.getParent(), booking);
+  }
+
+  @Override public void cancelBooking(Parent parent, int bookingID)
+  {
+
   }
 
   @Override public boolean isPasswordCorrect(String userName, String password)
@@ -361,10 +373,10 @@ public class ModelManager implements Model
     return bookingList.getBookingById(id);
   }
 
-  @Override public void changeStatus( int id, String status)
+  @Override public void changeStatus(int id, String status)
   {
     bookingList.getBookingById(id).setStatus(status);
-    property.firePropertyChange("status",null,bookingList.getBookingById(id));
+    property.firePropertyChange("status", null, bookingList.getBookingById(id));
   }
 
   @Override public boolean addListener(
@@ -383,9 +395,10 @@ public class ModelManager implements Model
   @Override public int getNotifications(Parent parent)
   {
     int check = 0;
-    for (Booking booking : bookingList.getBookingsByParent(parent))
+    for (int i = 0; i < bookingList.getBookingsByParent(parent).size(); i++)
     {
-      if (!booking.getStatus().equals(Booking.PENDING))
+      if (!bookingList.getBookingsByParent(parent).get(i).getStatus()
+          .equals(Booking.PENDING))
       {
         check++;
       }
@@ -396,9 +409,11 @@ public class ModelManager implements Model
   @Override public int getBabysitterPendingBookings(Babysitter babysitter)
   {
     int check = 0;
-    for (Booking booking : bookingList.getBabysitterBookings(babysitter))
+    for (int i = 0;
+         i < bookingList.getBabysitterBookings(babysitter).size(); i++)
     {
-      if (booking.getStatus().equals(Booking.PENDING))
+      if (bookingList.getBabysitterBookings(babysitter).get(i).getStatus()
+          .equals(Booking.PENDING))
       {
         check++;
       }
