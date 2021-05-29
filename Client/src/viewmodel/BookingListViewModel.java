@@ -71,18 +71,7 @@ public class BookingListViewModel implements LocalListener<Account, Booking>
           model.getAllBookings(viewState.getParent()).get(i)));
     }
   }
-
-  public void remove()
-  {
-    parentBookings.clear();
-    for (int i = 0; i < model.getAllBookings(viewState.getParent()).size(); i++)
-    {
-      parentBookings.remove(new BookingViewModel(
-          model.getAllBookings(viewState.getParent()).get(i)));
-    }
-
-  }
-
+  
   public ObservableList<BookingViewModel> getBookings()
   {
     return bookings;
