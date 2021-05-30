@@ -5,6 +5,7 @@ import javafx.beans.property.StringProperty;
 import model.Account;
 import model.Babysitter;
 import model.LocalModel;
+import model.Parent;
 
 public class LoginViewModel
 {
@@ -36,8 +37,12 @@ public class LoginViewModel
         {
             Account loggedIn = model.login(username.get(), password.get());
             viewState.setAccount(loggedIn);
+            System.out.println(loggedIn instanceof Parent);
+            System.out.println(model.getParent(username.get()));
             viewState.setBabysitter(model.getBabysitter(username.get()));
             viewState.setParent(model.getParent(username.get()));
+
+
 
             if (loggedIn instanceof Babysitter)
             {

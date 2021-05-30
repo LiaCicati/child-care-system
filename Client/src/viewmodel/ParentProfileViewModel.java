@@ -63,10 +63,10 @@ public class ParentProfileViewModel implements LocalListener<Account, Booking>
   private void loadData()
   {
 
-    firstName.set(viewState.getAccount().getFirstName());
-    lastName.set(viewState.getAccount().getLastName());
-    username.set(viewState.getAccount().getUserName());
-    email.set(viewState.getAccount().getEmail());
+    firstName.set(viewState.getParent().getFirstName());
+    lastName.set(viewState.getParent().getLastName());
+    username.set(viewState.getParent().getUserName());
+    email.set(viewState.getParent().getEmail());
 
     if (viewState.getParent().hasPets())
     {

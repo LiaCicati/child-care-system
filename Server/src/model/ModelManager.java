@@ -1,11 +1,19 @@
 package model;
 
+import dao.AccountDAO;
+import dao.AccountDAOImpl;
+import dao.KidDAO;
+import dao.KidDAOImpl;
+import database.Database;
+import database.ManagerFactory;
+import database.ParentManager;
 import utility.observer.listener.GeneralListener;
 import utility.observer.subject.PropertyChangeAction;
 import utility.observer.subject.PropertyChangeHandler;
 import utility.observer.subject.PropertyChangeProxy;
 
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import java.util.InputMismatchException;
@@ -21,17 +29,28 @@ public class ModelManager implements Model
 
   private BookingList bookingList;
 
+
+
+  private AccountDAO accountDAO;
+  private KidDAO kidDAO;
+
+
   ArrayList<Kid> kids;
 
   private PropertyChangeHandler<Account, Booking> property;
+
   //    private PropertyChangeAction<Account, Account> accountProperty; //TODO incomment again when account class isimplemented
 
-  public ModelManager()
+  public ModelManager() throws SQLException
   {
-    this.accountList = new AccountList();
+    accountDAO = AccountDAOImpl.getInstance();
+    kidDAO = KidDAOImpl.getInstance();
+
+//
+//    this.accountList = new AccountList();
     this.babysitterList = new AccountList();
-    this.parentList = new AccountList();
-    this.loggedInList = new AccountList();
+//    this.parentList = new AccountList();
+//    this.loggedInList = new AccountList();
 
     this.bookingList = new BookingList();
 
@@ -39,7 +58,29 @@ public class ModelManager implements Model
     this.parents = new ArrayList<>();
 
     this.property = new PropertyChangeHandler<>(this);
-    addDummyData();
+    loadAccounts();
+//    addDummyData();
+
+  }
+
+  private void loadAccounts()
+  {
+    try
+    {
+//accountList= accountDAO.getAllAccounts();
+      accountList = accountDAO.allParents();
+      loggedInList = accountDAO.allParents();
+      parentList = accountDAO.allParents();
+//      System.out.println("NRRR: " + accountList.getNumberOfAccounts());
+//      System.out.println("NRRR: " + loggedInList.getNumberOfAccounts());
+//      System.out.println(parentList.getAllParentAccounts());
+//      babysitterList= accountDAO.allBabysitters();
+    }
+    catch (SQLException e)
+
+    {
+      e.printStackTrace();
+    }
   }
 
   private void addDummyData()
@@ -107,6 +148,7 @@ public class ModelManager implements Model
     if (accountList.getByUserName(username).getPassword().equals(password))
     {
       loggedInList.addAccount(account);
+      accountList.addAccount(account);
       return account;
     }
     else
@@ -152,6 +194,14 @@ public class ModelManager implements Model
           mainLanguage, hasFirstAidCertificate);
       accountList.addAccount(account);
       babysitterList.addAccount(account);
+//      try{
+//        accountDAO.create(account);
+//        //        accountDAO.createParent(account);
+//
+//      }
+//      catch (SQLException e) {
+//        e.printStackTrace();
+//      }
     }
     else if (accountList.containsUsername(userName))
     {
@@ -247,6 +297,22 @@ public class ModelManager implements Model
     }
   }
 
+//  @Override public void registerParent(String firstName, String lastName,
+//      String userName, String email, String password, boolean hasPets)throws IllegalArgumentException, IllegalStateException
+//  {
+//    try
+//    {
+//      Account account = new Parent(firstName,lastName,userName,email,password,hasPets);
+//      if(accountDAO.readByEmail(email) != null) throw new IllegalStateException(
+//          "An user with this email is already registered in the system");
+//      accountDAO.create(account);
+//    } catch (SQLException e) {
+//      throw new IllegalStateException("Try again");
+//    }
+//  }
+
+
+
   @Override public void registerParent(String firstName, String lastName,
       String userName, String email, String password, boolean hasPets)
   {
@@ -255,11 +321,26 @@ public class ModelManager implements Model
     {
       Account account = new Parent(firstName, lastName, userName, email,
           password, hasPets);
+
       accountList.addAccount(account);
       parentList.addAccount(account);
 
-    }
-    else if (accountList.containsUsername(userName))
+      try{
+        accountDAO.createParent(firstName,lastName,userName,email,password,hasPets);
+//        accountDAO.createParent(account);
+
+      }
+      catch (SQLException e) {
+        e.printStackTrace();
+      }
+      //      try {
+      //        managerFactory.getAccountManager().addAccount(account);
+      //      }
+      //      catch (SQLException e) {
+      //        e.printStackTrace();
+      //      }
+      //    }
+    } else if (accountList.containsUsername(userName))
     {
       throw new IllegalStateException(
           "An user with this username is already registered in the system");
@@ -303,6 +384,14 @@ public class ModelManager implements Model
     {
       parent = (Parent) parentList.getByUserName(parent.getUserName());
       parent.addKid(kid);
+      try{
+        kidDAO.create(kid,parent);
+        //        accountDAO.createParent(account);
+
+      }
+      catch (SQLException e) {
+        e.printStackTrace();
+      }
     }
     else
     {

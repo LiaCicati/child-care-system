@@ -39,6 +39,7 @@ public class LoginViewController extends ViewController
             default:
                 break;
         }
+        System.out.println(viewModel.login());
     }
 
     public void onRegister()
