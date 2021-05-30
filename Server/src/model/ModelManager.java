@@ -376,7 +376,7 @@ public class ModelManager implements Model
   @Override public void changeStatus(int id, String status)
   {
     bookingList.getBookingById(id).setStatus(status);
-    property.firePropertyChange("status", null, bookingList.getBookingById(id));
+    property.firePropertyChange("status", bookingList.getBookingById(id).getParent(), bookingList.getBookingById(id));
   }
 
   @Override public boolean addListener(

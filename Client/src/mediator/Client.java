@@ -32,7 +32,7 @@ public class Client implements ClientModel, RemoteListener<Account, Booking>
     this.remoteModel = (RemoteModel) Naming
         .lookup("rmi://" + host + ":1099/App");
     UnicastRemoteObject.exportObject(this, 0);
-    this.remoteModel.addListener(this, "add", "remove");
+    this.remoteModel.addListener(this, "add", "remove", "status");
     this.property = new PropertyChangeProxy<>(this, true);
   }
 

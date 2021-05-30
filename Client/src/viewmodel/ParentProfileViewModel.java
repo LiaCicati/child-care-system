@@ -41,7 +41,7 @@ public class ParentProfileViewModel implements LocalListener<Account, Booking>
     hasPets = new SimpleStringProperty();
     errorLabel = new SimpleStringProperty();
     changedStatus = new SimpleStringProperty();
-    model.addListener(this, "add");
+    model.addListener(this);
     notificationUpdate = 0;
   }
 
@@ -63,10 +63,10 @@ public class ParentProfileViewModel implements LocalListener<Account, Booking>
   private void loadData()
   {
 
-    firstName.set(viewState.getAccount().getFirstName());
-    lastName.set(viewState.getAccount().getLastName());
-    username.set(viewState.getAccount().getUserName());
-    email.set(viewState.getAccount().getEmail());
+    firstName.set(viewState.getParent().getFirstName());
+    lastName.set(viewState.getParent().getLastName());
+    username.set(viewState.getParent().getUserName());
+    email.set(viewState.getParent().getEmail());
 
     if (viewState.getParent().hasPets())
     {
@@ -135,9 +135,9 @@ public class ParentProfileViewModel implements LocalListener<Account, Booking>
   {
 
     Platform.runLater(() -> {
-      if (event.getValue1().equals(viewState.getParent()))
-      {
-      }
+        changedStatus.set(
+            String.valueOf(model.getNotifications(viewState.getParent()) - getNotificationUpdate()));
     });
+
   }
 }

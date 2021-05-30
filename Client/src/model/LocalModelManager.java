@@ -23,7 +23,7 @@ public class LocalModelManager
     try
     {
       this.serverModel = new Client(this);
-      serverModel.addListener(this, "add", "remove");
+      serverModel.addListener(this, "add", "remove", "status");
     }
     catch (Exception e)
     {
@@ -198,6 +198,7 @@ public class LocalModelManager
 
     property.firePropertyChange("add", event.getValue1(), event.getValue2());
     property.firePropertyChange("remove", event.getValue1(), event.getValue2());
+    property.firePropertyChange("status", event.getValue1(), event.getValue2());
   }
 
   @Override public int getNotifications(Parent parent)

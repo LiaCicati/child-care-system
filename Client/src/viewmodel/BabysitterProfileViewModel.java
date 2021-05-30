@@ -9,7 +9,8 @@ import model.LocalModel;
 import utility.observer.event.ObserverEvent;
 import utility.observer.listener.LocalListener;
 
-public class BabysitterProfileViewModel implements LocalListener<Account, Booking>
+public class BabysitterProfileViewModel
+    implements LocalListener<Account, Booking>
 {
   private LocalModel model;
   private ViewState viewState;
@@ -45,13 +46,14 @@ public class BabysitterProfileViewModel implements LocalListener<Account, Bookin
     errorLabel = new SimpleStringProperty();
 
     this.pendingBookings = new SimpleStringProperty();
-    model.addListener(this, "add");
+    model.addListener(this);
   }
 
   public void reset()
   {
     loadData();
-    pendingBookings.set(model.getBabysitterPendingBookings(viewState.getBabysitter()) + "");
+    pendingBookings.set(
+        model.getBabysitterPendingBookings(viewState.getBabysitter()) + "");
     errorLabel.set("");
   }
 
@@ -73,15 +75,20 @@ public class BabysitterProfileViewModel implements LocalListener<Account, Bookin
         .set(viewState.getBabysitter().getBabysittingExperience());
     paymentPerHour.set(viewState.getBabysitter().getPaymentPerHour());
     motherTongue.set(viewState.getBabysitter().getMainLanguage());
-  if(viewState.getBabysitter().hasFirstAidCertificate())
-  {
-    firstAidCertificate.set("Possess");
-  } else {
-    firstAidCertificate.set("Do not possess");
-  }
+    if (viewState.getBabysitter().hasFirstAidCertificate())
+    {
+      firstAidCertificate.set("Possess");
+    }
+    else
+    {
+      firstAidCertificate.set("Do not possess");
+    }
   }
 
-  public ObservableList<model.Babysitter> getAllBabysitters(){return babysitters;}
+  public ObservableList<model.Babysitter> getAllBabysitters()
+  {
+    return babysitters;
+  }
 
   public StringProperty getFirstName()
   {
@@ -145,13 +152,9 @@ public class BabysitterProfileViewModel implements LocalListener<Account, Bookin
 
   @Override public void propertyChange(ObserverEvent<Account, Booking> event)
   {
-
     Platform.runLater(() -> {
-      if (event.getValue1()
-          .equals(viewState.getBabysitter()))
-      {
-        pendingBookings.set(model.getBabysitterPendingBookings(viewState.getBabysitter()) + "");
-      }
+      pendingBookings.set(
+          model.getBabysitterPendingBookings(viewState.getBabysitter()) + "");
     });
   }
 }

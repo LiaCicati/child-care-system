@@ -34,7 +34,7 @@ public class BookingListViewModel implements LocalListener<Account, Booking>
     this.parentBookings = FXCollections.observableArrayList();
     this.selectedBooking = new SimpleObjectProperty<>();
     this.message = new SimpleStringProperty();
-    model.addListener(this, "add", "remove");
+    model.addListener(this, "add", "remove", "status");
   }
 
   public void reset()
@@ -222,6 +222,7 @@ public class BookingListViewModel implements LocalListener<Account, Booking>
   @Override public void propertyChange(ObserverEvent<Account, Booking> event)
   {
     Platform.runLater(this::update);
+    Platform.runLater(this::updateParentBookings);
   }
 
 }
