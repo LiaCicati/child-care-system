@@ -8,13 +8,15 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 
 public class MyApplication extends Application
 {
     private Model model;
     private RemoteModel server;
 
-    @Override public void start(Stage primaryStage) throws IOException
+    @Override public void start(Stage primaryStage)
+        throws IOException, SQLException
     {
         model = new ModelManager();
 //        ViewModelFactory viewModelFactory = new ViewModelFactory(model);
