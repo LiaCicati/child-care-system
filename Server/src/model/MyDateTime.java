@@ -394,6 +394,10 @@ public class MyDateTime implements Serializable
     return String.format("%02d:%02d", this.hour, this.minute);
   }
 
+  public String getSortableDate() {
+    return String.format("%d-%d-%d", year,month,day);
+  }
+
   public String getSimpleDate() {
     return String.format("%02d/%02d", this.day, this.month) + "/" + this.year;
   }

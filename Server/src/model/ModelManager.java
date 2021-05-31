@@ -24,12 +24,9 @@ public class ModelManager implements Model
 
   private BookingList bookingList;
 
-
-
   private AccountDAO accountDAO;
   private BabysitterDAO babysitterDAO;
   private KidDAO kidDAO;
-
 
   ArrayList<Kid> kids;
 
@@ -40,14 +37,14 @@ public class ModelManager implements Model
   public ModelManager() throws SQLException
   {
     accountDAO = AccountDAOImpl.getInstance();
-    babysitterDAO= BabysitterDAOImpl.getInstance();
+    babysitterDAO = BabysitterDAOImpl.getInstance();
     kidDAO = KidDAOImpl.getInstance();
 
-//
-//    this.accountList = new AccountList();
-    this.babysitterList = new AccountList();
-//    this.parentList = new AccountList();
-//    this.loggedInList = new AccountList();
+    //
+    //    this.accountList = new AccountList();
+//    this.babysitterList = new AccountList();
+    //    this.parentList = new AccountList();
+    //    this.loggedInList = new AccountList();
 
     this.bookingList = new BookingList();
 
@@ -56,48 +53,51 @@ public class ModelManager implements Model
 
     this.property = new PropertyChangeHandler<>(this);
     loadAccounts();
-//    loadBabysitters();
-//    addDummyData();
+    //    loadBabysitters();
+    //    addDummyData();
 
   }
-//private void loadBabysitters()
-//{
-//  try
-//  {
-//    //accountList= accountDAO.getAllAccounts();
-//    accountList = accountDAO.allBabysitters();
-//    loggedInList = accountDAO.allBabysitters();
-//    babysitterList = accountDAO.allBabysitters();
-//    //      System.out.println("NRRR: " + accountList.getNumberOfAccounts());
-//    //      System.out.println("NRRR: " + loggedInList.getNumberOfAccounts());
-//    //      System.out.println(parentList.getAllParentAccounts());
-//    //      babysitterList= accountDAO.allBabysitters();
-//  }
-//  catch (SQLException e)
-//
-//  {
-//    e.printStackTrace();
-//  }
-//}
+
+  //private void loadBabysitters()
+  //{
+  //  try
+  //  {
+  //    //accountList= accountDAO.getAllAccounts();
+  //    accountList = accountDAO.allBabysitters();
+  //    loggedInList = accountDAO.allBabysitters();
+  //    babysitterList = accountDAO.allBabysitters();
+  //    //      System.out.println("NRRR: " + accountList.getNumberOfAccounts());
+  //    //      System.out.println("NRRR: " + loggedInList.getNumberOfAccounts());
+  //    //      System.out.println(parentList.getAllParentAccounts());
+  //    //      babysitterList= accountDAO.allBabysitters();
+  //  }
+  //  catch (SQLException e)
+  //
+  //  {
+  //    e.printStackTrace();
+  //  }
+  //}
   private void loadAccounts()
   {
     try
     {
-accountList= accountDAO.getAllAccounts();
-//      accountList = accountDAO.allParents();
-      loggedInList = accountDAO.getAllAccounts();
+      accountList = accountDAO.getAll();
+      //      accountList = accountDAO.allParents();
+      loggedInList = accountDAO.getAll();
       parentList = accountDAO.allParents();
-//      accountList = accountDAO.allBabysitters();
-//      loggedInList = accountDAO.allBabysitters();
+      //      accountList = accountDAO.allBabysitters();
+      //      loggedInList = accountDAO.allBabysitters();
       babysitterList = accountDAO.allBabysitters();
-//      babysitterList= babysitterDAO.allBabysitters();
-//       babysitterDAO.allBabysitters();
-//     babysitterDAO.allBabysitters();
-//      System.out.println("NRRR: " + accountList.getNumberOfAccounts());
-      System.out.println("NRRR: " + loggedInList.getNumberOfAccounts());
-//      System.out.println(accountList.getAllParentAccounts());
-      System.out.println(parentList.getAllParentAccounts().size());
-//      babysitterList= accountDAO.allBabysitters();
+      System.out.println("babysitters: " + babysitterList.getNumberOfAccounts());
+      //      babysitterList= babysitterDAO.allBabysitters();
+      //       babysitterDAO.allBabysitters();
+      //     babysitterDAO.allBabysitters();
+      //      System.out.println("NRRR: " + accountList.getNumberOfAccounts());
+//      System.out.println("NRRR: " + loggedInList.getNumberOfAccounts());
+      System.out.println("all" + accountList.getNumberOfAccounts());
+      //      System.out.println(accountList.getAllParentAccounts());
+      System.out.println("parents: " + parentList.getAllParentAccounts().size());
+      //      babysitterList= accountDAO.allBabysitters();
     }
     catch (SQLException e)
 
@@ -172,7 +172,8 @@ accountList= accountDAO.getAllAccounts();
     {
       throw new IllegalArgumentException("Please fill out the fields");
     }
-    Account account = accountList.getByUserName(username);
+    Account account = parentList.getByUserName(username);
+
 
     if (!accountList.containsUsername(username))
     {
@@ -227,16 +228,22 @@ accountList= accountDAO.getAllAccounts();
       Account account = new Babysitter(firstName, lastName, userName, email,
           password, birthday, babysittingExperience, paymentPerHour,
           mainLanguage, hasFirstAidCertificate);
+      //      Babysitter babysitter = new Babysitter(firstName, lastName, userName, email,
+      //          password, birthday, babysittingExperience, paymentPerHour,
+      //          mainLanguage, hasFirstAidCertificate);
 
       accountList.addAccount(account);
       babysitterList.addAccount(account);
-      try{
+      try
+      {
 
-                accountDAO.create(account);
-                accountDAO.createBabysitter(email, birthday, babysittingExperience, paymentPerHour, mainLanguage, hasFirstAidCertificate);
+        accountDAO.create(account);
+        accountDAO.createBabysitter(email, birthday, babysittingExperience,
+            paymentPerHour, mainLanguage, hasFirstAidCertificate);
 
       }
-      catch (SQLException e) {
+      catch (SQLException e)
+      {
         e.printStackTrace();
       }
     }
@@ -334,21 +341,19 @@ accountList= accountDAO.getAllAccounts();
     }
   }
 
-//  @Override public void registerParent(String firstName, String lastName,
-//      String userName, String email, String password, boolean hasPets)throws IllegalArgumentException, IllegalStateException
-//  {
-//    try
-//    {
-//      Account account = new Parent(firstName,lastName,userName,email,password,hasPets);
-//      if(accountDAO.readByEmail(email) != null) throw new IllegalStateException(
-//          "An user with this email is already registered in the system");
-//      accountDAO.create(account);
-//    } catch (SQLException e) {
-//      throw new IllegalStateException("Try again");
-//    }
-//  }
-
-
+  //  @Override public void registerParent(String firstName, String lastName,
+  //      String userName, String email, String password, boolean hasPets)throws IllegalArgumentException, IllegalStateException
+  //  {
+  //    try
+  //    {
+  //      Account account = new Parent(firstName,lastName,userName,email,password,hasPets);
+  //      if(accountDAO.readByEmail(email) != null) throw new IllegalStateException(
+  //          "An user with this email is already registered in the system");
+  //      accountDAO.create(account);
+  //    } catch (SQLException e) {
+  //      throw new IllegalStateException("Try again");
+  //    }
+  //  }
 
   @Override public void registerParent(String firstName, String lastName,
       String userName, String email, String password, boolean hasPets)
@@ -362,14 +367,16 @@ accountList= accountDAO.getAllAccounts();
       accountList.addAccount(account);
       parentList.addAccount(account);
 
-      try{
-//        accountDAO.createParent(firstName,lastName,userName,email,password,hasPets);
+      try
+      {
+        //        accountDAO.createParent(firstName,lastName,userName,email,password,hasPets);
         accountDAO.create(account);
-        accountDAO.createParent( email,  hasPets);
-//        accountDAO.createParent(account);
+        accountDAO.createParent(email, hasPets);
+        //        accountDAO.createParent(account);
 
       }
-      catch (SQLException e) {
+      catch (SQLException e)
+      {
         e.printStackTrace();
       }
       //      try {
@@ -379,7 +386,8 @@ accountList= accountDAO.getAllAccounts();
       //        e.printStackTrace();
       //      }
       //    }
-    } else if (accountList.containsUsername(userName))
+    }
+    else if (accountList.containsUsername(userName))
     {
       throw new IllegalStateException(
           "An user with this username is already registered in the system");
@@ -423,12 +431,14 @@ accountList= accountDAO.getAllAccounts();
     {
       parent = (Parent) parentList.getByUserName(parent.getUserName());
       parent.addKid(kid);
-      try{
-        kidDAO.create(kid,parent);
+      try
+      {
+        kidDAO.create(kid, parent);
         //        accountDAO.createParent(account);
 
       }
-      catch (SQLException e) {
+      catch (SQLException e)
+      {
         e.printStackTrace();
       }
     }
@@ -492,7 +502,9 @@ accountList= accountDAO.getAllAccounts();
   @Override public void changeStatus(int id, String status)
   {
     bookingList.getBookingById(id).setStatus(status);
-    property.firePropertyChange("status", bookingList.getBookingById(id).getParent(), bookingList.getBookingById(id));
+    property.firePropertyChange("status",
+        bookingList.getBookingById(id).getParent(),
+        bookingList.getBookingById(id));
   }
 
   @Override public boolean addListener(

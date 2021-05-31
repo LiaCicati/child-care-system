@@ -10,7 +10,7 @@ public interface AccountDAO extends DAO
   void create(Account account) throws SQLException;
   void update(Account account) throws SQLException;
   void delete(Account account) throws SQLException;
-  AccountList getAllAccounts() throws SQLException;
+//  AccountList getAllAccounts() throws SQLException;
   AccountList allParents() throws SQLException;
   AccountList allBabysitters() throws SQLException;
   Account readByEmail(String email) throws SQLException;
@@ -27,4 +27,5 @@ public interface AccountDAO extends DAO
 
   void removeParent(Parent parent) throws SQLException;
   void removeBabysitter(Babysitter babysitter) throws SQLException;
+  AccountList getAll() throws SQLException;
 }
