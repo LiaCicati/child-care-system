@@ -12,4 +12,5 @@ public interface KidDAO extends DAO
 //  Kid readById(int ID) throws SQLException;
   void update(Kid kid) throws SQLException;
   void delete(Kid kid) throws SQLException;
+  void getAllKids() throws SQLException;
 }

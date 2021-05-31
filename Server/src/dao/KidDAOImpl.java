@@ -5,6 +5,8 @@ import model.MyDateTime;
 import model.Parent;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class KidDAOImpl implements KidDAO
 {
@@ -73,7 +75,27 @@ public class KidDAOImpl implements KidDAO
     }
   }
 
+  public void getAllKids() throws SQLException
+  {
+    List<Kid> kids = new ArrayList<>();
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement statement = connection
+          .prepareStatement("SELECT * FROM kid;");
+      ResultSet resultSet = statement.executeQuery();
+      while (resultSet.next())
+      {
+        String parent_email = resultSet.getString("parent_email");
+        int ID = resultSet.getInt("ID");
+        boolean gender = resultSet.getBoolean("gender");
+        Date date = (Date) resultSet.getObject(" birthday ");
+        MyDateTime birthday = new MyDateTime(date.toLocalDate().getDayOfMonth(),
+            date.toLocalDate().getMonthValue(), date.toLocalDate().getYear());
+        String health = resultSet.getString("health_condition");
 
+      }
+    }
+  }
 
 }
   //  @Override public Kid readById(int ID) throws SQLException{

@@ -29,41 +29,75 @@ public class AccountDAOImpl implements AccountDAO
     return DriverManager.getConnection(URL, USERNAME, PASSWORD);
   }
 
-//  @Override public void create(Account account) throws SQLException
-//  {
-//    try (Connection connection = getConnection())
-//    {
-//      PreparedStatement statement = connection.prepareStatement(
-//          "INSERT INTO account(username, email, first_name, last_name,password) VALUES(?, ?, ?, ?, ?) ;");
-//
-//      statement.setString(1, account.getUserName());
-//      statement.setString(2, account.getEmail());
-//      statement.setString(3, account.getFirstName());
-//      statement.setString(4, account.getLastName());
-//      statement.setString(5, account.getPassword());
-//      statement.executeUpdate();
-////      PreparedStatement statement1 = connection.prepareStatement(
-////          "INSERT INTO parent( email, has_pets) VALUES(?, ?);");
-////      statement1.setString(1,account.getEmail());
-////      statement1.setBoolean(2,p);
-//
-//    }
-//  }
-
-
-
-  @Override public void createParent(String firstName, String lastName,
-      String userName, String email, String password, boolean hasPets) throws SQLException{
+  @Override public void create(Account account) throws SQLException
+  {
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection.prepareStatement(
-          "INSERT INTO parent ( username,email,password,first_name, last_name,has_pets) VALUES(?, ?,?,?,?,?);");
-      statement.setString(1, userName);
-      statement.setString(2,email);
-      statement.setString(3,password);
-      statement.setString(4,firstName);
-      statement.setString(5,lastName);
-      statement.setBoolean(6, hasPets);
+          "INSERT INTO account(username, email, first_name, last_name,password) VALUES(?, ?, ?, ?, ?) ;");
+
+      statement.setString(1, account.getUserName());
+      statement.setString(2, account.getEmail());
+      statement.setString(3, account.getFirstName());
+      statement.setString(4, account.getLastName());
+      statement.setString(5, account.getPassword());
+      statement.executeUpdate();
+//      PreparedStatement statement1 = connection.prepareStatement(
+//          "INSERT INTO parent( email, has_pets) VALUES(?, ?);");
+//      statement1.setString(1,account.getEmail());
+//      statement1.setBoolean(2,);
+
+    }
+  }
+
+
+
+//  @Override public void createParent(String firstName, String lastName,
+//      String userName, String email, String password, boolean hasPets) throws SQLException{
+//    try (Connection connection = getConnection())
+//    {
+//      PreparedStatement statement = connection.prepareStatement(
+//          "INSERT INTO parent ( username,email,password,first_name, last_name,has_pets) VALUES(?, ?,?,?,?,?);");
+//      statement.setString(1, userName);
+//      statement.setString(2,email);
+//      statement.setString(3,password);
+//      statement.setString(4,firstName);
+//      statement.setString(5,lastName);
+//      statement.setBoolean(6, hasPets);
+//      statement.executeUpdate();
+//    }
+//  }
+
+  @Override public void createParent(String email,  boolean hasPets) throws SQLException{
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement statement = connection.prepareStatement(
+          "INSERT INTO parent ( email,has_pets) VALUES(?, ?);");
+//      statement.setString(1, userName);
+      statement.setString(1,email);
+//      statement.setString(3,password);
+//      statement.setString(4,firstName);
+//      statement.setString(5,lastName);
+      statement.setBoolean(2, hasPets);
+      statement.executeUpdate();
+    }
+  }
+
+
+  @Override public void createBabysitter( String email,  MyDateTime birthday,
+      double babysittingExperience, double paymentPerHour, String mainLanguage,
+      boolean hasFirstAidCertificate) throws SQLException{
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement statement = connection.prepareStatement(
+          "INSERT INTO babysitter ( email,birthday,payment,language,years_of_experience,first_aid_certificate) VALUES(?, ?,?,?,?,?);");
+
+      statement.setString(1,email);
+      statement.setObject(2,birthday);
+      statement.setDouble(3,babysittingExperience);
+      statement.setDouble(4,paymentPerHour);
+      statement.setString(5,mainLanguage);
+      statement.setBoolean(6,hasFirstAidCertificate);
       statement.executeUpdate();
     }
   }
@@ -164,7 +198,7 @@ public class AccountDAOImpl implements AccountDAO
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection
-          .prepareStatement("SELECT * FROM parent ;");
+          .prepareStatement("SELECT * FROM account, parent ;");
       ResultSet resultSet = statement.executeQuery();
 
       while (resultSet.next())
@@ -218,12 +252,12 @@ public class AccountDAOImpl implements AccountDAO
 
 
   public AccountList allBabysitters() throws SQLException
-  {
+  {    AccountList babysitters = new AccountList();
     try (Connection connection = getConnection())
     {
-      PreparedStatement statement = connection.prepareStatement("SELECT * FROM babysitter ;");
+      PreparedStatement statement = connection.prepareStatement("SELECT * FROM account, babysitter ;");
       ResultSet resultSet = statement.executeQuery();
-      AccountList babysitters = new AccountList();
+
       while (resultSet.next())
       {
         String username = resultSet.getString("username");
@@ -234,11 +268,12 @@ public class AccountDAOImpl implements AccountDAO
         Date date = (Date) resultSet.getObject(" birthday ");
         MyDateTime birthday = new MyDateTime(date.toLocalDate().getDayOfMonth(),
             date.toLocalDate().getMonthValue(), date.toLocalDate().getYear());
+
         double experience = resultSet.getDouble("years_of_experience");
         double payment = resultSet.getDouble("payment ");
         String mainLanguage = resultSet.getString("language");
         boolean hasFirstAidCertificate = resultSet.getBoolean("first_aid_certificate");
-        Babysitter babysitter = new Babysitter(firstName, lastName, username,
+        Account babysitter = new Babysitter(firstName, lastName, username,
             email, password, birthday, experience, payment, mainLanguage,
             hasFirstAidCertificate);
         babysitters.addAccount(babysitter);
@@ -281,6 +316,22 @@ public class AccountDAOImpl implements AccountDAO
       }
 
 }
+
+  public void removeParent(Parent parent) throws SQLException{
+    try (Connection connection = Database.getInstance().getConnection()) {
+      PreparedStatement statement = connection.prepareStatement("DELETE FROM parent WHERE email = ?");
+      statement.setString(1, parent.getEmail());
+      statement.executeUpdate();
+    }
+  }
+
+  public void removeBabysitter(Babysitter babysitter) throws SQLException{
+    try (Connection connection = Database.getInstance().getConnection()) {
+      PreparedStatement statement = connection.prepareStatement("DELETE FROM babysitter WHERE email = ?");
+      statement.setString(1, babysitter.getEmail());
+      statement.executeUpdate();
+    }
+  }
 }
 
 

@@ -1,12 +1,7 @@
 package model;
 
-import dao.AccountDAO;
-import dao.AccountDAOImpl;
-import dao.KidDAO;
-import dao.KidDAOImpl;
-import database.Database;
-import database.ManagerFactory;
-import database.ParentManager;
+import dao.*;
+
 import utility.observer.listener.GeneralListener;
 import utility.observer.subject.PropertyChangeAction;
 import utility.observer.subject.PropertyChangeHandler;
@@ -32,6 +27,7 @@ public class ModelManager implements Model
 
 
   private AccountDAO accountDAO;
+  private BabysitterDAO babysitterDAO;
   private KidDAO kidDAO;
 
 
@@ -44,6 +40,7 @@ public class ModelManager implements Model
   public ModelManager() throws SQLException
   {
     accountDAO = AccountDAOImpl.getInstance();
+    babysitterDAO= BabysitterDAOImpl.getInstance();
     kidDAO = KidDAOImpl.getInstance();
 
 //
@@ -59,20 +56,46 @@ public class ModelManager implements Model
 
     this.property = new PropertyChangeHandler<>(this);
     loadAccounts();
+//    loadBabysitters();
 //    addDummyData();
 
   }
-
+//private void loadBabysitters()
+//{
+//  try
+//  {
+//    //accountList= accountDAO.getAllAccounts();
+//    accountList = accountDAO.allBabysitters();
+//    loggedInList = accountDAO.allBabysitters();
+//    babysitterList = accountDAO.allBabysitters();
+//    //      System.out.println("NRRR: " + accountList.getNumberOfAccounts());
+//    //      System.out.println("NRRR: " + loggedInList.getNumberOfAccounts());
+//    //      System.out.println(parentList.getAllParentAccounts());
+//    //      babysitterList= accountDAO.allBabysitters();
+//  }
+//  catch (SQLException e)
+//
+//  {
+//    e.printStackTrace();
+//  }
+//}
   private void loadAccounts()
   {
     try
     {
-//accountList= accountDAO.getAllAccounts();
-      accountList = accountDAO.allParents();
+accountList= accountDAO.allParents();
+//      accountList = accountDAO.allParents();
       loggedInList = accountDAO.allParents();
       parentList = accountDAO.allParents();
+//      accountList = accountDAO.allBabysitters();
+//      loggedInList = accountDAO.allBabysitters();
+      babysitterList = accountDAO.allBabysitters();
+//      babysitterList= babysitterDAO.allBabysitters();
+//       babysitterDAO.allBabysitters();
+//     babysitterDAO.allBabysitters();
 //      System.out.println("NRRR: " + accountList.getNumberOfAccounts());
 //      System.out.println("NRRR: " + loggedInList.getNumberOfAccounts());
+//      System.out.println(accountList.getAllParentAccounts());
 //      System.out.println(parentList.getAllParentAccounts());
 //      babysitterList= accountDAO.allBabysitters();
     }
@@ -204,16 +227,18 @@ public class ModelManager implements Model
       Account account = new Babysitter(firstName, lastName, userName, email,
           password, birthday, babysittingExperience, paymentPerHour,
           mainLanguage, hasFirstAidCertificate);
+
       accountList.addAccount(account);
       babysitterList.addAccount(account);
-//      try{
-//        accountDAO.create(account);
-//        //        accountDAO.createParent(account);
-//
-//      }
-//      catch (SQLException e) {
-//        e.printStackTrace();
-//      }
+      try{
+
+                accountDAO.create(account);
+                accountDAO.createBabysitter(email, birthday, babysittingExperience, paymentPerHour, mainLanguage, hasFirstAidCertificate);
+
+      }
+      catch (SQLException e) {
+        e.printStackTrace();
+      }
     }
     else if (accountList.containsUsername(userName))
     {
@@ -338,7 +363,9 @@ public class ModelManager implements Model
       parentList.addAccount(account);
 
       try{
-        accountDAO.createParent(firstName,lastName,userName,email,password,hasPets);
+//        accountDAO.createParent(firstName,lastName,userName,email,password,hasPets);
+        accountDAO.create(account);
+        accountDAO.createParent( email,  hasPets);
 //        accountDAO.createParent(account);
 
       }
