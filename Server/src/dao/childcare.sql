@@ -63,4 +63,9 @@ CREATE TABLE kid
 INSERT INTO account(username, email, password, first_name, last_name)
 Values ('gloria', 'gloria@gmail.com', 'password', 'Gloria', 'Melu');
 ;
+SELECT * FROM account;
+SELECT * FROM account, parent WHERE account.email = parent.email;
+SELECT * FROM account, parent, babysitter WHERE account.email = parent.email
+
+;
 

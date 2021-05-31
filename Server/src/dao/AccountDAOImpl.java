@@ -275,7 +275,7 @@ public class AccountDAOImpl implements AccountDAO
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection
-          .prepareStatement("SELECT * FROM account, parent ;");
+          .prepareStatement("SELECT * FROM account, parent WHERE account.email = parent.email;");
       ResultSet resultSet = statement.executeQuery();
 
       while (resultSet.next())
@@ -337,7 +337,7 @@ public class AccountDAOImpl implements AccountDAO
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection
-          .prepareStatement("SELECT * FROM account, babysitter ;");
+          .prepareStatement("SELECT * FROM account, babysitter WHERE account.email = babysitter.email;");
       ResultSet resultSet = statement.executeQuery();
 
       while (resultSet.next())
