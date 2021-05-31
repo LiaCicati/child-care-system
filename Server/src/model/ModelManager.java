@@ -83,9 +83,9 @@ public class ModelManager implements Model
   {
     try
     {
-accountList= accountDAO.allParents();
+accountList= accountDAO.getAllAccounts();
 //      accountList = accountDAO.allParents();
-      loggedInList = accountDAO.allParents();
+      loggedInList = accountDAO.getAllAccounts();
       parentList = accountDAO.allParents();
 //      accountList = accountDAO.allBabysitters();
 //      loggedInList = accountDAO.allBabysitters();
@@ -94,9 +94,9 @@ accountList= accountDAO.allParents();
 //       babysitterDAO.allBabysitters();
 //     babysitterDAO.allBabysitters();
 //      System.out.println("NRRR: " + accountList.getNumberOfAccounts());
-//      System.out.println("NRRR: " + loggedInList.getNumberOfAccounts());
+      System.out.println("NRRR: " + loggedInList.getNumberOfAccounts());
 //      System.out.println(accountList.getAllParentAccounts());
-//      System.out.println(parentList.getAllParentAccounts());
+      System.out.println(parentList.getAllParentAccounts().size());
 //      babysitterList= accountDAO.allBabysitters();
     }
     catch (SQLException e)

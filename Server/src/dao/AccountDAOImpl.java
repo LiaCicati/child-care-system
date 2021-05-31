@@ -133,31 +133,34 @@ public class AccountDAOImpl implements AccountDAO
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection
-          .prepareStatement("SELECT * FROM parent, babysitter;");
+          .prepareStatement("SELECT * FROM account;");
+      PreparedStatement statement1 = connection.prepareStatement("SELECT * FROM parent");
+      ResultSet resultSet1 = statement1.executeQuery();
       ResultSet resultSet = statement.executeQuery();
       AccountList accounts = new AccountList();
-      while (resultSet.next())
+      while (resultSet.next() && resultSet1.next())
       {
         String username = resultSet.getString("username");
         String email = resultSet.getString("email");
         String firstName = resultSet.getString("first_name");
         String lastName = resultSet.getString("last_name");
         String password = resultSet.getString("password");
-        Date date = (Date) resultSet.getObject(" birthday ");
-        MyDateTime birthday = new MyDateTime(date.toLocalDate().getDayOfMonth(),
-            date.toLocalDate().getMonthValue(), date.toLocalDate().getYear());
-        double experience = resultSet.getDouble("years_of_experience");
-        double payment = resultSet.getDouble("payment ");
-        String mainLanguage = resultSet.getString("language");
-        boolean hasFirstAidCertificate = resultSet
-            .getBoolean("first_aid_certificate");
-        boolean hasPets = resultSet.getBoolean("has_pets");
-        Babysitter babysitter = new Babysitter(firstName, lastName, username,
-            email, password, birthday, experience, payment, mainLanguage,
-            hasFirstAidCertificate);
-        accounts.addAccount(babysitter);
-        Parent parent = new Parent(firstName, lastName, username, email,
-            password, hasPets);
+//        Date date = (Date) resultSet.getObject(" birthday ");
+//        MyDateTime birthday = new MyDateTime(date.toLocalDate().getDayOfMonth(),
+//            date.toLocalDate().getMonthValue(), date.toLocalDate().getYear());
+//        double experience = resultSet.getDouble("years_of_experience");
+//        double payment = resultSet.getDouble("payment ");
+//        String mainLanguage = resultSet.getString("language");
+//        boolean hasFirstAidCertificate = resultSet
+//            .getBoolean("first_aid_certificate");
+        boolean hasPets = resultSet1.getBoolean("has_pets");
+//        Babysitter babysitter = new Babysitter(firstName, lastName, username,
+//            email, password, birthday, experience, payment, mainLanguage,
+//            hasFirstAidCertificate);
+//        accounts.addAccount(babysitter);
+//        Parent parent = new Parent(firstName, lastName, username, email,
+//            password, hasPets);
+        Account parent = new Parent(firstName, lastName, username, email, password, hasPets);
         accounts.addAccount(parent);
 
       }
