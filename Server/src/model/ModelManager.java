@@ -94,7 +94,7 @@ public class ModelManager implements Model
       //     babysitterDAO.allBabysitters();
       //      System.out.println("NRRR: " + accountList.getNumberOfAccounts());
 //      System.out.println("NRRR: " + loggedInList.getNumberOfAccounts());
-      System.out.println("all" + accountList.getNumberOfAccounts());
+//      System.out.println("all: " + accountList.getNumberOfAccounts());
       //      System.out.println(accountList.getAllParentAccounts());
       System.out.println("parents: " + parentList.getAllParentAccounts().size());
       //      babysitterList= accountDAO.allBabysitters();
@@ -172,7 +172,7 @@ public class ModelManager implements Model
     {
       throw new IllegalArgumentException("Please fill out the fields");
     }
-    Account account = parentList.getByUserName(username);
+    Account account = accountList.getByUserName(username);
 
 
     if (!accountList.containsUsername(username))
@@ -181,10 +181,9 @@ public class ModelManager implements Model
           "The username or password is incorrect, please try again");
     }
 
-    if (accountList.getByUserName(username).getPassword().equals(password))
+    if (accountList.getByUserName(username).getPassword().equals(password) || parentList.getByUserName(username).getPassword().equals(password) || babysitterList.getByUserName(username).getPassword().equals(password))
     {
       loggedInList.addAccount(account);
-      accountList.addAccount(account);
       return account;
     }
     else
@@ -228,12 +227,9 @@ public class ModelManager implements Model
       Account account = new Babysitter(firstName, lastName, userName, email,
           password, birthday, babysittingExperience, paymentPerHour,
           mainLanguage, hasFirstAidCertificate);
-      //      Babysitter babysitter = new Babysitter(firstName, lastName, userName, email,
-      //          password, birthday, babysittingExperience, paymentPerHour,
-      //          mainLanguage, hasFirstAidCertificate);
-
       accountList.addAccount(account);
       babysitterList.addAccount(account);
+
       try
       {
 
@@ -363,7 +359,7 @@ public class ModelManager implements Model
     {
       Account account = new Parent(firstName, lastName, userName, email,
           password, hasPets);
-
+//
       accountList.addAccount(account);
       parentList.addAccount(account);
 

@@ -131,51 +131,46 @@ public class AccountDAOImpl implements AccountDAO
 
   @Override public AccountList getAll() throws SQLException
   {
+    AccountList accounts = new AccountList();
     try (Connection connection = getConnection())
     {
-
-            PreparedStatement statement = connection
-                .prepareStatement("SELECT * FROM account;");
-            PreparedStatement statement1 = connection.prepareStatement("SELECT * FROM parent;");
-            PreparedStatement statement2 = connection.prepareStatement("SELECT * FROM babysitter;");
-            ResultSet resultSet = statement.executeQuery();
-      ResultSet resultSet2 = statement1.executeQuery();
-      ResultSet resultSet3 = statement2.executeQuery();
-
-
-      AccountList accounts = new AccountList();
-      while (resultSet.next() && resultSet2.next() && resultSet3.next())
+      //      "SELECT account.*,parent.has_pets,babysitter.birthday , babysitter.years_of_experience,babysitter.payment,babysitter.language,babysitter.first_aid_certificate FROM account LEFT JOIN parent  ON account.email = parent.email LEFT JOIN babysitter ON account.email = babysitter.email;"
+      PreparedStatement statement = connection.prepareStatement(
+          "SELECT * FROM account,parent, babysitter;");
+      ResultSet resultSet = statement.executeQuery();
+      while (resultSet.next())
       {
-
         String username = resultSet.getString("username");
         String email = resultSet.getString("email");
         String firstName = resultSet.getString("first_name");
         String lastName = resultSet.getString("last_name");
         String password = resultSet.getString("password");
-        boolean hasPets = resultSet2.getBoolean("has_pets");
         boolean isParent = resultSet.getBoolean("isParent");
-
-        Date date = (Date) resultSet3.getObject("birthday");
+        boolean hasPets = resultSet.getBoolean("has_pets");
+        //        Parent parent = new Parent(firstName, lastName, username, email,
+        //            password, hasPets);
+        Date date = (Date) resultSet.getObject("birthday");
         MyDateTime birthday = new MyDateTime(date.toLocalDate().getDayOfMonth(),
             date.toLocalDate().getMonthValue(), date.toLocalDate().getYear());
-        double experience = resultSet3.getDouble("years_of_experience");
-        double payment = resultSet3.getDouble("payment");
-        String mainLanguage = resultSet3.getString("language");
-        boolean hasFirstAidCertificate = resultSet3
+
+        double experience = resultSet.getDouble("years_of_experience");
+        double payment = resultSet.getDouble("payment");
+        String mainLanguage = resultSet.getString("language");
+        boolean hasFirstAidCertificate = resultSet
             .getBoolean("first_aid_certificate");
+        //        Babysitter babysitter = new Babysitter(firstName, lastName, username,
+        //            email, password, birthday, experience, payment, mainLanguage,
+        //            hasFirstAidCertificate);
+
         if (isParent)
         {
-          Account parent = new Parent(firstName, lastName, username, email,
-              password, hasPets);
-          accounts.addAccount(parent);
+          accounts.addAccount(new Parent(firstName,lastName,username,email,password,hasPets));
         }
         else
-        {
-          Account babysitter = new Babysitter(firstName, lastName, username,
+          accounts.addAccount(new Babysitter(firstName, lastName, username,
               email, password, birthday, experience, payment, mainLanguage,
-              hasFirstAidCertificate);
-          accounts.addAccount(babysitter);
-        }
+              hasFirstAidCertificate));
+
       }
       return accounts;
     }
