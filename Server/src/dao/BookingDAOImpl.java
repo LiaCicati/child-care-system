@@ -1,6 +1,6 @@
 package dao;
 
-import database.Database;
+
 import model.Booking;
 
 import java.sql.Connection;
@@ -34,7 +34,7 @@ public class BookingDAOImpl implements BookingDAO
 
   public void addBooking(Booking booking) throws SQLException
   {
-    try (Connection connection = Database.getInstance().getConnection())
+    try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection.prepareStatement(
           "INSERT INTO booking(bookingID,parent_email,babysitter_email,dateTime,status,description,dateTimeOfBooking) VALUES (?,?,?,?,?,?,?)");

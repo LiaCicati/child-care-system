@@ -1,6 +1,6 @@
 package dao;
 
-import database.Database;
+
 import model.*;
 
 import java.sql.*;
@@ -221,7 +221,7 @@ public class AccountDAOImpl implements AccountDAO
   }
   public Babysitter getBabysitter(String email) throws SQLException
   {
-    try (Connection connection = Database.getInstance().getConnection())
+    try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection.prepareStatement("SELECT * from babysitter WHERE email=? ");
       statement.setString(1, email);
@@ -318,7 +318,7 @@ public class AccountDAOImpl implements AccountDAO
 }
 
   public void removeParent(Parent parent) throws SQLException{
-    try (Connection connection = Database.getInstance().getConnection()) {
+    try (Connection connection = getConnection()) {
       PreparedStatement statement = connection.prepareStatement("DELETE FROM parent WHERE email = ?");
       statement.setString(1, parent.getEmail());
       statement.executeUpdate();
@@ -326,7 +326,7 @@ public class AccountDAOImpl implements AccountDAO
   }
 
   public void removeBabysitter(Babysitter babysitter) throws SQLException{
-    try (Connection connection = Database.getInstance().getConnection()) {
+    try (Connection connection = getConnection()) {
       PreparedStatement statement = connection.prepareStatement("DELETE FROM babysitter WHERE email = ?");
       statement.setString(1, babysitter.getEmail());
       statement.executeUpdate();
