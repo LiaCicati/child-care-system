@@ -249,10 +249,11 @@ public class BookingBabysitterViewModel
         errorMessage = "Please pick a babysitter";
         errorLabel.set(errorMessage);
       }else if (getStartTime().getTime()!=0){
-        //        reset();
         Booking myBooking = new Booking(new TimeInterval(getStartTime(), getEndTime()),viewState.getParent() , model.getBabysitter(babysitter), getDescription().get());
         model.addBooking(myBooking);
         viewState.setBooking(myBooking);
+
+        reset();
 
         errorMessage = "Booking of babysitter completed!";
         label.setTextFill(Color.web("black"));
