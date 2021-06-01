@@ -46,5 +46,4 @@ void changeStatus(int id, String status);
   int getNotifications(Parent parent);
   int getBabysitterPendingBookings(Babysitter babysitter);
   void cancelBooking(Booking booking);
-  void cancelBooking(Parent parent, int bookingID);
 }

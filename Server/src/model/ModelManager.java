@@ -19,73 +19,60 @@ public class ModelManager implements Model
   private AccountList accountList;
   private AccountList babysitterList;
   private AccountList parentList;
-  private ArrayList<Parent> parents;
   private AccountList loggedInList;
-
   private BookingList bookingList;
 
   private AccountDAO accountDAO;
-//  private BabysitterDAO babysitterDAO;
   private KidDAO kidDAO;
-private BookingDAO bookingDAO;
+  private BookingDAO bookingDAO;
   ArrayList<Kid> kids;
+  ArrayList<Parent> parents;
 
   private PropertyChangeHandler<Account, Booking> property;
 
-  //    private PropertyChangeAction<Account, Account> accountProperty; //TODO incomment again when account class isimplemented
-
   public ModelManager() throws SQLException
   {
+
     accountDAO = AccountDAOImpl.getInstance();
-//    babysitterDAO = BabysitterDAOImpl.getInstance();
     kidDAO = KidDAOImpl.getInstance();
     bookingDAO = BookingDAOImpl.getInstance();
+//    accountList = new AccountList();
+//    parentList = new AccountList();
+//    babysitterList = new AccountList();
+//    loggedInList = new AccountList();
+    bookingList = new BookingList();
+    parents = new ArrayList<>();
 
-    //
-    //    this.accountList = new AccountList();
-//    this.babysitterList = new AccountList();
-    //    this.parentList = new AccountList();
-    //    this.loggedInList = new AccountList();
-
-//    this.bookingList = new BookingList();
-
-    this.kids = new ArrayList<>();
-    this.parents = new ArrayList<>();
-
+//    addDummyData();
     this.property = new PropertyChangeHandler<>(this);
     loadAccounts();
-    //    loadBabysitters();
-    //    addDummyData();
-
+//    loadBookings();
   }
 
   private void loadAccounts()
   {
     try
     {
-//      kids = kidDAO.getAllKids();
+
       accountList = accountDAO.getAll();
-      //      accountList = accountDAO.allParents();
       loggedInList = accountDAO.getAll();
       parentList = accountDAO.allParents();
-      //      accountList = accountDAO.allBabysitters();
-      //      loggedInList = accountDAO.allBabysitters();
-//      bookingList = bookingDAO.getAllBookings();
-      bookingList = bookingDAO.getAllBookings();
-      System.out.println("NRR OF BOOKINGS: " + bookingList.getNumberOfBookings());
-      System.out.println("HEEEELLLOOO");
-//      System.out.println("BOOKINGS: " + bookingList.getNumberOfBookings());
       babysitterList = accountDAO.allBabysitters();
-      System.out.println("babysitters: " + babysitterList.getNumberOfAccounts());
-      //      babysitterList= babysitterDAO.allBabysitters();
-      //       babysitterDAO.allBabysitters();
-      //     babysitterDAO.allBabysitters();
-      //      System.out.println("NRRR: " + accountList.getNumberOfAccounts());
-//      System.out.println("NRRR: " + loggedInList.getNumberOfAccounts());
-//      System.out.println("all: " + accountList.getNumberOfAccounts());
-      //      System.out.println(accountList.getAllParentAccounts());
-      System.out.println("parents: " + parentList.getAllParentAccounts().size());
-      //      babysitterList= accountDAO.allBabysitters();
+      kids = kidDAO.getAllKids();
+
+    }
+    catch (SQLException e)
+
+    {
+      e.printStackTrace();
+    }
+  }
+
+  private void loadBookings()
+  {
+    try
+    {
+      bookingList = bookingDAO.getAllBookings();
     }
     catch (SQLException e)
 
@@ -123,8 +110,8 @@ private BookingDAO bookingDAO;
     parentList.addAccount(parent2);
   }
 
-  @Override public void addBooking(Booking booking, Parent parent, Babysitter babysitter)
-      throws IllegalArgumentException
+  @Override public void addBooking(Booking booking, Parent parent,
+      Babysitter babysitter) throws IllegalArgumentException
   {
     parent = (Parent) parentList.getByEmail(parent.getEmail());
     System.out.println("parent :: " + parent.getEmail());
@@ -132,10 +119,10 @@ private BookingDAO bookingDAO;
     try
     {
 
-
-//        kidDAO.create(kid, parent);
+      //        kidDAO.create(kid, parent);
       bookingDAO.addBooking(booking, parent, babysitter);
       bookingList.addBooking(booking);
+      property.firePropertyChange("add", booking.getBabysitter(), booking);
       System.out.println("PARENT: " + parent.getEmail());
 
     }
@@ -145,8 +132,7 @@ private BookingDAO bookingDAO;
     }
 
 
-    //TODO
-    property.firePropertyChange("add", booking.getBabysitter(), booking);
+
   }
 
   @Override public void cancelBooking(Booking booking)
@@ -157,10 +143,7 @@ private BookingDAO bookingDAO;
     property.firePropertyChange("remove", booking.getParent(), booking);
   }
 
-  @Override public void cancelBooking(Parent parent, int bookingID)
-  {
 
-  }
 
   @Override public boolean isPasswordCorrect(String userName, String password)
       throws RemoteException
@@ -181,14 +164,16 @@ private BookingDAO bookingDAO;
     }
     Account account = accountList.getByUserName(username);
 
-
     if (!accountList.containsUsername(username))
     {
       throw new IllegalArgumentException(
           "The username or password is incorrect, please try again");
     }
 
-    if (accountList.getByUserName(username).getPassword().equals(password) || parentList.getByUserName(username).getPassword().equals(password) || babysitterList.getByUserName(username).getPassword().equals(password))
+    if (accountList.getByUserName(username).getPassword().equals(password)
+        || parentList.getByUserName(username).getPassword().equals(password)
+        || babysitterList.getByUserName(username).getPassword()
+        .equals(password))
     {
       loggedInList.addAccount(account);
       return account;
@@ -199,28 +184,6 @@ private BookingDAO bookingDAO;
           "The username or password is incorrect, please try again");
     }
   }
-
-  //    @Override public void registerBabysitter(String userName, String password,
-  //        String email, String firstName, String lastName)
-  //    {
-  //      if (!accountList.containsUsername(userName) && !accountList.containsEmail(email))
-  //      {
-  //        Account account = new Babysitter(userName, password, email, firstName,
-  //            lastName);
-  //        accountList.addAccount(account);
-  //        babysitterList.addAccount(account);
-  //      }
-  //      else if (accountList.containsUsername(userName))
-  //      {
-  //        throw new IllegalStateException(
-  //            "An user with this username is already registered in the system");
-  //      }
-  //      else if (accountList.containsEmail(email))
-  //      {
-  //        throw new IllegalStateException(
-  //            "An user with this email is already registered in the system");
-  //      }
-  //    }
 
   @Override public void registerBabysitter(String firstName, String lastName,
       String userName, String email, String password, MyDateTime birthday,
@@ -263,29 +226,6 @@ private BookingDAO bookingDAO;
 
   }
 
-  //    @Override public void registerParent(String userName, String password,
-  //        String email, String firstName, String lastName)
-  //    {
-  //        if (!accountList.containsUsername(userName) && !accountList
-  //            .containsEmail(email))
-  //        {
-  //            Account account = new Parent(userName, password, email, firstName,
-  //                lastName);
-  //            accountList.addAccount(account);
-  //            parentList.addAccount(account);
-  //        }
-  //        else if (accountList.containsUsername(userName))
-  //        {
-  //            throw new IllegalStateException(
-  //                "An user with this username is already registered in the system");
-  //        }
-  //        else if (accountList.containsEmail(email))
-  //        {
-  //            throw new IllegalStateException(
-  //                "An user with this email is already registered in the system");
-  //        }
-  //    }
-
   @Override public AccountList getParentList()
   {
     return parentList;
@@ -303,7 +243,7 @@ private BookingDAO bookingDAO;
     }
   }
 
- public Parent getParentByEmail(String email)
+  public Parent getParentByEmail(String email)
   {
     if (parentList.containsEmail(email))
     {
@@ -337,7 +277,7 @@ private BookingDAO bookingDAO;
     }
   }
 
- public Babysitter getBabysitterByEmail(String email)
+  public Babysitter getBabysitterByEmail(String email)
   {
     if (babysitterList.containsEmail(email))
     {
@@ -390,7 +330,7 @@ private BookingDAO bookingDAO;
     {
       Account account = new Parent(firstName, lastName, userName, email,
           password, hasPets);
-//
+      //
       accountList.addAccount(account);
       parentList.addAccount(account);
 

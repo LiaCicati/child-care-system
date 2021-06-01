@@ -11,7 +11,7 @@ CREATE TABLE account
     password   VARCHAR(16),
     first_name VARCHAR(500)        NOT NULL,
     last_name  VARCHAR(500)        NOT NULL,
-    isParent BOOLEAN
+    isParent   BOOLEAN
 );
 
 CREATE TABLE parent
@@ -37,17 +37,20 @@ CREATE TABLE babysitter
 
 CREATE TABLE booking
 (
-    bookingID         VARCHAR(5),
+
+    start_time TIME,
+    end_time TIME,
     parent_email      VARCHAR(100),
     babysitter_email  VARCHAR(100),
-    dateTime          timeStamp,
-    status            VARCHAR(50),
     description       VARCHAR(1000),
-    dateTimeOfBooking timeStamp,
-    PRIMARY KEY (bookingID),
+    status            VARCHAR(50),
+    dateTimeOfBooking VARCHAR,
+    booking_id INTEGER,
+    PRIMARY KEY (booking_id),
     FOREIGN KEY (parent_email) REFERENCES parent (email) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (babysitter_email) REFERENCES babysitter (email) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
 
 CREATE TABLE kid
 (
@@ -59,13 +62,3 @@ CREATE TABLE kid
     PRIMARY KEY (ID, parent_email),
     FOREIGN KEY (parent_email) REFERENCES parent (email) ON DELETE CASCADE ON UPDATE CASCADE
 );
-
-INSERT INTO account(username, email, password, first_name, last_name)
-Values ('gloria', 'gloria@gmail.com', 'password', 'Gloria', 'Melu');
-;
-SELECT * FROM account;
-SELECT * FROM account, parent WHERE account.email = parent.email;
-SELECT * FROM account, parent, babysitter WHERE account.email = parent.email
-
-;
-

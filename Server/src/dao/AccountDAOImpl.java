@@ -46,8 +46,6 @@ public class AccountDAOImpl implements AccountDAO
     }
   }
 
-
-
   @Override public void createParent(String email, boolean hasPets)
       throws SQLException
   {
@@ -113,8 +111,8 @@ public class AccountDAOImpl implements AccountDAO
     AccountList accounts = new AccountList();
     try (Connection connection = getConnection())
     {
-      PreparedStatement statement = connection.prepareStatement(
-          "SELECT * FROM account,parent, babysitter;");
+      PreparedStatement statement = connection
+          .prepareStatement("SELECT * FROM account,parent, babysitter;");
       ResultSet resultSet = statement.executeQuery();
       while (resultSet.next())
       {
@@ -136,56 +134,30 @@ public class AccountDAOImpl implements AccountDAO
         boolean hasFirstAidCertificate = resultSet
             .getBoolean("first_aid_certificate");
 
-
         if (isParent)
         {
-          accounts.addAccount(new Parent(firstName,lastName,username,email,password,hasPets));
+          accounts.addAccount(
+              new Parent(firstName, lastName, username, email, password,
+                  hasPets));
         }
         else
-          accounts.addAccount(new Babysitter(firstName, lastName, username,
-              email, password, birthday, experience, payment, mainLanguage,
-              hasFirstAidCertificate));
+          accounts.addAccount(
+              new Babysitter(firstName, lastName, username, email, password,
+                  birthday, experience, payment, mainLanguage,
+                  hasFirstAidCertificate));
 
       }
       return accounts;
     }
   }
 
-
-  //  public Parent getParent(String firstName, String lastName,
-  //      String userName, String email, String password, boolean hasPets) throws SQLException
-  //  {
-  //    try (Connection connection = getConnection())
-  //    {
-  //      PreparedStatement statement = connection
-  //          .prepareStatement("SELECT * from parent WHERE username=? ");
-  //      statement.setString(1, userName);
-  //      ResultSet resultSet = statement.executeQuery();
-  //      if (resultSet.next())
-  //      {
-  //        String emailResult = resultSet.getString("email");
-  ////        String username = resultSet.getString("username");
-  //        String first_Name = resultSet.getString("first_name");
-  //        String last_Name = resultSet.getString("last_name");
-  //        String pass = resultSet.getString("password");
-  //        boolean has_Pets = resultSet.getBoolean("has_pets");
-  //        return new Parent(first_Name, last_Name, userName, emailResult, pass,
-  //            has_Pets);
-  //      }
-  //      else
-  //      {
-  //        throw new IllegalStateException("Account not in database");
-  //      }
-  //    }
-  //  }
-
   public AccountList allParents() throws SQLException
   {
     AccountList parents = new AccountList();
     try (Connection connection = getConnection())
     {
-      PreparedStatement statement = connection
-          .prepareStatement("SELECT * FROM account, parent WHERE account.email = parent.email;");
+      PreparedStatement statement = connection.prepareStatement(
+          "SELECT * FROM account, parent WHERE account.email = parent.email;");
       ResultSet resultSet = statement.executeQuery();
 
       while (resultSet.next())
@@ -243,8 +215,8 @@ public class AccountDAOImpl implements AccountDAO
     AccountList babysitters = new AccountList();
     try (Connection connection = getConnection())
     {
-      PreparedStatement statement = connection
-          .prepareStatement("SELECT * FROM account, babysitter WHERE account.email = babysitter.email;");
+      PreparedStatement statement = connection.prepareStatement(
+          "SELECT * FROM account, babysitter WHERE account.email = babysitter.email;");
       ResultSet resultSet = statement.executeQuery();
 
       while (resultSet.next())
@@ -272,13 +244,15 @@ public class AccountDAOImpl implements AccountDAO
     }
   }
 
-  @Override public Account readBabysitterByEmail(String email) throws SQLException
+  @Override public Account readBabysitterByEmail(String email)
+      throws SQLException
   {
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection
           .prepareStatement("SELECT * FROM account WHERE email=?;");
-      PreparedStatement statement1 = connection.prepareStatement("SELECT * FROM babysitter where email=?;");
+      PreparedStatement statement1 = connection
+          .prepareStatement("SELECT * FROM babysitter where email=?;");
       statement.setString(1, email);
       statement1.setString(1, email);
       ResultSet resultSet = statement.executeQuery();
@@ -289,8 +263,6 @@ public class AccountDAOImpl implements AccountDAO
         String firstName = resultSet.getString("first_name");
         String lastName = resultSet.getString("last_name");
         String password = resultSet.getString("password");
-//        boolean hasPets = resultSet.getBoolean("has_pets");
-
         Date date = (Date) resultSet1.getObject("birthday");
         MyDateTime birthday = new MyDateTime(date.toLocalDate().getDayOfMonth(),
             date.toLocalDate().getMonthValue(), date.toLocalDate().getYear());
@@ -299,22 +271,14 @@ public class AccountDAOImpl implements AccountDAO
         String mainLanguage = resultSet1.getString("language");
         boolean hasFirstAidCertificate = resultSet1
             .getBoolean("first_aid_certificate");
-//        boolean isParent = resultSet.getBoolean("isParent");
-// return resultSet.getBoolean("isParent")? new Parent(firstName,lastName,username,email,password,true) : new Babysitter(firstName,lastName
-// ,username,email,password,null,experience,payment,mainLanguage,hasFirstAidCertificate);
-        return !resultSet.getBoolean("isParent") ?   new Babysitter(firstName,lastName
-            ,username,email,password,birthday,experience,payment,mainLanguage,hasFirstAidCertificate) : null;
-//        return new Parent(firstName, lastName, username, email, password,
-//            hasPets);
-//
-//                return new Babysitter(firstName, lastName, username, email, password,
-//                            birthday, experience, payment, mainLanguage, hasFirstAidCertificate);
+        return new Babysitter(firstName, lastName, username, email, password,
+            birthday, experience, payment, mainLanguage,
+            hasFirstAidCertificate);
       }
       return null;
     }
 
   }
-
 
   @Override public Account readParentByEmail(String email) throws SQLException
   {
@@ -334,25 +298,11 @@ public class AccountDAOImpl implements AccountDAO
         String firstName = resultSet.getString("first_name");
         String lastName = resultSet.getString("last_name");
         String password = resultSet.getString("password");
-                boolean hasPets = resultSet1.getBoolean("has_pets");
+        boolean hasPets = resultSet1.getBoolean("has_pets");
 
-//        Date date = (Date) resultSet.getObject(" birthday ");
-//        MyDateTime birthday = new MyDateTime(date.toLocalDate().getDayOfMonth(),
-//            date.toLocalDate().getMonthValue(), date.toLocalDate().getYear());
-//        double experience = resultSet.getDouble("years_of_experience");
-//        double payment = resultSet.getDouble("payment ");
-//        String mainLanguage = resultSet.getString("language");
-//        boolean hasFirstAidCertificate = resultSet
-//            .getBoolean("first_aid_certificate");
-        //        boolean isParent = resultSet.getBoolean("isParent");
-        // return resultSet.getBoolean("isParent")? new Parent(firstName,lastName,username,email,password,true) : new Babysitter(firstName,lastName
-        // ,username,email,password,null,experience,payment,mainLanguage,hasFirstAidCertificate);
-        return   new Parent(firstName,lastName,username,email,password,hasPets);
-        //        return new Parent(firstName, lastName, username, email, password,
-        //            hasPets);
-        //
-        //                return new Babysitter(firstName, lastName, username, email, password,
-        //                            birthday, experience, payment, mainLanguage, hasFirstAidCertificate);
+        return new Parent(firstName, lastName, username, email, password,
+            hasPets);
+
       }
       return null;
     }
