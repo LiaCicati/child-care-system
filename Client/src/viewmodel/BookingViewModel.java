@@ -24,12 +24,12 @@ public class BookingViewModel
     id = new SimpleIntegerProperty(booking.getBookingID());
     parent = new SimpleStringProperty(booking.getParent().getFirstName());
     dateTime = new SimpleStringProperty(booking.getDateTimeOfBooking());
-    date = new SimpleStringProperty(
-        booking.getTime().getStartTime().getSimpleDate());
-    startTime = new SimpleStringProperty(
-        booking.getTime().getStartTime().getSimpleTime());
-    endTime = new SimpleStringProperty(
-        booking.getTime().getEndTime().getSimpleTime());
+//    date = new SimpleStringProperty(
+//        booking.getTime().getStartTime().getSimpleDate());
+//    startTime = new SimpleStringProperty(
+//        booking.getTime().getStartTime().getSimpleTime());
+//    endTime = new SimpleStringProperty(
+//        booking.getTime().getEndTime().getSimpleTime());
 
     babysitter = new SimpleStringProperty(
         booking.getBabysitter().getFirstName() + ", " + booking.getBabysitter()

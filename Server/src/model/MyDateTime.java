@@ -391,7 +391,7 @@ public class MyDateTime implements Serializable
   }
 
   public String getSimpleTime() {
-    return String.format("%02d:%02d", this.hour, this.minute);
+    return String.format("%02d:%02d:%02d", this.hour, this.minute, 0);
   }
 
   public String getSortableDate() {

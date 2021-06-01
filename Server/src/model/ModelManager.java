@@ -63,15 +63,18 @@ private BookingDAO bookingDAO;
   {
     try
     {
+//      kids = kidDAO.getAllKids();
       accountList = accountDAO.getAll();
       //      accountList = accountDAO.allParents();
       loggedInList = accountDAO.getAll();
       parentList = accountDAO.allParents();
       //      accountList = accountDAO.allBabysitters();
       //      loggedInList = accountDAO.allBabysitters();
-      bookingList = new BookingList();
+//      bookingList = bookingDAO.getAllBookings();
+      bookingList = bookingDAO.getAllBookings();
+      System.out.println("NRR OF BOOKINGS: " + bookingList.getNumberOfBookings());
       System.out.println("HEEEELLLOOO");
-      System.out.println("BOOKINGS: " + bookingList.getNumberOfBookings());
+//      System.out.println("BOOKINGS: " + bookingList.getNumberOfBookings());
       babysitterList = accountDAO.allBabysitters();
       System.out.println("babysitters: " + babysitterList.getNumberOfAccounts());
       //      babysitterList= babysitterDAO.allBabysitters();

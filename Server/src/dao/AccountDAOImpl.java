@@ -272,35 +272,87 @@ public class AccountDAOImpl implements AccountDAO
     }
   }
 
-  @Override public Account readByEmail(String email) throws SQLException
+  @Override public Account readBabysitterByEmail(String email) throws SQLException
   {
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection
-          .prepareStatement("SELECT * FROM account WHERE email = ?");
+          .prepareStatement("SELECT * FROM account WHERE email=?;");
+      PreparedStatement statement1 = connection.prepareStatement("SELECT * FROM babysitter where email=?;");
       statement.setString(1, email);
+      statement1.setString(1, email);
       ResultSet resultSet = statement.executeQuery();
-      if (resultSet.next())
+      ResultSet resultSet1 = statement1.executeQuery();
+      if (resultSet.next() && resultSet1.next())
       {
         String username = resultSet.getString("username");
         String firstName = resultSet.getString("first_name");
         String lastName = resultSet.getString("last_name");
         String password = resultSet.getString("password");
-        boolean hasPets = resultSet.getBoolean("has_pets");
+//        boolean hasPets = resultSet.getBoolean("has_pets");
 
-        Date date = (Date) resultSet.getObject(" birthday ");
+        Date date = (Date) resultSet1.getObject("birthday");
         MyDateTime birthday = new MyDateTime(date.toLocalDate().getDayOfMonth(),
             date.toLocalDate().getMonthValue(), date.toLocalDate().getYear());
-        double experience = resultSet.getDouble("years_of_experience");
-        double payment = resultSet.getDouble("payment ");
-        String mainLanguage = resultSet.getString("language");
-        boolean hasFirstAidCertificate = resultSet
+        double experience = resultSet1.getDouble("years_of_experience");
+        double payment = resultSet1.getDouble("payment");
+        String mainLanguage = resultSet1.getString("language");
+        boolean hasFirstAidCertificate = resultSet1
             .getBoolean("first_aid_certificate");
+//        boolean isParent = resultSet.getBoolean("isParent");
+// return resultSet.getBoolean("isParent")? new Parent(firstName,lastName,username,email,password,true) : new Babysitter(firstName,lastName
+// ,username,email,password,null,experience,payment,mainLanguage,hasFirstAidCertificate);
+        return !resultSet.getBoolean("isParent") ?   new Babysitter(firstName,lastName
+            ,username,email,password,birthday,experience,payment,mainLanguage,hasFirstAidCertificate) : null;
+//        return new Parent(firstName, lastName, username, email, password,
+//            hasPets);
+//
+//                return new Babysitter(firstName, lastName, username, email, password,
+//                            birthday, experience, payment, mainLanguage, hasFirstAidCertificate);
+      }
+      return null;
+    }
 
-        return new Parent(firstName, lastName, username, email, password,
-            hasPets);
-        //        return new Babysitter(firstName, lastName, username, email, password,
-        //                    birthday, experience, payment, mainLanguage, hasFirstAidCertificate);
+  }
+
+
+  @Override public Account readParentByEmail(String email) throws SQLException
+  {
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement statement = connection
+          .prepareStatement("SELECT * FROM account WHERE email=?;");
+      PreparedStatement statement1 = connection
+          .prepareStatement("SELECT * FROM parent WHERE email=?;");
+      statement.setString(1, email);
+      statement1.setString(1, email);
+      ResultSet resultSet = statement.executeQuery();
+      ResultSet resultSet1 = statement1.executeQuery();
+      if (resultSet.next() && resultSet1.next())
+      {
+        String username = resultSet.getString("username");
+        String firstName = resultSet.getString("first_name");
+        String lastName = resultSet.getString("last_name");
+        String password = resultSet.getString("password");
+                boolean hasPets = resultSet1.getBoolean("has_pets");
+
+//        Date date = (Date) resultSet.getObject(" birthday ");
+//        MyDateTime birthday = new MyDateTime(date.toLocalDate().getDayOfMonth(),
+//            date.toLocalDate().getMonthValue(), date.toLocalDate().getYear());
+//        double experience = resultSet.getDouble("years_of_experience");
+//        double payment = resultSet.getDouble("payment ");
+//        String mainLanguage = resultSet.getString("language");
+//        boolean hasFirstAidCertificate = resultSet
+//            .getBoolean("first_aid_certificate");
+        //        boolean isParent = resultSet.getBoolean("isParent");
+        // return resultSet.getBoolean("isParent")? new Parent(firstName,lastName,username,email,password,true) : new Babysitter(firstName,lastName
+        // ,username,email,password,null,experience,payment,mainLanguage,hasFirstAidCertificate);
+        return   new Parent(firstName,lastName,username,email,password,hasPets);
+        //        return new Parent(firstName, lastName, username, email, password,
+        //            hasPets);
+        //
+        //                return new Babysitter(firstName, lastName, username, email, password,
+        //                            birthday, experience, payment, mainLanguage, hasFirstAidCertificate);
       }
       return null;
     }

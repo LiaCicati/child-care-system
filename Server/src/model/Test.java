@@ -33,6 +33,7 @@ public class Test
     booking1.setStatus("Accepted");
     System.out.println(booking1.getTime());
     System.out.println("HEREEE: " + booking1.getTime().getEndTime().getDateTime());
+    System.out.println(booking1.getBookingWorkTime());
 
 
 

@@ -1,8 +1,6 @@
 package dao;
 
-import model.Kid;
-import model.MyDateTime;
-import model.Parent;
+import model.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -75,27 +73,59 @@ public class KidDAOImpl implements KidDAO
     }
   }
 
-  public void getAllKids() throws SQLException
+//  public ArrayList<Kid> getAllKids() throws SQLException
+//  {
+//    ArrayList<Kid> kidList = new ArrayList<>();
+//    try (Connection connection = getConnection())
+//    {
+//      PreparedStatement statement = connection
+//          .prepareStatement("SELECT * FROM kid;");
+//      ResultSet resultSet = statement.executeQuery();
+//      while (resultSet.next())
+//      {
+//        String parent_email = resultSet.getString("parent_email");
+//        int ID = resultSet.getInt("ID");
+//        boolean gender = resultSet.getBoolean("gender");
+////        Date date = (Date) resultSet.getObject(" birthday ");
+////        MyDateTime birthday = new MyDateTime(date.toLocalDate().getDayOfMonth(),
+////            date.toLocalDate().getMonthValue(), date.toLocalDate().getYear());
+//        Date date = (Date) resultSet.getObject("birthday");
+//        MyDateTime birthday = new MyDateTime(date.toLocalDate().getDayOfMonth(),
+//            date.toLocalDate().getMonthValue(), date.toLocalDate().getYear());
+//        String health = resultSet.getString("health_condition");
+//        Kid kid = new Kid(ID,birthday.getDay(),birthday.getMonth(),birthday.getYear(),gender,health);
+//        kidList.add(kid);
+//
+//      }
+//return kidList;
+//    }
+//  }
+
+  public AccountList allParents() throws SQLException
   {
-    List<Kid> kids = new ArrayList<>();
+    AccountList parents = new AccountList();
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection
-          .prepareStatement("SELECT * FROM kid;");
+          .prepareStatement("SELECT * FROM account, parent WHERE account.email = parent.email;");
       ResultSet resultSet = statement.executeQuery();
+
       while (resultSet.next())
       {
-        String parent_email = resultSet.getString("parent_email");
-        int ID = resultSet.getInt("ID");
-        boolean gender = resultSet.getBoolean("gender");
-        Date date = (Date) resultSet.getObject(" birthday ");
-        MyDateTime birthday = new MyDateTime(date.toLocalDate().getDayOfMonth(),
-            date.toLocalDate().getMonthValue(), date.toLocalDate().getYear());
-        String health = resultSet.getString("health_condition");
-
+        String username = resultSet.getString("username");
+        String email = resultSet.getString("email");
+        String firstName = resultSet.getString("first_name");
+        String lastName = resultSet.getString("last_name");
+        String password = resultSet.getString("password");
+        boolean hasPets = resultSet.getBoolean("has_pets");
+        Account parent = new Parent(firstName, lastName, username, email,
+            password, hasPets);
+        parents.addAccount(parent);
       }
+      return parents;
     }
   }
+
 
 }
   //  @Override public Kid readById(int ID) throws SQLException{

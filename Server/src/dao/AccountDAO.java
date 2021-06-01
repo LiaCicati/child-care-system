@@ -13,7 +13,7 @@ public interface AccountDAO extends DAO
 //  AccountList getAllAccounts() throws SQLException;
   AccountList allParents() throws SQLException;
   AccountList allBabysitters() throws SQLException;
-  Account readByEmail(String email) throws SQLException;
+//  Account readByEmail(String email) throws SQLException;
 //  void createParent(String firstName, String lastName,
 //      String userName, String email, String password, boolean hasPets) throws SQLException;
   void createParent(String email,  boolean hasPets) throws SQLException;
@@ -28,4 +28,6 @@ public interface AccountDAO extends DAO
   void removeParent(Parent parent) throws SQLException;
   void removeBabysitter(Babysitter babysitter) throws SQLException;
   AccountList getAll() throws SQLException;
+  Account readBabysitterByEmail(String email) throws SQLException;
+  Account readParentByEmail(String email) throws SQLException;
 }
