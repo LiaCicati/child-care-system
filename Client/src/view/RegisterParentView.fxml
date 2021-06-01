@@ -66,7 +66,7 @@
                     </VBox.margin>
                 </PasswordField>
             <Label text="* Family pets" />
-            <RadioButton fx:id="hasPets" mnemonicParsing="false" onAction="#hasPetsSelected" text="yes">
+            <RadioButton fx:id="hasPets" mnemonicParsing="false"  text="yes">
                 <toggleGroup>
                     <ToggleGroup fx:id="groupToggle">
 

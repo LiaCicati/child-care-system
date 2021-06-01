@@ -52,5 +52,5 @@ public class RegisterParentViewController extends ViewController
   {
     getViewHandler().openView(View.LOGIN_VIEW);
   }
-
+  
 }
