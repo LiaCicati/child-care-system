@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="-Infinity" prefHeight="740.0" prefWidth="414.0" style="-fx-background-color: E6E1FF;" userData="Notifications" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ParentBookingsViewController">
+<AnchorPane minHeight="-Infinity" prefHeight="740.0" prefWidth="414.0" style="-fx-background-color: E6E1FF;" userData="My Bookings" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ParentBookingsViewController">
     <children>
         <ImageView fitHeight="111.0" fitWidth="174.0" layoutX="126.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@resources/logo.png" />
