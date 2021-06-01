@@ -248,7 +248,7 @@ public class BookingBabysitterViewModel
       }
       else if (endTime.equals(startTime))
       {
-        errorMessage = "Please select for how long you want you child babysat";
+        errorMessage = "Please select for how long you want your child to be babysat";
         errorLabel.set(errorMessage);
       }
       else if (startTime.equals(new MyDateTime(0, 0, 0, 0, 0)))

@@ -259,7 +259,7 @@ public class ModelManager implements Model
     }
     else
     {
-      throw new IllegalArgumentException("Nonexistent account");
+      throw new IllegalArgumentException("The specified user is not logged in");
     }
   }
 
