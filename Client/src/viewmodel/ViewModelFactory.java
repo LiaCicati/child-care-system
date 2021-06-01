@@ -25,8 +25,8 @@ public class ViewModelFactory
     this.viewState = new ViewState();
     this.registerBabysitterViewModel = new RegisterBabysitterViewModel(
         localModel);
-    this.bookingBabysitterViewModel = new BookingBabysitterViewModel(
-        localModel, viewState);
+    this.bookingBabysitterViewModel = new BookingBabysitterViewModel(localModel,
+        viewState);
     this.registerParentViewModel = new RegisterParentViewModel(localModel);
     this.loginViewModel = new LoginViewModel(localModel, viewState);
     this.babysitterProfileViewModel = new BabysitterProfileViewModel(localModel,
@@ -36,7 +36,8 @@ public class ViewModelFactory
         viewState);
     this.addEditKidViewModel = new AddEditKidViewModel(localModel, viewState);
     this.bookingListViewModel = new BookingListViewModel(localModel, viewState);
-    this.bookingDetailsViewModel = new BookingDetailsViewModel(localModel, viewState);
+    this.bookingDetailsViewModel = new BookingDetailsViewModel(localModel,
+        viewState);
   }
 
   public RegisterBabysitterViewModel getRegisterBabysitterViewModel()

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public interface LocalModel extends LocalSubject<Account, Booking>
 {
   void addBooking(Booking booking, Parent parent, Babysitter babysitter) throws RemoteException;
-  boolean isPasswordCorrect(String userName, String password) throws RemoteException;
+
   void close();
   Account login(String username, String password);
   void registerBabysitter(String firstName, String lastName, String userName,String email, String password,

@@ -50,7 +50,8 @@ public class ParentProfileViewController extends ViewController
     email.textProperty().bindBidirectional(viewModel.getEmail());
     //    password.textProperty().bindBidirectional(viewModel.getPassword());
     hasPets.textProperty().bindBidirectional(viewModel.getHasPets());
-    changedStatus.textProperty().bindBidirectional(viewModel.getChangedStatus());
+    changedStatus.textProperty()
+        .bindBidirectional(viewModel.getChangedStatus());
 
     editParentButton.setDisable(true);
 

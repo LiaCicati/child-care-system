@@ -51,7 +51,8 @@ public class BabysitterProfileViewController extends ViewController
     //    errorLabel.textProperty().bind(viewModel.getError());
     editBabysitter.setDisable(true);
 
-    pendingBookings.textProperty().bindBidirectional(viewModel.getPendingBookings());
+    pendingBookings.textProperty()
+        .bindBidirectional(viewModel.getPendingBookings());
     reset();
   }
 
@@ -63,11 +64,6 @@ public class BabysitterProfileViewController extends ViewController
   public void onEdit()
   {
     getViewHandler().openView(View.EDIT_BABYSITTER_PROFILE_VIEW);
-  }
-
-  public void onHome()
-  {
-
   }
 
   public void onLogOut()

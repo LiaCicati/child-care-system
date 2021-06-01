@@ -13,12 +13,7 @@ public interface RemoteModel extends RemoteSubject<Account, Booking>
 {
 
  void addBooking(Booking booking, Parent parent, Babysitter babysitter) throws RemoteException;
- boolean isPasswordCorrect(String userName, String password) throws RemoteException;
 
- /*  void connect() throws RemoteException, MalformedURLException, NotBoundException;
-   void addBooking(Booking booking) throws RemoteException;
-   boolean doesUserNameExist(String userName) throws RemoteException;
-   boolean isPasswordCorrect(String userName, String password) throws RemoteException;*/
  Account login(String username, String password) throws RemoteException;
  void registerBabysitter(String firstName, String lastName, String userName,String email, String password,
      MyDateTime birthday, double babysittingExperience,

@@ -5,6 +5,7 @@ import model.ModelManager;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
@@ -12,32 +13,28 @@ import java.sql.SQLException;
 
 public class MyApplication extends Application
 {
-    private Model model;
-    private RemoteModel server;
+  private Model model;
+  private RemoteModel server;
 
-    @Override public void start(Stage primaryStage)
-        throws IOException, SQLException
+  @Override public void start(Stage primaryStage)
+      throws IOException, SQLException
+  {
+    model = new ModelManager();
+
+    //  starting server
+    try
     {
-        model = new ModelManager();
-//        ViewModelFactory viewModelFactory = new ViewModelFactory(model);
-//        ViewHandler view = new ViewHandler(viewModelFactory);
-//
-//        view.start(primaryStage);
-
-        //  starting server
-        try
-        {
-            server = new Server(model);
-        }
-        catch (RemoteException | MalformedURLException e)
-        {
-            e.printStackTrace();
-        }
+      server = new Server(model);
     }
-
-    @Override public void stop()
+    catch (RemoteException | MalformedURLException e)
     {
-        model.close();  //closing observer threads
-        ((Server)server).close();   //closing server
+      e.printStackTrace();
     }
+  }
+
+  @Override public void stop()
+  {
+    model.close();  //closing observer threads
+    ((Server) server).close();   //closing server
+  }
 }

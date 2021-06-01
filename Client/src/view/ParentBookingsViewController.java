@@ -31,12 +31,14 @@ public class ParentBookingsViewController extends ViewController
         .setCellValueFactory(cellData -> cellData.getValue().getEndTime());
     babysitterColumn
         .setCellValueFactory(cellData -> cellData.getValue().getBabysitter());
-    statusColumn.setCellValueFactory(cellData -> cellData.getValue().getStatus());
+    statusColumn
+        .setCellValueFactory(cellData -> cellData.getValue().getStatus());
     bookingsTable.setItems(viewModel.getParentBookings());
-    bookingsTable.getSelectionModel().selectedItemProperty().addListener(
-        (obs, oldValue, newValue) -> {
+    bookingsTable.getSelectionModel().selectedItemProperty()
+        .addListener((obs, oldValue, newValue) -> {
           viewModel.setSelectedBooking(newValue);
-          if (newValue != null) {
+          if (newValue != null)
+          {
             viewModel.resetLabel();
           }
         });
@@ -47,7 +49,7 @@ public class ParentBookingsViewController extends ViewController
 
   @Override public void reset()
   {
-viewModel.reset();
+    viewModel.reset();
   }
 
   public void onProfile()
@@ -62,10 +64,6 @@ viewModel.reset();
 
   public void onCancelBooking()
   {
-//viewModel.onCancelBooking();
-//      bookingsTable.getSelectionModel().clearSelection();
-
-//    reset();
-viewModel.onCancelBooking(errorLabel);
+    viewModel.onCancelBooking(errorLabel);
   }
 }

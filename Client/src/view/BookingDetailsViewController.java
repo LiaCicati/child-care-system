@@ -26,12 +26,12 @@ public class BookingDetailsViewController extends ViewController
     endTime.textProperty().bindBidirectional(viewModel.getEndTime());
     description.textProperty().bindBidirectional(viewModel.getDescription());
 
-reset();
+    reset();
   }
 
   @Override public void reset()
   {
-viewModel.reset();
+    viewModel.reset();
   }
 
   public void onProfile()

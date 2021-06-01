@@ -57,11 +57,7 @@ public class Server implements RemoteModel, LocalListener<Account, Booking>
      property.firePropertyChange("add", booking.getBabysitter(), booking);
   }
 
-  @Override public boolean isPasswordCorrect(String userName, String password)
-      throws RemoteException
-  {
-    return model.isPasswordCorrect(userName, password);
-  }
+
 
   @Override public Account login(String username, String password)
       throws RemoteException

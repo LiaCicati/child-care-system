@@ -62,7 +62,6 @@ public class AddEditKidViewModel
     try
     {
 
-
       Kid kid = new Kid(id.get(), age.get().getDayOfYear(),
           age.get().getMonthValue(), age.get().getYear(), gender.get(),
           healthCondition.get());
@@ -75,7 +74,7 @@ public class AddEditKidViewModel
         throw new IllegalArgumentException(
             "Date of birth cannot be a future date.");
 
-        model.addKid(viewState.getParent(), kid);
+      model.addKid(viewState.getParent(), kid);
 
       return true;
     }

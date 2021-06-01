@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public interface ClientModel extends LocalSubject<Account, Booking> {
     void addBooking(Booking booking, Parent parent, Babysitter babysitter);
 
-    boolean isPasswordCorrect(String userName, String password);
+
     void close();
     Account login(String username, String password);
     void registerBabysitter(String firstName, String lastName, String userName,String email, String password,

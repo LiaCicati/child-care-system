@@ -38,11 +38,6 @@ public class LocalModelManager
     serverModel.addBooking(booking, parent, babysitter);
   }
 
-  @Override public boolean isPasswordCorrect(String userName, String password)
-      throws RemoteException
-  {
-    return serverModel.isPasswordCorrect(userName, password);
-  }
 
   @Override public void close()
   {

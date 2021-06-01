@@ -101,6 +101,7 @@ public class ViewState
   {
     selectedChild = -1;
   }
+
   public int getSelectedBooking()
   {
     return selectedBooking;
@@ -110,6 +111,7 @@ public class ViewState
   {
     this.selectedBooking = selectedBooking;
   }
+
   public void removeSelectedBooking()
   {
     selectedBooking = -1;

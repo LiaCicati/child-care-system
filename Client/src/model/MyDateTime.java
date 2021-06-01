@@ -231,8 +231,9 @@ public class MyDateTime implements Serializable
 
   public void setDay(int day)
   {
-    if (day>numberOfDaysInMonth(getMonth())){
-      setMonth(getMonth()+1);
+    if (day > numberOfDaysInMonth(getMonth()))
+    {
+      setMonth(getMonth() + 1);
       day = day - numberOfDaysInMonth(getMonth());
     }
     this.day = day;
@@ -245,9 +246,10 @@ public class MyDateTime implements Serializable
 
   public void setMonth(int month)
   {
-    if (month>12){
-      setYear(getYear()+1);
-      month=month-12;
+    if (month > 12)
+    {
+      setYear(getYear() + 1);
+      month = month - 12;
     }
     this.month = month;
   }
@@ -269,9 +271,10 @@ public class MyDateTime implements Serializable
 
   public void setHour(int hour)
   {
-    if (hour>24){
-      setDay(getDay()+1);
-      hour = hour-24;
+    if (hour > 24)
+    {
+      setDay(getDay() + 1);
+      hour = hour - 24;
     }
     this.hour = hour;
   }
@@ -283,9 +286,10 @@ public class MyDateTime implements Serializable
 
   public void setMinute(int minute)
   {
-    if (minute>60){
-      setHour(getHour()+1);
-      minute = minute-60;
+    if (minute > 60)
+    {
+      setHour(getHour() + 1);
+      minute = minute - 60;
     }
     this.minute = minute;
   }
@@ -305,15 +309,18 @@ public class MyDateTime implements Serializable
     return getTime() > time.getTime();
   }
 
-  public int getDateTime(){
+  public int getDateTime()
+  {
     return year * 400 + month * 31 + day + (hour * 60 * 60) + (minute * 60);
   }
 
-  public boolean isBeforeDateTime(MyDateTime dateTime){
+  public boolean isBeforeDateTime(MyDateTime dateTime)
+  {
     return getDateTime() < dateTime.getDateTime();
   }
 
-  public boolean isAfterDateTime(MyDateTime dateTime){
+  public boolean isAfterDateTime(MyDateTime dateTime)
+  {
     return getDateTime() > dateTime.getDateTime();
   }
 
@@ -328,7 +335,7 @@ public class MyDateTime implements Serializable
   {
     int dummyDaysOfThis = year * 400 + month * 31 + day;
     int dummyDaysOfOther = other.year * 400 + other.month * 31 + other.day;
-    return dummyDaysOfThis >dummyDaysOfOther;
+    return dummyDaysOfThis > dummyDaysOfOther;
   }
 
   public int yearsBetween(MyDateTime other)
@@ -390,15 +397,18 @@ public class MyDateTime implements Serializable
     return s;
   }
 
-  public String getSimpleTime() {
+  public String getSimpleTime()
+  {
     return String.format("%02d:%02d:%02d", this.hour, this.minute, 0);
   }
 
-  public String getSortableDate() {
-    return String.format("%d-%d-%d", year,month,day);
+  public String getSortableDate()
+  {
+    return String.format("%d-%d-%d", year, month, day);
   }
 
-  public String getSimpleDate() {
+  public String getSimpleDate()
+  {
     return String.format("%02d/%02d", this.day, this.month) + "/" + this.year;
   }
 }

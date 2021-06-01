@@ -5,255 +5,224 @@ import java.util.ArrayList;
 
 public class AccountList implements Serializable
 {
-    private ArrayList<Account> accounts;
+  private ArrayList<Account> accounts;
 
-    public AccountList()
+  public AccountList()
+  {
+    this.accounts = new ArrayList<>();
+  }
+
+  public void addAccount(Account account)
+  {
+    accounts.add(account);
+  }
+
+  public void removeAccount(Account account)
+  {
+    accounts.remove(account);
+  }
+
+  public int getNumberOfAccounts()
+  {
+    return accounts.size();
+  }
+
+  public ArrayList<Account> getAllAccounts()
+  {
+    return accounts;
+  }
+
+  public int getNumberOfParentAccounts()
+  {
+    int check = 0;
+    for (Account account : accounts)
     {
-        this.accounts = new ArrayList<>();
+      if (account instanceof Parent)
+      {
+        check++;
+      }
     }
+    return check;
+  }
 
-    public void addAccount(Account account)
+  public int getNumberOfBabysitterAccounts()
+  {
+    int check = 0;
+    for (Account account : accounts)
     {
-        accounts.add(account);
+      if (account instanceof Babysitter)
+      {
+        check++;
+      }
     }
+    return check;
+  }
 
-    public void removeAccount(Account account)
+  public ArrayList<Parent> getAllParentAccounts()
+  {
+    ArrayList<Parent> temp = new ArrayList<>();
+    for (Account account : accounts)
     {
-        accounts.remove(account);
+      if (account instanceof Parent)
+      {
+        temp.add((Parent) account);
+      }
     }
+    return temp;
+  }
 
-    public int getNumberOfAccounts()
+  public ArrayList<Babysitter> getAllBabysitterAccounts()
+  {
+    ArrayList<Babysitter> temp = new ArrayList<>();
+    for (Account account : accounts)
     {
-        return accounts.size();
+      if (account instanceof Babysitter)
+      {
+        temp.add((Babysitter) account);
+      }
     }
+    return temp;
+  }
 
-    public ArrayList<Account> getAllAccounts()
+  public ArrayList<Babysitter> getByPayRate(int payPerHour)
+  {
+    ArrayList<Babysitter> temp = new ArrayList<>();
+    for (Account account : accounts)
     {
-        return accounts;
-    }
-
-    public int getNumberOfParentAccounts()
-    {
-        int check = 0;
-        for (Account account : accounts)
+      if (account instanceof Babysitter)
+      {
+        if (payPerHour >= ((Babysitter) account).getPaymentPerHour())
         {
-            if (account instanceof Parent)
-            {
-                check++;
-            }
+          temp.add((Babysitter) account);
         }
-        return check;
+      }
     }
+    return temp;
+  }
 
-    public int getNumberOfBabysitterAccounts()
+  public ArrayList<Babysitter> getWithFirstAid()
+  {
+    ArrayList<Babysitter> temp = new ArrayList<>();
+    for (Account account : accounts)
     {
-        int check = 0;
-        for (Account account : accounts)
+      if (account instanceof Babysitter)
+      {
+        if (((Babysitter) account).hasFirstAidCertificate())
         {
-            if (account instanceof Babysitter)
-            {
-                check++;
-            }
+          temp.add((Babysitter) account);
         }
-        return check;
+      }
     }
+    return temp;
+  }
 
-    public ArrayList<Parent> getAllParentAccounts()
+  public ArrayList<Babysitter> getWithLanguage(String language)
+  {
+    ArrayList<Babysitter> temp = new ArrayList<>();
+    for (Account account : accounts)
     {
-        ArrayList<Parent> temp = new ArrayList<>();
-        for (Account account : accounts)
+      if (account instanceof Babysitter)
+      {
+        if (((Babysitter) account).getLanguages().contains(language))
         {
-            if (account instanceof Parent)
-            {
-                temp.add((Parent) account);
-            }
+          temp.add((Babysitter) account);
         }
-        return temp;
+      }
     }
+    return temp;
+  }
 
-    public ArrayList<Babysitter> getAllBabysitterAccounts()
+  public Account getByUserName(String userName)
+  {
+    for (Account account : accounts)
     {
-        ArrayList<Babysitter> temp = new ArrayList<>();
-        for (Account account : accounts)
-        {
-            if (account instanceof Babysitter)
-            {
-                temp.add((Babysitter) account);
-            }
-        }
-        return temp;
+      if (account.getUserName().equals(userName))
+      {
+        return account;
+      }
     }
+    return null;
+  }
 
-    public ArrayList<Babysitter> getByPayRate(int payPerHour)
+  public Account getByEmail(String email)
+  {
+    for (Account account : accounts)
     {
-        ArrayList<Babysitter> temp = new ArrayList<>();
-        for (Account account : accounts)
-        {
-            if (account instanceof Babysitter)
-            {
-                if (payPerHour >= ((Babysitter) account).getPaymentPerHour())
-                {
-                    temp.add((Babysitter) account);
-                }
-            }
-        }
-        return temp;
+      if (account.getEmail().equals(email))
+      {
+        return account;
+      }
     }
+    return null;
+  }
 
-    public ArrayList<Babysitter> getWithFirstAid()
+  public Account getByFirstName(String firstName)
+  {
+    for (Account account : accounts)
     {
-        ArrayList<Babysitter> temp = new ArrayList<>();
-        for (Account account : accounts)
-        {
-            if (account instanceof Babysitter)
-            {
-                if (((Babysitter) account).hasFirstAidCertificate())
-                {
-                    temp.add((Babysitter) account);
-                }
-            }
-        }
-        return temp;
+      if (account.getFirstName().equals(firstName))
+      {
+        return account;
+      }
     }
+    return null;
+  }
 
-    public ArrayList<Babysitter> getWithLanguage(String language)
+  public Account getByLastName(String lastName)
+  {
+    for (Account account : accounts)
     {
-        ArrayList<Babysitter> temp = new ArrayList<>();
-        for (Account account : accounts)
-        {
-            if (account instanceof Babysitter)
-            {
-                if (((Babysitter) account).getLanguages().contains(language))
-                {
-                    temp.add((Babysitter) account);
-                }
-            }
-        }
-        return temp;
+      if (account.getLastName().equals(lastName))
+      {
+        return account;
+      }
     }
+    return null;
+  }
 
-//    public ArrayList<Parent> getWithPets()
-//    {
-//        ArrayList<Parent> temp = new ArrayList<>();
-//        for (Account account : accounts)
-//        {
-//            if (account instanceof Parent)
-//            {
-//                if (((Parent) account).hasPets())
-//                {
-//                    temp.add((Parent) account);
-//                }
-//            }
-//        }
-//        return temp;
-//    }
-
-//    public ArrayList<Parent> getWithoutPets()
-//    {
-//        ArrayList<Parent> temp = new ArrayList<>();
-//        for (Account account : accounts)
-//        {
-//            if (account instanceof Parent)
-//            {
-//                if (!((Parent) account).hasPets())
-//                {
-//                    temp.add((Parent) account);
-//                }
-//            }
-//        }
-//        return temp;
-//    }
-
-    public Account getByUserName(String userName)
+  public boolean contains(Account account)
+  {
+    for (int i = 0; i < accounts.size(); i++)
     {
-        for (Account account : accounts)
-        {
-            if (account.getUserName().equals(userName))
-            {
-                return account;
-            }
-        }
-        return null;
+      if (accounts.get(i).getUserName().equals(account.getUserName()))
+      {
+        return true;
+      }
     }
+    return false;
+  }
 
-    public Account getByEmail(String email)
+  public boolean containsUsername(String username)
+  {
+    for (int i = 0; i < accounts.size(); i++)
     {
-        for (Account account : accounts)
-        {
-            if (account.getEmail().equals(email))
-            {
-                return account;
-            }
-        }
-        return null;
+      if (accounts.get(i).getUserName().equals(username))
+      {
+        return true;
+      }
     }
+    return false;
+  }
 
-    public Account getByFirstName(String firstName)
+  public boolean containsEmail(String email)
+  {
+    for (int i = 0; i < accounts.size(); i++)
     {
-        for (Account account : accounts)
-        {
-            if (account.getFirstName().equals(firstName))
-            {
-                return account;
-            }
-        }
-        return null;
+      if (accounts.get(i).getEmail().equals(email))
+      {
+        return true;
+      }
     }
+    return false;
+  }
 
-    public Account getByLastName(String lastName)
-    {
-        for (Account account : accounts)
-        {
-            if (account.getLastName().equals(lastName))
-            {
-                return account;
-            }
-        }
-        return null;
-    }
+  public Account getAccount(int index)
+  {
+    return accounts.get(index);
+  }
 
-    public boolean contains(Account account)
-    {
-        for (int i = 0; i < accounts.size(); i++)
-        {
-            if (accounts.get(i).getUserName().equals(account.getUserName()))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean containsUsername(String username)
-    {
-        for (int i = 0; i < accounts.size(); i++)
-        {
-            if (accounts.get(i).getUserName().equals(username))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean containsEmail(String email)
-    {
-        for (int i = 0; i < accounts.size(); i++)
-        {
-            if (accounts.get(i).getEmail().equals(email))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public Account getAccount(int index) {
-        return accounts.get(index);
-    }
-
-    @Override public String toString()
-    {
-        return "Accounts : " + "\n" + accounts;
-    }
+  @Override public String toString()
+  {
+    return "Accounts : " + "\n" + accounts;
+  }
 }

@@ -32,12 +32,14 @@ public class BabysitterNotificationsViewController extends ViewController
         .setCellValueFactory(cellData -> cellData.getValue().getEndTime());
     parentColumn
         .setCellValueFactory(cellData -> cellData.getValue().getParent());
-    statusColumn.setCellValueFactory(cellData -> cellData.getValue().getStatus());
+    statusColumn
+        .setCellValueFactory(cellData -> cellData.getValue().getStatus());
     bookingsTable.setItems(viewModel.getBookings());
-    bookingsTable.getSelectionModel().selectedItemProperty().addListener(
-        (obs, oldValue, newValue) -> {
+    bookingsTable.getSelectionModel().selectedItemProperty()
+        .addListener((obs, oldValue, newValue) -> {
           viewModel.setSelectedBooking(newValue);
-          if (newValue != null) {
+          if (newValue != null)
+          {
             viewModel.resetLabel();
           }
         });
@@ -57,7 +59,7 @@ public class BabysitterNotificationsViewController extends ViewController
 
   public void onAccept()
   {
-   viewModel.onAccept(messageLabel);
+    viewModel.onAccept(messageLabel);
 
   }
 
@@ -69,7 +71,7 @@ public class BabysitterNotificationsViewController extends ViewController
   public void onDetails()
   {
     System.out.println(viewModel.onDetails(messageLabel));
-    if(viewModel.onDetails(messageLabel))
+    if (viewModel.onDetails(messageLabel))
     {
       getViewHandler().openView(View.BABYSITTER_BOOKING_DETAILS_VIEW);
     }

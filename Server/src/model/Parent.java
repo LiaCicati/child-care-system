@@ -8,27 +8,24 @@ public class Parent extends Account
   private boolean hasPets;
   private ArrayList<Kid> kids;
 
-  public Parent(String firstName, String lastName, String userName,String email, String password, boolean hasPets)
+  public Parent(String firstName, String lastName, String userName,
+      String email, String password, boolean hasPets)
   {
-    super( firstName, lastName, userName, email, password);
+    super(firstName, lastName, userName, email, password);
     setHasPets(hasPets);
     this.kids = new ArrayList<Kid>();
   }
-
-  //    public Parent(String firstName, String lastName, String userName,String email, String password)
-  //    {
-  //        super( firstName, lastName, userName, email, password);
-  //
-  //    }
 
   public int getNrOfKids()
   {
     return kids.size();
   }
+
   public boolean hasPets()
   {
     return hasPets;
   }
+
   public void setHasPets(boolean hasPets)
   {
     this.hasPets = hasPets;

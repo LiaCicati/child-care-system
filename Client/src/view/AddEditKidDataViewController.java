@@ -32,8 +32,8 @@ public class AddEditKidDataViewController extends ViewController
         .bindBidirectional(viewModel.getHealthCondition());
 
     girl.selectedProperty().bindBidirectional(viewModel.getGender());
-//    boy.selectedProperty().bindBidirectional(viewModel.getGender());
-//    groupToggle.getSelectedToggle().selectedProperty().bindBidirectional(viewModel.getGender());
+    //    boy.selectedProperty().bindBidirectional(viewModel.getGender());
+    //    groupToggle.getSelectedToggle().selectedProperty().bindBidirectional(viewModel.getGender());
 
     errorLabel.textProperty().bind(viewModel.getError());
     reset();
@@ -48,10 +48,10 @@ public class AddEditKidDataViewController extends ViewController
   public void onSave()
   {
 
-   if(viewModel.onSave())
-   {
-     getViewHandler().openView(View.PARENT_PROFILE_VIEW);
-   }
+    if (viewModel.onSave())
+    {
+      getViewHandler().openView(View.PARENT_PROFILE_VIEW);
+    }
   }
 
   public void onCancel()

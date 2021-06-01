@@ -72,7 +72,7 @@ public class BookingListViewModel implements LocalListener<Account, Booking>
           model.getAllBookings(viewState.getParent()).get(i)));
     }
   }
-  
+
   public ObservableList<BookingViewModel> getBookings()
   {
     return bookings;
@@ -97,7 +97,7 @@ public class BookingListViewModel implements LocalListener<Account, Booking>
 
   public boolean onAccept(Label label)
   {
-    if (selectedBooking.get() != null)
+    if (isBookingSelected())
     {
       viewState.setSelectedBooking(selectedBooking.get().getId().get());
       model.changeStatus(viewState.getSelectedBooking(), Booking.ACCEPTED);
@@ -121,7 +121,7 @@ public class BookingListViewModel implements LocalListener<Account, Booking>
 
   public void onReject(Label label)
   {
-    if (selectedBooking.get() != null)
+    if (isBookingSelected())
     {
       viewState.setSelectedBooking(selectedBooking.get().getId().get());
       model.changeStatus(viewState.getSelectedBooking(), Booking.REJECTED);
@@ -130,7 +130,6 @@ public class BookingListViewModel implements LocalListener<Account, Booking>
           .getBookingById(viewState.getSelectedBooking()).getStatus());
 
       update();
-      //message.set("");
     }
     else
     {
@@ -144,7 +143,7 @@ public class BookingListViewModel implements LocalListener<Account, Booking>
 
   public boolean onDetails(Label label)
   {
-    if (selectedBooking.get() != null)
+    if (isBookingSelected())
     {
       viewState.setSelectedBooking(selectedBooking.get().getId().get());
       return true;
@@ -163,7 +162,7 @@ public class BookingListViewModel implements LocalListener<Account, Booking>
   public void onCancelBooking(Label label)
   {
 
-    if (selectedBooking.get() != null)
+    if (isBookingSelected())
     {
       if (confirmation())
       {

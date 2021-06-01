@@ -58,7 +58,6 @@ public class RegisterBabysitterViewController extends ViewController
     viewModel.reset();
   }
 
-
   public void onRegister() throws RemoteException
   {
     if (viewModel.register())

@@ -34,24 +34,20 @@ public class KidListViewModel
   public void reset()
   {
 
-
     error.set("");
     //    kids.clear();
     update();
 
   }
 
-//  public void edit()
-//  {
-//    error.set("Select a kid from the list");
-//  }
-public void onAdd()
-{
-  viewState.removeSelectedKid();
-//  if(selectedKid.get() != null) {
-//    viewState.setSelectedKid(viewState.getKid());
-//  }
-}
+  public void onAdd()
+  {
+    viewState.removeSelectedKid();
+    //  if(selectedKid.get() != null) {
+    //    viewState.setSelectedKid(viewState.getKid());
+    //  }
+  }
+
   public void update()
   {
     kids.clear();
@@ -80,14 +76,14 @@ public void onAdd()
 
   public boolean edit()
   {
-//    System.out.println(selectedKid.getValue());
 
-    if(selectedKid.get() != null)
+    if (selectedKid.get() != null)
     {
       viewState.setSelectedChild(selectedKid.get().getId().get());
       return true;
     }
-    else {
+    else
+    {
       viewState.removeSelectedKid();
       error.set("Please select a kid first");
       return false;

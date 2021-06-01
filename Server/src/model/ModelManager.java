@@ -3,11 +3,8 @@ package model;
 import dao.*;
 
 import utility.observer.listener.GeneralListener;
-import utility.observer.subject.PropertyChangeAction;
 import utility.observer.subject.PropertyChangeHandler;
-import utility.observer.subject.PropertyChangeProxy;
 
-import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -36,17 +33,17 @@ public class ModelManager implements Model
     accountDAO = AccountDAOImpl.getInstance();
     kidDAO = KidDAOImpl.getInstance();
     bookingDAO = BookingDAOImpl.getInstance();
-//    accountList = new AccountList();
-//    parentList = new AccountList();
-//    babysitterList = new AccountList();
-//    loggedInList = new AccountList();
+    //    accountList = new AccountList();
+    //    parentList = new AccountList();
+    //    babysitterList = new AccountList();
+    //    loggedInList = new AccountList();
     bookingList = new BookingList();
     parents = new ArrayList<>();
 
-//    addDummyData();
+    //    addDummyData();
     this.property = new PropertyChangeHandler<>(this);
     loadAccounts();
-//    loadBookings();
+    //    loadBookings();
   }
 
   private void loadAccounts()
@@ -131,24 +128,13 @@ public class ModelManager implements Model
       e.printStackTrace();
     }
 
-
-
   }
 
   @Override public void cancelBooking(Booking booking)
       throws IllegalStateException
   {
-
     bookingList.removeBookingById(booking.getBookingID());
     property.firePropertyChange("remove", booking.getParent(), booking);
-  }
-
-
-
-  @Override public boolean isPasswordCorrect(String userName, String password)
-      throws RemoteException
-  {
-    return false;
   }
 
   @Override public void close()
@@ -243,18 +229,6 @@ public class ModelManager implements Model
     }
   }
 
-  public Parent getParentByEmail(String email)
-  {
-    if (parentList.containsEmail(email))
-    {
-      return (Parent) parentList.getByEmail(email);
-    }
-    else
-    {
-      return null;
-    }
-  }
-
   @Override public AccountList getAccountList()
   {
     return accountList;
@@ -277,50 +251,17 @@ public class ModelManager implements Model
     }
   }
 
-  public Babysitter getBabysitterByEmail(String email)
-  {
-    if (babysitterList.containsEmail(email))
-    {
-      return (Babysitter) babysitterList.getByEmail(email);
-    }
-    else
-    {
-      return null;
-    }
-  }
-
   @Override public void logout(Account account)
   {
-    if (accountList.contains(account))
+    if (loggedInList.contains(account))
     {
-      if (loggedInList.contains(account))
-      {
-        loggedInList.removeAccount(account);
-      }
-      else
-      {
-        throw new IllegalArgumentException("error");
-      }
+      loggedInList.removeAccount(account);
     }
     else
     {
       throw new IllegalArgumentException("Nonexistent account");
     }
   }
-
-  //  @Override public void registerParent(String firstName, String lastName,
-  //      String userName, String email, String password, boolean hasPets)throws IllegalArgumentException, IllegalStateException
-  //  {
-  //    try
-  //    {
-  //      Account account = new Parent(firstName,lastName,userName,email,password,hasPets);
-  //      if(accountDAO.readByEmail(email) != null) throw new IllegalStateException(
-  //          "An user with this email is already registered in the system");
-  //      accountDAO.create(account);
-  //    } catch (SQLException e) {
-  //      throw new IllegalStateException("Try again");
-  //    }
-  //  }
 
   @Override public void registerParent(String firstName, String lastName,
       String userName, String email, String password, boolean hasPets)
@@ -330,29 +271,20 @@ public class ModelManager implements Model
     {
       Account account = new Parent(firstName, lastName, userName, email,
           password, hasPets);
-      //
+
       accountList.addAccount(account);
       parentList.addAccount(account);
 
       try
       {
-        //        accountDAO.createParent(firstName,lastName,userName,email,password,hasPets);
         accountDAO.create(account);
         accountDAO.createParent(email, hasPets);
-        //        accountDAO.createParent(account);
 
       }
       catch (SQLException e)
       {
         e.printStackTrace();
       }
-      //      try {
-      //        managerFactory.getAccountManager().addAccount(account);
-      //      }
-      //      catch (SQLException e) {
-      //        e.printStackTrace();
-      //      }
-      //    }
     }
     else if (accountList.containsUsername(userName))
     {
@@ -401,8 +333,6 @@ public class ModelManager implements Model
       try
       {
         kidDAO.create(kid, parent);
-        //        accountDAO.createParent(account);
-
       }
       catch (SQLException e)
       {

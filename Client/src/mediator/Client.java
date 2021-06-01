@@ -12,7 +12,6 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Client implements ClientModel, RemoteListener<Account, Booking>
@@ -28,7 +27,7 @@ public class Client implements ClientModel, RemoteListener<Account, Booking>
   {
     this.localModel = localModel;
     this.host = host;
-    //    connect();
+
     this.remoteModel = (RemoteModel) Naming
         .lookup("rmi://" + host + ":1099/App");
     UnicastRemoteObject.exportObject(this, 0);
@@ -42,11 +41,6 @@ public class Client implements ClientModel, RemoteListener<Account, Booking>
     this(localModel, HOST);
   }
 
-/*   public void connect() throws RemoteException, MalformedURLException, NotBoundException {
-    this.remoteModelClient = (RemoteModelClient) Naming
-        .lookup("rmi://" + host + ":1099/App");
-    UnicastRemoteObject.exportObject(this, 0);
-  }*/
 
   @Override public void addBooking(Booking booking, Parent parent, Babysitter babysitter)
   {
@@ -60,18 +54,7 @@ public class Client implements ClientModel, RemoteListener<Account, Booking>
     }
   }
 
-  @Override public boolean isPasswordCorrect(String userName, String password)
-  {
-    try
-    {
-      return remoteModel.isPasswordCorrect(userName, password);
-    }
-    catch (RemoteException e)
-    {
-      e.printStackTrace();
-      return false;
-    }
-  }
+
 
   @Override public void close()
   {

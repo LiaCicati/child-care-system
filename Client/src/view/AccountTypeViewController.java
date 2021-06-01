@@ -1,6 +1,5 @@
 package view;
 
-
 public class AccountTypeViewController extends ViewController
 {
   @Override protected void init()

@@ -64,7 +64,7 @@ public class RegisterBabysitterViewModel
     paymentPerHour.set(0);
     motherTongue.set(null);
     errorLabel.set("");
-  //  hasCertificate.set(true);
+    //  hasCertificate.set(true);
   }
 
   public StringProperty getFirstName()
@@ -122,87 +122,77 @@ public class RegisterBabysitterViewModel
     return errorLabel;
   }
 
-  /*public boolean registerWithRequiredData() throws RemoteException
-  {
-
-    try
-    {
-      model.registerBabysitter(username.get(), password.get(), email.get(),
-          firstName.get(), lastName.get());
-      errorLabel.set("");
-
-      return true;
-    }
-    catch (Exception e)
-    {
-      errorLabel.set(e.getMessage());
-      return false;
-    }
-  }*/
-
-
   public boolean register() throws RemoteException
   {
-    try {
+    try
+    {
 
       selectedBirthDate = null;
-      selectedBirthDateString ="";
+      selectedBirthDateString = "";
       setCprCertificate(hasCertificate);
       selectedBirthDate = getAge().get();
-      System.out.println("localdate: "+selectedBirthDate);
-      if (selectedBirthDate==null){
+      System.out.println("localdate: " + selectedBirthDate);
+      if (selectedBirthDate == null)
+      {
         System.out.println("vi er i aller første if");
         selectedBirthDateString = null;
       }
       System.out.println("start af første else");
-      if (selectedBirthDateString==null){
+      if (selectedBirthDateString == null)
+      {
         System.out.println("vi er i if");
-        selectedBirthDateMyDateTime=null;
+        selectedBirthDateMyDateTime = null;
       }
       else
       {
         selectedBirthDateString = String.valueOf(selectedBirthDate);
 
         System.out.println("vi er i else");
-        selectedBirthYear = Integer.parseInt(selectedBirthDateString.substring(0, 4));
-        System.out.println("day: "+selectedBirthDay);
-        selectedBirthMonth = Integer.parseInt(selectedBirthDateString.substring(5, 7));
-        System.out.println("month: "+selectedBirthMonth);
-        selectedBirthDay = Integer.parseInt(selectedBirthDateString.substring(8, 10));
-        System.out.println("year: "+selectedBirthYear);
-        selectedBirthDateMyDateTime = new MyDateTime(selectedBirthDay, selectedBirthMonth, selectedBirthYear);
+        selectedBirthYear = Integer
+            .parseInt(selectedBirthDateString.substring(0, 4));
+        System.out.println("day: " + selectedBirthDay);
+        selectedBirthMonth = Integer
+            .parseInt(selectedBirthDateString.substring(5, 7));
+        System.out.println("month: " + selectedBirthMonth);
+        selectedBirthDay = Integer
+            .parseInt(selectedBirthDateString.substring(8, 10));
+        System.out.println("year: " + selectedBirthYear);
+        selectedBirthDateMyDateTime = new MyDateTime(selectedBirthDay,
+            selectedBirthMonth, selectedBirthYear);
 
       }
-      System.out.println("mydatetime: "+selectedBirthDateMyDateTime);
+      System.out.println("mydatetime: " + selectedBirthDateMyDateTime);
 
-      System.out.println("pay: "+paymentPerHour.get());
-      model.registerBabysitter(firstName.get(), lastName.getValue(), username.get(), email.get(), password.get(),
-          selectedBirthDateMyDateTime, babysittingExperience.get(), paymentPerHour.get(),
-          motherTongue.get(),
-          cprCertificate.get());
+      System.out.println("pay: " + paymentPerHour.get());
+      model.registerBabysitter(firstName.get(), lastName.getValue(),
+          username.get(), email.get(), password.get(),
+          selectedBirthDateMyDateTime, babysittingExperience.get(),
+          paymentPerHour.get(), motherTongue.get(), cprCertificate.get());
 
       errorLabel.set("");
-
-
-
       return true;
     }
     catch (Exception e)
     {
-      System.out.println("exception: "+e.getMessage());
-      errorLabel.set("exception: "+e.getMessage());
+      System.out.println("exception: " + e.getMessage());
+      errorLabel.set("exception: " + e.getMessage());
       return false;
     }
   }
 
-  public ObjectProperty<Boolean> getCprCertificate() {
+  public ObjectProperty<Boolean> getCprCertificate()
+  {
     return cprCertificate;
   }
 
-  public void setCprCertificate(ObjectProperty<Boolean> cprCertificate) {
-    if (getHasCertificate().get()==null){
+  public void setCprCertificate(ObjectProperty<Boolean> cprCertificate)
+  {
+    if (getHasCertificate().get() == null)
+    {
       this.cprCertificate.set(false);
-    } else {
+    }
+    else
+    {
       this.cprCertificate.set(true);
     }
   }
