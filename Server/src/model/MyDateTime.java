@@ -373,19 +373,19 @@ public class MyDateTime implements Serializable
     {
       s += "0";
     }
-    s += day + "/";
+    s += day + "-";
     if (month < 10)
     {
       s += "0";
     }
     if (hour == 0 && minute == 0)
     {
-      s += month + "/" + year;
+      s += month + "-" + year;
     }
 
     else
     {
-      s += month + "/" + year + " " + hour + ":" + minute;
+      s += month + "-" + year + " " + hour + ":" + minute;
     }
     return s;
   }

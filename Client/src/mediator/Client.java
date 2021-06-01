@@ -48,11 +48,11 @@ public class Client implements ClientModel, RemoteListener<Account, Booking>
     UnicastRemoteObject.exportObject(this, 0);
   }*/
 
-  @Override public void addBooking(Booking booking)
+  @Override public void addBooking(Booking booking, Parent parent, Babysitter babysitter)
   {
     try
     {
-      remoteModel.addBooking(booking);
+      remoteModel.addBooking(booking, parent, babysitter);
     }
     catch (RemoteException e)
     {

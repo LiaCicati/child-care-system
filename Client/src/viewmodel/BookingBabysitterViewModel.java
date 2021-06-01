@@ -251,7 +251,7 @@ public class BookingBabysitterViewModel
       }else if (getStartTime().getTime()!=0){
         //        reset();
         Booking myBooking = new Booking(new TimeInterval(getStartTime(), getEndTime()),viewState.getParent() , model.getBabysitter(babysitter), getDescription().get());
-        model.addBooking(myBooking);
+        model.addBooking(myBooking, myBooking.getParent(), myBooking.getBabysitter());
         viewState.setBooking(myBooking);
 
         errorMessage = "Booking of babysitter completed!";

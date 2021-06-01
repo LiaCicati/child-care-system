@@ -102,6 +102,7 @@ public class Booking implements Serializable
         this.description = description;
     }
 
+
     public String toString()
     {
         return "Booking id: " + bookingID + "\n" + "Parent: " + parent

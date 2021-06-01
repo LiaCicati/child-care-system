@@ -33,9 +33,9 @@ public class LocalModelManager
 
   }
 
-  @Override public void addBooking(Booking booking) throws RemoteException
+  @Override public void addBooking(Booking booking, Parent parent, Babysitter babysitter) throws RemoteException
   {
-    serverModel.addBooking(booking);
+    serverModel.addBooking(booking, parent, babysitter);
   }
 
   @Override public boolean isPasswordCorrect(String userName, String password)

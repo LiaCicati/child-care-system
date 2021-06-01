@@ -25,9 +25,9 @@ public class ModelManager implements Model
   private BookingList bookingList;
 
   private AccountDAO accountDAO;
-  private BabysitterDAO babysitterDAO;
+//  private BabysitterDAO babysitterDAO;
   private KidDAO kidDAO;
-
+private BookingDAO bookingDAO;
   ArrayList<Kid> kids;
 
   private PropertyChangeHandler<Account, Booking> property;
@@ -37,8 +37,9 @@ public class ModelManager implements Model
   public ModelManager() throws SQLException
   {
     accountDAO = AccountDAOImpl.getInstance();
-    babysitterDAO = BabysitterDAOImpl.getInstance();
+//    babysitterDAO = BabysitterDAOImpl.getInstance();
     kidDAO = KidDAOImpl.getInstance();
+    bookingDAO = BookingDAOImpl.getInstance();
 
     //
     //    this.accountList = new AccountList();
@@ -46,7 +47,7 @@ public class ModelManager implements Model
     //    this.parentList = new AccountList();
     //    this.loggedInList = new AccountList();
 
-    this.bookingList = new BookingList();
+//    this.bookingList = new BookingList();
 
     this.kids = new ArrayList<>();
     this.parents = new ArrayList<>();
@@ -58,25 +59,6 @@ public class ModelManager implements Model
 
   }
 
-  //private void loadBabysitters()
-  //{
-  //  try
-  //  {
-  //    //accountList= accountDAO.getAllAccounts();
-  //    accountList = accountDAO.allBabysitters();
-  //    loggedInList = accountDAO.allBabysitters();
-  //    babysitterList = accountDAO.allBabysitters();
-  //    //      System.out.println("NRRR: " + accountList.getNumberOfAccounts());
-  //    //      System.out.println("NRRR: " + loggedInList.getNumberOfAccounts());
-  //    //      System.out.println(parentList.getAllParentAccounts());
-  //    //      babysitterList= accountDAO.allBabysitters();
-  //  }
-  //  catch (SQLException e)
-  //
-  //  {
-  //    e.printStackTrace();
-  //  }
-  //}
   private void loadAccounts()
   {
     try
@@ -87,6 +69,9 @@ public class ModelManager implements Model
       parentList = accountDAO.allParents();
       //      accountList = accountDAO.allBabysitters();
       //      loggedInList = accountDAO.allBabysitters();
+      bookingList = new BookingList();
+      System.out.println("HEEEELLLOOO");
+      System.out.println("BOOKINGS: " + bookingList.getNumberOfBookings());
       babysitterList = accountDAO.allBabysitters();
       System.out.println("babysitters: " + babysitterList.getNumberOfAccounts());
       //      babysitterList= babysitterDAO.allBabysitters();
@@ -135,10 +120,29 @@ public class ModelManager implements Model
     parentList.addAccount(parent2);
   }
 
-  @Override public void addBooking(Booking booking)
+  @Override public void addBooking(Booking booking, Parent parent, Babysitter babysitter)
       throws IllegalArgumentException
   {
-    bookingList.addBooking(booking);    //TODO
+    parent = (Parent) parentList.getByEmail(parent.getEmail());
+    System.out.println("parent :: " + parent.getEmail());
+    babysitter = (Babysitter) babysitterList.getByEmail(babysitter.getEmail());
+    try
+    {
+
+
+//        kidDAO.create(kid, parent);
+      bookingDAO.addBooking(booking, parent, babysitter);
+      bookingList.addBooking(booking);
+      System.out.println("PARENT: " + parent.getEmail());
+
+    }
+    catch (SQLException e)
+    {
+      e.printStackTrace();
+    }
+
+
+    //TODO
     property.firePropertyChange("add", booking.getBabysitter(), booking);
   }
 
@@ -296,6 +300,18 @@ public class ModelManager implements Model
     }
   }
 
+ public Parent getParentByEmail(String email)
+  {
+    if (parentList.containsEmail(email))
+    {
+      return (Parent) parentList.getByEmail(email);
+    }
+    else
+    {
+      return null;
+    }
+  }
+
   @Override public AccountList getAccountList()
   {
     return accountList;
@@ -311,6 +327,18 @@ public class ModelManager implements Model
     if (babysitterList.containsUsername(username))
     {
       return (Babysitter) babysitterList.getByUserName(username);
+    }
+    else
+    {
+      return null;
+    }
+  }
+
+ public Babysitter getBabysitterByEmail(String email)
+  {
+    if (babysitterList.containsEmail(email))
+    {
+      return (Babysitter) babysitterList.getByEmail(email);
     }
     else
     {

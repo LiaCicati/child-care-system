@@ -39,6 +39,7 @@ public class BookingListViewModel implements LocalListener<Account, Booking>
 
   public void reset()
   {
+    System.out.println(model.getBookingList().getNumberOfBookings());
     message.set("");
     update();
     updateParentBookings();

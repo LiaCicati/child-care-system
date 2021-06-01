@@ -42,29 +42,11 @@ public class AccountDAOImpl implements AccountDAO
       statement.setString(5, account.getPassword());
       statement.setBoolean(6, account.isParent());
       statement.executeUpdate();
-      //      PreparedStatement statement1 = connection.prepareStatement(
-      //          "INSERT INTO parent( email, has_pets) VALUES(?, ?);");
-      //      statement1.setString(1,account.getEmail());
-      //      statement1.setBoolean(2,);
 
     }
   }
 
-  //  @Override public void createParent(String firstName, String lastName,
-  //      String userName, String email, String password, boolean hasPets) throws SQLException{
-  //    try (Connection connection = getConnection())
-  //    {
-  //      PreparedStatement statement = connection.prepareStatement(
-  //          "INSERT INTO parent ( username,email,password,first_name, last_name,has_pets) VALUES(?, ?,?,?,?,?);");
-  //      statement.setString(1, userName);
-  //      statement.setString(2,email);
-  //      statement.setString(3,password);
-  //      statement.setString(4,firstName);
-  //      statement.setString(5,lastName);
-  //      statement.setBoolean(6, hasPets);
-  //      statement.executeUpdate();
-  //    }
-  //  }
+
 
   @Override public void createParent(String email, boolean hasPets)
       throws SQLException
@@ -73,11 +55,7 @@ public class AccountDAOImpl implements AccountDAO
     {
       PreparedStatement statement = connection.prepareStatement(
           "INSERT INTO parent ( email,has_pets) VALUES(?, ?);");
-      //      statement.setString(1, userName);
       statement.setString(1, email);
-      //      statement.setString(3,password);
-      //      statement.setString(4,firstName);
-      //      statement.setString(5,lastName);
       statement.setBoolean(2, hasPets);
       statement.executeUpdate();
     }
@@ -99,6 +77,7 @@ public class AccountDAOImpl implements AccountDAO
       statement.setDouble(4, paymentPerHour);
       statement.setString(5, mainLanguage);
       statement.setBoolean(6, hasFirstAidCertificate);
+      System.out.println("Has certificate: " + hasFirstAidCertificate);
       statement.executeUpdate();
     }
   }
@@ -134,7 +113,6 @@ public class AccountDAOImpl implements AccountDAO
     AccountList accounts = new AccountList();
     try (Connection connection = getConnection())
     {
-      //      "SELECT account.*,parent.has_pets,babysitter.birthday , babysitter.years_of_experience,babysitter.payment,babysitter.language,babysitter.first_aid_certificate FROM account LEFT JOIN parent  ON account.email = parent.email LEFT JOIN babysitter ON account.email = babysitter.email;"
       PreparedStatement statement = connection.prepareStatement(
           "SELECT * FROM account,parent, babysitter;");
       ResultSet resultSet = statement.executeQuery();
@@ -147,8 +125,7 @@ public class AccountDAOImpl implements AccountDAO
         String password = resultSet.getString("password");
         boolean isParent = resultSet.getBoolean("isParent");
         boolean hasPets = resultSet.getBoolean("has_pets");
-        //        Parent parent = new Parent(firstName, lastName, username, email,
-        //            password, hasPets);
+
         Date date = (Date) resultSet.getObject("birthday");
         MyDateTime birthday = new MyDateTime(date.toLocalDate().getDayOfMonth(),
             date.toLocalDate().getMonthValue(), date.toLocalDate().getYear());
@@ -158,9 +135,7 @@ public class AccountDAOImpl implements AccountDAO
         String mainLanguage = resultSet.getString("language");
         boolean hasFirstAidCertificate = resultSet
             .getBoolean("first_aid_certificate");
-        //        Babysitter babysitter = new Babysitter(firstName, lastName, username,
-        //            email, password, birthday, experience, payment, mainLanguage,
-        //            hasFirstAidCertificate);
+
 
         if (isParent)
         {
@@ -175,67 +150,7 @@ public class AccountDAOImpl implements AccountDAO
       return accounts;
     }
   }
-  //  public AccountList getAllAccounts() throws SQLException
-  //  {
-  //
-  //    try (Connection connection = getConnection())
-  //    {
-  //      PreparedStatement statement = connection
-  //          .prepareStatement("SELECT * FROM account;");
-  //      PreparedStatement statement1 = connection
-  //          .prepareStatement("SELECT * FROM parent");
-  //      PreparedStatement statement2 = connection
-  //          .prepareStatement("SELECT * FROM babysitter");
-  //      ResultSet resultSet1 = statement1.executeQuery();
-  //      ResultSet resultSet = statement.executeQuery();
-  //      ResultSet resultSet2 = statement2.executeQuery();
-  //      AccountList accounts = new AccountList();
-  //
-  //      if (resultSet.next() && resultSet1.next())
-  //      {
-  //        String username = resultSet.getString("username");
-  //        String email = resultSet.getString("email");
-  //        String firstName = resultSet.getString("first_name");
-  //        String lastName = resultSet.getString("last_name");
-  //        String password = resultSet.getString("password");
-  //        boolean hasPets = resultSet1.getBoolean("has_pets");
-  //        boolean isParent = resultSet.getBoolean("isParent");
-  //        if (isParent)
-  //        {
-  //          Parent parent = new Parent(firstName, lastName, username, email,
-  //              password, hasPets);
-  //          accounts.addAccount(parent);
-  //        }
-  //
-  //      }
-  //      else if (resultSet.next() && resultSet2.next())
-  //      {
-  //        String username = resultSet.getString("username");
-  //        String email = resultSet.getString("email");
-  //        String firstName = resultSet.getString("first_name");
-  //        String lastName = resultSet.getString("last_name");
-  //        String password = resultSet.getString("password");
-  //        Date date = (Date) resultSet2.getObject("birthday");
-  //        MyDateTime birthday = new MyDateTime(date.toLocalDate().getDayOfMonth(),
-  //            date.toLocalDate().getMonthValue(), date.toLocalDate().getYear());
-  //        double experience = resultSet2.getDouble("years_of_experience");
-  //        double payment = resultSet2.getDouble("payment ");
-  //        String mainLanguage = resultSet2.getString("language");
-  //        boolean hasFirstAidCertificate = resultSet2
-  //            .getBoolean("first_aid_certificate");
-  //        boolean isParent = resultSet.getBoolean("isParent");
-  //        if (!isParent)
-  //        {
-  //          Babysitter babysitter = new Babysitter(firstName, lastName, username,
-  //              email, password, birthday, experience, payment, mainLanguage,
-  //              hasFirstAidCertificate);
-  //          accounts.addAccount(babysitter);
-  //        }
-  //
-  //      }
-  //      return accounts;
-  //    }
-  //  }
+
 
   //  public Parent getParent(String firstName, String lastName,
   //      String userName, String email, String password, boolean hasPets) throws SQLException
@@ -284,9 +199,6 @@ public class AccountDAOImpl implements AccountDAO
         Account parent = new Parent(firstName, lastName, username, email,
             password, hasPets);
         parents.addAccount(parent);
-        //        Parent account = getParent(firstName,lastName,username,email,password,hasPets);
-        //        parents.addAccount(account);
-
       }
       return parents;
     }
@@ -365,7 +277,7 @@ public class AccountDAOImpl implements AccountDAO
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection
-          .prepareStatement("SELECT * FROM parent WHERE email = ?");
+          .prepareStatement("SELECT * FROM account WHERE email = ?");
       statement.setString(1, email);
       ResultSet resultSet = statement.executeQuery();
       if (resultSet.next())
