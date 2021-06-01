@@ -250,7 +250,7 @@ public class BookingBabysitterViewModel
         errorLabel.set(errorMessage);
       }else if (getStartTime().getTime()!=0){
         Booking myBooking = new Booking(new TimeInterval(getStartTime(), getEndTime()),viewState.getParent() , model.getBabysitter(babysitter), getDescription().get());
-        model.addBooking(myBooking);
+        model.addBooking(myBooking, myBooking.getParent(), myBooking.getBabysitter());
         viewState.setBooking(myBooking);
 
         reset();

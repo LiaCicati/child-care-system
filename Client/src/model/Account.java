@@ -10,6 +10,7 @@ public abstract class Account implements Serializable
   private String email;
   private String firstName;
   private String lastName;
+  private boolean isParent;
 
   public Account(String firstName, String lastName, String userName, String email, String password)
   {
@@ -111,10 +112,10 @@ public abstract class Account implements Serializable
     }
     this.password = password;
   }
-  public String getParent()
-  {
-    return "Hello";
-  }
+public boolean isParent()
+{
+  return isParent = this instanceof Parent;
+}
 
   @Override public boolean equals(Object obj)
   {

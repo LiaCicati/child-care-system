@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public interface Model extends LocalSubject<Account, Booking>
 {
-  void addBooking(Booking booking) throws IllegalArgumentException;
+  void addBooking(Booking booking, Parent parent, Babysitter babysitter) throws IllegalArgumentException;
 
   boolean isPasswordCorrect(String userName, String password)
       throws RemoteException;
@@ -46,5 +46,4 @@ void changeStatus(int id, String status);
   int getNotifications(Parent parent);
   int getBabysitterPendingBookings(Babysitter babysitter);
   void cancelBooking(Booking booking);
-  void cancelBooking(Parent parent, int bookingID);
 }

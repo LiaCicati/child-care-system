@@ -52,6 +52,11 @@ public class Booking implements Serializable
             .format(DateTimeFormatter.ofPattern("dd/MM/yyyy, hh:mm"));
     }
 
+    public String getBookingWorkTime()
+    {
+        return getTime().getStartTime().getSimpleDate() + ", " + getTime().getStartTime().getSimpleTime() + " - " + getTime().getEndTime().getSimpleTime();
+    }
+
     public Parent getParent()
     {
         return parent;
@@ -101,6 +106,7 @@ public class Booking implements Serializable
     {
         this.description = description;
     }
+
 
     public String toString()
     {

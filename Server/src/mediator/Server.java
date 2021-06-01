@@ -51,9 +51,9 @@ public class Server implements RemoteModel, LocalListener<Account, Booking>
     }
   }
 
-  @Override public void addBooking(Booking booking) throws RemoteException
+  @Override public void addBooking(Booking booking, Parent parent, Babysitter babysitter) throws RemoteException
   {
-    model.addBooking(booking);
+    model.addBooking(booking, parent, babysitter);
      property.firePropertyChange("add", booking.getBabysitter(), booking);
   }
 

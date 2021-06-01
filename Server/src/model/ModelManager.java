@@ -1,11 +1,14 @@
 package model;
 
+import dao.*;
+
 import utility.observer.listener.GeneralListener;
 import utility.observer.subject.PropertyChangeAction;
 import utility.observer.subject.PropertyChangeHandler;
 import utility.observer.subject.PropertyChangeProxy;
 
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import java.util.InputMismatchException;
@@ -16,30 +19,66 @@ public class ModelManager implements Model
   private AccountList accountList;
   private AccountList babysitterList;
   private AccountList parentList;
-  private ArrayList<Parent> parents;
   private AccountList loggedInList;
-
   private BookingList bookingList;
 
+  private AccountDAO accountDAO;
+  private KidDAO kidDAO;
+  private BookingDAO bookingDAO;
   ArrayList<Kid> kids;
+  ArrayList<Parent> parents;
 
   private PropertyChangeHandler<Account, Booking> property;
-  //    private PropertyChangeAction<Account, Account> accountProperty; //TODO incomment again when account class isimplemented
 
-  public ModelManager()
+  public ModelManager() throws SQLException
   {
-    this.accountList = new AccountList();
-    this.babysitterList = new AccountList();
-    this.parentList = new AccountList();
-    this.loggedInList = new AccountList();
 
-    this.bookingList = new BookingList();
+    accountDAO = AccountDAOImpl.getInstance();
+    kidDAO = KidDAOImpl.getInstance();
+    bookingDAO = BookingDAOImpl.getInstance();
+//    accountList = new AccountList();
+//    parentList = new AccountList();
+//    babysitterList = new AccountList();
+//    loggedInList = new AccountList();
+    bookingList = new BookingList();
+    parents = new ArrayList<>();
 
-    this.kids = new ArrayList<>();
-    this.parents = new ArrayList<>();
-
+//    addDummyData();
     this.property = new PropertyChangeHandler<>(this);
-    addDummyData();
+    loadAccounts();
+//    loadBookings();
+  }
+
+  private void loadAccounts()
+  {
+    try
+    {
+
+      accountList = accountDAO.getAll();
+      loggedInList = accountDAO.getAll();
+      parentList = accountDAO.allParents();
+      babysitterList = accountDAO.allBabysitters();
+      kids = kidDAO.getAllKids();
+
+    }
+    catch (SQLException e)
+
+    {
+      e.printStackTrace();
+    }
+  }
+
+  private void loadBookings()
+  {
+    try
+    {
+      bookingList = bookingDAO.getAllBookings();
+    }
+    catch (SQLException e)
+
+    {
+      e.printStackTrace();
+    }
   }
 
   private void addDummyData()
@@ -71,11 +110,29 @@ public class ModelManager implements Model
     parentList.addAccount(parent2);
   }
 
-  @Override public void addBooking(Booking booking)
-      throws IllegalArgumentException
+  @Override public void addBooking(Booking booking, Parent parent,
+      Babysitter babysitter) throws IllegalArgumentException
   {
-    bookingList.addBooking(booking);    //TODO
-    property.firePropertyChange("add", booking.getBabysitter(), booking);
+    parent = (Parent) parentList.getByEmail(parent.getEmail());
+    System.out.println("parent :: " + parent.getEmail());
+    babysitter = (Babysitter) babysitterList.getByEmail(babysitter.getEmail());
+    try
+    {
+
+      //        kidDAO.create(kid, parent);
+      bookingDAO.addBooking(booking, parent, babysitter);
+      bookingList.addBooking(booking);
+      property.firePropertyChange("add", booking.getBabysitter(), booking);
+      System.out.println("PARENT: " + parent.getEmail());
+
+    }
+    catch (SQLException e)
+    {
+      e.printStackTrace();
+    }
+
+
+
   }
 
   @Override public void cancelBooking(Booking booking)
@@ -86,10 +143,7 @@ public class ModelManager implements Model
     property.firePropertyChange("remove", booking.getParent(), booking);
   }
 
-  @Override public void cancelBooking(Parent parent, int bookingID)
-  {
 
-  }
 
   @Override public boolean isPasswordCorrect(String userName, String password)
       throws RemoteException
@@ -116,7 +170,10 @@ public class ModelManager implements Model
           "The username or password is incorrect, please try again");
     }
 
-    if (accountList.getByUserName(username).getPassword().equals(password))
+    if (accountList.getByUserName(username).getPassword().equals(password)
+        || parentList.getByUserName(username).getPassword().equals(password)
+        || babysitterList.getByUserName(username).getPassword()
+        .equals(password))
     {
       loggedInList.addAccount(account);
       return account;
@@ -127,28 +184,6 @@ public class ModelManager implements Model
           "The username or password is incorrect, please try again");
     }
   }
-
-  //    @Override public void registerBabysitter(String userName, String password,
-  //        String email, String firstName, String lastName)
-  //    {
-  //      if (!accountList.containsUsername(userName) && !accountList.containsEmail(email))
-  //      {
-  //        Account account = new Babysitter(userName, password, email, firstName,
-  //            lastName);
-  //        accountList.addAccount(account);
-  //        babysitterList.addAccount(account);
-  //      }
-  //      else if (accountList.containsUsername(userName))
-  //      {
-  //        throw new IllegalStateException(
-  //            "An user with this username is already registered in the system");
-  //      }
-  //      else if (accountList.containsEmail(email))
-  //      {
-  //        throw new IllegalStateException(
-  //            "An user with this email is already registered in the system");
-  //      }
-  //    }
 
   @Override public void registerBabysitter(String firstName, String lastName,
       String userName, String email, String password, MyDateTime birthday,
@@ -164,6 +199,19 @@ public class ModelManager implements Model
           mainLanguage, hasFirstAidCertificate);
       accountList.addAccount(account);
       babysitterList.addAccount(account);
+
+      try
+      {
+
+        accountDAO.create(account);
+        accountDAO.createBabysitter(email, birthday, babysittingExperience,
+            paymentPerHour, mainLanguage, hasFirstAidCertificate);
+
+      }
+      catch (SQLException e)
+      {
+        e.printStackTrace();
+      }
     }
     else if (accountList.containsUsername(userName))
     {
@@ -178,29 +226,6 @@ public class ModelManager implements Model
 
   }
 
-  //    @Override public void registerParent(String userName, String password,
-  //        String email, String firstName, String lastName)
-  //    {
-  //        if (!accountList.containsUsername(userName) && !accountList
-  //            .containsEmail(email))
-  //        {
-  //            Account account = new Parent(userName, password, email, firstName,
-  //                lastName);
-  //            accountList.addAccount(account);
-  //            parentList.addAccount(account);
-  //        }
-  //        else if (accountList.containsUsername(userName))
-  //        {
-  //            throw new IllegalStateException(
-  //                "An user with this username is already registered in the system");
-  //        }
-  //        else if (accountList.containsEmail(email))
-  //        {
-  //            throw new IllegalStateException(
-  //                "An user with this email is already registered in the system");
-  //        }
-  //    }
-
   @Override public AccountList getParentList()
   {
     return parentList;
@@ -211,6 +236,18 @@ public class ModelManager implements Model
     if (parentList.containsUsername(username))
     {
       return (Parent) parentList.getByUserName(username);
+    }
+    else
+    {
+      return null;
+    }
+  }
+
+  public Parent getParentByEmail(String email)
+  {
+    if (parentList.containsEmail(email))
+    {
+      return (Parent) parentList.getByEmail(email);
     }
     else
     {
@@ -240,6 +277,18 @@ public class ModelManager implements Model
     }
   }
 
+  public Babysitter getBabysitterByEmail(String email)
+  {
+    if (babysitterList.containsEmail(email))
+    {
+      return (Babysitter) babysitterList.getByEmail(email);
+    }
+    else
+    {
+      return null;
+    }
+  }
+
   @Override public void logout(Account account)
   {
     if (accountList.contains(account))
@@ -259,6 +308,20 @@ public class ModelManager implements Model
     }
   }
 
+  //  @Override public void registerParent(String firstName, String lastName,
+  //      String userName, String email, String password, boolean hasPets)throws IllegalArgumentException, IllegalStateException
+  //  {
+  //    try
+  //    {
+  //      Account account = new Parent(firstName,lastName,userName,email,password,hasPets);
+  //      if(accountDAO.readByEmail(email) != null) throw new IllegalStateException(
+  //          "An user with this email is already registered in the system");
+  //      accountDAO.create(account);
+  //    } catch (SQLException e) {
+  //      throw new IllegalStateException("Try again");
+  //    }
+  //  }
+
   @Override public void registerParent(String firstName, String lastName,
       String userName, String email, String password, boolean hasPets)
   {
@@ -267,9 +330,29 @@ public class ModelManager implements Model
     {
       Account account = new Parent(firstName, lastName, userName, email,
           password, hasPets);
+      //
       accountList.addAccount(account);
       parentList.addAccount(account);
 
+      try
+      {
+        //        accountDAO.createParent(firstName,lastName,userName,email,password,hasPets);
+        accountDAO.create(account);
+        accountDAO.createParent(email, hasPets);
+        //        accountDAO.createParent(account);
+
+      }
+      catch (SQLException e)
+      {
+        e.printStackTrace();
+      }
+      //      try {
+      //        managerFactory.getAccountManager().addAccount(account);
+      //      }
+      //      catch (SQLException e) {
+      //        e.printStackTrace();
+      //      }
+      //    }
     }
     else if (accountList.containsUsername(userName))
     {
@@ -315,6 +398,16 @@ public class ModelManager implements Model
     {
       parent = (Parent) parentList.getByUserName(parent.getUserName());
       parent.addKid(kid);
+      try
+      {
+        kidDAO.create(kid, parent);
+        //        accountDAO.createParent(account);
+
+      }
+      catch (SQLException e)
+      {
+        e.printStackTrace();
+      }
     }
     else
     {
@@ -376,7 +469,9 @@ public class ModelManager implements Model
   @Override public void changeStatus(int id, String status)
   {
     bookingList.getBookingById(id).setStatus(status);
-    property.firePropertyChange("status", bookingList.getBookingById(id).getParent(), bookingList.getBookingById(id));
+    property.firePropertyChange("status",
+        bookingList.getBookingById(id).getParent(),
+        bookingList.getBookingById(id));
   }
 
   @Override public boolean addListener(

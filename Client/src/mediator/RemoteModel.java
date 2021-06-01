@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public interface RemoteModel extends RemoteSubject<Account, Booking>
 {
 
- void addBooking(Booking booking) throws RemoteException;
+ void addBooking(Booking booking, Parent parent, Babysitter babysitter) throws RemoteException;
  boolean isPasswordCorrect(String userName, String password) throws RemoteException;
 
  /*  void connect() throws RemoteException, MalformedURLException, NotBoundException;

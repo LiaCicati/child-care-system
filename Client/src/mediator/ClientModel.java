@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public interface ClientModel extends LocalSubject<Account, Booking> {
-    void addBooking(Booking booking);
+    void addBooking(Booking booking, Parent parent, Babysitter babysitter);
 
     boolean isPasswordCorrect(String userName, String password);
     void close();
