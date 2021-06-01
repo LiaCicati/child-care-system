@@ -8,7 +8,7 @@ public class BookingDAOImpl implements BookingDAO
 {
   private static BookingDAOImpl instance;
 
-  public BookingDAOImpl() throws SQLException
+  private BookingDAOImpl() throws SQLException
   {
     DriverManager.registerDriver(new org.postgresql.Driver());
   }

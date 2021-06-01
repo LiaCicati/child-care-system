@@ -8,7 +8,7 @@ public class AccountDAOImpl implements AccountDAO
 {
   private static AccountDAOImpl instance;
 
-  public AccountDAOImpl() throws SQLException
+  private AccountDAOImpl() throws SQLException
   {
     DriverManager.registerDriver(new org.postgresql.Driver());
   }
