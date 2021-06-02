@@ -41,12 +41,12 @@
                 </Button>
             </children>
         </HBox>
-        <Label fx:id="errorLabel" layoutX="40.0" layoutY="538.0" prefHeight="41.0" prefWidth="334.0" text="Error label" textFill="#f9494b">
+        <Label fx:id="errorLabel" layoutX="40.0" layoutY="542.0" prefHeight="41.0" prefWidth="334.0" text="Error label" textFill="#f9494b">
             <font>
                 <Font size="13.0" />
             </font>
         </Label>
-      <TableView fx:id="babysittersTable" layoutX="18.0" layoutY="226.0" prefHeight="170.0" prefWidth="378.0">
+      <TableView fx:id="babysittersTable" layoutX="17.0" layoutY="242.0" prefHeight="170.0" prefWidth="378.0">
         <columns>
           <TableColumn fx:id="babysitterNameColumn" prefWidth="75.0" text="Name" />
           <TableColumn fx:id="babysitterAgeColumn" prefWidth="75.0" text="Age" />
@@ -62,7 +62,10 @@
       </SplitMenuButton>
       <VBox layoutX="18.0" layoutY="125.0" prefHeight="93.0" prefWidth="378.0">
          <children>
-            <Label alignment="CENTER" prefHeight="17.0" prefWidth="382.0" text="Date and time you need a babysitter" />
+            <Label alignment="CENTER" prefHeight="17.0" prefWidth="382.0" text="Date and time you need a babysitter">
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin></Label>
             <HBox prefHeight="41.0" prefWidth="298.0">
                <children>
                   <DatePicker fx:id="bookingDatePicker" onAction="#onDateEntered" prefHeight="26.0" prefWidth="189.0" />
@@ -124,7 +127,7 @@
             </HBox>
             <Label alignment="CENTER" prefHeight="17.0" prefWidth="389.0" text="Duration you need a babysitter">
                <VBox.margin>
-                  <Insets top="10.0" />
+                  <Insets bottom="5.0" top="5.0" />
                </VBox.margin>
             </Label>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
@@ -163,7 +166,7 @@
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>
-
+      
                   </Label>
                   <ComboBox fx:id="durationMinutesComboBox" maxWidth="106.0" minWidth="106.0" onAction="#onDurationMinutesEntered" prefWidth="106.0">
                      <HBox.margin>
@@ -195,7 +198,7 @@
             </HBox>
          </children>
       </VBox>
-      <VBox layoutX="18.0" layoutY="406.0" prefHeight="123.0" prefWidth="378.0">
+      <VBox layoutX="17.0" layoutY="418.0" prefHeight="123.0" prefWidth="378.0">
          <children>
             <Label alignment="CENTER" prefHeight="17.0" prefWidth="378.0" text="Description" />
             <TextArea fx:id="description" prefHeight="200.0" prefWidth="200.0" />
