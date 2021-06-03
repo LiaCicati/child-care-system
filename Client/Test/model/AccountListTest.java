@@ -19,8 +19,8 @@ class AccountListTest
     {
         System.out.println("--> setUp()");
         list = new AccountList();
-        parent = new Parent("Parent", "password", "parent@gmail.com", "Santa",
-            "Clause", false);
+        parent = new Parent("Parent", "Santa", "santa", "parent@gmail.com",
+            "password", false);
         babysitter = new Babysitter("Anne", "Marie",
             "anne", "babysitter@gmail.com", "password",
             new MyDateTime(1, 5, 1999), 2, 40, "English", true);
@@ -35,8 +35,8 @@ class AccountListTest
 
     @Test void testAdd()
     {
-        Parent testParent = new Parent("Test", "password", "test@gmail.com",
-            "Testing", "Tester", true);
+        Parent testParent = new Parent("Test", "User", "test",
+            "test@gmail.com", "password", true);
         list.addAccount(testParent);
         assertThat(testParent.toString(),
             is(list.getAllAccounts().get(2).toString()));
@@ -51,8 +51,8 @@ class AccountListTest
 
     @Test void testNumberOfAccounts()
     {
-        Parent testParent = new Parent("Test", "password", "test@gmail.com",
-            "Testing", "Tester", true);
+        Parent testParent = new Parent("Test", "Test", "tester",
+            "test@gmail.com", "test@gmail.com", true);
         assertEquals(2, list.getNumberOfAccounts());
         list.addAccount(testParent);
         assertEquals(3, list.getNumberOfAccounts());
