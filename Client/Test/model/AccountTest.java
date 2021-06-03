@@ -16,7 +16,7 @@ class AccountTest
   {
     System.out.println("--> setUp()");
     list = new AccountList();
-    parent = new Parent("ana", "password", "ana@gmail.com", "Anna", "Mary",
+    parent = new Parent("Ana", "Peters", "ana", "ana@gmail.com", "password",
         true);
     babysitter = new Babysitter("Lia", "Cicati", "ciocarlia","ciocarlia@gmail.com", "password",
         new MyDateTime(13, 2, 2001), 1,30, "English", true);

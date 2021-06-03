@@ -14,7 +14,7 @@ class ParentTest
 
   @BeforeEach void setUp()
   {
-    parent = new Parent("Lana", "password", "lana@gmail.com", "Lana", "Peters",
+    parent = new Parent("Lana", "Parker", "lana", "lana@gmail.com", "password",
         false);
     kids = new ArrayList<>();
   }
@@ -37,10 +37,10 @@ class ParentTest
 
   @Test void testEquals()
   {
-    Parent parent1 = new Parent("La", "password", "lana123@gmail.com", "Lana",
-        "Peters", false);
-    Parent parent2 = new Parent("Lana", "password", "lana@gmail.com", "Lana",
-        "Peters", false);
+    Parent parent1 = new Parent("La", "Peters", "lara", "lana123@gmail.com",
+        "password", false);
+    Parent parent2 = new Parent("Lana", "Parker", "lana", "lana@gmail.com",
+        "password", false);
     System.out.println(parent1.equals(parent));
     assertNotEquals(parent1, parent);
     System.out.println(parent.equals(parent2));

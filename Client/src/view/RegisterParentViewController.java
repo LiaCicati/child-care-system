@@ -40,7 +40,10 @@ public class RegisterParentViewController extends ViewController
     viewModel.reset();
   }
 
-  public void onRegister() throws RemoteException
+  /**
+   * Opening the LogIn view if an account was successfully registered
+   */
+  public void onRegister()
   {
     if (viewModel.register())
     {
@@ -48,6 +51,9 @@ public class RegisterParentViewController extends ViewController
     }
   }
 
+  /**
+   * Opens the LogIn View
+   */
   public void onLogIn()
   {
     getViewHandler().openView(View.LOGIN_VIEW);

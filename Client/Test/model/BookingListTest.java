@@ -21,8 +21,8 @@ class BookingListTest
     {
         System.out.println("--> setUp()");
         list = new BookingList();
-        parent = new Parent("Parent", "password", "parent@gmail.com", "Santa",
-            "Clause", false);
+        parent = new Parent("Parent", "Name", "name", "parent@gmail.com",
+            "password", false);
         babysitter = new Babysitter("Anne", "Marie",
             "anne", "babysitter@gmail.com", "password",
             new MyDateTime(1, 5, 1999), 2, 40, "English", true);

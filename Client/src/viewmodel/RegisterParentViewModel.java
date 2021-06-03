@@ -82,19 +82,25 @@ public class RegisterParentViewModel
     return hasPets.getValue();
   }
 
-  public boolean register() throws RemoteException
+  /**
+   * Registers a parent account
+   * @return true if the registration was successful, false if not catching exceptions
+   * and showing them as messages
+   */
+  public boolean register()
   {
-
     try
     {
-
+      // calls the register method from the model
       model.registerParent(firstName.get(), lastName.get(), username.get(),
           email.get(), password.getValue(), hasPets());
+      //if successful registration no error messages
       errorLabel.set("");
       return true;
     }
     catch (Exception e)
     {
+      //catches exceptions and shows them
       System.out.println(e.getMessage());
       errorLabel.set(e.getMessage());
       return false;

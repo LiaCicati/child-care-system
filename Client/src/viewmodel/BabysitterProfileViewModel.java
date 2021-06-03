@@ -46,7 +46,7 @@ public class BabysitterProfileViewModel
     errorLabel = new SimpleStringProperty();
 
     this.pendingBookings = new SimpleStringProperty();
-    model.addListener(this);
+    model.addListener(this, "status");
   }
 
   public void reset()

@@ -41,8 +41,9 @@ public class ParentProfileViewModel implements LocalListener<Account, Booking>
     hasPets = new SimpleStringProperty();
     errorLabel = new SimpleStringProperty();
     changedStatus = new SimpleStringProperty();
-    model.addListener(this);
     notificationUpdate = 0;
+    model.addListener(this, "status");
+
   }
 
   public void reset()

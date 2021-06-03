@@ -16,11 +16,14 @@ class BookingTest
   @BeforeEach void setUp()
   {
     System.out.println("--> setUp()");
-//    Babysitter babysitter = new Babysitter("Lia", 13, 2, 2001, 50, "English", 2,
-//        true);
-//    Parent parent = new Parent(true);
-//    this.booking = new Booking(new TimeInterval(new MyDateTime(13, 2, 2021),
-//        new MyDateTime(14, 2, 2001)), parent, babysitter);
+    Babysitter babysitter2 = new Babysitter("Loredana", "Cicati", "lori",
+        "lori@mail.ru", "lialialia", new MyDateTime(13, 2, 2001), 2, 30,
+        "English", false);
+    Parent parent1 = new Parent("Ana", "Peters", "ana", "ana@gmail.com",
+        "password", false);
+    this.booking = new Booking(
+        new TimeInterval(new MyDateTime(22, 5, 2021, 12, 5),
+            new MyDateTime(22, 5, 2021, 14, 5)), parent1, babysitter2, null);
 
   }
 

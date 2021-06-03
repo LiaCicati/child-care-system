@@ -122,7 +122,7 @@ public class RegisterBabysitterViewModel
     return errorLabel;
   }
 
-  public boolean register() throws RemoteException
+  public boolean register()
   {
     try
     {

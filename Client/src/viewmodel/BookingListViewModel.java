@@ -34,7 +34,7 @@ public class BookingListViewModel implements LocalListener<Account, Booking>
     this.parentBookings = FXCollections.observableArrayList();
     this.selectedBooking = new SimpleObjectProperty<>();
     this.message = new SimpleStringProperty();
-    model.addListener(this, "add", "remove", "status");
+    model.addListener(this, "add", "remove");
   }
 
   public void reset()
@@ -50,6 +50,9 @@ public class BookingListViewModel implements LocalListener<Account, Booking>
     message.set("");
   }
 
+  /**
+   * Updates the list of babysitter bookings if any changes happen (add/remove booking from list)
+   */
   public void update()
   {
     bookings.clear();
@@ -62,9 +65,11 @@ public class BookingListViewModel implements LocalListener<Account, Booking>
 
   }
 
+  /**
+   * Updates the list of parent made bookings
+   */
   public void updateParentBookings()
   {
-
     parentBookings.clear();
     for (int i = 0; i < model.getAllBookings(viewState.getParent()).size(); i++)
     {
@@ -95,6 +100,11 @@ public class BookingListViewModel implements LocalListener<Account, Booking>
     }
   }
 
+  /**
+   * Updates the status of a booking
+   * @param label label to control the format of the messages the user receives
+   * @return true if the status of a selected booking is successfully updated
+   */
   public boolean onAccept(Label label)
   {
     if (isBookingSelected())
@@ -105,8 +115,6 @@ public class BookingListViewModel implements LocalListener<Account, Booking>
       message.set("Status changed to " + model
           .getBookingById(viewState.getSelectedBooking()).getStatus());
       update();
-      //message.set("");
-
       return true;
     }
     else
@@ -116,7 +124,6 @@ public class BookingListViewModel implements LocalListener<Account, Booking>
       message.set("Please select a booking first");
       return false;
     }
-
   }
 
   public void onReject(Label label)
